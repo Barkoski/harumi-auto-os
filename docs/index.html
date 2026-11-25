@@ -26,6 +26,10 @@ nav.links a{color:var(--muted);text-decoration:none;white-space:nowrap}nav.links
 
 .hero{padding:72px 0 40px;background:radial-gradient(1200px 500px at 70% -10%,rgba(227,166,200,.16),transparent 60%),radial-gradient(900px 500px at 0% 20%,rgba(111,176,255,.10),transparent 60%)}
 .hero .wrap{display:grid;grid-template-columns:1.05fr 1fr;gap:40px;align-items:center}
+.live{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:500;padding:6px 12px;border-radius:999px;border:1px solid rgba(127,214,163,.35);background:rgba(127,214,163,.08);color:#a6e6c1;margin-bottom:18px}
+.live i{width:8px;height:8px;border-radius:50%;background:#7fd6a3;box-shadow:0 0 0 0 rgba(127,214,163,.6);animation:pulse 2s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(127,214,163,.55)}70%{box-shadow:0 0 0 9px rgba(127,214,163,0)}100%{box-shadow:0 0 0 0 rgba(127,214,163,0)}}
+@media (prefers-reduced-motion:reduce){.live i{animation:none}}
 .eyebrow{font:500 12px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--pink)}
 h1{font-size:clamp(34px,5vw,56px);line-height:1.05;letter-spacing:-.03em;margin:14px 0 16px}
 .lead{font-size:18px;color:var(--muted);margin:0 0 24px;max-width:540px}
@@ -92,6 +96,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:12px 28px;justify-content:space-bet
 
 <div class="hero"><div class="wrap">
   <div>
+    <div class="live"><i></i>Projeto em andamento · atualizado com frequência</div>
     <div class="eyebrow">Subaru Impreza Sport Wagon 1993</div>
     <h1>Uma central com IA que roda no próprio carro</h1>
     <p class="lead">O Harumi Auto OS troca a interface da central por um sistema próprio, com mapas, música, painel do carro e a assistente <b>Harumi</b>: conversa, reconhecimento de fala e voz funcionam sem internet.</p>
@@ -195,7 +200,8 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:12px 28px;justify-content:space-bet
 
 <section id="estado"><div class="wrap">
   <div class="eyebrow">Estado atual</div>
-  <h2>Protótipo de bancada</h2>
+  <h2>Protótipo de bancada, em construção</h2>
+  <p class="sub">O Harumi Auto OS é um projeto em andamento e recebe atualizações com frequência: cada etapa da instalação no carro, cada sensor ligado e cada melhoria da interface entram aqui e no <a href="https://github.com/Barkoski/harumi-auto-os/commits/main">histórico do GitHub</a>. Volte para acompanhar.</p>
   <div class="status">
     <div class="st ok"><h3>Funcionando</h3><ul><li>Interface, tela dividida e apps</li><li>IA local: conversa, fala e voz</li><li>Mapas e rotas</li><li>Projeto da instalação em 3D</li></ul></div>
     <div class="st wait"><h3>Falta no carro</h3><ul><li>Ligação física ainda não homologada</li><li>Adaptador SSM1 e sensores a instalar</li><li>Ré, câmera 360, telefonia e ACC dependem de teste no hardware</li><li>Medidas estimadas a conferir</li></ul></div>

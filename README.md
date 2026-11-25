@@ -12,6 +12,8 @@ Mapas, música, painel do carro e a assistente Harumi, tudo rodando no próprio 
 
 **[Site do projeto](https://barkoski.github.io/harumi-auto-os/)** · **[Carro em 3D](https://barkoski.github.io/harumi-auto-os/subaru/3d/showroom.html)**
 
+🟢 **Projeto em andamento** — recebe atualizações com frequência, a cada etapa da instalação no carro.
+
 </div>
 
 ---
