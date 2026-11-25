@@ -1,4 +1,4 @@
-# Validação — voz 0.3.1-dev.1 — 02/11/2026
+# Validação: voz 0.3.1-dev.1: 02/11/2026
 
 Voz selecionada pelo usuário: opção 2, Supertonic 3 F3, speaker 2. Preserva o timbre nativo dessa voz. Idioma pt, 24 passos de geração, velocidade 0.99 e silêncio 1.08; sem mudança artificial de pitch.
 

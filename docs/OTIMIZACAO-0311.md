@@ -1,4 +1,4 @@
-# Harumi 0.3.11-dev.1 — otimização e proposta de mapas
+# Harumi 0.3.11-dev.1: otimização e proposta de mapas
 
 Nota: documento histórico da 0.3.11; valores atuais em ADR-008-IA-local.md.
 

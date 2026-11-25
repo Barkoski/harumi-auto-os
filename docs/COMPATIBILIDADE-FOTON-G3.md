@@ -1,4 +1,4 @@
-# Compatibilidade e core — Aikon Fóton G3
+# Compatibilidade e core: Aikon Fóton G3
 
 Pesquisa de 02/11/2026. Identificação informada por Lucas: F09-88256/360/G3. O anúncio estava cadastrado como Generic/FOTON G3; esse código também existe no catálogo oficial Aikon. Isso identifica a referência comercial, não autentica o aparelho comprado.
 

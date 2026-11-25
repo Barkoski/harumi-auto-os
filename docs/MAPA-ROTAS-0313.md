@@ -1,4 +1,4 @@
-# Planejamento de trajetos — 0.3.13-dev.1
+# Planejamento de trajetos: 0.3.13-dev.1
 
 ## Uso
 

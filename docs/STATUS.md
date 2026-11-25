@@ -1,4 +1,4 @@
-# Estado em 03/11/2026 — 0.3.15-dev.1
+# Estado em 03/11/2026: 0.3.15-dev.1
 
 Integração local de LLM, reconhecimento e voz feminina implementada e executada em Android emulado. Comandos tipados de mapas/música/rotas e consulta de diagnóstico integrados à conversa. Pipeline de voz testado com áudio sintético; ruído e microfone da central não homologados.
 

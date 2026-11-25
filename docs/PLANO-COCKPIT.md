@@ -34,7 +34,7 @@ section#road-map.cockpit            fixed; inset:0; z-index:8; background:#1b1b2
 │   ├ div#ck-media (igual)
 │   └ div#ck-assist.ck-card  "Harumi" + botão 56px "Falar" data-action="assistant.listen"
 ├ div.ck-fab                        absolute; right:16; bottom:112; column gap 10
-│   ├ .m3-zoom (cápsula vertical 56x116 + / −; criada pelo map3d.js; só reposicionar) — no 2D, o zoom do Leaflet no mesmo lugar
+│   ├ .m3-zoom (cápsula vertical 56x116 + / −; criada pelo map3d.js; só reposicionar), no 2D, o zoom do Leaflet no mesmo lugar
 │   └ button#nav-recenter.ck-fab-btn (bússola; hidden quando following)
 └ nav.ck-tabs                       absolute; left:0; right:0; bottom:0; h:84px
     ├ canto esq: button#nav-stop "Encerrar" (pill 56px, fundo #6b4a5e, texto #f0eaf0; só em .nav-on)

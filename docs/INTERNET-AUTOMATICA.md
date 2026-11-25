@@ -1,4 +1,4 @@
-# Internet e interface — 0.3.4-dev.1 — 02/11/2026
+# Internet e interface: 0.3.4-dev.1: 02/11/2026
 
 ## Correção de escopo de Lucas
 
@@ -11,7 +11,7 @@ O usuário quer Internet disponível automaticamente ao entrar/conectar o celula
 - A Harumi continua acompanhando a rede padrão do Android, incluindo troca/reconexão observada. Não é necessário selecionar um transporte no app.
 - A voz aprovada, o botão Falar e os comandos Wi-Fi/Bluetooth foram preservados.
 
-## Limite explícito — automação universal ainda não entregue
+## Limite explícito: automação universal ainda não entregue
 
 Observar a rede e usar o transporte escolhido pelo sistema não equivale a ativar o compartilhamento no telefone. O aplicativo não habilita à distância o roteador de qualquer iPhone/Android ao parear, carregar ou conectar o cabo. Não foi criada automação universal de telefone, serviço Bluetooth PAN, driver ou conexão privilegiada.
 

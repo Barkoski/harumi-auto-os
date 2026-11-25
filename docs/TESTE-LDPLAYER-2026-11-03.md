@@ -1,4 +1,4 @@
-# Teste no LDPlayer — 03/11/2026
+# Teste no LDPlayer: 03/11/2026
 
 APK do commit `6c55276` (0.3.15-dev.1), instalado no LDPlayer do Lucas (`emulator-5554`).
 

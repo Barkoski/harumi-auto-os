@@ -1,4 +1,4 @@
-# Harumi Auto OS 0.3.6-dev.1 — 02/11/2026
+# Harumi Auto OS 0.3.6-dev.1: 02/11/2026
 
 Interface reformulada a partir da gravação da Harumi IA indicada por Lucas: superfícies escuras, rosa suave, menu lateral e pétalas discretas. Toque de OS dos anos 1990 em barras de título, botões com relevo e barra de tarefas. Navegação, música, câmera OEM, configuração, Internet e conversa usam as mesmas ações nativas anteriores.
 

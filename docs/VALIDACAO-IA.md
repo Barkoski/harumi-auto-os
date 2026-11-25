@@ -1,4 +1,4 @@
-# Validação da IA — 02/11/2026
+# Validação da IA: 02/11/2026
 
 ## Executado
 

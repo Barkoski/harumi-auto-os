@@ -1,4 +1,4 @@
-# Validação — 02/11/2026
+# Validação: 02/11/2026
 
 ## Evidências
 

@@ -70,7 +70,7 @@ A cópia de alguns GB demora vários minutos. Depois de copiar, feche e abra o a
 - Os tiles do arquivo vêm comprimidos em gzip; o gateway descomprime antes de entregar ao WebView, como já fazia com os tiles online. Tiles lidos do arquivo não vão para o cache em disco.
 - Tile ausente dentro dos limites (`bounds` do metadata) devolve resposta 200 com corpo vazio, tratada pelo MapLibre como tile sem camadas. Tile na borda dos limites (parcialmente fora) vai para a Internet.
 
-## Rotas sem Internet (pasta `rotas/`) — EM VALIDAÇÃO
+## Rotas sem Internet (pasta `rotas/`): EM VALIDAÇÃO
 
 Status: FUNCIONANDO no emulador (Android 14 x86_64). Dois remendos foram necessários: (1) `MMapDataAccess` ajustada (`ByteBuffer` de Java 13; `scripts/build-graphhopper-android.sh` gera `app/libs/graphhopper-core-11.1-android.jar`); (2) peso de carro próprio sem Janino (`navigation/gh/HarumiGraphHopper.java`), porque o Janino gera bytecode JVM, que o Android não carrega. O mesmo peso é usado no import do PC e no app.
 

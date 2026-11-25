@@ -1,4 +1,4 @@
-# Apps da Fóton e integração Harumi — 0.3.14-dev.1
+# Apps da Fóton e integração Harumi: 0.3.14-dev.1
 
 Pesquisa em 03/11/2026. Nenhum aplicativo de terceiros foi instalado na central física ou no LDPlayer do usuário. Foram implementados catálogo, inventário real, abertura de apps, associação OEM e acesso à loja oficial. Os aplicativos continuam sendo pacotes separados no Android da central.
 

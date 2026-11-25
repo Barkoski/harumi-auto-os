@@ -1,4 +1,4 @@
-# Resposta, microfone e animação — 0.3.10-dev.1
+# Resposta, microfone e animação: 0.3.10-dev.1
 
 Lucas informou que o LDPlayer não reconheceu sua voz nem respondeu ao texto e pediu que a personagem ficasse parada fora da resposta. A instalação identificada por leitura do Android era 0.3.7-dev.1, processo/biblioteca x86_64. O arquivo do Qwen tinha 532.517.120 bytes e o marcador de preparação existia. RECORD_AUDIO estava autorizado; AppOps registrava acesso anterior de aproximadamente 10,9 segundos. Isso comprova presença do modelo/permissão/acesso, não que o áudio do Windows chegou ao reconhecedor ou qual foi a causa da resposta ausente.
 

@@ -1,10 +1,10 @@
 # ADR-010: Atuadores externos, luz auxiliar e limites do diagnóstico
 
-Status: Proposta — aguarda dados da central e decisão do Lucas.
+Status: Proposta, aguarda dados da central e decisão do Lucas.
 Data: 03/11/2026.
 Decisor: Lucas.
 
-Convenção deste documento: o que não foi conferido em arquivo do projeto está marcado "(de memória — confirmar na fonte oficial)" ou "(estimativa)". Nada foi pesquisado na internet. Não é parecer jurídico nem projeto de engenharia elétrica.
+Convenção deste documento: o que não foi conferido em arquivo do projeto está marcado "(de memória, confirmar na fonte oficial)" ou "(estimativa)". Nada foi pesquisado na internet. Não é parecer jurídico nem projeto de engenharia elétrica.
 
 ## Contexto
 
@@ -36,8 +36,8 @@ Permitir, no futuro, controle por software de iluminação que não seja de segu
 
 ### Normas
 
-- Iluminação adicional em veículos: existem regras do Contran sobre faróis auxiliares e luzes adicionais (de memória — confirmar na fonte oficial). Quais resoluções, condições de uso e se há exigência de homologação não foi verificado. Antes de instalar, Lucas ou o eletricista deve conferir a norma vigente.
-- Vídeo em tela visível ao condutor com o veículo em movimento: há restrição em norma do Contran (de memória — confirmar na fonte oficial). Mantém-se a política atual de câmeras e vídeo no OEM (ADR-001/003).
+- Iluminação adicional em veículos: existem regras do Contran sobre faróis auxiliares e luzes adicionais (de memória, confirmar na fonte oficial). Quais resoluções, condições de uso e se há exigência de homologação não foi verificado. Antes de instalar, Lucas ou o eletricista deve conferir a norma vigente.
+- Vídeo em tela visível ao condutor com o veículo em movimento: há restrição em norma do Contran (de memória, confirmar na fonte oficial). Mantém-se a política atual de câmeras e vídeo no OEM (ADR-001/003).
 
 ### Diagnóstico SSM1
 

@@ -1,4 +1,4 @@
-# Harumi Auto OS 0.3.2-dev.1 — voz aprovada
+# Harumi Auto OS 0.3.2-dev.1: voz aprovada
 
 Atualização solicitada por Lucas após aprovar a amostra Harumi-F3-entusiasmo.mp3.
 

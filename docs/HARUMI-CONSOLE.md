@@ -1,4 +1,4 @@
-# Harumi animada — 0.3.5-dev.1 — 02/11/2026
+# Harumi animada: 0.3.5-dev.1: 02/11/2026
 
 Personagem escolhida por Lucas no vídeo gemini_generated_video_32078480.mp4. Original preservado em reference-assets; cinco trechos locais sem áudio acompanham saudação, espera, escuta, processamento e resposta falada. Os estados vêm do controlador nativo: preparar a voz ainda é processamento; falar começa na reprodução de áudio. Comando duplicado não troca o estado de uma captura/fala em andamento.
 

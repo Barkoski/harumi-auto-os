@@ -1,4 +1,4 @@
-# 0.3.12 — mapa do Brasil
+# 0.3.12: mapa do Brasil
 
 Frontend-design aplicado, preservando botões grandes e identidade preta/rosa aprovada. Atlas local com limites oficiais IBGE, 26 estados + DF, seleção persistida, fotos das 27 capitais e créditos individuais. Navegação abre o atlas; botão Maps/Waze mantém o seletor de apps; destino da capital passa pela confirmação nativa existente. Cancelamento silencioso evita reabrir a conversa ao sair.
 
