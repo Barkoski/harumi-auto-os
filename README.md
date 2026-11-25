@@ -31,6 +31,20 @@ O projeto tem duas camadas:
 | **Tela dividida (monitor grande)** | **Tela de 7 polegadas** |
 | ![Tela dividida com mapa, música e carro](docs/amostras/grande-dividida.jpg) | ![Tela inicial na central de 7 polegadas](docs/amostras/7pol-tela-inicial.jpg) |
 
+## Modelo 3D da instalação
+
+Páginas 3D interativas que mostram onde cada peça fica no carro, por onde passam os cabos e como a tela e a central são montadas. Ficam em [docs/subaru/3d](docs/subaru/3d): baixe o arquivo e abra no navegador (precisa de internet para carregar o three.js).
+
+| Carro | Raio-X com peças e cabos |
+|:---:|:---:|
+| ![Impreza perua 1993 em 3D sobre a plataforma](docs/amostras/3d-harumi-carro.jpg) | ![Raio-X mostrando central, sensores e cabos dentro do carro](docs/amostras/3d-harumi-raio-x.jpg) |
+
+- [showroom.html](docs/subaru/3d/showroom.html): carro na plataforma, pontos por sistema, modos Carro, Raio-X e Bancada. Aceita um modelo real em `.glb` arrastado para a página.
+- [pecas-no-carro.html](docs/subaru/3d/pecas-no-carro.html): todas as peças, na bancada em tamanho real ou posicionadas no carro.
+- [tela-e-central.html](docs/subaru/3d/tela-e-central.html): tela de 13,3" no painel e caixa da central, com conferência de folgas.
+
+Posições e medidas são aproximadas; as marcadas como estimadas ainda precisam ser medidas no carro.
+
 ## O que ele faz
 
 - **Assistente Harumi** — conversa por texto ou voz com um modelo Qwen local (llama.cpp), reconhecimento de fala em português com Vosk e voz feminina sintetizada no aparelho.
