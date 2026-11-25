@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Harumi Auto OS</title>
+<meta name="description" content="Central multimídia com assistente de voz local para um Subaru Impreza perua 1993: interface, IA offline, fiação e instalação em 3D.">
+<meta property="og:title" content="Harumi Auto OS">
+<meta property="og:description" content="Central multimídia com IA local para um Subaru Impreza 1993, com a instalação completa em 3D.">
+<meta property="og:image" content="amostras/site/3d-central-e-cabos.jpg">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+:root{--bg:#0d0b12;--bg2:#15121c;--card:#1b1724;--line:#2e2838;--fg:#efe9f3;--muted:#a69bb2;--pink:#e3a6c8;--pink2:#f3c7de;--blue:#6fb0ff;
+  --sans:"Inter",system-ui,"Segoe UI",sans-serif;--mono:"JetBrains Mono",Consolas,monospace;color-scheme:dark}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.6 var(--sans)}
+a{color:var(--pink2)}
+img{max-width:100%;display:block}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+header.top{position:sticky;top:0;z-index:5;background:rgba(13,11,18,.82);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+header.top .wrap{display:flex;align-items:center;gap:20px;height:58px}
+.brand{font-weight:700;letter-spacing:-.01em;text-decoration:none;color:var(--fg)}.brand span{color:var(--muted);font-weight:500;margin-left:6px;font-size:13px}
+nav.links{margin-left:auto;display:flex;gap:18px;font-size:14px;overflow-x:auto}
+nav.links a{color:var(--muted);text-decoration:none;white-space:nowrap}nav.links a:hover{color:var(--fg)}
+
+.hero{padding:72px 0 40px;background:radial-gradient(1200px 500px at 70% -10%,rgba(227,166,200,.16),transparent 60%),radial-gradient(900px 500px at 0% 20%,rgba(111,176,255,.10),transparent 60%)}
+.hero .wrap{display:grid;grid-template-columns:1.05fr 1fr;gap:40px;align-items:center}
+.eyebrow{font:500 12px/1 var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--pink)}
+h1{font-size:clamp(34px,5vw,56px);line-height:1.05;letter-spacing:-.03em;margin:14px 0 16px}
+.lead{font-size:18px;color:var(--muted);margin:0 0 24px;max-width:540px}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:28px}
+.tag{font:12px var(--mono);padding:4px 10px;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+.cta{display:flex;gap:10px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:11px 18px;border-radius:12px;font-weight:600;font-size:15px;text-decoration:none;border:1px solid var(--line);color:var(--fg);background:var(--card)}
+.btn:hover{border-color:var(--pink)}
+.btn.pri{background:linear-gradient(180deg,#eab3d2,#d48db6);color:#1b0f17;border-color:transparent}
+.shot{border-radius:16px;overflow:hidden;border:1px solid var(--line);box-shadow:0 30px 80px rgba(0,0,0,.55)}
+
+section{padding:64px 0;border-top:1px solid var(--line)}
+h2{font-size:clamp(26px,3.2vw,36px);letter-spacing:-.02em;margin:10px 0 10px}
+.sub{color:var(--muted);max-width:720px;margin:0 0 32px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+figure{margin:0}
+figcaption{font-size:14px;color:var(--muted);margin-top:10px}
+figcaption b{color:var(--fg);font-weight:600}
+
+.feat{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:28px}
+.f{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px}
+.f h3{margin:0 0 6px;font-size:16px}.f p{margin:0;color:var(--muted);font-size:14px}
+
+.open3d{display:flex;gap:10px;flex-wrap:wrap;margin:24px 0 0}
+
+.wires{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.w{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px;border-left:4px solid var(--c)}
+.w h3{margin:0 0 10px;font-size:16px;display:flex;align-items:center;gap:10px}
+.w h3 i{width:22px;height:4px;border-radius:2px;background:var(--c)}
+.w ul{margin:0;padding-left:18px;color:var(--muted);font-size:14px;display:grid;gap:4px}
+.w ul b{color:var(--fg);font-weight:500}
+
+table{width:100%;border-collapse:collapse;font-size:14px}
+th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{color:var(--muted);font-weight:500;font-size:12px;letter-spacing:.06em;text-transform:uppercase}
+td:first-child{font-weight:500}
+.tw{overflow-x:auto;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:6px 8px}
+
+.status{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.st{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px}
+.st h3{margin:0 0 8px;font-size:15px}.st ul{margin:0;padding-left:18px;color:var(--muted);font-size:14px;display:grid;gap:4px}
+.ok h3{color:#7fd6a3}.wait h3{color:#f0c27a}
+
+footer{border-top:1px solid var(--line);padding:32px 0 48px;color:var(--muted);font-size:14px}
+footer .wrap{display:flex;flex-wrap:wrap;gap:12px 28px;justify-content:space-between}
+
+@media (max-width:900px){
+  .hero .wrap,.grid2,.wires,.status{grid-template-columns:1fr}
+  .grid3,.feat{grid-template-columns:1fr 1fr}
+  .hero{padding-top:44px}
+}
+@media (max-width:560px){.grid3,.feat{grid-template-columns:1fr} nav.links{display:none} section{padding:48px 0}}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <a class="brand" href="#">Harumi<span>Auto OS</span></a>
+  <nav class="links" aria-label="Seções">
+    <a href="#central">A central</a><a href="#instalacao">Instalação em 3D</a><a href="#fiacao">Fiação</a><a href="#pecas">Peças</a><a href="#estado">Estado</a>
+    <a href="https://github.com/Barkoski/harumi-auto-os">GitHub</a>
+  </nav>
+</div></header>
+
+<div class="hero"><div class="wrap">
+  <div>
+    <div class="eyebrow">Subaru Impreza Sport Wagon 1993</div>
+    <h1>Uma central com IA que roda no próprio carro</h1>
+    <p class="lead">O Harumi Auto OS troca a interface da central por um sistema próprio, com mapas, música, painel do carro e a assistente <b>Harumi</b>: conversa, reconhecimento de fala e voz funcionam sem internet.</p>
+    <div class="tags"><span class="tag">Orange Pi 5</span><span class="tag">Ubuntu</span><span class="tag">Electron</span><span class="tag">Python</span><span class="tag">llama.cpp</span><span class="tag">Vosk</span><span class="tag">OpenStreetMap</span><span class="tag">three.js</span></div>
+    <div class="cta">
+      <a class="btn pri" href="subaru/3d/showroom.html">Ver o carro em 3D</a>
+      <a class="btn" href="https://github.com/Barkoski/harumi-auto-os">Código no GitHub</a>
+    </div>
+  </div>
+  <div class="shot"><img src="amostras/site/app-inicio.jpg" alt="Tela inicial da Harumi com relógio, busca de destino, som do carro, assistente e atalhos do Subaru" width="1280" height="720"></div>
+</div></div>
+
+<section id="central"><div class="wrap">
+  <div class="eyebrow">A central</div>
+  <h2>Interface pensada para dirigir</h2>
+  <p class="sub">Botões grandes, tema escuro e tudo a um toque: destino, música, a assistente e o estado do carro. Funciona na tela de 7" original e num monitor maior com tela dividida.</p>
+  <div class="grid2">
+    <figure><div class="shot"><img src="amostras/site/app-harumi.jpg" alt="Conversa com a Harumi aberta ao lado da tela inicial" loading="lazy"></div><figcaption><b>Harumi.</b> Conversa por voz ou texto com um modelo Qwen local; abre apps e manda destinos para o mapa.</figcaption></figure>
+    <figure><div class="shot"><img src="amostras/grande-dividida.jpg" alt="Tela dividida com mapa, música e carro" loading="lazy"></div><figcaption><b>Tela dividida.</b> Mapa, música e carro lado a lado no monitor grande.</figcaption></figure>
+  </div>
+  <div class="grid3" style="margin-top:20px">
+    <figure><div class="shot"><img src="amostras/painel-do-carro.jpg" alt="Painel do carro com motor, bateria, pneus e câmeras" loading="lazy"></div><figcaption><b>Painel do carro.</b> Rotação, água, bateria, pneus e câmeras.</figcaption></figure>
+    <figure><div class="shot"><img src="amostras/tela-inicial.jpg" alt="Tela inicial com mapa, música e assistente" loading="lazy"></div><figcaption><b>Mapa offline.</b> OpenStreetMap com rotas entre cidades.</figcaption></figure>
+    <figure><div class="shot"><img src="amostras/site/app-apps.jpg" alt="Tela de apps da Harumi" loading="lazy"></div><figcaption><b>Apps.</b> Navegação própria, conversa e atlas do Brasil.</figcaption></figure>
+  </div>
+  <div class="feat">
+    <div class="f"><h3>IA sem internet</h3><p>llama.cpp com Qwen, Vosk para fala em português e voz sintetizada no aparelho.</p></div>
+    <div class="f"><h3>Privacidade</h3><p>Conversas só na memória da sessão, sem gravação de áudio; a IA não executa comandos de sistema.</p></div>
+    <div class="f"><h3>Feita para um carro de 1993</h3><p>Sem OBD-II: dados do motor pelo cabo SSM1, bateria pelo INA226 e pneus por TPMS Bluetooth.</p></div>
+  </div>
+</div></section>
+
+<section id="instalacao"><div class="wrap">
+  <div class="eyebrow">Instalação em 3D</div>
+  <h2>Onde cada peça fica no carro</h2>
+  <p class="sub">Modelo interativo da instalação: central embaixo do painel do passageiro, tela de 13,3" no tampo, sensores nos para-choques e bateria do modo vigia no porta-malas. Gire, aproxime e toque numa peça para ver medida e onde ela liga.</p>
+  <figure><div class="shot"><img src="amostras/site/3d-central-e-cabos.jpg" alt="Raio-X do painel: caixa da central, mangueira do ar-condicionado, cabo HDMI até a tela" loading="lazy"></div>
+    <figcaption><b>Painel e central em Raio-X.</b> A caixa da central recebe ar frio por uma mangueira de 50 mm vinda da saída de ar do passageiro; o cabo HDMI sobe por trás do porta-luvas até a tela.</figcaption></figure>
+  <div class="grid2" style="margin-top:20px">
+    <figure><div class="shot"><img src="amostras/site/3d-showroom-raio-x.jpg" alt="Carro inteiro em Raio-X com peças e cabos" loading="lazy"></div><figcaption><b>Carro inteiro.</b> Cada cor de cabo é um tipo de ligação.</figcaption></figure>
+    <figure><div class="shot"><img src="amostras/site/3d-sensores-360.jpg" alt="Para-choque dianteiro com ultrassom, radar, lidar e câmera" loading="lazy"></div><figcaption><b>Sensores 360.</b> Ultrassom, radar, lidar e câmera ligados a um nó com ESP32-S3.</figcaption></figure>
+    <figure><div class="shot"><img src="amostras/site/3d-bancada.jpg" alt="Todas as peças lado a lado em tamanho real" loading="lazy"></div><figcaption><b>Bancada.</b> Todas as peças em tamanho real, agrupadas por sistema.</figcaption></figure>
+    <figure><div class="shot"><img src="amostras/site/3d-tela-e-central.jpg" alt="Tela no suporte do painel e caixa da central explodida" loading="lazy"></div><figcaption><b>Tela e central.</b> Inclinação, altura do eixo e folga dos plugues conferidas antes de imprimir.</figcaption></figure>
+  </div>
+  <div class="open3d">
+    <a class="btn pri" href="subaru/3d/showroom.html">Abrir o showroom 3D</a>
+    <a class="btn" href="subaru/3d/pecas-no-carro.html">Peças no carro</a>
+    <a class="btn" href="subaru/3d/tela-e-central.html">Tela e central</a>
+  </div>
+</div></section>
+
+<section id="fiacao"><div class="wrap">
+  <div class="eyebrow">Fiação</div>
+  <h2>O que liga em quê</h2>
+  <p class="sub">Tudo passa pelo Orange Pi 5. As cores são as mesmas dos cabos no modelo 3D.</p>
+  <div class="wires">
+    <div class="w" style="--c:#ff5a4a"><h3><i></i>Energia 12 V / 5 V</h3><ul>
+      <li><b>Caixa de fusíveis</b> (derivador) → 12 V e ACC por baixo do painel → central</li>
+      <li><b>Conversor 12→5 V 10 A</b> → Orange Pi (USB-C 90°)</li>
+      <li><b>Relé temporizador ACC</b> → conversor e alimentação estável do hub</li>
+      <li><b>Modo vigia:</b> relé 40 A → carregador SK35L → bateria extra 7 Ah → protetor XH-M609 → central</li></ul></div>
+    <div class="w" style="--c:#4d8dff"><h3><i></i>USB e vídeo da tela</h3><ul>
+      <li><b>Hub USB 7 portas</b> ↔ Orange Pi (cabo USB 3.0 curto)</li>
+      <li>No hub: <b>modem 4G</b>, <b>Bluetooth</b>, <b>FT232RL</b>, <b>placa de captura</b>, <b>GPS</b>, <b>microfone</b> e <b>câmera frontal</b></li>
+      <li><b>Nó de sensores dianteiro</b> → hub</li>
+      <li><b>HDMI 2 m (90°) + USB do touch</b> → tela de 13,3"</li></ul></div>
+    <div class="w" style="--c:#ffcc33"><h3><i></i>Vídeo das câmeras 360</h3><ul>
+      <li><b>4 câmeras</b> (frente, trás e retrovisores) → <b>DVR</b> do kit 360</li>
+      <li>DVR → RCA → <b>placa de captura USB</b> → hub</li></ul></div>
+    <div class="w" style="--c:#3ddc97"><h3><i></i>Áudio</h3><ul>
+      <li><b>Orange Pi (P2)</b> → isolador de ruído → <b>amplificador 4 canais</b></li>
+      <li>Amplificador → <b>4 alto-falantes</b> originais; 4 mm² da bateria; remoto no ACC</li></ul></div>
+    <div class="w" style="--c:#c77dff"><h3><i></i>Sinais do carro e sensores</h3><ul>
+      <li><b>Conector SSM1</b> ↔ FT232RL: dados do motor sem OBD-II</li>
+      <li><b>PC817 4 canais:</b> ACC, ré e luz do painel → GPIO</li>
+      <li><b>INA226</b> (tensão e corrente) e <b>MPU6050</b> → I2C</li>
+      <li><b>12 ultrassons, 4 radares e 1 lidar</b> → nós de sensores</li></ul></div>
+    <div class="w" style="--c:#9fb3c8"><h3><i></i>Sem fio</h3><ul>
+      <li><b>4 sensores TPMS</b> nas válvulas → Bluetooth</li>
+      <li><b>Nó traseiro</b> → ESP-NOW → nó dianteiro</li></ul></div>
+  </div>
+</div></section>
+
+<section id="pecas"><div class="wrap">
+  <div class="eyebrow">Peças</div>
+  <h2>Principais componentes</h2>
+  <p class="sub">38 tipos e 64 peças no total. Medidas em milímetros; as marcadas no modelo 3D como estimadas ainda serão conferidas no carro.</p>
+  <div class="tw"><table>
+    <thead><tr><th>Sistema</th><th>Peças</th><th>Onde fica</th></tr></thead>
+    <tbody>
+      <tr><td>Central e tela</td><td>Orange Pi 5 + NVMe em case de alumínio, conversor 12→5 V, INA226, tela 13,3" Full HD touch</td><td>Caixa impressa embaixo do painel do passageiro; tela no tampo do painel</td></tr>
+      <tr><td>Caixa da central</td><td>Hub USB 7 portas, modem 4G E3372h, Bluetooth UB500, FT232RL, captura USB, PC817, relé ACC, 2 ventoinhas Noctua 80 mm</td><td>Dentro da caixa (205 × 195 × 73)</td></tr>
+      <tr><td>GPS, voz e câmera</td><td>GPS VK-162, microfone USB, câmera frontal</td><td>Tampo do painel e coluna</td></tr>
+      <tr><td>Som</td><td>Isolador de ruído, amplificador 4 canais, 4 alto-falantes originais</td><td>Amplificador embaixo do banco</td></tr>
+      <tr><td>Dados do carro</td><td>Cabo SSM1, 4 sensores TPMS</td><td>Embaixo do painel e nas rodas</td></tr>
+      <tr><td>Modo vigia</td><td>Bateria 12 V 7 Ah, SK35L, XH-M609, relé 40 A</td><td>Porta-malas</td></tr>
+      <tr><td>360 e sensores</td><td>Kit 360 (DVR + 4 câmeras), 12 ultrassons JSN-SR04T, 4 radares HLK-LD2451, lidar TFmini Plus, 2 nós com ESP32-S3</td><td>Para-choques, retrovisores e traseira</td></tr>
+    </tbody>
+  </table></div>
+</div></section>
+
+<section id="estado"><div class="wrap">
+  <div class="eyebrow">Estado atual</div>
+  <h2>Protótipo de bancada</h2>
+  <div class="status">
+    <div class="st ok"><h3>Funcionando</h3><ul><li>Interface, tela dividida e apps</li><li>IA local: conversa, fala e voz</li><li>Mapas e rotas</li><li>Projeto da instalação em 3D</li></ul></div>
+    <div class="st wait"><h3>Falta no carro</h3><ul><li>Ligação física ainda não homologada</li><li>Adaptador SSM1 e sensores a instalar</li><li>Ré, câmera 360, telefonia e ACC dependem de teste no hardware</li><li>Medidas estimadas a conferir</li></ul></div>
+  </div>
+</div></section>
+
+<footer><div class="wrap">
+  <span>Harumi Auto OS · projeto de Lucas Barkoski</span>
+  <span><a href="https://github.com/Barkoski/harumi-auto-os">github.com/Barkoski/harumi-auto-os</a></span>
+</div></footer>
+</body>
+</html>

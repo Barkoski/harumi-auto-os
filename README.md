@@ -10,6 +10,8 @@ Mapas, música, painel do carro e a assistente Harumi — tudo rodando no própr
 
 `Android` · `Ubuntu no Orange Pi 5` · `Electron` · `Python` · `llama.cpp` · `Vosk` · `OpenStreetMap`
 
+**[Site do projeto](https://barkoski.github.io/harumi-auto-os/)** · **[Carro em 3D](https://barkoski.github.io/harumi-auto-os/subaru/3d/showroom.html)**
+
 </div>
 
 ---
@@ -33,15 +35,17 @@ O projeto tem duas camadas:
 
 ## Modelo 3D da instalação
 
-Páginas 3D interativas que mostram onde cada peça fica no carro, por onde passam os cabos e como a tela e a central são montadas. Ficam em [docs/subaru/3d](docs/subaru/3d): baixe o arquivo e abra no navegador (precisa de internet para carregar o three.js).
+Páginas 3D interativas que mostram onde cada peça fica no carro, por onde passam os cabos e como a tela e a central são montadas. Abrem direto no navegador pelo site; a fiação completa está na [página do projeto](https://barkoski.github.io/harumi-auto-os/#fiacao).
 
-| Carro | Raio-X com peças e cabos |
+![Painel e central em Raio-X: caixa da central, mangueira do ar-condicionado e cabo HDMI até a tela](docs/amostras/site/3d-central-e-cabos.jpg)
+
+| Carro inteiro em Raio-X | Sensores 360 no para-choque |
 |:---:|:---:|
-| ![Impreza perua 1993 em 3D sobre a plataforma](docs/amostras/3d-harumi-carro.jpg) | ![Raio-X mostrando central, sensores e cabos dentro do carro](docs/amostras/3d-harumi-raio-x.jpg) |
+| ![Raio-X do carro com peças e cabos](docs/amostras/site/3d-showroom-raio-x.jpg) | ![Ultrassom, radar, lidar e câmera no para-choque](docs/amostras/site/3d-sensores-360.jpg) |
 
-- [showroom.html](docs/subaru/3d/showroom.html): carro na plataforma, pontos por sistema, modos Carro, Raio-X e Bancada. Aceita um modelo real em `.glb` arrastado para a página.
-- [pecas-no-carro.html](docs/subaru/3d/pecas-no-carro.html): todas as peças, na bancada em tamanho real ou posicionadas no carro.
-- [tela-e-central.html](docs/subaru/3d/tela-e-central.html): tela de 13,3" no painel e caixa da central, com conferência de folgas.
+- [Showroom 3D](https://barkoski.github.io/harumi-auto-os/subaru/3d/showroom.html): carro na plataforma, pontos por sistema, modos Carro, Raio-X e Bancada. Aceita um modelo real em `.glb` arrastado para a página.
+- [Peças no carro](https://barkoski.github.io/harumi-auto-os/subaru/3d/pecas-no-carro.html): todas as peças, na bancada em tamanho real ou posicionadas no carro.
+- [Tela e central](https://barkoski.github.io/harumi-auto-os/subaru/3d/tela-e-central.html): tela de 13,3" no painel e caixa da central, com conferência de folgas.
 
 Posições e medidas são aproximadas; as marcadas como estimadas ainda precisam ser medidas no carro.
 
