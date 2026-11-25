@@ -190,7 +190,7 @@ cv.addEventListener('pointerdown',e=>down=[e.clientX,e.clientY]);
 cv.addEventListener('pointerup',e=>{if(!down||Math.hypot(e.clientX-down[0],e.clientY-down[1])>5)return;const b=cv.getBoundingClientRect();
   mp.set((e.clientX-b.left)/b.width*2-1,-(e.clientY-b.top)/b.height*2+1);ray.setFromCamera(mp,cam);
   const hs=ray.intersectObjects(world.children,true).filter(h=>h.object.userData.owner);const h=hs.find(h=>!(h.object.material.transparent&&h.object.material.opacity<.5))||hs[0];
-  if(h){const u=h.object.userData.owner.userData;pick.textContent=`${u.name} — ${u.info}${u.est?" (medida estimada)":""}`;}else pick.textContent="Toque numa peça para ver o nome e a medida";});
+  if(h){const u=h.object.userData.owner.userData;pick.textContent=`${u.name}: ${u.info}${u.est?" (medida estimada)":""}`;}else pick.textContent="Toque numa peça para ver o nome e a medida";});
 function theme(){scene.background=new THREE.Color(css('--scene'));}
 matchMedia('(prefers-color-scheme: dark)').addEventListener('change',theme);theme();
 function size(){const w=cv.clientWidth,h=cv.clientHeight;R.setSize(w,h,false);cam.aspect=w/h;cam.updateProjectionMatrix();}
