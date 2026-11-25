@@ -1,0 +1,93 @@
+{
+  "Fabricante": "unknown",
+  "Modelo": "Android SDK built for x86_64",
+  "Android declarado": "11",
+  "API": 30,
+  "Área do app": "1024 × 600 px",
+  "Densidade": "160 dpi",
+  "WebView": "com.android.webview 83.0.4103.120",
+  "Arquiteturas Android": "x86_64, x86",
+  "Processo 64 bits": true,
+  "Compatibilidade Harumi": "BANCADA x86_64: não comprova compatibilidade com a central ARM.",
+  "Placa declarada": "goldfish_x86_64",
+  "Hardware declarado": "ranchu",
+  "Build declarado": "sdk_phone_x86_64-userdebug 11 RSR1.210722.013.A2 10067904 test-keys",
+  "Identidade do hardware": "Valores declarados pelo Android; não autenticam a especificação comercial.",
+  "RAM disponível": "3078 MB",
+  "RAM total declarada": "3929 MB",
+  "Pouca memória sinalizada": false,
+  "Armazenamento livre": "3538 MB",
+  "Reserva para modelos": "Acima da reserva de bancada de 3 GiB; não é benchmark de IA",
+  "Página de memória": "4096 bytes; 16 KiB ainda não homologados",
+  "GPS declarado": true,
+  "Bluetooth declarado": true,
+  "Apps com ícone detectados": [
+    {
+      "nome": "Calendar",
+      "pacote": "com.android.calendar",
+      "versao": "11"
+    },
+    {
+      "nome": "Camera",
+      "pacote": "com.android.camera2",
+      "versao": "2.0.002"
+    },
+    {
+      "nome": "Clock",
+      "pacote": "com.android.deskclock",
+      "versao": "11"
+    },
+    {
+      "nome": "Contacts",
+      "pacote": "com.android.contacts",
+      "versao": "1.7.31"
+    },
+    {
+      "nome": "Files",
+      "pacote": "com.android.documentsui",
+      "versao": "11"
+    },
+    {
+      "nome": "Gallery",
+      "pacote": "com.android.gallery3d",
+      "versao": "1.1.40030"
+    },
+    {
+      "nome": "Harumi Auto OS",
+      "pacote": "com.harumi.autoos",
+      "versao": "0.3.9-dev.1"
+    },
+    {
+      "nome": "Messaging",
+      "pacote": "com.android.messaging",
+      "versao": "1.0.001"
+    },
+    {
+      "nome": "Phone",
+      "pacote": "com.android.dialer",
+      "versao": "23.0"
+    },
+    {
+      "nome": "Search",
+      "pacote": "com.android.quicksearchbox",
+      "versao": "11"
+    },
+    {
+      "nome": "Settings",
+      "pacote": "com.android.settings",
+      "versao": "11"
+    },
+    {
+      "nome": "WebView Browser Tester",
+      "pacote": "org.chromium.webview_shell",
+      "versao": "1.0"
+    }
+  ],
+  "Navegadores detectados": [],
+  "Players detectados": [],
+  "Play Store presente": false,
+  "Play Services presente": false,
+  "Certificação Google": "Presença dos pacotes não comprova certificação. Conferir Play Store > Configurações > Sobre.",
+  "MCU": "Não identificada",
+  "Câmeras \/ áudio \/ ACC": "Homologação física pendente"
+}

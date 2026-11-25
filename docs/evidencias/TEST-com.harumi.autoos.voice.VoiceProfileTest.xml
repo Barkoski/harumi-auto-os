@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.harumi.autoos.voice.VoiceProfileTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2026-11-02T17:43:29" hostname="A" time="0.001">
+  <properties/>
+  <testcase name="approvedGreetingUsesCorrectPronunciation" classname="com.harumi.autoos.voice.VoiceProfileTest" time="0.0"/>
+  <testcase name="simpleGreetingsDoNotRequireInference" classname="com.harumi.autoos.voice.VoiceProfileTest" time="0.001"/>
+  <testcase name="matchesApprovedAudition" classname="com.harumi.autoos.voice.VoiceProfileTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

@@ -1,0 +1,9 @@
+{
+  "device": "API30 x86_64 WebView83 own bench 5556",
+  "actual_missing_apps_status": "PASS",
+  "official_play_store_browser_fallback": "PASS",
+  "oem_assignment_chooser": "PASS",
+  "all_installed_chooser": "PASS",
+  "unknown_id_ignored": "PASS",
+  "external_apps_installed": 0
+}

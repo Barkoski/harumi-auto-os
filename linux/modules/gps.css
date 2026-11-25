@@ -1,0 +1,13 @@
+/* Modulo GPS: selo de simulacao e secao de Ajustes. */
+.hl-gps-badge{position:fixed;top:8px;left:50%;transform:translateX(-50%);z-index:95;padding:8px 18px;border-radius:999px;
+  background:var(--ck-accent,#d2a0bd);color:var(--ck-accent-ink,#2a1e2b);font:700 15px system-ui,sans-serif;letter-spacing:.08em;
+  box-shadow:var(--ck-shadow,0 8px 24px rgba(0,0,0,.45));pointer-events:none}
+.hl-gps-badge[hidden]{display:none}
+.hl-gps-box{display:flex;flex-direction:column;gap:10px;padding:8px 0}
+.hl-gps-status{margin:0;color:var(--ck-text,#f0eaf0);font:500 16px system-ui,sans-serif}
+.hl-gps-hint{margin:0;color:var(--ck-muted,#b9a9bb);font:14px system-ui,sans-serif}
+.hl-gps-switch{align-self:flex-start;min-width:200px;min-height:48px;padding:0 20px;border-radius:24px;cursor:pointer;
+  border:1px solid var(--ck-stroke-hi,rgba(240,234,240,.18));background:transparent;color:var(--ck-text,#f0eaf0);font:600 16px system-ui,sans-serif}
+.hl-gps-switch.on{background:var(--ck-accent,#d2a0bd);color:var(--ck-accent-ink,#2a1e2b);border-color:transparent}
+.hl-gps-switch:focus-visible{outline:2px solid var(--ck-accent,#d2a0bd);outline-offset:3px}
+@media (prefers-reduced-motion:reduce){.hl-gps-badge,.hl-gps-switch{transition:none;animation:none}}

@@ -1,0 +1,37 @@
+[
+  {
+    "id": "maps",
+    "page": "https://play.google.com/store/apps/details?id=com.google.android.apps.maps&hl=pt_BR",
+    "image": "https://play-lh.googleusercontent.com/B8pdO_2K5nBsF0g1h6dKwV_jQFLP-XombGDEQGtJT-mw1EUKCKJpa9lBGCF4rP_MwCsozSXyvI3z19g9R3J4=s0-br30"
+  },
+  {
+    "id": "waze",
+    "page": "https://play.google.com/store/apps/details?id=com.waze&hl=pt_BR",
+    "image": "https://play-lh.googleusercontent.com/d4dltd4baeDGnfJD1H-ut68ERsIynfywij9zHRL7ioB-PJW3ENw-bFgg08KGPo8zQfSyRW36e58xhlqQ0pE1gg=s0-br30"
+  },
+  {
+    "id": "spotify",
+    "page": "https://play.google.com/store/apps/details?id=com.spotify.music&hl=pt_BR",
+    "image": "https://play-lh.googleusercontent.com/IzQgYCcnCFCD08GR-3bdtcT8xzOvrNkC84avGT5CwTX2VIqmTmKKJcP_Cd4JoBOdmCMlTndlOzV6hrthg2fOWA=s0-br30"
+  },
+  {
+    "id": "youtube",
+    "page": "https://play.google.com/store/apps/details?id=com.google.android.youtube&hl=pt_BR",
+    "image": "https://play-lh.googleusercontent.com/QNmuZQc9I6Zbe3mWnSr0hycnENqGFCI5p3yE29Hkxtf22T0IWS6zTrpxULLyyjWpB7ONAXDsDQXnXcVWokl3eg=s0-br30"
+  },
+  {
+    "id": "chrome",
+    "page": "https://play.google.com/store/apps/details?id=com.android.chrome&hl=pt_BR",
+    "image": "https://play-lh.googleusercontent.com/gbkzfC3R1fXcGR4Uag1uRSN_123Tpo_KxhVZFLFCatmthFuO1bzPczUomFtxI42YYEQMJeAaZuIFVrTF58gZYg=s0-br30"
+  },
+  {
+    "id": "netflix",
+    "page": "https://play.google.com/store/apps/details?id=com.netflix.mediaclient&hl=pt_BR",
+    "image": "https://play-lh.googleusercontent.com/fXVS45nukV1x9PYVSKHkCQK0QGCOishIvAOxIZS3sgRem8HS7l9l94_Ggj-WZPrTLePRdNYN4pp4SPAQL7oS0PU=s0-br30"
+  },
+  {
+    "id": "torque",
+    "page": "https://play.google.com/store/apps/details?id=org.prowl.torquefree&hl=pt_BR",
+    "image": "https://play-lh.googleusercontent.com/pddzteOAIUawLdiT3ugfUlen2x0_xZemDRD_617OMH2SN17zNKZfuf0s3gZ4K0SntmEagDBX7WFmDUKzKCHEjQ=s0-br30"
+  }
+]

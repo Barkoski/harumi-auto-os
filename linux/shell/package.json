@@ -1,0 +1,7 @@
+{
+  "name": "harumi-shell",
+  "version": "0.1.0",
+  "description": "Moldura da Harumi Auto OS no Orange Pi: tela cheia com apps web embutidos (YouTube) dentro da interface.",
+  "main": "main.js",
+  "private": true
+}

@@ -1,0 +1,29 @@
+{
+ "centro-aeroporto": {
+  "url": "https://router.project-osrm.org/route/v1/driving/-51.1630,-23.3105;-51.1372,-23.3336?steps=true&overview=false",
+  "dist_m": 4599,
+  "passos": 14,
+  "intersecoes": 47,
+  "intersecoes_com_lanes": 0,
+  "passos_com_lanes": 0,
+  "exemplos": []
+ },
+ "centro-UEL": {
+  "url": "https://router.project-osrm.org/route/v1/driving/-51.1630,-23.3105;-51.2003,-23.3262?steps=true&overview=false",
+  "dist_m": 5704,
+  "passos": 18,
+  "intersecoes": 71,
+  "intersecoes_com_lanes": 0,
+  "passos_com_lanes": 0,
+  "exemplos": []
+ },
+ "norte-centro": {
+  "url": "https://router.project-osrm.org/route/v1/driving/-51.1650,-23.2700;-51.1630,-23.3105?steps=true&overview=false",
+  "dist_m": 5744,
+  "passos": 14,
+  "intersecoes": 69,
+  "intersecoes_com_lanes": 0,
+  "passos_com_lanes": 0,
+  "exemplos": []
+ }
+}

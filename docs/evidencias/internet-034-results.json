@@ -1,0 +1,37 @@
+[
+  {
+    "test": "Offline status from Android",
+    "status": "PASS",
+    "observed": "Sem conexão de rede"
+  },
+  {
+    "test": "Automatic-status panel; USB removed; initial setup collapsed",
+    "status": "PASS"
+  },
+  {
+    "test": "Settings launch connection.wifi",
+    "status": "PASS"
+  },
+  {
+    "test": "Settings launch connection.bluetooth",
+    "status": "PASS"
+  },
+  {
+    "test": "Network callback updates Wi-Fi status",
+    "status": "PASS",
+    "observed": "Internet disponível · Wi-Fi"
+  },
+  {
+    "test": "HOME voice button opens assistant and starts offline capture",
+    "status": "PASS",
+    "observed": "Ouvindo… fale após tocar no microfone"
+  },
+  {
+    "test": "Stop voice and return to HOME without overflow",
+    "status": "PASS"
+  },
+  {
+    "test": "Spoken-command route opens Wi-Fi settings after local reply",
+    "status": "PASS"
+  }
+]

@@ -1,0 +1,304 @@
+{
+ "source": "app/src/main/java/com/harumi/autoos/ai/CarKnowledge.java",
+ "entries": [
+  {
+   "id": "ficha",
+   "regex": "\\b(?:ficha|dados|especificac\\w*|versao|qual (?:e )?o modelo) d[oe] (?:meu |seu |nosso )?(?:carro|subaru|impreza)|quantos cavalos|potencia d[oe] (?:meu |seu )?(?:carro|motor|subaru|impreza)",
+   "answer": "Seu carro é um Subaru Impreza perua 1993, provavelmente a versão GF6, com tração integral e câmbio automático de 4 marchas. O motor é o EJ18 boxer, 1,8 litro e 16 válvulas, com cerca de 105 cavalos. Confirme a versão pelo número do chassi."
+  },
+  {
+   "id": "boxer",
+   "regex": "\\bboxer\\b|motor (?:de )?cilindros? (?:deitados|opostos)",
+   "answer": "No motor boxer os cilindros ficam deitados, dois de cada lado, e os pistões se movem em sentidos opostos. Isso deixa o motor mais baixo e equilibrado, com menos vibração. O seu EJ18 é um boxer de 4 cilindros e 1,8 litro."
+  },
+  {
+   "id": "economia",
+   "regex": "\\becono\\w* (?:de )?(?:combustivel|gasolina|etanol|alcool)|\\b(?:gastar|gaste|consumir|consuma|gasta|consome) menos (?:combustivel|gasolina)|\\breduzir o consumo|\\bconsumo (?:alto|de combustivel)|\\b(?:dica|dicas) (?:de|para|pra) (?:economi\\w*|consumo)",
+   "answer": "Acelere com suavidade, mantenha velocidade constante e antecipe as frenagens, aproveitando o embalo. Mantenha os pneus calibrados e não carregue peso à toa. Na estrada, acima de 100 quilômetros por hora o consumo sobe bastante."
+  },
+  {
+   "id": "luz_oleo",
+   "regex": "\\b(?:luz|lampada)\\b.*\\boleo\\b|\\bpressao (?:do|de) oleo\\b",
+   "answer": "Luz do óleo acesa com o motor ligado é sinal de parar. Encoste assim que for seguro, desligue o motor e confira o nível na vareta antes de seguir."
+  },
+  {
+   "id": "luz_cambio",
+   "regex": "\\bat oil temp\\b|\\b(?:luz|lampada)\\b.*\\b(?:cambio|power)\\b",
+   "answer": "A luz AT OIL TEMP acesa com o motor ligado indica câmbio quente: pare e deixe esfriar. Se ela piscar logo ao dar a partida, provavelmente há um código de falha gravado no câmbio."
+  },
+  {
+   "id": "luz_injecao",
+   "regex": "\\b(?:luz|lampada)\\b.*\\b(?:injecao|check engine|motor)\\b|\\bcheck engine\\b",
+   "answer": "Luz da injeção acesa e fixa: dá para seguir com calma, mas verifique logo. Se ela piscar com o motor andando, é falha grave, provavelmente de ignição: reduza e pare em local seguro."
+  },
+  {
+   "id": "oleo_cambio",
+   "regex": "\\b(?:oleo|fluido|atf)\\b.*\\b(?:cambio|transmissao|automatico)\\b|\\b(?:cambio|transmissao)\\b.*\\b(?:oleo|fluido)\\b|\\batf\\b",
+   "answer": "O câmbio automático usa fluido ATF Dexron II, ou o ATF da Subaru compatível. A capacidade total é de cerca de 7,9 litros, mas uma troca pelo dreno tira uns 2,5 litros. Confira o nível com o motor quente, na posição P."
+  },
+  {
+   "id": "oleo_motor",
+   "regex": "\\boleo\\b.*\\b(?:motor|troca|trocar|qual|quantos? litros?|viscosidade|usar|uso|colocar|cabe)\\b|\\b(?:troca|trocar|qual|quantos? litros?)\\b.*\\boleo\\b",
+   "answer": "O motor EJ18 leva cerca de 4 litros de óleo. Na época se usava 5W-30 em clima frio, ou 10W-30 e 10W-40. Confira a vareta com o carro no plano e o motor desligado há alguns minutos."
+  },
+  {
+   "id": "velas",
+   "regex": "\\bvelas?\\b(?! de aniversario)",
+   "answer": "A vela indicada é a NGK BKR6E-11, com folga de 1,0 a 1,1 milímetro e aperto de 41 a 47 newton-metro. O modelo da vela veio de uma fonte só, então confira a aplicação na loja."
+  },
+  {
+   "id": "correia",
+   "regex": "\\bcorreia (?:dentada|do comando|de comando|da distribuicao)|\\bcorreia\\b.*\\b(?:trocar|troca|quando|romper|rompeu|arrebentar)\\b",
+   "answer": "A correia dentada deve ser inspecionada a cada 48 mil quilômetros e trocada a cada 96 mil. Sem registro da última troca, o melhor é trocar já, junto com tensor, polias, retentores e bomba d'água. O EJ18 não é interferente: se romper, o carro para, mas em tese não empena válvula."
+  },
+  {
+   "id": "marcha_lenta",
+   "regex": "\\bmarcha lenta\\b|\\blenta (?:oscilando|baixa|alta|irregular)|\\b(?:rotacao|giro) (?:oscila|oscilando|sobe e desce)",
+   "answer": "Com o motor quente, a marcha lenta normal é de 700 rotações, com variação de 100 para mais ou para menos. Com o ar-condicionado ligado, fica perto de 850. Se ela oscilar, a causa comum é a válvula de marcha lenta suja, que pode ser limpa antes de trocar."
+  },
+  {
+   "id": "temperatura",
+   "regex": "\\btemperatura (?:do motor|da agua|normal|ideal|do liquido)|\\b(?:motor|carro) (?:esquentando|esquentou|ferveu|fervendo|superaquec\\w*)|\\bsuperaquec\\w*",
+   "answer": "Com o motor quente, o normal fica entre 80 e 100 graus. Acima de 105, fique atento; acima de 110, pare em local seguro e desligue o motor. Esses limites são de referência e não do manual do seu carro."
+  },
+  {
+   "id": "scanner",
+   "regex": "\\b(?:elm ?327|obd ?2?|obdii|scanner|leitor de (?:falhas|codigos)|select monitor|ssm)\\b",
+   "answer": "O seu Impreza 1993 é anterior ao OBD-II e usa o protocolo Subaru Select Monitor. Leitor ELM327 comum não funciona. Serve um cabo próprio para Select Monitor, no conector amarelo de 9 pinos."
+  },
+  {
+   "id": "piscadas",
+   "regex": "\\b(?:ler|leitura|ver)\\b.*\\b(?:codigos?|falhas?)\\b.*\\bsem (?:scanner|aparelho)|\\bpiscadas\\b",
+   "answer": "Sem scanner, com a ignição ligada e o motor desligado, liga-se o par de plugues pretos de leitura de memória e contam-se as piscadas da luz da injeção. Piscada longa é a dezena e curta é a unidade. A posição desses plugues no seu carro ainda precisa ser confirmada."
+  },
+  {
+   "id": "bateria",
+   "regex": "\\bbateria\\b|\\balternador\\b",
+   "answer": "Com o motor ligado, a bateria deve marcar entre 13,5 e 14,5 volts. Abaixo de 12,5 com o motor ligado indica problema no alternador; acima de 15, no regulador."
+  },
+  {
+   "id": "trepida",
+   "regex": "\\b(?:trepida|trepidando|treme|tremendo|freia sozinho|segura|travando)\\b.*\\bcurvas?\\b|\\bcurvas?\\b.*\\b(?:trepida|trepidando|treme|travando)\\b|\\btorque bind\\b",
+   "answer": "Trepidar ou travar em curvas fechadas e lentas costuma ser a embreagem da tração integral ou o solenoide Duty C. Um teste é colocar o fusível no soquete FWD do cofre: se o sintoma sumir, o problema está no sistema 4x4."
+  },
+  {
+   "id": "vazamento",
+   "regex": "\\b(?:vazamento|vazando|pingando|pinga)\\b.*\\boleo\\b|\\boleo\\b.*\\b(?:vazamento|vazando|pingando|pinga)\\b",
+   "answer": "No EJ18, os vazamentos mais comuns são nas juntas das tampas de válvulas, nos retentores dianteiros e na placa separadora entre motor e câmbio. Retentores velhos devem ser trocados junto com a correia dentada."
+  },
+  {
+   "id": "cambio_tranco",
+   "regex": "\\b(?:cambio|marcha|marchas)\\b.*\\b(?:tranco|trancos|escorrega|patina|dura|duras|demora)\\b|\\btranco\\b",
+   "answer": "Trancos ou trocas que escorregam no câmbio automático costumam vir de fluido velho ou de solenoides com defeito. Confira o nível e a cor do fluido, e leia os códigos do câmbio quando o scanner estiver conectado."
+  },
+  {
+   "id": "pneus",
+   "regex": "\\b(?:calibr\\w*|pressao (?:dos|do) pneus?|libras? (?:do|no|nos) pneus?)\\b",
+   "answer": "A pressão certa está na etiqueta do carro ou no manual; não tenho esse valor confirmado para o seu Impreza. Calibre com os pneus frios, a cada 15 dias, e um pouco mais quando o carro estiver carregado."
+  },
+  {
+   "id": "chuva",
+   "regex": "\\b(?:chuva|chovendo|aquaplan\\w*|pista molhada)\\b",
+   "answer": "Na chuva, reduza a velocidade, dobre a distância do carro da frente e acenda o farol baixo. Se aquaplanar, não freie de repente: tire o pé do acelerador e segure o volante reto até o pneu voltar a aderir."
+  },
+  {
+   "id": "neblina",
+   "regex": "\\b(?:neblina|cerracao|nevoeiro)\\b",
+   "answer": "Na neblina, use farol baixo e o de neblina, nunca o farol alto. Reduza a velocidade, aumente a distância e guie-se pela faixa da direita. Se a visibilidade sumir, saia da pista em local seguro e ligue o pisca-alerta."
+  },
+  {
+   "id": "sono",
+   "regex": "\\b(?:sono|sonolento|cansado|cansaco|dormir no volante|pescando)\\b",
+   "answer": "Sono ao volante é perigoso. Pare em um local seguro assim que puder, descanse uns 20 minutos e só depois siga. Em viagens longas, faça uma pausa a cada duas horas."
+  },
+  {
+   "id": "pneu_furado",
+   "regex": "\\bpneu (?:furado|furou|murcho|estourou|estourado)|\\bfurou (?:o |um )?pneu|\\btrocar (?:o )?pneu|\\bestepe\\b",
+   "answer": "Pare em local plano e seguro, ligue o pisca-alerta e coloque o triângulo bem atrás do carro. Afrouxe os parafusos antes de erguer o carro, troque o pneu e aperte em cruz. Confira a pressão do estepe no próximo posto."
+  },
+  {
+   "id": "estrada_longa",
+   "regex": "\\b(?:viagem|viajar|estrada) (?:longa|longe)|\\bantes de (?:viajar|pegar a estrada)|\\bpreparar o carro\\b|\\brevisao antes\\b",
+   "answer": "Antes de pegar a estrada, confira óleo, água do radiador, pneus e estepe, faróis e palhetas. Leve água e o celular carregado. Faça uma pausa a cada duas horas."
+  }
+ ],
+ "engine": [
+  {
+   "code": "11",
+   "text": "o sensor de ângulo do virabrequim",
+   "singleSource": false
+  },
+  {
+   "code": "12",
+   "text": "o sinal do motor de partida",
+   "singleSource": false
+  },
+  {
+   "code": "13",
+   "text": "o sensor de posição do comando",
+   "singleSource": false
+  },
+  {
+   "code": "14",
+   "text": "o injetor do cilindro 1",
+   "singleSource": true
+  },
+  {
+   "code": "15",
+   "text": "o injetor do cilindro 2",
+   "singleSource": true
+  },
+  {
+   "code": "16",
+   "text": "o injetor do cilindro 3",
+   "singleSource": true
+  },
+  {
+   "code": "17",
+   "text": "o injetor do cilindro 4",
+   "singleSource": true
+  },
+  {
+   "code": "21",
+   "text": "o sensor de temperatura do líquido de arrefecimento",
+   "singleSource": false
+  },
+  {
+   "code": "22",
+   "text": "o sensor de detonação",
+   "singleSource": false
+  },
+  {
+   "code": "23",
+   "text": "o medidor de massa de ar, o MAF",
+   "singleSource": false
+  },
+  {
+   "code": "24",
+   "text": "a válvula de ar da marcha lenta",
+   "singleSource": false
+  },
+  {
+   "code": "31",
+   "text": "o sensor de posição da borboleta",
+   "singleSource": false
+  },
+  {
+   "code": "32",
+   "text": "a sonda lambda",
+   "singleSource": false
+  },
+  {
+   "code": "33",
+   "text": "o sensor de velocidade do veículo",
+   "singleSource": false
+  },
+  {
+   "code": "34",
+   "text": "a válvula EGR, que só existe em algumas versões",
+   "singleSource": false
+  },
+  {
+   "code": "35",
+   "text": "o solenoide de purga do cânister",
+   "singleSource": true
+  },
+  {
+   "code": "41",
+   "text": "a correção de mistura fora do limite, mistura pobre ou rica",
+   "singleSource": false
+  },
+  {
+   "code": "42",
+   "text": "o interruptor de marcha lenta, no sensor da borboleta",
+   "singleSource": false
+  },
+  {
+   "code": "45",
+   "text": "o sensor de pressão atmosférica, se o carro tiver",
+   "singleSource": true
+  },
+  {
+   "code": "49",
+   "text": "o resistor de ajuste de CO",
+   "singleSource": true
+  },
+  {
+   "code": "51",
+   "text": "o interruptor de neutro do câmbio",
+   "singleSource": true
+  },
+  {
+   "code": "52",
+   "text": "o interruptor de estacionamento, a posição P",
+   "singleSource": true
+  }
+ ],
+ "gearbox": [
+  {
+   "code": "11",
+   "text": "o solenoide Duty A, da pressão de linha",
+   "singleSource": false
+  },
+  {
+   "code": "12",
+   "text": "o solenoide Duty B, do travamento do conversor",
+   "singleSource": false
+  },
+  {
+   "code": "13",
+   "text": "o solenoide de troca 3",
+   "singleSource": false
+  },
+  {
+   "code": "14",
+   "text": "o solenoide de troca 2",
+   "singleSource": false
+  },
+  {
+   "code": "15",
+   "text": "o solenoide de troca 1",
+   "singleSource": false
+  },
+  {
+   "code": "21",
+   "text": "o sensor de temperatura do fluido",
+   "singleSource": false
+  },
+  {
+   "code": "22",
+   "text": "o sensor de pressão atmosférica",
+   "singleSource": false
+  },
+  {
+   "code": "23",
+   "text": "o sinal de rotação do motor",
+   "singleSource": false
+  },
+  {
+   "code": "24",
+   "text": "o solenoide Duty C, da tração integral",
+   "singleSource": false
+  },
+  {
+   "code": "25",
+   "text": "o sinal de controle de torque",
+   "singleSource": false
+  },
+  {
+   "code": "31",
+   "text": "o sensor da borboleta",
+   "singleSource": false
+  },
+  {
+   "code": "32",
+   "text": "o sensor de velocidade 1",
+   "singleSource": false
+  },
+  {
+   "code": "33",
+   "text": "o sensor de velocidade 2",
+   "singleSource": false
+  }
+ ]
+}

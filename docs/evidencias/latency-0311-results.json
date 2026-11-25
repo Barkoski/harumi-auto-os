@@ -1,0 +1,31 @@
+[
+  {
+    "test": "Quick deterministic reply",
+    "question": "Oi harumi, tudo bem? oi harumi, tudo bem?",
+    "status": "PASS",
+    "text_seconds": 0.422,
+    "reply": "Harumi\nOi, Lucas! Tudo bem por aqui. E você?",
+    "speech_start_seconds": 3.906
+  },
+  {
+    "test": "Real LLM generation with reused native runtime",
+    "question": "Em uma frase curta, o que você pode fazer?",
+    "status": "PASS",
+    "text_seconds": 11.484,
+    "reply": "Harumi\nOlá, Harumi. Como assistente de Lucas, posso ajudar a organizar tarefas, planejar viagens ou auxiliar com outras tarefas. Qual é a situação que você gostaria de resolver hoje?",
+    "speech_start_seconds": 16.109
+  },
+  {
+    "test": "Real LLM generation with reused native runtime",
+    "question": "Você consegue controlar o freio do carro?",
+    "status": "PASS",
+    "text_seconds": 12.235,
+    "reply": "Harumi\nNão, Harumi não tem controle sobre o freio do veículo. É uma função exclusiva de um mecânico, e o carro está desconectado, o que limita meus recursos para realizar ações.",
+    "speech_start_seconds": 16.579
+  },
+  {
+    "test": "Route confirmation appears without waiting for synthesis",
+    "status": "PASS",
+    "observed_seconds_including_ui_dump": 2.907
+  }
+]

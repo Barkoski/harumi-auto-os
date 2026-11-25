@@ -1,0 +1,26 @@
+/* Apps: tela cheia, segmentos e tiles. Base e tokens: harumi-ui.css. */
+.apps-head{flex-wrap:wrap;row-gap:8px}
+.apps-head h2{flex:none;margin-right:4px}
+.apps-head .hu-seg{margin-right:auto}
+.apps-scroll{flex:1;min-height:0;overflow:auto;padding:12px 16px 12px}
+.apps-foot{flex:none;margin:0;padding:0 16px 8px}
+#apps-install{margin-bottom:12px;height:56px;max-width:100%}
+.hu-tiles{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}
+.hu-empty{grid-column:1/-1;margin:24px auto;max-width:420px;text-align:center;font-size:15px;line-height:1.5;color:var(--ck-muted)}
+
+.app-tile{position:relative;min-width:0}
+.app-card{width:100%;height:120px;min-height:120px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:8px 10px;border:1px solid var(--ck-stroke);border-radius:var(--ck-r);background:var(--ck-glass);box-shadow:var(--ck-shadow),inset 0 1px 0 var(--ck-stroke-hi);color:var(--ck-text);text-align:center}
+.app-card:active{background:rgba(63,52,72,.92);filter:none}
+.app-ico{flex:none;width:56px;height:56px;margin-bottom:4px;display:flex;align-items:center;justify-content:center;overflow:hidden;border-radius:50%;border:1px solid var(--ck-stroke-hi);background:rgba(210,160,189,.14);color:var(--ck-accent)}
+.app-ico.is-real{border:0;border-radius:16px;background:transparent}
+.app-ico img{display:block;width:56px;height:56px;object-fit:cover}
+.app-card h3{max-width:100%;margin:0;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;font-size:15px;font-weight:600;line-height:1.2}
+.app-availability{max-width:100%;margin:0;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;font-size:12px;line-height:1.2;color:var(--ck-muted)}
+.app-availability.available{color:var(--ck-accent)}
+.app-assign{position:absolute;top:4px;right:4px;width:44px;height:44px;min-height:44px;padding:0;display:flex;align-items:center;justify-content:center;border:0;border-radius:50%;background:transparent;color:var(--ck-muted)}
+.app-assign .ck-ico{width:20px;height:20px}
+#apps-install:disabled{color:var(--ck-muted)}
+
+@media(max-width:899px){.hu-tiles{grid-template-columns:repeat(4,minmax(0,1fr))}.apps-head{flex-wrap:nowrap;gap:8px}.apps-head .hu-btn{padding:0 14px;font-size:15px}.apps-head .hu-seg button{padding:0 12px;font-size:14px}}
+@media(max-width:600px){.apps-head{flex-wrap:wrap}.hu-tiles{grid-template-columns:repeat(2,minmax(0,1fr))}.apps-head .hu-seg{order:5;flex:1 1 100%;overflow:auto}.apps-head .hu-seg button{flex:1;padding:0 10px;font-size:14px}.apps-head .hu-btn{padding:0 12px;font-size:14px}}
+@media(max-height:520px){.apps-scroll{padding:8px 14px}.app-card{height:108px;min-height:108px;padding:6px 8px;gap:2px}.app-ico{margin-bottom:2px}}

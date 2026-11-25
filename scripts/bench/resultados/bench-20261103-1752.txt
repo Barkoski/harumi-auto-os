@@ -1,0 +1,159 @@
+== Harumi bench 03/11/2026 17:52 · aparelho emulator-5554
+Aparelho: V2309A · Android 14 · ABI x86_64 · núcleos 8
+Versão: versionName=0.3.15-dev.1
+
+-- Abertura a frio (3x): tela nativa (Android) e interface pronta (WebView + status)
+  rodada 1: Android  ms · interface pronta 16026 ms
+  rodada 2: Android 2220 ms · interface pronta 3450 ms
+  rodada 3: Android 1693 ms · interface pronta 2505 ms
+
+-- Abrir app pela Harumi (Chrome) e Configurações de Wi-Fi: tempo medido pelo Android (Displayed)
+  catalog.open chrome: em primeiro plano em ~1000 ms (medido pelo PC, inclui adb) · Android: sem registro
+  connection.wifi -: em primeiro plano em ~19977 ms (medido pelo PC, inclui adb) · Android: sem registro
+
+-- Conversa, IA, voz, Oi Harumi e painéis (pela interface)
+{
+ "quando": "2026-11-03T20:53:47.560Z",
+ "comandos_locais": [
+  {
+   "pergunta": "Abra o Spotify",
+   "primeira_palavra_ms": 387,
+   "voz_comeca_ms": 387,
+   "fim_ms": 6427,
+   "caracteres": 91,
+   "status_final": "Pronta · diga “Oi Harumi”",
+   "resposta": "Não encontrei um aplicativo de música nesta central. Use o rádio ou o Bluetooth da central."
+  },
+  {
+   "pergunta": "Como está o carro?",
+   "primeira_palavra_ms": 416,
+   "voz_comeca_ms": 516,
+   "fim_ms": 9663,
+   "caracteres": 147,
+   "status_final": "Pronta · diga “Oi Harumi”",
+   "resposta": "Sem adaptador de diagnóstico conectado. Não tenho leituras reais de motor, temperatura, bateria ou falhas, então não consigo avaliar o carro agora."
+  },
+  {
+   "pergunta": "Por favor, tudo bem?",
+   "primeira_palavra_ms": 427,
+   "voz_comeca_ms": 427,
+   "fim_ms": 3660,
+   "caracteres": 37,
+   "status_final": "Pronta · diga “Oi Harumi”",
+   "resposta": "Oi, Lucas! Tudo bem por aqui. E você?"
+  }
+ ],
+ "ia": [
+  {
+   "pergunta": "Qual a capital do Paraná?",
+   "primeira_palavra_ms": 5717,
+   "voz_comeca_ms": 15693,
+   "fim_ms": 18297,
+   "caracteres": 31,
+   "status_final": "Pronta · diga “Oi Harumi”",
+   "resposta": "A capital do Paraná é Curitiba."
+  },
+  {
+   "pergunta": "Me dê uma dica para economizar combustível.",
+   "primeira_palavra_ms": 420,
+   "voz_comeca_ms": 520,
+   "fim_ms": 14136,
+   "caracteres": 227,
+   "status_final": "Pronta · diga “Oi Harumi”",
+   "resposta": "Acelere com suavidade, mantenha velocidade constante e antecipe as frenagens, aproveitando o embalo. Mantenha os pneus calibrados e não carregue peso à toa. Na "
+  },
+  {
+   "pergunta": "Explique em poucas palavras o que é um motor boxer.",
+   "primeira_palavra_ms": 414,
+   "voz_comeca_ms": 414,
+   "fim_ms": 15530,
+   "caracteres": 220,
+   "status_final": "Pronta · diga “Oi Harumi”",
+   "resposta": "No motor boxer os cilindros ficam deitados, dois de cada lado, e os pistões se movem em sentidos opostos. Isso deixa o motor mais baixo e equilibrado, com menos"
+  },
+  {
+   "pergunta": "Quanto é 15 vezes 12?",
+   "primeira_palavra_ms": 3700,
+   "voz_comeca_ms": 18230,
+   "fim_ms": 21634,
+   "caracteres": 27,
+   "status_final": "Pronta · diga “Oi Harumi”",
+   "resposta": "15 vezes 12 resulta em 180."
+  },
+  {
+   "pergunta": "Obrigado, Harumi.",
+   "primeira_palavra_ms": 343,
+   "voz_comeca_ms": 450,
+   "fim_ms": 3153,
+   "caracteres": 32,
+   "status_final": "Pronta · diga “Oi Harumi”",
+   "resposta": "Por nada, Lucas! Estou por aqui."
+  }
+ ],
+ "outros": {
+  "oi_harumi": {
+   "voz_comeca_ms": 410,
+   "ouvindo_ms": 3117
+  },
+  "mapa_abre_com_tiles_ms": 120,
+  "atlas_abre_ms": 3,
+  "painel_apps_ms": 33
+ },
+ "navegacao": {
+  "busca_endereco": [
+   {
+    "q": "Avenida Higienópolis, Londrina",
+    "ms": 353,
+    "status": 200,
+    "resultados": 5
+   },
+   {
+    "q": "Catedral de Londrina",
+    "ms": 13,
+    "status": 200,
+    "resultados": 2
+   },
+   {
+    "q": "Aeroporto de Londrina",
+    "ms": 17,
+    "status": 200,
+    "resultados": 2
+   }
+  ],
+  "rota_com_manobras": [
+   {
+    "pontos": "-51.1630,-23.3105,-51.1561,-23.3040",
+    "ms": 997,
+    "status": 200,
+    "km": 1.4,
+    "min": 4,
+    "manobras": 5
+   },
+   {
+    "pontos": "-51.1630,-23.3105,-51.1300,-23.3290",
+    "ms": 273,
+    "status": 200,
+    "km": 4.7,
+    "min": 8,
+    "manobras": 14
+   },
+   {
+    "pontos": "-51.1630,-23.3105,-51.4600,-23.4200",
+    "ms": 357,
+    "status": 200,
+    "km": 41.9,
+    "min": 43,
+    "manobras": 19
+   }
+  ],
+  "rota_repetida_cache_ms": 0,
+  "painel_abre_ms": 0
+ }
+}
+
+-- Memória do app (com modelos carregados)
+  Native Heap        0        0        0        0        0   907656   900438     7217
+         Native Heap:        0                              0
+           TOTAL PSS:   663797            TOTAL RSS:   729276      TOTAL SWAP (KB):        0
+
+Resultado salvo em /c/Users/Aaaa/Documents/Codex/2026-11-02/bom-dia-tenho-u-5/Harumi Auto OS/scripts/bench/resultados/bench-20261103-1752.txt

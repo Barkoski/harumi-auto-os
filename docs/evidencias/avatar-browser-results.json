@@ -1,0 +1,50 @@
+[
+  {
+    "state": "listening",
+    "status": "PASS",
+    "playback": {
+      "time": 0.1346,
+      "paused": false,
+      "src": "http://127.0.0.1:8871/media/harumi-listening.mp4?v=038pink",
+      "muted": true
+    }
+  },
+  {
+    "state": "thinking",
+    "status": "PASS",
+    "playback": {
+      "time": 0.1064,
+      "paused": false,
+      "src": "http://127.0.0.1:8871/media/harumi-thinking.mp4?v=038pink",
+      "muted": true
+    }
+  },
+  {
+    "state": "speaking",
+    "status": "PASS",
+    "playback": {
+      "time": 0.1047,
+      "paused": false,
+      "src": "http://127.0.0.1:8871/media/harumi-speaking.mp4?v=038pink",
+      "muted": true
+    }
+  },
+  {
+    "state": "idle",
+    "status": "PASS",
+    "playback": {
+      "time": 0.1093,
+      "paused": false,
+      "src": "http://127.0.0.1:8871/media/harumi-idle.mp4?v=038pink",
+      "muted": true
+    }
+  },
+  {
+    "test": "Character stays visible next to conversation",
+    "status": "PASS"
+  },
+  {
+    "test": "Pause for lifecycle and reduced motion",
+    "status": "PASS"
+  }
+]

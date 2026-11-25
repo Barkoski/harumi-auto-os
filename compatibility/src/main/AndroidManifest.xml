@@ -1,0 +1,11 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools">
+ <!-- APK de diagnóstico fora da Play: precisa listar todos os pacotes, inclusive os sem ícone. -->
+ <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES" tools:ignore="QueryAllPackagesPermission"/>
+ <queries><package android:name="com.android.vending"/><package android:name="com.google.android.gms"/>
+ <intent><action android:name="android.intent.action.MAIN"/><category android:name="android.intent.category.LAUNCHER"/></intent>
+ <intent><action android:name="android.intent.action.VIEW"/><data android:scheme="geo"/></intent>
+ <intent><action android:name="android.intent.action.MUSIC_PLAYER"/></intent></queries>
+ <application android:label="Harumi Compatibilidade" android:theme="@android:style/Theme.Material.NoActionBar" android:allowBackup="false" android:usesCleartextTraffic="false">
+  <activity android:name=".ProbeActivity" android:exported="true"><intent-filter><action android:name="android.intent.action.MAIN"/><category android:name="android.intent.category.LAUNCHER"/></intent-filter></activity>
+ </application>
+</manifest>

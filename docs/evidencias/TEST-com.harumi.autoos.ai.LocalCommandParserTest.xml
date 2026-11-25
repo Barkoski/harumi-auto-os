@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.harumi.autoos.ai.LocalCommandParserTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2026-11-02T17:43:29" hostname="A" time="0.019">
+  <properties/>
+  <testcase name="destinationsAreDataOnly" classname="com.harumi.autoos.ai.LocalCommandParserTest" time="0.011"/>
+  <testcase name="knownDiagnosticRequestsUseObservedState" classname="com.harumi.autoos.ai.LocalCommandParserTest" time="0.001"/>
+  <testcase name="noSilentTruncationOrEmptyDestination" classname="com.harumi.autoos.ai.LocalCommandParserTest" time="0.0"/>
+  <testcase name="blocksLinksAsDestinations" classname="com.harumi.autoos.ai.LocalCommandParserTest" time="0.003"/>
+  <testcase name="connectionCommandsOpenSettingsOnly" classname="com.harumi.autoos.ai.LocalCommandParserTest" time="0.001"/>
+  <testcase name="naturalConversationDoesNotExecuteCommands" classname="com.harumi.autoos.ai.LocalCommandParserTest" time="0.002"/>
+  <testcase name="PortugueseMapCommands" classname="com.harumi.autoos.ai.LocalCommandParserTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

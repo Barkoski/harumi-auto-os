@@ -1,0 +1,14 @@
+[
+  {
+    "test": "Standalone probe launches without native libraries or AI models",
+    "status": "PASS"
+  },
+  {
+    "test": "Probe exports local JSON through DocumentsUI",
+    "status": "PASS"
+  },
+  {
+    "test": "Probe distinguishes x86 bench and absent Play Store",
+    "status": "PASS"
+  }
+]

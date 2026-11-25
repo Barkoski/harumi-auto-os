@@ -1,0 +1,12 @@
+[
+  {
+    "name": "Supertonic 3 INT8",
+    "sha256": "82fa96f91c4ef8abaae3a14a3f4153facf88bed821d1f7331cec2700f432c427",
+    "bytes": 128774318
+  },
+  {
+    "name": "sherpa-onnx 2.0.1",
+    "sha256": "a8d09d1d32f3eb8520482c6d3d43fae674681c5b050385967c70a3c2c9bf0ee7",
+    "bytes": 49441341
+  }
+]

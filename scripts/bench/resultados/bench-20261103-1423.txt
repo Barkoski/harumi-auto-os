@@ -1,0 +1,109 @@
+== Harumi bench 03/11/2026 14:23 · aparelho emulator-5554
+Aparelho: V2309A · Android 14 · ABI x86_64 · núcleos 8
+Versão: versionName=0.3.15-dev.1
+
+-- Abertura a frio (3x): tela nativa (Android) e interface pronta (WebView + status)
+  rodada 1: Android 3166 ms · interface pronta 5534 ms
+  rodada 2: Android 1673 ms · interface pronta 2569 ms
+  rodada 3: Android 1426 ms · interface pronta 2133 ms
+
+-- Abrir app pela Harumi (Chrome) e Configurações de Wi-Fi: tempo medido pelo Android (Displayed)
+  catalog.open chrome: em primeiro plano em ~1592 ms (medido pelo PC, inclui adb) · Android: sem registro
+  connection.wifi -: em primeiro plano em ~1493 ms (medido pelo PC, inclui adb) · Android: sem registro
+
+-- Conversa, IA, voz, Oi Harumi e painéis (pela interface)
+{
+ "quando": "2026-11-03T17:24:01.834Z",
+ "comandos_locais": [
+  {
+   "pergunta": "Abra o Spotify",
+   "primeira_palavra_ms": 323,
+   "voz_comeca_ms": 430,
+   "fim_ms": 7300,
+   "caracteres": 99,
+   "status_final": "Pronta · diga “Oi Harumi”",
+   "resposta": "Não encontrei um aplicativo de música instalado. Em Aplicativos, toque em Instalar apps essenciais."
+  },
+  {
+   "pergunta": "Como está o carro?",
+   "primeira_palavra_ms": 406,
+   "voz_comeca_ms": 406,
+   "fim_ms": 9816,
+   "caracteres": 147,
+   "status_final": "Pronta · diga “Oi Harumi”",
+   "resposta": "Sem adaptador de diagnóstico conectado. Não tenho leituras reais de motor, temperatura, bateria ou falhas, então não consigo avaliar o carro agora."
+  },
+  {
+   "pergunta": "Por favor, tudo bem?",
+   "primeira_palavra_ms": 537,
+   "voz_comeca_ms": 537,
+   "fim_ms": 3727,
+   "caracteres": 37,
+   "status_final": "Pronta · diga “Oi Harumi”",
+   "resposta": "Oi, Lucas! Tudo bem por aqui. E você?"
+  }
+ ],
+ "ia": [
+  {
+   "pergunta": "Qual a capital do Paraná?",
+   "primeira_palavra_ms": 3483,
+   "voz_comeca_ms": 24333,
+   "fim_ms": 30490,
+   "caracteres": 92,
+   "status_final": "Pronta para conversar · IA local",
+   "resposta": "A capital do Paraná é Curitiba, que serve como o centro administrativo e cultural da região."
+  },
+  {
+   "pergunta": "Me dê uma dica para economizar combustível.",
+   "primeira_palavra_ms": 3687,
+   "voz_comeca_ms": 22433,
+   "fim_ms": 28343,
+   "caracteres": 85,
+   "status_final": "Pronta · diga “Oi Harumi”",
+   "resposta": "Use o sistema de pontos do carro para economizar combustível e não fique sem energia."
+  },
+  {
+   "pergunta": "Explique em poucas palavras o que é um motor boxer.",
+   "primeira_palavra_ms": 5217,
+   "voz_comeca_ms": 37887,
+   "fim_ms": 47560,
+   "caracteres": 149,
+   "status_final": "Pronta para conversar · IA local",
+   "resposta": "Um motor boxer é um tipo de motor de combustível que usa cilindros paralelos para gerar torque, sendo muito comum em carros de corrida e utilitários."
+  },
+  {
+   "pergunta": "Quanto é 15 vezes 12?",
+   "primeira_palavra_ms": 5600,
+   "voz_comeca_ms": 18040,
+   "fim_ms": 21490,
+   "caracteres": 27,
+   "status_final": "Pronta para conversar · IA local",
+   "resposta": "15 vezes 12 resulta em 180."
+  },
+  {
+   "pergunta": "Obrigado, Harumi.",
+   "primeira_palavra_ms": 534,
+   "voz_comeca_ms": 534,
+   "fim_ms": 3254,
+   "caracteres": 32,
+   "status_final": "Pronta · diga “Oi Harumi”",
+   "resposta": "Por nada, Lucas! Estou por aqui."
+  }
+ ],
+ "outros": {
+  "oi_harumi": {
+   "voz_comeca_ms": 426,
+   "ouvindo_ms": 3140
+  },
+  "mapa_abre_com_tiles_ms": 93,
+  "atlas_abre_ms": 3,
+  "painel_apps_ms": 390
+ }
+}
+
+-- Memória do app (com modelos carregados)
+  Native Heap        0        0        0        0        0   908688   892302    16385
+         Native Heap:        0                              0
+           TOTAL PSS:   700110            TOTAL RSS:   774448      TOTAL SWAP (KB):        0
+
+Resultado salvo em /c/Users/Aaaa/Documents/Codex/2026-11-02/bom-dia-tenho-u-5/Harumi Auto OS/scripts/bench/resultados/bench-20261103-1423.txt

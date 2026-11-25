@@ -1,0 +1,14 @@
+[
+  {
+    "test": "Native compatibility dialog and architecture policy",
+    "status": "PASS"
+  },
+  {
+    "test": "User-directed local JSON export through Android DocumentsUI",
+    "status": "PASS"
+  },
+  {
+    "test": "Report correctly distinguishes AOSP bench, unknown MCU and absent Play Store",
+    "status": "PASS"
+  }
+]

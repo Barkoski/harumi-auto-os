@@ -1,0 +1,22 @@
+[
+  {
+    "viewport": "1024x600",
+    "status": "PASS",
+    "vertical_scroll": false
+  },
+  {
+    "viewport": "1024x480",
+    "status": "PASS",
+    "vertical_scroll": false
+  },
+  {
+    "viewport": "800x480",
+    "status": "PASS",
+    "vertical_scroll": false
+  },
+  {
+    "viewport": "390x844",
+    "status": "PASS",
+    "vertical_scroll": false
+  }
+]

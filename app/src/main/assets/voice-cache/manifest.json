@@ -1,0 +1,506 @@
+{
+  "engine": "Supertonic 3 INT8 F3",
+  "speaker": 2,
+  "steps": 24,
+  "speed": 1.25,
+  "silence_scale": 0.72,
+  "language": "pt",
+  "post_processing": "none",
+  "clips": [
+    {
+      "id": "wellbeing",
+      "text": "Oi, Lucas! Tudo bem por aqui. E você?",
+      "sample_rate": 44100,
+      "samples": 141933,
+      "seconds": 3.21843537414966,
+      "generation_seconds": 1.0310000000026776,
+      "sha256": "b9deb5313ecb60463c4f36951d49729b40cbaaee1b15db5cc3585a7046ab080a"
+    },
+    {
+      "id": "thanks",
+      "text": "Por nada, Lucas! Estou por aqui.",
+      "sample_rate": 44100,
+      "samples": 117028,
+      "seconds": 2.6536961451247167,
+      "generation_seconds": 0.9379999999946449,
+      "sha256": "6dee0549b6890c74daf2cdbd9d4e328a0b34396e8dc8faaff4a073858c0fa21a"
+    },
+    {
+      "id": "greeting",
+      "text": "Oi, Lucas! Eu sou a Harumi! Quer que eu abra o mapa? Me diz: pra onde a gente vai hoje?",
+      "sample_rate": 44100,
+      "samples": 310853,
+      "seconds": 7.048820861678005,
+      "generation_seconds": 1.875,
+      "sha256": "1570caad78a891165a43657d5eb23ab9edfe300f916015d834b1d2312f3fb4f5"
+    },
+    {
+      "id": "wake_reply",
+      "text": "Oi, Lucas! O que você deseja?",
+      "sample_rate": 44100,
+      "samples": 117098,
+      "seconds": 2.6552834467120183,
+      "generation_seconds": 0.9530000000086147,
+      "sha256": "97ebf2b0c60edaed310cd347a555b4d8eca2adaede7ef4d157f54fa2c798e66e"
+    },
+    {
+      "id": "off_topic",
+      "text": "Esse assunto fica fora da minha área. Sou sua copiloto: posso ajudar com o carro, a estrada, rotas, viagem, pontos turísticos e música.",
+      "sample_rate": 44100,
+      "samples": 399119,
+      "seconds": 9.05031746031746,
+      "generation_seconds": 2.4680000000080327,
+      "sha256": "7224f5d76d702af637b4edf57736d439bc8fd24e981a6d6d35b44c8a14814dfd"
+    },
+    {
+      "id": "music_open",
+      "text": "Vou abrir seu aplicativo de música.",
+      "sample_rate": 44100,
+      "samples": 108031,
+      "seconds": 2.4496825396825397,
+      "generation_seconds": 0.9219999999913853,
+      "sha256": "a0c4ee1fa5a345ea73ae720ccc1a7d969f4d7874f1274775ab2803309855dc69"
+    },
+    {
+      "id": "music_missing",
+      "text": "Não encontrei um aplicativo de música nesta central. Use o rádio ou o Bluetooth da central.",
+      "sample_rate": 44100,
+      "samples": 263816,
+      "seconds": 5.982222222222222,
+      "generation_seconds": 1.6560000000026776,
+      "sha256": "494f6becc849846251f50988df21780d8134cfc670406b4c2955d37bfa601c85"
+    },
+    {
+      "id": "diag_disconnected",
+      "text": "Sem adaptador de diagnóstico conectado. Não tenho leituras reais de motor, temperatura, bateria ou falhas, então não consigo avaliar o carro agora.",
+      "sample_rate": 44100,
+      "samples": 403379,
+      "seconds": 9.146916099773243,
+      "generation_seconds": 2.2810000000026776,
+      "sha256": "d052764cee13cec6c55d0ad81da59fa8ebd4459e61f1b35f75defb6779f95892"
+    },
+    {
+      "id": "kb_ficha",
+      "text": "Seu carro é um Subaru Impreza perua 1993, provavelmente a versão GF6, com tração integral e câmbio automático de 4 marchas. O motor é o EJ18 boxer, 1,8 litro e 16 válvulas, com cerca de 105 cavalos. Confirme a versão pelo número do chassi.",
+      "sample_rate": 44100,
+      "samples": 818082,
+      "seconds": 18.55061224489796,
+      "generation_seconds": 5.687000000005355,
+      "sha256": "0ac83d0d666e89259032f45e615d4cc2f752a64474503c26104847798ef34838"
+    },
+    {
+      "id": "kb_boxer",
+      "text": "No motor boxer os cilindros ficam deitados, dois de cada lado, e os pistões se movem em sentidos opostos. Isso deixa o motor mais baixo e equilibrado, com menos vibração. O seu EJ18 é um boxer de 4 cilindros e 1,8 litro.",
+      "sample_rate": 44100,
+      "samples": 657664,
+      "seconds": 14.913015873015873,
+      "generation_seconds": 4.375,
+      "sha256": "5bdac9a6db30ea4d35f3e746328e92499024de6eed34ec3233585bf1128a28d2"
+    },
+    {
+      "id": "kb_economia",
+      "text": "Acelere com suavidade, mantenha velocidade constante e antecipe as frenagens, aproveitando o embalo. Mantenha os pneus calibrados e não carregue peso à toa. Na estrada, acima de 100 quilômetros por hora o consumo sobe bastante.",
+      "sample_rate": 44100,
+      "samples": 591251,
+      "seconds": 13.40705215419501,
+      "generation_seconds": 4.046999999991385,
+      "sha256": "f34c1bed0e27d63d365c8233b822cd7e43fdbd08cccdf650af615406bc4d176b"
+    },
+    {
+      "id": "kb_luz_oleo",
+      "text": "Luz do óleo acesa com o motor ligado é sinal de parar. Encoste assim que for seguro, desligue o motor e confira o nível na vareta antes de seguir.",
+      "sample_rate": 44100,
+      "samples": 384033,
+      "seconds": 8.708231292517008,
+      "generation_seconds": 2.563000000009197,
+      "sha256": "e75dd6d1a113301b9ba582576185d00c1b65a286667822ce27a4db985c0e5119"
+    },
+    {
+      "id": "kb_luz_cambio",
+      "text": "A luz AT OIL TEMP acesa com o motor ligado indica câmbio quente: pare e deixe esfriar. Se ela piscar logo ao dar a partida, provavelmente há um código de falha gravado no câmbio.",
+      "sample_rate": 44100,
+      "samples": 518054,
+      "seconds": 11.747256235827665,
+      "generation_seconds": 3.4060000000026776,
+      "sha256": "d33e974e05310e02c5689da16fef4fd55751aa7cab87f2c647b1ea1e65cd9a4f"
+    },
+    {
+      "id": "kb_luz_injecao",
+      "text": "Luz da injeção acesa e fixa: dá para seguir com calma, mas verifique logo. Se ela piscar com o motor andando, é falha grave, provavelmente de ignição: reduza e pare em local seguro.",
+      "sample_rate": 44100,
+      "samples": 526552,
+      "seconds": 11.939954648526077,
+      "generation_seconds": 3.437000000005355,
+      "sha256": "a0874e10b3572ffbe1819a519119108eea02bd40bae5d42e6a774539ba1a6447"
+    },
+    {
+      "id": "kb_oleo_cambio",
+      "text": "O câmbio automático usa fluido ATF Dexron II, ou o ATF da Subaru compatível. A capacidade total é de cerca de 7,9 litros, mas uma troca pelo dreno tira uns 2,5 litros. Confira o nível com o motor quente, na posição P.",
+      "sample_rate": 44100,
+      "samples": 657930,
+      "seconds": 14.91904761904762,
+      "generation_seconds": 4.437999999994645,
+      "sha256": "62f55525d6cb2940728ef96657a7f565137e7d22e3f73ab6056dd6f7eecc4161"
+    },
+    {
+      "id": "kb_oleo_motor",
+      "text": "O motor EJ18 leva cerca de 4 litros de óleo. Na época se usava 5W-30 em clima frio, ou 10W-30 e 10W-40. Confira a vareta com o carro no plano e o motor desligado há alguns minutos.",
+      "sample_rate": 44100,
+      "samples": 594397,
+      "seconds": 13.478390022675738,
+      "generation_seconds": 3.9840000000112923,
+      "sha256": "86280e54931f11d22cc4309672c83c479fe013359361a7fd7c0bd7352313b1de"
+    },
+    {
+      "id": "kb_velas",
+      "text": "A vela indicada é a NGK BKR6E-11, com folga de 1,0 a 1,1 milímetro e aperto de 41 a 47 newton-metro. O modelo da vela veio de uma fonte só, então confira a aplicação na loja.",
+      "sample_rate": 44100,
+      "samples": 615823,
+      "seconds": 13.964240362811791,
+      "generation_seconds": 4.187000000005355,
+      "sha256": "7ceae191717f7a651bb5e2a1c7e8edcc52abd322c8d53884b4ef990b96349aaa"
+    },
+    {
+      "id": "kb_correia",
+      "text": "A correia dentada deve ser inspecionada a cada 48 mil quilômetros e trocada a cada 96 mil. Sem registro da última troca, o melhor é trocar já, junto com tensor, polias, retentores e bomba d'água. O EJ18 não é interferente: se romper, o carro para, mas em tese não empena válvula.",
+      "sample_rate": 44100,
+      "samples": 816734,
+      "seconds": 18.52004535147392,
+      "generation_seconds": 5.3439999999973224,
+      "sha256": "f00e4f4202155c9dd13683547aed8a494c2169b12ff9cca9334bf63413bff5fb"
+    },
+    {
+      "id": "kb_marcha_lenta",
+      "text": "Com o motor quente, a marcha lenta normal é de 700 rotações, com variação de 100 para mais ou para menos. Com o ar-condicionado ligado, fica perto de 850. Se ela oscilar, a causa comum é a válvula de marcha lenta suja, que pode ser limpa antes de trocar.",
+      "sample_rate": 44100,
+      "samples": 713344,
+      "seconds": 16.17560090702948,
+      "generation_seconds": 4.562999999994645,
+      "sha256": "d81e4f4ed36bdf14edb84a8a0a67022c52c4a4d0d5ae14239117ccbd03d02695"
+    },
+    {
+      "id": "kb_temperatura",
+      "text": "Com o motor quente, o normal fica entre 80 e 100 graus. Acima de 105, fique atento; acima de 110, pare em local seguro e desligue o motor. Esses limites são de referência e não do manual do seu carro.",
+      "sample_rate": 44100,
+      "samples": 572276,
+      "seconds": 12.976780045351473,
+      "generation_seconds": 3.7030000000086147,
+      "sha256": "5695fe198292920043ed4da46e2a87647f0b222452c1ca31058e89be3ea3d46e"
+    },
+    {
+      "id": "kb_scanner",
+      "text": "O seu Impreza 1993 é anterior ao OBD-II e usa o protocolo Subaru Select Monitor. Leitor ELM327 comum não funciona. Serve um cabo próprio para Select Monitor, no conector amarelo de 9 pinos.",
+      "sample_rate": 44100,
+      "samples": 617352,
+      "seconds": 13.99891156462585,
+      "generation_seconds": 4.156999999991967,
+      "sha256": "e50769122a97a247f67687dd8c5641ef1b2b26729671bc6f58e13723474c515d"
+    },
+    {
+      "id": "kb_piscadas",
+      "text": "Sem scanner, com a ignição ligada e o motor desligado, liga-se o par de plugues pretos de leitura de memória e contam-se as piscadas da luz da injeção. Piscada longa é a dezena e curta é a unidade. A posição desses plugues no seu carro ainda precisa ser confirmada.",
+      "sample_rate": 44100,
+      "samples": 705662,
+      "seconds": 16.00140589569161,
+      "generation_seconds": 4.6560000000026776,
+      "sha256": "d8b751879f00efc253bedba6afe195740f5b21bfae5fa808b68d1937e7d6133d"
+    },
+    {
+      "id": "kb_bateria",
+      "text": "Com o motor ligado, a bateria deve marcar entre 13,5 e 14,5 volts. Abaixo de 12,5 com o motor ligado indica problema no alternador; acima de 15, no regulador.",
+      "sample_rate": 44100,
+      "samples": 526341,
+      "seconds": 11.935170068027212,
+      "generation_seconds": 3.562000000005355,
+      "sha256": "d437a3ac7ef4b042b7581f9cb029c53941ede595777e1339b93fdcfbe62a25fc"
+    },
+    {
+      "id": "kb_trepida",
+      "text": "Trepidar ou travar em curvas fechadas e lentas costuma ser a embreagem da tração integral ou o solenoide Duty C. Um teste é colocar o fusível no soquete FWD do cofre: se o sintoma sumir, o problema está no sistema 4x4.",
+      "sample_rate": 44100,
+      "samples": 628383,
+      "seconds": 14.24904761904762,
+      "generation_seconds": 4.140999999988708,
+      "sha256": "88c1b577848d010ea5faccf3ba1ce1036f271d76b5682cd2d7a5b799432ba840"
+    },
+    {
+      "id": "kb_vazamento",
+      "text": "No EJ18, os vazamentos mais comuns são nas juntas das tampas de válvulas, nos retentores dianteiros e na placa separadora entre motor e câmbio. Retentores velhos devem ser trocados junto com a correia dentada.",
+      "sample_rate": 44100,
+      "samples": 571647,
+      "seconds": 12.96251700680272,
+      "generation_seconds": 3.7810000000026776,
+      "sha256": "e824395b560c15501eb20d2a24c2a7fc9a253df5c64838c97d65db0009346b43"
+    },
+    {
+      "id": "kb_cambio_tranco",
+      "text": "Trancos ou trocas que escorregam no câmbio automático costumam vir de fluido velho ou de solenoides com defeito. Confira o nível e a cor do fluido, e leia os códigos do câmbio quando o scanner estiver conectado.",
+      "sample_rate": 44100,
+      "samples": 520292,
+      "seconds": 11.798004535147392,
+      "generation_seconds": 3.514999999999418,
+      "sha256": "32b60de57a119fc2c2838a00cfc29aa19050c96801fc9ce4f5c7c75fa28b8939"
+    },
+    {
+      "id": "kb_pneus",
+      "text": "A pressão certa está na etiqueta do carro ou no manual; não tenho esse valor confirmado para o seu Impreza. Calibre com os pneus frios, a cada 15 dias, e um pouco mais quando o carro estiver carregado.",
+      "sample_rate": 44100,
+      "samples": 536518,
+      "seconds": 12.165941043083901,
+      "generation_seconds": 3.5469999999913853,
+      "sha256": "39b82eee50ce81fe8cbc79b29857ec06ea6f68c2f14eb43e27ac1bf123a52374"
+    },
+    {
+      "id": "kb_chuva",
+      "text": "Na chuva, reduza a velocidade, dobre a distância do carro da frente e acenda o farol baixo. Se aquaplanar, não freie de repente: tire o pé do acelerador e segure o volante reto até o pneu voltar a aderir.",
+      "sample_rate": 44100,
+      "samples": 555190,
+      "seconds": 12.589342403628118,
+      "generation_seconds": 3.764999999999418,
+      "sha256": "aa257610eff78a0a2325936ea8fecf110c00721a0ca63d291db5d467e7e9e309"
+    },
+    {
+      "id": "kb_neblina",
+      "text": "Na neblina, use farol baixo e o de neblina, nunca o farol alto. Reduza a velocidade, aumente a distância e guie-se pela faixa da direita. Se a visibilidade sumir, saia da pista em local seguro e ligue o pisca-alerta.",
+      "sample_rate": 44100,
+      "samples": 579292,
+      "seconds": 13.135873015873015,
+      "generation_seconds": 3.8280000000086147,
+      "sha256": "ac0b72ec533d4a652ce60f78b8809315b531f043c4daac5dfeeb75939ad86431"
+    },
+    {
+      "id": "kb_sono",
+      "text": "Sono ao volante é perigoso. Pare em um local seguro assim que puder, descanse uns 20 minutos e só depois siga. Em viagens longas, faça uma pausa a cada duas horas.",
+      "sample_rate": 44100,
+      "samples": 454084,
+      "seconds": 10.296689342403628,
+      "generation_seconds": 3.0930000000080327,
+      "sha256": "92f75dd71daed522b9277ba044dc1ef969c5fc89b9ff9e1725fca2d5e11a0f97"
+    },
+    {
+      "id": "kb_pneu_furado",
+      "text": "Pare em local plano e seguro, ligue o pisca-alerta e coloque o triângulo bem atrás do carro. Afrouxe os parafusos antes de erguer o carro, troque o pneu e aperte em cruz. Confira a pressão do estepe no próximo posto.",
+      "sample_rate": 44100,
+      "samples": 559129,
+      "seconds": 12.678662131519275,
+      "generation_seconds": 3.7969999999913853,
+      "sha256": "ea644e95099cf7512746965cc2b53398f5e943e17ecd6c0c16dcf3f3e8a017f6"
+    },
+    {
+      "id": "kb_estrada_longa",
+      "text": "Antes de pegar a estrada, confira óleo, água do radiador, pneus e estepe, faróis e palhetas. Leve água e o celular carregado. Faça uma pausa a cada duas horas.",
+      "sample_rate": 44100,
+      "samples": 433160,
+      "seconds": 9.822222222222223,
+      "generation_seconds": 2.9689999999973224,
+      "sha256": "c7332b8d0798f89ba37a2cc7471fdd0dc9772f4d1ceaa79c57bd9fd93c202c1c"
+    },
+    {
+      "id": "nav_d100",
+      "text": "Em cem metros,",
+      "sample_rate": 44100,
+      "samples": 56541,
+      "seconds": 1.282108843537415,
+      "generation_seconds": 0.6410000000032596,
+      "sha256": "33f2c655dd6e96b7a3b3ecb7cf7a74ba01741556c1c531f9f8f770e9f93cd617"
+    },
+    {
+      "id": "nav_d200",
+      "text": "Em duzentos metros,",
+      "sample_rate": 44100,
+      "samples": 73744,
+      "seconds": 1.6721995464852608,
+      "generation_seconds": 0.6719999999913853,
+      "sha256": "841e2af7a03d905ba9af45ec96cb93689bc92177648e02a147e569741f50a45b"
+    },
+    {
+      "id": "nav_d500",
+      "text": "Em quinhentos metros,",
+      "sample_rate": 44100,
+      "samples": 70134,
+      "seconds": 1.5903401360544218,
+      "generation_seconds": 0.6560000000026776,
+      "sha256": "90fb2c794def6983f6dd8936e61b292e6648b858215718f192c2a0e79d65a41a"
+    },
+    {
+      "id": "nav_d1k",
+      "text": "Em um quilômetro,",
+      "sample_rate": 44100,
+      "samples": 60274,
+      "seconds": 1.3667573696145126,
+      "generation_seconds": 0.6410000000032596,
+      "sha256": "4f5991fdeaf5a27bdaf599cc5c79a118901f8d762912e8c29e45236166ec6cce"
+    },
+    {
+      "id": "nav_now",
+      "text": "Agora,",
+      "sample_rate": 44100,
+      "samples": 49202,
+      "seconds": 1.1156916099773242,
+      "generation_seconds": 0.625,
+      "sha256": "803997b7420f184533c750db45e6d9e9457810af543c530203053aa393301501"
+    },
+    {
+      "id": "nav_left",
+      "text": "vire à esquerda.",
+      "sample_rate": 44100,
+      "samples": 59854,
+      "seconds": 1.3572335600907028,
+      "generation_seconds": 0.6559999999881256,
+      "sha256": "f55457a2703e1725ab6561c80956cb4b504583d2fab9a5933659cd274427936e"
+    },
+    {
+      "id": "nav_right",
+      "text": "vire à direita.",
+      "sample_rate": 44100,
+      "samples": 58869,
+      "seconds": 1.3348979591836734,
+      "generation_seconds": 0.6570000000065193,
+      "sha256": "aa9a6d04ca15d5d5bb4812db7da910527b71f266261fa2c959dbe835a201ca8c"
+    },
+    {
+      "id": "nav_slight_left",
+      "text": "mantenha-se levemente à esquerda.",
+      "sample_rate": 44100,
+      "samples": 90776,
+      "seconds": 2.0584126984126985,
+      "generation_seconds": 0.6710000000020955,
+      "sha256": "9c7dd34a098dbde3cf1a43b94f6d03190001cc4afb910eea218e91cf397368f6"
+    },
+    {
+      "id": "nav_slight_right",
+      "text": "mantenha-se levemente à direita.",
+      "sample_rate": 44100,
+      "samples": 91313,
+      "seconds": 2.070589569160998,
+      "generation_seconds": 0.6879999999946449,
+      "sha256": "2a4c6989f8aa90bc3a04fcababd9800dd578d99c5f1deaa95eada61d8e25e249"
+    },
+    {
+      "id": "nav_sharp_left",
+      "text": "curva fechada à esquerda.",
+      "sample_rate": 44100,
+      "samples": 79169,
+      "seconds": 1.7952154195011338,
+      "generation_seconds": 0.6720000000059372,
+      "sha256": "0728ea8c01197ff5784a7a1d6ab6f5b5eff3575ea0b4a849f062346f4ab74cfe"
+    },
+    {
+      "id": "nav_sharp_right",
+      "text": "curva fechada à direita.",
+      "sample_rate": 44100,
+      "samples": 79708,
+      "seconds": 1.807437641723356,
+      "generation_seconds": 0.6720000000059372,
+      "sha256": "94521219a37f31cfbf19d69aaecd1ee5ec8fc1d1b5264ea5a6a6f6af49f5c4c7"
+    },
+    {
+      "id": "nav_straight",
+      "text": "siga em frente.",
+      "sample_rate": 44100,
+      "samples": 56883,
+      "seconds": 1.2898639455782313,
+      "generation_seconds": 0.625,
+      "sha256": "2221bc3652e4b8b98627e1ecb607f1a69e8e56b0cf4af770c53ec355d44859c9"
+    },
+    {
+      "id": "nav_uturn",
+      "text": "faça o retorno.",
+      "sample_rate": 44100,
+      "samples": 56528,
+      "seconds": 1.281814058956916,
+      "generation_seconds": 0.625,
+      "sha256": "1e2da60f7dc8e4986e728315d6c1f816fc19954663a7a3c35b361df42a60b26a"
+    },
+    {
+      "id": "nav_keep_left",
+      "text": "mantenha-se à esquerda.",
+      "sample_rate": 44100,
+      "samples": 72543,
+      "seconds": 1.6449659863945578,
+      "generation_seconds": 0.6399999999994179,
+      "sha256": "b7e3301add58ae081312ce5147e87d379d58d1fe841a4ca8edd795a260ac2bbb"
+    },
+    {
+      "id": "nav_keep_right",
+      "text": "mantenha-se à direita.",
+      "sample_rate": 44100,
+      "samples": 72219,
+      "seconds": 1.6376190476190475,
+      "generation_seconds": 0.6410000000032596,
+      "sha256": "26bcf0649fb5cdab0cd51dc5efdb8f268f7c64114ea084a9b2beb1aec9d40ffa"
+    },
+    {
+      "id": "nav_arrive",
+      "text": "Você chegou ao destino.",
+      "sample_rate": 44100,
+      "samples": 71992,
+      "seconds": 1.6324716553287981,
+      "generation_seconds": 0.625,
+      "sha256": "4342ea03ef726c1ccf7a32b8d352556c1f6d1cae41faf369356c2578485abf43"
+    },
+    {
+      "id": "nav_recalc",
+      "text": "Recalculando a rota.",
+      "sample_rate": 44100,
+      "samples": 67803,
+      "seconds": 1.5374829931972789,
+      "generation_seconds": 0.625,
+      "sha256": "d73def6608621356cfad5aac05e7cdd40edad81f508fb8ef754d101a2921d107"
+    },
+    {
+      "id": "nav_start",
+      "text": "Vamos lá. Calculando o caminho.",
+      "sample_rate": 44100,
+      "samples": 105247,
+      "seconds": 2.3865532879818594,
+      "generation_seconds": 0.9060000000026776,
+      "sha256": "43e99fd7e60bc1e7b5087e1adc9e67d9d244592fd794b6ad2a00440967686f17"
+    },
+    {
+      "id": "nav_roundabout_1",
+      "text": "na rotatória, pegue a primeira saída.",
+      "sample_rate": 44100,
+      "samples": 113400,
+      "seconds": 2.5714285714285716,
+      "generation_seconds": 0.9060000000026776,
+      "sha256": "e787b1bbe3a8632bfe011c7d5c46292ca2df0627b3ec90cff71f6c043e611294"
+    },
+    {
+      "id": "nav_roundabout_2",
+      "text": "na rotatória, pegue a segunda saída.",
+      "sample_rate": 44100,
+      "samples": 108890,
+      "seconds": 2.4691609977324265,
+      "generation_seconds": 0.9379999999946449,
+      "sha256": "5fa774d837b8e33ac60b124c7bba90916a78fc72388bbb286c2eb80496648a3e"
+    },
+    {
+      "id": "nav_roundabout_3",
+      "text": "na rotatória, pegue a terceira saída.",
+      "sample_rate": 44100,
+      "samples": 112303,
+      "seconds": 2.5465532879818595,
+      "generation_seconds": 0.9210000000020955,
+      "sha256": "c8ac3f6676b2e488f689d5eed18365ada808afa9ab795730708b6192af9352ee"
+    },
+    {
+      "id": "nav_roundabout_4",
+      "text": "na rotatória, pegue a quarta saída.",
+      "sample_rate": 44100,
+      "samples": 101590,
+      "seconds": 2.3036281179138323,
+      "generation_seconds": 0.9219999999913853,
+      "sha256": "1d642fa5ce33b964cfb7cbd8fa74f01842a5a4935fbd0d55c7a491af0fae16a9"
+    },
+    {
+      "id": "nav_roundabout_5",
+      "text": "na rotatória, pegue a quinta saída.",
+      "sample_rate": 44100,
+      "samples": 100815,
+      "seconds": 2.2860544217687075,
+      "generation_seconds": 0.9220000000059372,
+      "sha256": "dd4ab4c129540ff51124749217ead5d5af34488c610a2d518c1e648bdb4d887c"
+    }
+  ]
+}

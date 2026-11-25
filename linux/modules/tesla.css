@@ -1,0 +1,38 @@
+/* Acabamento no estilo das centrais modernas: superficies solidas (sem vidro desfocado sobre o mapa),
+   cantos e sombras discretos, barra inferior escura e cartoes alinhados a area do mapa.
+   Bonus de desempenho: backdrop-filter (blur) pesa na GPU Mali do Orange Pi; aqui ele sai. */
+body.hl-tesla{--t-surface:#1d1a22;--t-surface-2:#24202a;--t-line:rgba(240,234,240,.09);--t-shadow:0 8px 24px rgba(8,5,12,.45)}
+
+body.hl-tesla #road-map .ck-card,
+body.hl-tesla #hl-bottom-cards .ck-card,
+body.hl-tesla #hl-mini,
+body.hl-tesla #hl-cards{backdrop-filter:none;background:var(--t-surface);border:1px solid var(--t-line);box-shadow:var(--t-shadow)}
+
+/* Cartoes de baixo (musica + navegar) colados ao canto inferior esquerdo do mapa */
+@media (min-width:900px){
+  body.hl-tesla #hl-bottom-cards{justify-content:flex-start;right:96px}
+}
+
+/* Barra inferior: solida, com linha fina no topo */
+body.hl-tesla #hl-dock{background:#131116;border-top:1px solid var(--t-line);box-shadow:none}
+
+/* Topo: faixa escura suave para a hora e o estado sempre legiveis sobre qualquer mapa */
+body.hl-tesla #road-map .ck-top{background:linear-gradient(to bottom,rgba(19,17,22,.85),rgba(19,17,22,0))}
+
+/* Campo de busca do mapa um pouco maior, como nas centrais de tela grande */
+body.hl-tesla #road-map .ck-search{min-height:64px;border-radius:18px}
+body.hl-tesla #road-map #nav-dest{font-size:18px}
+
+/* Botoes redondos do mapa (2D/3D, zoom) solidos */
+body.hl-tesla #road-map .ck-fab,body.hl-tesla #road-map .m3-zoom button{background:var(--t-surface);border:1px solid var(--t-line);box-shadow:var(--t-shadow)}
+
+/* Tela de 7" (1024x600): mapa limpo. O cartao de musica do canto some (o mini-player embaixo ja controla a musica),
+   a busca de baixo some (a de cima faz o mesmo) e ficam so os atalhos Casa/Trabalho ao lado da musica. */
+@media (min-width:900px) and (max-width:1279px), (min-width:900px) and (max-height:760px){
+  body.hl-tesla #road-map > aside.ck-right{display:none}
+  body.hl-tesla #road-map .ck-left{width:min(320px,calc(100vw - var(--pane) - 100px))}
+  body.hl-tesla #road-map .ck-search{min-height:56px}
+  body.hl-tesla #hl-bottom-cards{right:80px;gap:8px}
+  body.hl-tesla #hl-bottom-cards .hl-navcard-search{display:none}
+  body.hl-tesla #hl-bottom-cards .hl-navcard{flex:0 1 auto;padding:8px}
+}

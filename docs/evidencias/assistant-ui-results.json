@@ -1,0 +1,25 @@
+[
+  {
+    "test": "Chat through actual WebView and native engines",
+    "status": "PASS",
+    "conversation": "Harumi Posso conversar, abrir seus apps e encaminhar um destino aos mapas. Toque em Falar para usar o microfone. O diagnóstico do Subaru ainda está sem adaptador.Você Olá, Harumi. Como você pode me ajudar?Harumi Olá, Lucas! Como posso ajudar você hoje?"
+  },
+  {
+    "test": "Route confirmation from conversation",
+    "status": "PASS",
+    "destination": "centro de Londrina"
+  },
+  {
+    "test": "Vehicle status without adapter",
+    "status": "PASS",
+    "details": "Explicitly disconnected; no fabricated readings"
+  },
+  {
+    "test": "Cancel active turn",
+    "status": "PASS"
+  },
+  {
+    "test": "Native recovery after AI use",
+    "status": "PASS"
+  }
+]

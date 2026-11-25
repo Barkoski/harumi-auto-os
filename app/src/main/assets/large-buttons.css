@@ -1,0 +1,4 @@
+/* Restore the first dashboard and its large touch targets. */
+.character.harumi-video,.assistant-avatar-slot .character.harumi-video{background:#2c384b;border-radius:0}.avatar-state{top:0;bottom:auto;background:#2c384b;color:#d9d0e6;border-radius:0}.companion .intro>span{font-size:16px}.module{min-height:92px}.module strong{font-size:26px}.module small{font-size:15px}.module-mark{color:#3e4d62}.home-actions .greet{min-height:54px;font-size:20px}.text-chat{min-height:54px;font-size:18px}#assistant{background:#2c384b}#NAV,#MUSIC{white-space:nowrap}.controls .arrow{font-size:24px}.settings-actions button{min-height:54px}
+@media(max-height:560px) and (min-width:741px){.module{min-height:76px}.module strong{font-size:24px}.module small{font-size:13px}.home-actions .greet,.text-chat{min-height:50px}.companion .intro>span{font-size:14px}}
+@media(max-width:740px){.module{min-height:86px}.module strong{font-size:24px}.module small{font-size:13px}}

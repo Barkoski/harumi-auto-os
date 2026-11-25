@@ -1,0 +1,92 @@
+{
+ "planner": {
+  "viewport": "1024x600",
+  "engine": "3d",
+  "renderedFeatures": 39,
+  "vectorSourceLoaded": true,
+  "km": 1100,
+  "hours": "14 h 57 min",
+  "routeRendered": 6,
+  "pitch": 16,
+  "attribution": "OpenFreeMap · OpenMapTiles | © OpenStreetMap contributors (ODbL)"
+ },
+ "nav1024": {
+  "viewport": "1024x600",
+  "engine": "3d",
+  "progress_pct": 40.1,
+  "pitch": 66,
+  "zoom": 15.5,
+  "bearing": 89.5,
+  "carY": 0.7,
+  "carX": 0.5,
+  "builtFeatures": 0,
+  "routeFeatures": 7,
+  "credit": "© OpenStreetMap · OpenFreeMap · Rotas: OSRM",
+  "arrival": "Chegou",
+  "says": 17
+ },
+ "nav800": {
+  "viewport": "800x480",
+  "engine": "3d",
+  "progress_pct": 40.1,
+  "pitch": 66,
+  "zoom": 15.5,
+  "bearing": 89.5,
+  "carY": 0.7,
+  "carX": 0.5,
+  "builtFeatures": 1,
+  "routeFeatures": 7,
+  "credit": "© OpenStreetMap · OpenFreeMap · Rotas: OSRM",
+  "arrival": "Chegou",
+  "says": 17
+ },
+ "nav390": {
+  "viewport": "390x844",
+  "engine": "3d",
+  "progress_pct": 40.1,
+  "pitch": 66,
+  "zoom": 15.5,
+  "bearing": 89.5,
+  "carY": 0.7002369668246445,
+  "carX": 0.5,
+  "builtFeatures": 0,
+  "routeFeatures": 5,
+  "credit": "© OpenStreetMap · OpenFreeMap · Rotas: OSRM",
+  "arrival": "Chegou",
+  "says": 17
+ },
+ "fallback": {
+  "ls_off": "2d",
+  "session_failed": "2d",
+  "runtime_fail": "2d com rota preservada"
+ },
+ "nearby": {
+  "items": [
+   "Bradesco (Banco, 13 m)",
+   "Vale Verde (Farmácia, 39 m)",
+   "Rovani (Restaurante, 96 m)",
+   "Café Royal (Café, 120 m)",
+   "Crystal Palace (Hotel, 136 m)",
+   "Cipasa (Concessionária, 148 m)"
+  ],
+  "plan_items": 4,
+  "tap_starts_nav": "Café Royal",
+  "nav_tap_changes_dest": "Vale Verde",
+  "nav_items": 3
+ },
+ "toggle": {
+  "plan": "rota preservada 3D->2D->3D",
+  "nav": "navegacao preservada 3D->2D->3D (pitch>45, carro e rota)"
+ },
+ "origem": {
+  "aviso_longe": {
+   "note": "A navegação parte da sua posição atual (perto de Brasília / DF), não de Rondonópolis / MT.",
+   "button": "Navegar daqui até Londrina / PR"
+  },
+  "perto_da_origem": "Iniciar navegação, sem aviso",
+  "sem_fix": {
+   "note": "A navegação parte da sua posição atual quando o GPS responder.",
+   "button": "Navegar até Londrina / PR"
+  }
+ }
+}

@@ -1,0 +1,28 @@
+/* Cartao de boas-vindas ao ligar */
+.hl-greet{position:fixed;left:50%;top:50%;z-index:60;width:min(640px,calc(100vw - 32px));box-sizing:border-box;transform:translate(-50%,-50%);
+  padding:36px 40px 28px;border-radius:24px;background:#1d1a22;border:1px solid rgba(240,234,240,.12);box-shadow:0 20px 60px rgba(8,5,12,.6);
+  color:var(--ck-text,#f0eaf0);text-align:center;font-family:system-ui,"Segoe UI",Roboto,"Noto Sans CJK JP","Noto Sans JP",sans-serif}
+.hl-greet[hidden]{display:none}
+.hl-greet-ja{margin:0;font-size:40px;font-weight:600;color:#e8b9d3;letter-spacing:2px}
+.hl-greet-ja span{display:inline-block;white-space:nowrap}
+.hl-greet-romaji{margin:6px 0 0;font-size:18px;color:var(--ck-muted,#b9a9bb)}
+.hl-greet-pt{margin:18px 0 0;font-size:28px;font-weight:600}
+.hl-greet-q{margin:8px 0 0;font-size:22px;color:var(--ck-muted,#b9a9bb)}
+.hl-greet-actions{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:28px}
+.hl-greet-btn{min-height:56px;padding:0 22px;border-radius:16px;border:1px solid rgba(240,234,240,.16);background:#26212c;color:var(--ck-text,#f0eaf0);font:500 17px system-ui,sans-serif;cursor:pointer}
+.hl-greet-btn.primary{background:#d2a0bd;color:#24182a;border-color:transparent;font-weight:600}
+.hl-greet-btn:focus-visible{outline:2px solid #f0d2e3;outline-offset:3px}
+.hl-greet-settings{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.hl-greet-note{flex-basis:100%;margin:4px 0 0;font-size:14px;color:var(--ck-muted,#b9a9bb)}
+@media (prefers-reduced-motion:no-preference){
+  .hl-greet:not([hidden]){animation:hl-greet-in .35s ease-out}
+  @keyframes hl-greet-in{from{opacity:0;transform:translate(-50%,-46%)}to{opacity:1;transform:translate(-50%,-50%)}}
+}
+@media (max-height:760px){
+  .hl-greet{padding:22px 24px 18px}
+  .hl-greet-ja{font-size:30px}
+  .hl-greet-pt{margin-top:10px;font-size:22px}
+  .hl-greet-q{font-size:18px}
+  .hl-greet-actions{margin-top:16px}
+  .hl-greet-btn{min-height:48px;padding:0 16px}
+}

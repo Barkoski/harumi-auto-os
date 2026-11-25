@@ -1,0 +1,43 @@
+[
+  {
+    "test": "Android idle playback",
+    "status": "PASS",
+    "observed": {
+      "state": "idle",
+      "time": 0.253419,
+      "paused": false,
+      "muted": true,
+      "error": null
+    }
+  },
+  {
+    "test": "Real microphone listening with visible character",
+    "status": "PASS",
+    "observed": {
+      "state": "listening",
+      "time": 0.237957,
+      "paused": false,
+      "muted": true,
+      "error": null
+    }
+  },
+  {
+    "test": "Real TTS speaking animation",
+    "status": "PASS",
+    "observed": {
+      "state": "speaking",
+      "time": 0.276424,
+      "paused": false,
+      "muted": true,
+      "error": null
+    }
+  },
+  {
+    "test": "Background pauses animation",
+    "status": "PASS"
+  },
+  {
+    "test": "Resume restores animation",
+    "status": "PASS"
+  }
+]

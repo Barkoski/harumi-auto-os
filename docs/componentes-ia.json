@@ -1,0 +1,32 @@
+[
+  {
+    "name": "Qwen3.5-0.8B Q4_K_M",
+    "url": "https://huggingface.co/unsloth/Qwen3.5-0.8B-GGUF/tree/6ab461498e2023f6e3c1baea90a8f0fe38ab64d0",
+    "sha256": "bd258782e35f7f458f8aced1adc053e6e92e89bc735ba3be89d38a06121dc517",
+    "bytes": 532517120
+  },
+  {
+    "name": "sherpa-onnx 2.0.1",
+    "url": "https://github.com/k2-fsa/sherpa-onnx/releases/tag/v2.0.1",
+    "sha256": "a8d09d1d32f3eb8520482c6d3d43fae674681c5b050385967c70a3c2c9bf0ee7",
+    "bytes": 49441341
+  },
+  {
+    "name": "Supertonic 3 INT8 (sherpa-onnx-supertonic-3-tts-int8-2026-05-11)",
+    "url": "https://huggingface.co/Supertone/supertonic-3",
+    "sha256": "82fa96f91c4ef8abaae3a14a3f4153facf88bed821d1f7331cec2700f432c427",
+    "bytes": 128774318
+  },
+  {
+    "name": "Vosk português pequeno 0.3",
+    "url": "https://alphacephei.com/vosk/models",
+    "sha256": "6e1ce909032e1afa7a88e68a3d628ecafff302bdf195befab308826c395e93b7",
+    "bytes": 32453112
+  },
+  {
+    "name": "llama.cpp cd8427d018c07eefab6c110f7f115c31ec4c6157",
+    "url": "https://github.com/ggml-org/llama.cpp/tree/cd8427d018c07eefab6c110f7f115c31ec4c6157",
+    "sha256": "07598aa25457076832c395e2db2e61df4cc28be1eba814a266c07739da74570a",
+    "bytes": 41263624
+  }
+]

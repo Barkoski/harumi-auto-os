@@ -1,0 +1,9 @@
+{
+  "reply": "Olá! Posso ajudar com o diagnóstico do Subaru. O carro está desconectado e não tenho acesso às informações de estado. Você gostaria de fazer alguma consulta?",
+  "llm_ms": 9880,
+  "voice": "Supertonic 3 F3 \/ speaker 2 \/ pt \/ 24 steps",
+  "spoken_name": "Rarumi",
+  "tts_ms": 4279,
+  "voice_seconds": 8.63124716553288,
+  "stt_transcription": "abra o mapa para encontrar o meu destino"
+}

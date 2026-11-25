@@ -1,0 +1,31 @@
+[
+  {
+    "state": "idle",
+    "status": "PASS",
+    "paused": true
+  },
+  {
+    "state": "listening",
+    "status": "PASS",
+    "paused": true
+  },
+  {
+    "state": "thinking",
+    "status": "PASS",
+    "paused": true
+  },
+  {
+    "state": "speaking",
+    "status": "PASS",
+    "paused": false
+  },
+  {
+    "state": "idle",
+    "status": "PASS",
+    "paused": true
+  },
+  {
+    "test": "Elapsed processing time and persistent error status",
+    "status": "PASS"
+  }
+]

@@ -1,0 +1,26 @@
+[
+  {
+    "viewport": "1024x600",
+    "real_osrm_route": "1.100 km / 14 h 57 min",
+    "loaded_street_tiles": 15,
+    "invalid_and_network_error_clear_route": "PASS"
+  },
+  {
+    "viewport": "1024x480",
+    "real_osrm_route": "1.100 km / 14 h 57 min",
+    "loaded_street_tiles": 15,
+    "invalid_and_network_error_clear_route": "PASS"
+  },
+  {
+    "viewport": "800x480",
+    "real_osrm_route": "1.100 km / 14 h 57 min",
+    "loaded_street_tiles": 12,
+    "invalid_and_network_error_clear_route": "PASS"
+  },
+  {
+    "viewport": "390x844",
+    "real_osrm_route": "1.100 km / 14 h 57 min",
+    "loaded_street_tiles": 12,
+    "invalid_and_network_error_clear_route": "PASS"
+  }
+]

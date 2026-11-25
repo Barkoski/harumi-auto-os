@@ -1,0 +1,65 @@
+{
+  "android_api": 30,
+  "webview": "83.0.4103.120",
+  "results": [
+    {
+      "test": "Native bridge and initial state",
+      "status": "PASS",
+      "details": "unknown Android SDK built for x86_64"
+    },
+    {
+      "test": "1024x600 Android layout",
+      "status": "PASS",
+      "details": {
+        "webview_width": 1024,
+        "webview_height": 520,
+        "scroll": false
+      }
+    },
+    {
+      "test": "Device profile dialog",
+      "status": "PASS",
+      "details": "Native profile displayed; MCU remains unknown"
+    },
+    {
+      "test": "App assignment",
+      "status": "PASS",
+      "details": "Settings assigned to NAV only as a bench test"
+    },
+    {
+      "test": "Assigned app launch",
+      "status": "PASS",
+      "details": "Settings opened through stored, visible launcher activity"
+    },
+    {
+      "test": "Assignment persistence",
+      "status": "PASS",
+      "details": "Assignment preserved after force-stop and restart"
+    },
+    {
+      "test": "Clear assignment",
+      "status": "PASS",
+      "details": "Stored mapping removed and UI refreshed"
+    },
+    {
+      "test": "Unknown command rejection",
+      "status": "PASS",
+      "details": "shell.exec has no action; app remains active"
+    },
+    {
+      "test": "External top-level navigation",
+      "status": "PASS",
+      "details": "Navigation rejected; trusted local origin preserved"
+    },
+    {
+      "test": "Offline launcher screen",
+      "status": "PASS",
+      "details": "Local interface loads with emulator Wi-Fi and data disabled"
+    },
+    {
+      "test": "Native recovery button",
+      "status": "PASS",
+      "details": "Returned to emulator launcher3; central OEM recovery still NOT_RUN"
+    }
+  ]
+}

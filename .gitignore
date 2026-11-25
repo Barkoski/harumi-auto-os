@@ -1,0 +1,19 @@
+.gradle/
+**/build/
+local.properties
+*.jks
+*.keystore
+.env
+.env.*
+!.env.example
+.idea/
+*.iml
+data/
+
+# Modelos de IA (~700 MB) ficam fora do Git; conferir com docs/MODELOS.sha256
+app/src/main/assets/models/
+# Logs de falha da JVM
+hs_err_pid*.log
+replay_pid*.log
+__pycache__/
+app-icons/

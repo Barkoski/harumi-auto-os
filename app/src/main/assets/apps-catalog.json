@@ -1,0 +1,259 @@
+{
+  "sources": [
+    {
+      "id": "foton-manual",
+      "label": "Manual oficial Aikon Fóton",
+      "url": "https://aikontechnology.com/wp-content/uploads/2024/05/Manual-Aikon-Foton.pdf"
+    },
+    {
+      "id": "g3-seller",
+      "label": "Anúncio F09-88256/G3 — composição do vendedor",
+      "url": "https://atecheletronica.com/shopping/multimidia-universal-aikon-foton-g3-8256gb-octacore-4g-9p-58211572449"
+    },
+    {
+      "id": "proton-manual",
+      "label": "Manual oficial Aikon Próton — comparação de linha",
+      "url": "https://aikontechnology.com/wp-content/uploads/2024/05/Manual-Aikon-Proton.pdf"
+    }
+  ],
+  "apps": [
+    {
+      "id": "maps",
+      "name": "Google Maps",
+      "group": "android",
+      "packages": [
+        "com.google.android.apps.maps"
+      ],
+      "store": "com.google.android.apps.maps",
+      "detail": "Navegação. Instalação e compatibilidade verificadas pela loja do aparelho.",
+      "evidence": "g3-seller; foton-manual p.24: exemplo de app a instalar"
+    },
+    {
+      "id": "waze",
+      "name": "Waze",
+      "group": "android",
+      "packages": [
+        "com.waze"
+      ],
+      "store": "com.waze",
+      "detail": "Navegação e trânsito. Não é o motor interno do mapa da Harumi.",
+      "evidence": "g3-seller; foton-manual p.24: exemplo de app a instalar"
+    },
+    {
+      "id": "spotify",
+      "name": "Spotify",
+      "group": "android",
+      "packages": [
+        "com.spotify.music"
+      ],
+      "store": "com.spotify.music",
+      "detail": "Música e podcasts. Conta e recursos dependem do serviço.",
+      "evidence": "g3-seller; foton-manual p.23: exemplo de comando"
+    },
+    {
+      "id": "youtube",
+      "name": "YouTube",
+      "group": "android",
+      "packages": [
+        "com.google.android.youtube"
+      ],
+      "store": "com.google.android.youtube",
+      "detail": "Vídeos. Mantenha os bloqueios de vídeo em movimento da central.",
+      "evidence": "g3-seller; foton-manual p.22: exemplo de comando"
+    },
+    {
+      "id": "chrome",
+      "name": "Google Chrome",
+      "group": "android",
+      "packages": [
+        "com.android.chrome"
+      ],
+      "store": "com.android.chrome",
+      "detail": "Navegador. Atualização e disponibilidade dependem do Android.",
+      "evidence": "g3-seller"
+    },
+    {
+      "id": "netflix",
+      "name": "Netflix",
+      "group": "android",
+      "packages": [
+        "com.netflix.mediaclient"
+      ],
+      "store": "com.netflix.mediaclient",
+      "detail": "Requer conta e suporte do aparelho. Instalação não comprova reprodução/DRM.",
+      "evidence": "g3-seller"
+    },
+    {
+      "id": "claude",
+      "name": "Claude",
+      "group": "android",
+      "packages": [
+        "com.anthropic.claude"
+      ],
+      "store": "com.anthropic.claude",
+      "detail": "Assistente da Anthropic. Entre com a sua conta no próprio app. Não controla a central.",
+      "evidence": "Google Play com.anthropic.claude (página conferida em 04/11/2026)"
+    },
+    {
+      "id": "chatgpt",
+      "name": "ChatGPT",
+      "group": "android",
+      "packages": [
+        "com.openai.chatgpt"
+      ],
+      "store": "com.openai.chatgpt",
+      "detail": "Assistente da OpenAI. Entre com a sua conta no próprio app. Não controla a central.",
+      "evidence": "Google Play com.openai.chatgpt (página conferida em 04/11/2026)"
+    },
+    {
+      "id": "torque",
+      "name": "Torque",
+      "group": "android",
+      "packages": [
+        "org.prowl.torquefree",
+        "org.prowl.torque"
+      ],
+      "store": "org.prowl.torquefree",
+      "detail": "Loja abre Torque Lite. Adaptador/protocolo do Subaru 1993 ainda não validado.",
+      "evidence": "foton-manual p.54: edição do Torque não especificada"
+    },
+    {
+      "id": "playstore",
+      "name": "Play Store",
+      "group": "oem",
+      "packages": [
+        "com.android.vending"
+      ],
+      "detail": "Use a loja fornecida pelo fabricante. Não instala serviços Google no firmware.",
+      "evidence": "foton-manual pp.51–52"
+    },
+    {
+      "id": "igo",
+      "name": "iGO / navegador de fábrica",
+      "group": "oem",
+      "packages": [],
+      "detail": "Alguns vendedores incluem iGO. Requer app e mapas licenciados; associe o existente.",
+      "evidence": "g3-seller; não confirmado como padrão universal de fábrica"
+    },
+    {
+      "id": "radio",
+      "name": "Rádio AM/FM",
+      "group": "oem",
+      "packages": [],
+      "detail": "Sintonizador e MCU da central. Associe o aplicativo original.",
+      "evidence": "foton-manual pp.5–7"
+    },
+    {
+      "id": "bluetooth",
+      "name": "Telefone / Bluetooth",
+      "group": "oem",
+      "packages": [],
+      "detail": "Chamadas e áudio Bluetooth pelo aplicativo original da central.",
+      "evidence": "foton-manual pp.10–11"
+    },
+    {
+      "id": "localmusic",
+      "name": "Música local",
+      "group": "oem",
+      "packages": [],
+      "detail": "Reprodutor de arquivos instalado na central.",
+      "evidence": "foton-manual p.12"
+    },
+    {
+      "id": "video",
+      "name": "Vídeo local",
+      "group": "oem",
+      "packages": [],
+      "detail": "Reprodutor original. Mantém as limitações de vídeo da central.",
+      "evidence": "foton-manual p.22"
+    },
+    {
+      "id": "equalizer",
+      "name": "Equalizador / DSP",
+      "group": "oem",
+      "packages": [],
+      "detail": "Configuração do DSP original; não substitui o driver de áudio.",
+      "evidence": "foton-manual pp.13–16"
+    },
+    {
+      "id": "cpaa",
+      "name": "CarPlay / Android Auto",
+      "group": "oem",
+      "packages": [],
+      "detail": "CPAA, Carlink ou equivalente da unidade. Requer app/licença e hardware compatíveis.",
+      "evidence": "foton-manual pp.17–18; nomenclatura depende da unidade"
+    },
+    {
+      "id": "camera",
+      "name": "Câmeras / 360°",
+      "group": "oem",
+      "packages": [],
+      "detail": "Associe o app original da variante 360°. Ré automática permanece no firmware.",
+      "evidence": "modelo F09-88256/360/G3; integração física pendente"
+    },
+    {
+      "id": "aux",
+      "name": "Entrada auxiliar / AV",
+      "group": "oem",
+      "packages": [],
+      "detail": "Entrada física de áudio/vídeo da central.",
+      "evidence": "foton-manual p.49"
+    },
+    {
+      "id": "gallery",
+      "name": "Fotos / galeria",
+      "group": "oem",
+      "packages": [],
+      "detail": "Visualização de imagens pelo app instalado na unidade.",
+      "evidence": "foton-manual p.49"
+    },
+    {
+      "id": "files",
+      "name": "Pastas / arquivos",
+      "group": "oem",
+      "packages": [],
+      "detail": "Gerenciador de arquivos original da central.",
+      "evidence": "foton-manual p.50"
+    },
+    {
+      "id": "touch",
+      "name": "Assistente touch",
+      "group": "oem",
+      "packages": [],
+      "detail": "Botão flutuante original, caso tenha atividade acessível.",
+      "evidence": "foton-manual p.53"
+    },
+    {
+      "id": "wheel",
+      "name": "Conduzir / volante",
+      "group": "oem",
+      "packages": [],
+      "detail": "Configuração original dos comandos do volante. Não altera CAN/MCU pela Harumi.",
+      "evidence": "foton-manual p.54"
+    },
+    {
+      "id": "adam",
+      "name": "Adam / comando de voz",
+      "group": "oem",
+      "packages": [],
+      "detail": "Assistente do fabricante; ativação e licença independentes da Harumi.",
+      "evidence": "foton-manual pp.20–24"
+    },
+    {
+      "id": "gpsmonitor",
+      "name": "Monitor de GPS",
+      "group": "oem",
+      "packages": [],
+      "detail": "Tela de sinal da central, se disponível como aplicativo.",
+      "evidence": "foton-manual p.46"
+    },
+    {
+      "id": "help",
+      "name": "Central de ajuda Aikon",
+      "group": "oem",
+      "packages": [],
+      "detail": "Ajuda original da unidade, se houver aplicativo acessível.",
+      "evidence": "foton-manual p.21"
+    }
+  ]
+}

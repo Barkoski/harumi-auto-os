@@ -1,0 +1,80 @@
+/* Home: cartoes de vidro sobre gradiente estatico. Nada de mapa ao vivo. */
+.hu-home{position:fixed;inset:0 0 var(--ck-tab-h) 0;display:flex;flex-direction:column;background:var(--hu-surface);overflow:hidden}
+.hu-top{flex:none;height:36px;padding:0 16px;display:flex;align-items:center;gap:10px;font-size:13px;color:var(--ck-muted)}
+.hu-brand{font-size:16px;font-weight:600;color:var(--ck-text)}
+.hu-top #device{margin-left:auto;min-width:0;max-width:50%;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.hu-top .hu-icon-btn{margin:-10px -10px -10px 0;border-color:transparent;background:transparent}
+.hu-grid{flex:1;min-height:0;width:100%;max-width:1400px;margin:0 auto;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:176px minmax(0,1fr);gap:12px;padding:12px 16px}
+.hu-grid>.ck-card{min-width:0;min-height:0;display:flex;flex-direction:column}
+.hu-grid strong{font-size:18px;font-weight:600;line-height:1.25}
+.hu-grid .hu-sub{font-size:13px;line-height:1.35;color:var(--ck-muted)}
+
+#hu-clock{grid-column:1;justify-content:center;gap:4px}
+#hu-clock time{display:block;font-size:64px;font-weight:600;line-height:1;font-variant-numeric:tabular-nums;letter-spacing:-1px}
+#hu-clock #date{font-size:15px;color:var(--ck-muted)}
+#network-short{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;font-size:13px;line-height:1.3;color:var(--ck-muted)}
+
+#hu-go{grid-column:2/4;justify-content:center;gap:8px}
+.hu-search{display:flex;align-items:center;gap:12px;width:100%;height:56px;min-height:56px;padding:0 20px;border:1px solid var(--ck-stroke-hi);border-radius:28px;background:rgba(27,27,33,.7);color:var(--ck-muted);font-size:19px;text-align:left}
+.hu-search span{min-width:0;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.hu-search .ck-ico{color:var(--ck-text)}
+
+#hu-harumi{display:grid;grid-template-columns:minmax(96px,32%) minmax(0,1fr);grid-template-rows:minmax(0,1fr) auto;column-gap:12px;row-gap:10px}
+.home-avatar-slot{grid-column:1;grid-row:1;min-width:0;min-height:0;max-height:280px;align-self:center;width:100%;height:100%}
+.hu-harumi-id{grid-column:2;grid-row:1;align-self:center;display:flex;flex-direction:column;gap:4px;min-width:0}
+.hu-harumi-btns{grid-column:1/3;grid-row:2;align-self:end;display:flex;gap:8px}
+.hu-harumi-btns>button{flex:1;min-width:0;padding:0 10px}
+.hu-harumi-btns .ck-talk{padding:0 12px}
+.hu-harumi-btns .hu-btn{padding:0 10px}
+
+#hu-sound{justify-content:space-between;gap:10px}
+#hu-sound .hu-btn{width:100%}
+.hu-ids{display:flex;flex-direction:column;gap:2px}
+
+#hu-car{gap:6px}
+#diagnostic-status{flex:none;margin:0;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;overflow:hidden;font-size:13px;line-height:1.35;color:var(--ck-muted)}
+#hu-car .hu-chips{margin-top:auto;display:grid;grid-template-columns:1fr 1fr}
+#hu-car .ck-chip{gap:8px;padding:0 10px;font-size:14px;min-width:0;justify-content:flex-start;white-space:nowrap}
+#hu-car .ck-chip .ck-ico{width:22px;height:22px;color:var(--ck-accent)}
+#hu-go .ck-chip .ck-ico{width:22px;height:22px;color:var(--ck-accent)}
+
+/* Avatar (video local) */
+.character.harumi-video{position:relative;width:100%;height:100%;overflow:hidden;background:transparent;pointer-events:none}
+.harumi-video video{display:block;width:100%;height:100%;object-fit:contain;mix-blend-mode:lighten}
+
+/* Paisagem curta: 1024x480, 800x480 */
+@media(max-height:520px){
+.hu-top{height:32px}
+.hu-grid{grid-template-rows:140px minmax(0,1fr);gap:10px;padding:10px 14px}
+.hu-grid>.ck-card{padding:10px 14px}
+#hu-clock time{font-size:52px}
+#hu-go .hu-label{display:none}
+#hu-go{gap:8px}
+.hu-top{height:32px}
+#diagnostic-status{-webkit-line-clamp:1}
+}
+@media(max-width:900px){
+#talk{flex:none;width:56px;padding:0}
+#talk span{display:none}
+.hu-grid{grid-template-columns:minmax(0,.9fr) minmax(0,.95fr) minmax(0,1.2fr)}
+#hu-car .ck-chip{font-size:13px;gap:6px;padding:0 8px}
+#hu-car .ck-chip .ck-ico{width:20px;height:20px}
+}
+
+/* Retrato / celular: uma coluna com rolagem */
+@media(max-width:600px){
+.hu-home{overflow-y:auto}
+.hu-grid{flex:none;display:flex;flex-direction:column;padding:8px 12px 12px}
+.hu-grid>.ck-card{flex:none}
+#hu-clock{min-height:132px}
+#hu-clock time{font-size:52px}
+#hu-harumi{grid-template-columns:96px minmax(0,1fr);grid-template-rows:132px auto}
+.home-avatar-slot{height:132px}
+#hu-go .hu-label{display:block}
+#hu-car .ck-chip{font-size:14px}
+#talk{flex:1;width:auto;padding:0 10px}
+#talk span{display:inline}
+}
+
+/* O campo de busca do cockpit ja mostra o foco no cartao (focus-within); sem retangulo duplo ao focar pela Home. */
+#road-map #nav-dest:focus-visible{outline:none}

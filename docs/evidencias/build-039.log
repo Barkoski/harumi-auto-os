@@ -1,0 +1,124 @@
+> Task :compatibility:preBuild UP-TO-DATE
+> Task :app:preBuild UP-TO-DATE
+> Task :compatibility:preDebugBuild UP-TO-DATE
+> Task :app:preDebugBuild UP-TO-DATE
+> Task :app:mergeDebugNativeDebugMetadata NO-SOURCE
+> Task :app:javaPreCompileDebug UP-TO-DATE
+> Task :compatibility:mergeDebugNativeDebugMetadata NO-SOURCE
+> Task :app:checkDebugAarMetadata UP-TO-DATE
+> Task :app:generateDebugResValues UP-TO-DATE
+> Task :app:mapDebugSourceSetPaths UP-TO-DATE
+> Task :app:generateDebugResources UP-TO-DATE
+> Task :app:mergeDebugResources UP-TO-DATE
+> Task :app:packageDebugResources UP-TO-DATE
+> Task :app:parseDebugLocalResources UP-TO-DATE
+> Task :app:createDebugCompatibleScreenManifests UP-TO-DATE
+> Task :app:extractDeepLinksDebug UP-TO-DATE
+> Task :app:processDebugMainManifest UP-TO-DATE
+> Task :app:processDebugManifest UP-TO-DATE
+> Task :app:processDebugManifestForPackage UP-TO-DATE
+> Task :compatibility:checkDebugAarMetadata
+> Task :compatibility:generateDebugResValues
+> Task :compatibility:javaPreCompileDebug
+> Task :compatibility:mapDebugSourceSetPaths
+> Task :app:processDebugResources UP-TO-DATE
+> Task :app:compileDebugJavaWithJavac UP-TO-DATE
+> Task :app:mergeDebugShaders UP-TO-DATE
+> Task :app:compileDebugShaders NO-SOURCE
+> Task :app:generateDebugAssets UP-TO-DATE
+> Task :compatibility:generateDebugResources
+> Task :app:mergeDebugAssets UP-TO-DATE
+> Task :app:compressDebugAssets UP-TO-DATE
+> Task :app:desugarDebugFileDependencies UP-TO-DATE
+> Task :app:dexBuilderDebug UP-TO-DATE
+> Task :app:mergeDebugGlobalSynthetics UP-TO-DATE
+> Task :app:processDebugJavaRes NO-SOURCE
+> Task :app:mergeDebugJavaResource UP-TO-DATE
+> Task :app:checkDebugDuplicateClasses UP-TO-DATE
+> Task :app:mergeExtDexDebug UP-TO-DATE
+> Task :app:mergeLibDexDebug UP-TO-DATE
+> Task :app:mergeProjectDexDebug UP-TO-DATE
+> Task :app:preReleaseBuild UP-TO-DATE
+> Task :app:configureCMakeRelease[arm64-v8a]
+> Task :compatibility:mergeDebugResources
+> Task :compatibility:packageDebugResources
+> Task :compatibility:createDebugCompatibleScreenManifests
+> Task :compatibility:extractDeepLinksDebug
+> Task :compatibility:parseDebugLocalResources
+> Task :compatibility:processDebugMainManifest
+> Task :app:buildCMakeRelease[arm64-v8a]
+> Task :compatibility:processDebugManifest
+> Task :compatibility:mergeDebugShaders
+> Task :compatibility:compileDebugShaders NO-SOURCE
+> Task :compatibility:generateDebugAssets UP-TO-DATE
+> Task :compatibility:mergeDebugAssets
+> Task :compatibility:compressDebugAssets
+> Task :compatibility:desugarDebugFileDependencies
+> Task :app:configureCMakeRelease[x86_64]
+> Task :compatibility:processDebugJavaRes NO-SOURCE
+> Task :compatibility:checkDebugDuplicateClasses
+> Task :compatibility:processDebugManifestForPackage
+> Task :compatibility:mergeExtDexDebug
+> Task :compatibility:mergeLibDexDebug
+> Task :compatibility:mergeDebugJniLibFolders
+> Task :app:buildCMakeRelease[x86_64]
+> Task :compatibility:mergeDebugNativeLibs NO-SOURCE
+> Task :app:mergeDebugJniLibFolders UP-TO-DATE
+> Task :compatibility:stripDebugDebugSymbols NO-SOURCE
+> Task :app:mergeDebugNativeLibs UP-TO-DATE
+> Task :app:stripDebugDebugSymbols UP-TO-DATE
+> Task :app:validateSigningDebug UP-TO-DATE
+> Task :app:writeDebugAppMetadata UP-TO-DATE
+> Task :app:writeDebugSigningConfigVersions UP-TO-DATE
+> Task :app:packageDebug UP-TO-DATE
+> Task :app:createDebugApkListingFileRedirect UP-TO-DATE
+> Task :app:assembleDebug UP-TO-DATE
+> Task :app:bundleDebugClassesToRuntimeJar UP-TO-DATE
+> Task :app:bundleDebugClassesToCompileJar UP-TO-DATE
+> Task :app:preDebugUnitTestBuild UP-TO-DATE
+> Task :app:javaPreCompileDebugUnitTest UP-TO-DATE
+> Task :compatibility:mergeDebugJavaResource
+> Task :app:compileDebugUnitTestJavaWithJavac UP-TO-DATE
+> Task :app:processDebugUnitTestJavaRes NO-SOURCE
+> Task :app:testDebugUnitTest UP-TO-DATE
+> Task :app:preDebugAndroidTestBuild SKIPPED
+> Task :app:generateDebugAndroidTestResValues UP-TO-DATE
+> Task :compatibility:validateSigningDebug
+> Task :compatibility:writeDebugAppMetadata
+> Task :app:generateDebugAndroidTestLintModel UP-TO-DATE
+> Task :app:extractProguardFiles UP-TO-DATE
+> Task :app:generateDebugLintReportModel UP-TO-DATE
+> Task :app:generateDebugUnitTestLintModel UP-TO-DATE
+> Task :app:lintAnalyzeDebug UP-TO-DATE
+> Task :app:lintAnalyzeDebugAndroidTest UP-TO-DATE
+> Task :app:lintAnalyzeDebugUnitTest UP-TO-DATE
+> Task :app:lintReportDebug UP-TO-DATE
+> Task :app:lintDebug
+> Task :compatibility:writeDebugSigningConfigVersions
+> Task :compatibility:preDebugAndroidTestBuild SKIPPED
+> Task :compatibility:generateDebugAndroidTestResValues
+> Task :compatibility:extractProguardFiles
+> Task :compatibility:preDebugUnitTestBuild UP-TO-DATE
+> Task :compatibility:processDebugResources
+> Task :compatibility:compileDebugJavaWithJavac
+> Task :compatibility:dexBuilderDebug
+> Task :compatibility:mergeDebugGlobalSynthetics
+> Task :compatibility:generateDebugLintReportModel
+> Task :compatibility:mergeProjectDexDebug
+> Task :compatibility:bundleDebugClassesToCompileJar
+> Task :compatibility:generateDebugAndroidTestLintModel
+> Task :compatibility:generateDebugUnitTestLintModel
+> Task :compatibility:packageDebug
+> Task :compatibility:createDebugApkListingFileRedirect
+> Task :compatibility:assembleDebug
+> Task :compatibility:lintAnalyzeDebugUnitTest
+> Task :compatibility:lintAnalyzeDebugAndroidTest
+> Task :compatibility:lintAnalyzeDebug
+
+> Task :compatibility:lintReportDebug
+Wrote HTML report to file:///C:/Users/Aaaa/Documents/Codex/2026-11-02/bom-dia-tenho-u-5/Harumi%20Auto%20OS/compatibility/build/reports/lint-results-debug.html
+
+> Task :compatibility:lintDebug
+
+BUILD SUCCESSFUL in 4s
+96 actionable tasks: 48 executed, 48 up-to-date

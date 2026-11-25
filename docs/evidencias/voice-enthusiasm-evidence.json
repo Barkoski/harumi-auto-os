@@ -1,0 +1,12 @@
+{
+  "reply": "Olá, Lucas! Tudo bem com você? Se o Subaru estiver funcionando, eu posso ajudar com o diagnóstico de navegação. Se já estiverem desligados, preciso que você desligue o computador e desligue o sistema de diagnóstico primeiro.",
+  "llm_ms": 19226,
+  "voice": "Supertonic 3 F3 \/ speaker 2 \/ pt \/ 24 steps",
+  "speed": 1.25,
+  "silence_scale": 0.7200000286102295,
+  "greeting": "Oi, Lucas! Eu sou a Harumi! Quer que eu abra o mapa? Me diz: pra onde a gente vai hoje?",
+  "spoken_name": "Rarumi",
+  "tts_ms": 6702,
+  "voice_seconds": 7.6221768707483,
+  "stt_transcription": "abra o mapa para encontrar o meu destino"
+}

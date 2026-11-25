@@ -1,0 +1,31 @@
+[
+  {
+    "test": "Native launcher icons and viewport",
+    "status": "PASS",
+    "actual_installed_icons": 12
+  },
+  {
+    "test": "Real local generation with streaming",
+    "question": "Lembre-se: minha cidade é Londrina. Confirme em uma frase curta.",
+    "reply": "Harumi Olá, Harumi. Como assistente de Lucas, sei que seu cidade é Londrina.\n\nComo posso ajudar você hoje?",
+    "first_partial_seconds": 6.234,
+    "complete_text_seconds": 7.453,
+    "final_status": "Pronta para conversar · IA local"
+  },
+  {
+    "test": "Real local generation with streaming",
+    "question": "Qual é a minha cidade? Responda somente com o nome da cidade.",
+    "reply": "Harumi Minha cidade é Londrina.",
+    "first_partial_seconds": 4.062,
+    "complete_text_seconds": 4.375,
+    "final_status": "Pronta para conversar · IA local"
+  },
+  {
+    "test": "Real local generation with streaming",
+    "question": "Explique em três frases completas como você pode me ajudar numa viagem sem inventar dados do carro.",
+    "reply": "Harumi Como assistente de Lucas, eu não posso inventar dados de veículos ou rotas. No entanto, posso confirmar que Londrina é o seu município.",
+    "first_partial_seconds": 4.609,
+    "complete_text_seconds": 6.125,
+    "final_status": "Pronta para conversar · IA local"
+  }
+]

@@ -1,0 +1,429 @@
+{
+  "falhas": [],
+  "telas": [
+    {
+      "tela": "inicio",
+      "viewport": "1024x600",
+      "sem_overflow_horizontal": true,
+      "alvos_pequenos": [],
+      "aba_ativa": [
+        "hu-tab-home"
+      ]
+    },
+    {
+      "tela": "apps-da-harumi",
+      "viewport": "1024x600",
+      "sem_overflow_horizontal": true,
+      "alvos_pequenos": [],
+      "aba_ativa": [
+        "open-apps"
+      ]
+    },
+    {
+      "tela": "apps-central",
+      "viewport": "1024x600",
+      "sem_overflow_horizontal": true,
+      "alvos_pequenos": [],
+      "aba_ativa": [
+        "open-apps"
+      ]
+    },
+    {
+      "tela": "apps-mais",
+      "viewport": "1024x600",
+      "sem_overflow_horizontal": true,
+      "alvos_pequenos": [],
+      "aba_ativa": [
+        "open-apps"
+      ]
+    },
+    {
+      "tela": "apps-instalados",
+      "viewport": "1024x600",
+      "sem_overflow_horizontal": true,
+      "alvos_pequenos": [],
+      "aba_ativa": [
+        "open-apps"
+      ]
+    },
+    {
+      "tela": "conversa",
+      "viewport": "1024x600",
+      "sem_overflow_horizontal": true,
+      "alvos_pequenos": [],
+      "aba_ativa": [
+        "hu-tab-harumi"
+      ]
+    },
+    {
+      "tela": "conversa-ouvindo",
+      "viewport": "1024x600",
+      "sem_overflow_horizontal": true,
+      "alvos_pequenos": [],
+      "aba_ativa": [
+        "hu-tab-harumi"
+      ]
+    },
+    {
+      "tela": "ajustes",
+      "viewport": "1024x600",
+      "sem_overflow_horizontal": true,
+      "alvos_pequenos": [],
+      "aba_ativa": [
+        "hu-tab-home"
+      ]
+    },
+    {
+      "tela": "internet",
+      "viewport": "1024x600",
+      "sem_overflow_horizontal": true,
+      "alvos_pequenos": [],
+      "aba_ativa": [
+        "hu-tab-home"
+      ]
+    },
+    {
+      "tela": "internet-config",
+      "viewport": "1024x600",
+      "sem_overflow_horizontal": true,
+      "alvos_pequenos": [],
+      "aba_ativa": [
+        "hu-tab-home"
+      ]
+    },
+    {
+      "tela": "atlas",
+      "viewport": "1024x600",
+      "sem_overflow_horizontal": true,
+      "alvos_pequenos": [],
+      "aba_ativa": [
+        "hu-tab-home"
+      ]
+    },
+    {
+      "tela": "cockpit",
+      "viewport": "1024x600",
+      "sem_overflow_horizontal": true,
+      "alvos_pequenos": [],
+      "aba_ativa": null
+    },
+    {
+      "tela": "inicio",
+      "viewport": "1024x480",
+      "sem_overflow_horizontal": true,
+      "alvos_pequenos": [],
+      "aba_ativa": [
+        "hu-tab-home"
+      ]
+    },
+    {
+      "tela": "apps-da-harumi",
+      "viewport": "1024x480",
+      "sem_overflow_horizontal": true,
+      "alvos_pequenos": [],
+      "aba_ativa": [
+        "open-apps"
+      ]
+    },
+    {
+      "tela": "apps-central",
+      "viewport": "1024x480",
+      "sem_overflow_horizontal": true,
+      "alvos_pequenos": [],
+      "aba_ativa": [
+        "open-apps"
+      ]
+    },
+    {
+      "tela": "apps-mais",
+      "viewport": "1024x480",
+      "sem_overflow_horizontal": true,
+      "alvos_pequenos": [],
+      "aba_ativa": [
+        "open-apps"
+      ]
+    },
+    {
+      "tela": "apps-instalados",
+      "viewport": "1024x480",
+      "sem_overflow_horizontal": true,
+      "alvos_pequenos": [],
+      "aba_ativa": [
+        "open-apps"
+      ]
+    },
+    {
+      "tela": "conversa",
+      "viewport": "1024x480",
+      "sem_overflow_horizontal": true,
+      "alvos_pequenos": [],
+      "aba_ativa": [
+        "hu-tab-harumi"
+      ]
+    },
+    {
+      "tela": "conversa-ouvindo",
+      "viewport": "1024x480",
+      "sem_overflow_horizontal": true,
+      "alvos_pequenos": [],
+      "aba_ativa": [
+        "hu-tab-harumi"
+      ]
+    },
+    {
+      "tela": "ajustes",
+      "viewport": "1024x480",
+      "sem_overflow_horizontal": true,
+      "alvos_pequenos": [],
+      "aba_ativa": [
+        "hu-tab-home"
+      ]
+    },
+    {
+      "tela": "internet",
+      "viewport": "1024x480",
+      "sem_overflow_horizontal": true,
+      "alvos_pequenos": [],
+      "aba_ativa": [
+        "hu-tab-home"
+      ]
+    },
+    {
+      "tela": "internet-config",
+      "viewport": "1024x480",
+      "sem_overflow_horizontal": true,
+      "alvos_pequenos": [],
+      "aba_ativa": [
+        "hu-tab-home"
+      ]
+    },
+    {
+      "tela": "atlas",
+      "viewport": "1024x480",
+      "sem_overflow_horizontal": true,
+      "alvos_pequenos": [],
+      "aba_ativa": [
+        "hu-tab-home"
+      ]
+    },
+    {
+      "tela": "cockpit",
+      "viewport": "1024x480",
+      "sem_overflow_horizontal": true,
+      "alvos_pequenos": [],
+      "aba_ativa": null
+    },
+    {
+      "tela": "inicio",
+      "viewport": "800x480",
+      "sem_overflow_horizontal": true,
+      "alvos_pequenos": [],
+      "aba_ativa": [
+        "hu-tab-home"
+      ]
+    },
+    {
+      "tela": "apps-da-harumi",
+      "viewport": "800x480",
+      "sem_overflow_horizontal": true,
+      "alvos_pequenos": [],
+      "aba_ativa": [
+        "open-apps"
+      ]
+    },
+    {
+      "tela": "apps-central",
+      "viewport": "800x480",
+      "sem_overflow_horizontal": true,
+      "alvos_pequenos": [],
+      "aba_ativa": [
+        "open-apps"
+      ]
+    },
+    {
+      "tela": "apps-mais",
+      "viewport": "800x480",
+      "sem_overflow_horizontal": true,
+      "alvos_pequenos": [],
+      "aba_ativa": [
+        "open-apps"
+      ]
+    },
+    {
+      "tela": "apps-instalados",
+      "viewport": "800x480",
+      "sem_overflow_horizontal": true,
+      "alvos_pequenos": [],
+      "aba_ativa": [
+        "open-apps"
+      ]
+    },
+    {
+      "tela": "conversa",
+      "viewport": "800x480",
+      "sem_overflow_horizontal": true,
+      "alvos_pequenos": [],
+      "aba_ativa": [
+        "hu-tab-harumi"
+      ]
+    },
+    {
+      "tela": "conversa-ouvindo",
+      "viewport": "800x480",
+      "sem_overflow_horizontal": true,
+      "alvos_pequenos": [],
+      "aba_ativa": [
+        "hu-tab-harumi"
+      ]
+    },
+    {
+      "tela": "ajustes",
+      "viewport": "800x480",
+      "sem_overflow_horizontal": true,
+      "alvos_pequenos": [],
+      "aba_ativa": [
+        "hu-tab-home"
+      ]
+    },
+    {
+      "tela": "internet",
+      "viewport": "800x480",
+      "sem_overflow_horizontal": true,
+      "alvos_pequenos": [],
+      "aba_ativa": [
+        "hu-tab-home"
+      ]
+    },
+    {
+      "tela": "internet-config",
+      "viewport": "800x480",
+      "sem_overflow_horizontal": true,
+      "alvos_pequenos": [],
+      "aba_ativa": [
+        "hu-tab-home"
+      ]
+    },
+    {
+      "tela": "atlas",
+      "viewport": "800x480",
+      "sem_overflow_horizontal": true,
+      "alvos_pequenos": [],
+      "aba_ativa": [
+        "hu-tab-home"
+      ]
+    },
+    {
+      "tela": "cockpit",
+      "viewport": "800x480",
+      "sem_overflow_horizontal": true,
+      "alvos_pequenos": [],
+      "aba_ativa": null
+    },
+    {
+      "tela": "inicio",
+      "viewport": "390x844",
+      "sem_overflow_horizontal": true,
+      "alvos_pequenos": [],
+      "aba_ativa": [
+        "hu-tab-home"
+      ]
+    },
+    {
+      "tela": "apps-da-harumi",
+      "viewport": "390x844",
+      "sem_overflow_horizontal": true,
+      "alvos_pequenos": [],
+      "aba_ativa": [
+        "open-apps"
+      ]
+    },
+    {
+      "tela": "apps-central",
+      "viewport": "390x844",
+      "sem_overflow_horizontal": true,
+      "alvos_pequenos": [],
+      "aba_ativa": [
+        "open-apps"
+      ]
+    },
+    {
+      "tela": "apps-mais",
+      "viewport": "390x844",
+      "sem_overflow_horizontal": true,
+      "alvos_pequenos": [],
+      "aba_ativa": [
+        "open-apps"
+      ]
+    },
+    {
+      "tela": "apps-instalados",
+      "viewport": "390x844",
+      "sem_overflow_horizontal": true,
+      "alvos_pequenos": [],
+      "aba_ativa": [
+        "open-apps"
+      ]
+    },
+    {
+      "tela": "conversa",
+      "viewport": "390x844",
+      "sem_overflow_horizontal": true,
+      "alvos_pequenos": [],
+      "aba_ativa": [
+        "hu-tab-harumi"
+      ]
+    },
+    {
+      "tela": "conversa-ouvindo",
+      "viewport": "390x844",
+      "sem_overflow_horizontal": true,
+      "alvos_pequenos": [],
+      "aba_ativa": [
+        "hu-tab-harumi"
+      ]
+    },
+    {
+      "tela": "ajustes",
+      "viewport": "390x844",
+      "sem_overflow_horizontal": true,
+      "alvos_pequenos": [],
+      "aba_ativa": [
+        "hu-tab-home"
+      ]
+    },
+    {
+      "tela": "internet",
+      "viewport": "390x844",
+      "sem_overflow_horizontal": true,
+      "alvos_pequenos": [],
+      "aba_ativa": [
+        "hu-tab-home"
+      ]
+    },
+    {
+      "tela": "internet-config",
+      "viewport": "390x844",
+      "sem_overflow_horizontal": true,
+      "alvos_pequenos": [],
+      "aba_ativa": [
+        "hu-tab-home"
+      ]
+    },
+    {
+      "tela": "atlas",
+      "viewport": "390x844",
+      "sem_overflow_horizontal": true,
+      "alvos_pequenos": [],
+      "aba_ativa": [
+        "hu-tab-home"
+      ]
+    },
+    {
+      "tela": "cockpit",
+      "viewport": "390x844",
+      "sem_overflow_horizontal": true,
+      "alvos_pequenos": [],
+      "aba_ativa": null
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+{
+  "status": "PASS",
+  "capture": "Emulated silent microphone started locally",
+  "pause": "Capture cancelled on HOME and returned idle",
+  "real_cabin_audio": "NOT_RUN"
+}

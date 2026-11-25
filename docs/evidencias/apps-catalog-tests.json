@@ -1,0 +1,34 @@
+[
+  {
+    "viewport": "1024x600",
+    "own": 3,
+    "android_apps": 7,
+    "oem_entries": 17,
+    "preview_does_not_claim_installation": true,
+    "status_and_actions": "PASS"
+  },
+  {
+    "viewport": "1024x480",
+    "own": 3,
+    "android_apps": 7,
+    "oem_entries": 17,
+    "preview_does_not_claim_installation": true,
+    "status_and_actions": "PASS"
+  },
+  {
+    "viewport": "800x480",
+    "own": 3,
+    "android_apps": 7,
+    "oem_entries": 17,
+    "preview_does_not_claim_installation": true,
+    "status_and_actions": "PASS"
+  },
+  {
+    "viewport": "390x844",
+    "own": 3,
+    "android_apps": 7,
+    "oem_entries": 17,
+    "preview_does_not_claim_installation": true,
+    "status_and_actions": "PASS"
+  }
+]

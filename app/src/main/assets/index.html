@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:; media-src 'self'; connect-src 'self'; frame-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<title>Harumi Auto OS</title>
+<link rel="stylesheet" href="style.css?v=0319">
+<link rel="stylesheet" href="harumi-ui.css?v=0319">
+<link rel="stylesheet" href="home.css?v=0319">
+<link rel="stylesheet" href="atlas.css?v=0319">
+<link rel="stylesheet" href="vendor/leaflet/leaflet.css">
+<link rel="stylesheet" href="vendor/maplibre/maplibre-gl.css">
+<link rel="stylesheet" href="road-map.css?v=0318">
+<link rel="stylesheet" href="apps-catalog.css?v=0319">
+</head>
+<body><main>
+<svg hidden aria-hidden="true" focusable="false">
+<symbol id="m-left" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"><path d="M36 40V28Q36 20 28 20H12M20 12L12 20L20 28"/></g></symbol>
+<symbol id="m-right" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 40V28Q12 20 20 20H36M28 12L36 20L28 28"/></g></symbol>
+<symbol id="m-slight_left" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"><path d="M28 40V30L16 18M16 30V18H28"/></g></symbol>
+<symbol id="m-slight_right" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 40V30L32 18M32 30V18H20"/></g></symbol>
+<symbol id="m-sharp_left" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"><path d="M38 40V26L16 32M16 20V32H28"/></g></symbol>
+<symbol id="m-sharp_right" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 40V26L32 32M32 20V32H20"/></g></symbol>
+<symbol id="m-straight" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"><path d="M24 42V10M12 22L24 10L36 22"/></g></symbol>
+<symbol id="m-uturn" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 42V20Q14 8 25 8Q36 8 36 20V30M28 24L36 32L44 24"/></g></symbol>
+<symbol id="m-keep_left" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"><path d="M28 42V30L14 16M14 28V16H26"/><path d="M28 30V10" stroke-opacity=".4"/></g></symbol>
+<symbol id="m-keep_right" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 42V30L34 16M34 28V16H22"/><path d="M20 30V10" stroke-opacity=".4"/></g></symbol>
+<symbol id="m-roundabout" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"><circle cx="22" cy="30" r="9"/><path d="M22 46V39M29 23L38 14M30 14H38V22"/></g></symbol>
+<symbol id="m-arrive" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 42V8M14 10H36L30 18L36 26H14"/></g></symbol>
+<symbol id="m-recalc" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"><path d="M38 24A14 14 0 1 1 33.9 14.1M38 8V16H30"/></g></symbol>
+<symbol id="ck-home" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11.5L12 4l9 7.5M5.5 10v10h4.5v-6h4v6h4.5V10"/></g></symbol>
+<symbol id="ck-nav" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 17-7-4-7 4z"/></g></symbol>
+<symbol id="ck-music" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6.5" cy="17.5" r="2.8"/><circle cx="16.5" cy="15.5" r="2.8"/><path d="M9.3 17.5V6l10-2v11.5"/></g></symbol>
+<symbol id="ck-harumi" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.3 5.7L20 11l-5.7 2.3L12 19l-2.3-5.7L4 11l5.7-2.3z"/></g></symbol>
+<symbol id="ck-apps" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="6" height="6" rx="1.5"/><rect x="14" y="4" width="6" height="6" rx="1.5"/><rect x="4" y="14" width="6" height="6" rx="1.5"/><rect x="14" y="14" width="6" height="6" rx="1.5"/></g></symbol>
+<symbol id="ck-compass" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/></g></symbol>
+<symbol id="ck-search" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5L21 21"/></g></symbol>
+<symbol id="ck-swap" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 20V4M3 8l4-4 4 4M17 4v16M13 16l4 4 4-4"/></g></symbol>
+<symbol id="ck-prev" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 5v14M19 5L9 12l10 7z"/></g></symbol>
+<symbol id="ck-play" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 5l8 7-8 7zM16 5v14M21 5v14"/></g></symbol>
+<symbol id="ck-next" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 5v14M5 5l10 7-10 7z"/></g></symbol>
+<symbol id="ck-fit" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></g></symbol>
+<symbol id="ck-mic" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></g></symbol>
+<symbol id="ck-phone" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></g></symbol>
+<symbol id="ck-camera" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h4l2-3h6l2 3h4v11H3z"/><circle cx="12" cy="13.5" r="3.5"/></g></symbol>
+<symbol id="ck-wifi" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 9a15 15 0 0 1 20 0M5.5 12.5a10 10 0 0 1 13 0M9 16a5 5 0 0 1 6 0"/><circle cx="12" cy="19.5" r=".6"/></g></symbol>
+<symbol id="ck-settings" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h8M18 7h2M4 17h2M12 17h8"/><circle cx="15" cy="7" r="3"/><circle cx="9" cy="17" r="3"/></g></symbol>
+<symbol id="ck-globe" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3.5 3.5 3.5 14.5 0 18M12 3c-3.5 3.5-3.5 14.5 0 18"/></g></symbol>
+<symbol id="ck-car" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 13l2-6a2 2 0 0 1 2-1.5h10A2 2 0 0 1 19 7l2 6v5H3z"/><path d="M3 13h18"/><circle cx="7.5" cy="16" r="1"/><circle cx="16.5" cy="16" r="1"/><path d="M5 18v2h3v-2M16 18v2h3v-2"/></g></symbol>
+<symbol id="ck-chat" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v11H10l-4 4v-4H4z"/></g></symbol>
+<symbol id="ck-refresh" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12a8 8 0 1 1-2.6-5.9M20 4v5h-5"/></g></symbol>
+<symbol id="ck-close" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6L6 18"/></g></symbol>
+<symbol id="ck-chevron" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></g></symbol>
+<symbol id="ck-bt" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7l10 10-5 4V3l5 4L7 17"/></g></symbol>
+</svg>
+<!-- ===== INICIO ===== -->
+<section id="home" class="hu-home" aria-label="Início">
+<header class="hu-top"><span class="hu-brand">Harumi</span><span>Auto OS</span><span id="device"></span><button type="button" id="configure" class="hu-icon-btn" aria-label="Ajustes"><svg class="ck-ico" aria-hidden="true" focusable="false"><use href="#ck-settings"/></svg></button></header>
+<div class="hu-grid">
+<article id="hu-clock" class="ck-card"><time id="clock">--:--</time><span id="date"></span><span id="network-short" title="Conexão">Rede</span></article>
+<article id="hu-go" class="ck-card"><p class="hu-label">Para onde vamos?</p><button type="button" id="home-road-map" class="hu-search"><svg class="ck-ico" aria-hidden="true" focusable="false"><use href="#ck-search"/></svg><span>Buscar endereço, lugar ou cidade</span></button><div class="hu-chips"><button type="button" id="hu-cities" class="ck-chip"><svg class="ck-ico" aria-hidden="true" focusable="false"><use href="#ck-nav"/></svg>Entre duas cidades</button><button type="button" id="open-atlas" class="ck-chip"><svg class="ck-ico" aria-hidden="true" focusable="false"><use href="#ck-globe"/></svg>Explorar o Brasil</button></div></article>
+<article id="hu-harumi" class="ck-card"><div id="home-avatar-slot" class="home-avatar-slot"><div id="harumi-actor" class="character harumi-video" role="img" aria-label="Harumi"><video id="harumi-avatar" muted playsinline preload="metadata" poster="media/harumi-poster.jpg"></video><span id="avatar-state" class="avatar-state">Com você</span></div></div><div class="hu-harumi-id"><strong>Harumi</strong><span id="hu-harumi-status" class="hu-sub">Pronta para conversar · IA local</span></div><div class="hu-harumi-btns"><button type="button" id="voice-home" class="ck-talk" aria-label="Falar com Harumi"><svg class="ck-ico" aria-hidden="true" focusable="false"><use href="#ck-mic"/></svg>Falar</button><button type="button" id="talk" class="hu-btn" aria-label="Conversar com a Harumi"><svg class="ck-ico" aria-hidden="true" focusable="false"><use href="#ck-chat"/></svg><span>Conversar</span></button></div></article>
+<article id="hu-sound" class="ck-card"><div class="hu-ids"><strong>Som do carro</strong><span class="hu-sub">Controles por Bluetooth/rádio</span></div><div class="ck-media-btns"><button type="button" data-action="media.previous" aria-label="Faixa anterior"><svg class="ck-ico" aria-hidden="true" focusable="false"><use href="#ck-prev"/></svg></button><button type="button" data-action="media.playpause" aria-label="Tocar ou pausar"><svg class="ck-ico" aria-hidden="true" focusable="false"><use href="#ck-play"/></svg></button><button type="button" data-action="media.next" aria-label="Próxima faixa"><svg class="ck-ico" aria-hidden="true" focusable="false"><use href="#ck-next"/></svg></button></div><button type="button" class="hu-btn" data-action="apps.open.music">Abrir música</button></article>
+<article id="hu-car" class="ck-card"><strong>Subaru</strong><p id="diagnostic-status">Diagnóstico aguardando conexão com o veículo.</p><div class="hu-chips"><button type="button" class="ck-chip" data-action="device.read.basic"><svg class="ck-ico" aria-hidden="true" focusable="false"><use href="#ck-car"/></svg>Diagnóstico</button><button type="button" class="ck-chip" data-action="catalog.open" data-module="bluetooth"><svg class="ck-ico" aria-hidden="true" focusable="false"><use href="#ck-phone"/></svg>Telefone</button><button type="button" class="ck-chip" data-action="apps.open.camera360"><svg class="ck-ico" aria-hidden="true" focusable="false"><use href="#ck-camera"/></svg>Câmeras</button><button type="button" id="connections" class="ck-chip"><svg class="ck-ico" aria-hidden="true" focusable="false"><use href="#ck-wifi"/></svg>Internet</button></div></article>
+</div>
+</section>
+<nav id="hu-tabs" class="hu-tabs" aria-label="Seções"><div class="ck-tabrow"><button type="button" id="hu-tab-home" class="ck-tab is-active" aria-current="page"><svg class="ck-ico" aria-hidden="true" focusable="false"><use href="#ck-home"/></svg><span>Início</span></button><button type="button" id="hu-tab-nav" class="ck-tab"><svg class="ck-ico" aria-hidden="true" focusable="false"><use href="#ck-nav"/></svg><span>Navegar</span></button><button type="button" data-action="apps.open.music" class="ck-tab"><svg class="ck-ico" aria-hidden="true" focusable="false"><use href="#ck-music"/></svg><span>Música</span></button><button type="button" id="hu-tab-harumi" class="ck-tab"><svg class="ck-ico" aria-hidden="true" focusable="false"><use href="#ck-harumi"/></svg><span>Harumi</span></button><button type="button" id="open-apps" class="ck-tab"><svg class="ck-ico" aria-hidden="true" focusable="false"><use href="#ck-apps"/></svg><span>Apps</span></button></div></nav>
+<!-- ===== AJUSTES ===== -->
+<section id="settings" class="hu-screen" hidden aria-label="Ajustes">
+<div class="hu-head"><h2>Ajustes</h2><button type="button" id="close" class="hu-icon-btn" aria-label="Fechar"><svg class="ck-ico" aria-hidden="true" focusable="false"><use href="#ck-close"/></svg></button></div>
+<div class="hu-row-list">
+<div class="hu-row"><svg class="ck-ico" aria-hidden="true" focusable="false"><use href="#ck-nav"/></svg><div class="hu-row-text"><strong>Mapas</strong><span id="NAV">Escolher aplicativo</span></div><button type="button" class="hu-btn" data-action="apps.choose" data-module="NAV" aria-label="Escolher mapas">Escolher</button></div>
+<div class="hu-row"><svg class="ck-ico" aria-hidden="true" focusable="false"><use href="#ck-music"/></svg><div class="hu-row-text"><strong>Música</strong><span id="MUSIC">Escolher aplicativo</span></div><button type="button" class="hu-btn" data-action="apps.choose" data-module="MUSIC" aria-label="Escolher música">Escolher</button></div>
+<div class="hu-row"><svg class="ck-ico" aria-hidden="true" focusable="false"><use href="#ck-camera"/></svg><div class="hu-row-text"><strong>Câmeras 360°</strong><span id="CAMERA360">Escolher app 360°</span></div><button type="button" class="hu-btn" data-action="apps.choose" data-module="CAMERA360" aria-label="Escolher app 360°">Escolher</button></div>
+<div class="hu-row"><svg class="ck-ico" aria-hidden="true" focusable="false"><use href="#ck-mic"/></svg><div class="hu-row-text"><strong>Oi Harumi</strong><span>Escuta com a Harumi aberta</span></div><button type="button" id="wake-toggle" class="hu-btn" data-action="wake.toggle">“Oi Harumi”: ligado</button></div>
+<div class="hu-row"><svg class="ck-ico" aria-hidden="true" focusable="false"><use href="#ck-harumi"/></svg><div class="hu-row-text"><strong>Pronúncia</strong><span>Ensine como você fala</span></div><button type="button" id="wake-learn" class="hu-btn" data-action="wake.learn">Ensinar</button></div><div class="hu-row"><svg class="ck-ico" aria-hidden="true" focusable="false"><use href="#ck-chat"/></svg><div class="hu-row-text"><strong>Apresentação</strong><span>Ouvir a Harumi se apresentar</span></div><button type="button" class="hu-btn" data-action="voice.greet">Ouvir</button></div>
+<div class="hu-row"><svg class="ck-ico" aria-hidden="true" focusable="false"><use href="#ck-wifi"/></svg><div class="hu-row-text"><strong>Internet</strong><span>Status e configuração inicial</span></div><button type="button" id="settings-internet" class="hu-btn">Abrir</button></div>
+<div class="hu-row"><svg class="ck-ico" aria-hidden="true" focusable="false"><use href="#ck-car"/></svg><div class="hu-row-text"><strong>Interface de fábrica</strong><span>Modo aplicativo · HOME bloqueada</span></div><button type="button" class="hu-btn" data-action="oem.home">Voltar</button></div>
+<p class="privacy hu-foot"><span class="version">Bancada 0.3.15</span> <button type="button" id="avatar-demo" class="hu-btn" hidden>Ver animações</button></p>
+</div>
+</section>
+<!-- ===== INTERNET ===== -->
+<section id="connectivity" class="hu-screen" hidden aria-label="Internet">
+<div class="hu-head"><div class="hu-head-text"><h2>Internet</h2><p id="network-status" role="status">Status disponível no aplicativo Android.</p></div><button type="button" id="close-connectivity" class="hu-icon-btn" aria-label="Fechar"><svg class="ck-ico" aria-hidden="true" focusable="false"><use href="#ck-close"/></svg></button></div>
+<div class="conn-body">
+<p class="hu-note connection-intro">A Harumi acompanha a rede sozinha: você não escolhe conexão aqui.</p>
+<p class="hu-note automatic-note">Para reconectar ao entrar no carro, o celular precisa dar Internet e a rede estar salva no Android da central.</p>
+<details id="initial-network-setup"><summary class="ck-chip">Configuração inicial de Wi-Fi e Bluetooth</summary>
+<div class="connection-options">
+<article class="ck-card"><svg class="ck-ico" aria-hidden="true" focusable="false"><use href="#ck-wifi"/></svg><div class="conn-text"><h3>Wi-Fi</h3><p>Salve a rede do celular na central e deixe a reconexão automática ligada.</p></div><button type="button" class="hu-btn" data-action="connection.wifi">Ajustar Wi-Fi</button></article>
+<article class="ck-card"><svg class="ck-ico" aria-hidden="true" focusable="false"><use href="#ck-bt"/></svg><div class="conn-text"><h3>Bluetooth</h3><p>Faça o pareamento e ative o acesso à Internet do celular, se a central oferecer.</p></div><button type="button" class="hu-btn" data-action="connection.bluetooth">Ajustar Bluetooth</button></article>
+</div></details>
+<p class="privacy">A Harumi só mostra o que o Android confirma e não liga o roteador do celular. A IA e a voz locais funcionam sem rede.</p>
+</div>
+</section>
+<!-- ===== CONVERSA (folha lateral) ===== -->
+<section id="assistant" hidden aria-label="Conversar com Harumi">
+<div class="hu-head"><div id="assistant-avatar-slot" class="assistant-avatar-slot"></div><div class="hu-head-text"><h2>Harumi</h2><span id="assistant-status">Pronta para conversar · IA local</span></div><div class="hu-wave" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div><button type="button" id="close-assistant" class="hu-icon-btn" aria-label="Fechar"><svg class="ck-ico" aria-hidden="true" focusable="false"><use href="#ck-close"/></svg></button></div>
+<div id="conversation" role="log" aria-live="polite"><p><strong>Harumi</strong> Posso conversar, abrir seus apps e encaminhar um destino aos mapas. Toque em Falar para usar o microfone. O diagnóstico do Subaru ainda está sem adaptador.</p></div>
+<p id="dictation-preview" class="dictation-preview" aria-live="polite" hidden></p>
+<div class="assistant-input"><textarea id="question" maxlength="1600" rows="1" aria-label="Sua mensagem" placeholder="Ex.: trace uma rota para Londrina"></textarea><button type="button" id="send-question" aria-label="Enviar"><svg class="ck-ico" aria-hidden="true" focusable="false"><use href="#ck-nav"/></svg></button></div>
+<div class="assistant-actions"><button type="button" id="listen" class="ck-talk" data-action="assistant.listen"><svg class="ck-ico" aria-hidden="true" focusable="false"><use href="#ck-mic"/></svg>Falar</button><button type="button" id="finish-listening" class="hu-btn" data-action="assistant.finish.listen" hidden>Concluir fala</button><button type="button" class="hu-btn" data-action="assistant.cancel">Parar</button><button type="button" id="continue-answer" class="hu-btn" hidden>Continuar resposta</button><button type="button" class="hu-btn" data-action="catalog.open" data-module="claude" aria-label="Abrir o app Claude">Claude</button><button type="button" class="hu-btn" data-action="catalog.open" data-module="chatgpt" aria-label="Abrir o app ChatGPT">ChatGPT</button></div>
+<p class="privacy">Conversa, voz e reconhecimento neste aparelho. Use o teclado com o carro parado.</p>
+</section>
+<!-- ===== ATLAS ===== -->
+<section id="brazil-atlas" class="hu-screen" hidden aria-label="Explorar o Brasil">
+<div class="hu-head atlas-head"><div class="atlas-title"><span>Seu próximo destino</span><h2>Brasil</h2></div><button type="button" id="open-road-map" class="ck-chip"><svg class="ck-ico" aria-hidden="true" focusable="false"><use href="#ck-nav"/></svg>Traçar rota</button><button type="button" id="atlas-native-nav" class="hu-btn" data-action="apps.open.nav">Outros apps</button><button type="button" id="atlas-close" class="hu-icon-btn" aria-label="Fechar"><svg class="ck-ico" aria-hidden="true" focusable="false"><use href="#ck-close"/></svg></button></div>
+<div class="atlas-layout">
+<div class="atlas-map-pane"><p>Toque em um estado para conhecer sua capital</p><svg id="brazil-map" viewBox="0 0 620 600" aria-label="Estados do Brasil"></svg></div>
+<div class="atlas-detail ck-card"><label for="atlas-select" class="atlas-capital-label">Escolha o estado</label><select id="atlas-select"></select><div class="atlas-state-heading"><h3 id="atlas-state-name"></h3><span id="atlas-uf"></span></div><p class="atlas-capital-label">Capital</p><h4 id="atlas-capital"></h4><img id="atlas-photo" class="atlas-photo" alt=""><details id="atlas-credits"><summary>Créditos da fotografia</summary><p id="atlas-photo-author"></p><p id="atlas-photo-license"></p><p id="atlas-photo-source"></p></details><p class="atlas-municipalities" id="atlas-municipalities"></p><button type="button" id="atlas-route" class="ck-talk">Ver capital nos mapas</button></div>
+</div>
+<p class="atlas-foot">Mapa e fotos disponíveis sem Internet. Limites: IBGE · Fotos: Wikimedia Commons.</p>
+</section>
+<!-- ===== COCKPIT DE NAVEGACAO ===== -->
+<section id="road-map" class="cockpit" hidden aria-label="Planejar trajeto e navegar">
+<div id="route-canvas" aria-label="Mapa de ruas e trajeto"></div><div id="route-map-network" class="route-map-warning" hidden>Mapa de ruas indisponível. Confira a Internet. A linha da rota não substitui o mapa.</div>
+<header class="ck-top"><button type="button" id="close-road-map" class="ck-icon" aria-label="Início"><svg class="ck-ico" aria-hidden="true" focusable="false"><use href="#ck-home"/></svg><span>Início</span></button><span id="ck-engine" class="ck-engine"></span><span class="ck-right"><span id="ck-net"></span><time id="ck-clock">--:--</time></span></header>
+<aside class="ck-left" aria-label="Destino e rota">
+<form id="nav-form" class="ck-card ck-search ck-plan"><label for="nav-dest" class="ck-sr">Navegar até: endereço, lugar ou cidade</label><div class="nav-field"><svg class="nav-lupa" aria-hidden="true" focusable="false"><use href="#ck-search"/></svg><input id="nav-dest" autocomplete="off" maxlength="160" placeholder="Para onde vamos?"></div><button type="submit" id="nav-search" class="ck-go" aria-label="Buscar destino"><svg class="ck-ico" aria-hidden="true" focusable="false"><use href="#ck-search"/></svg></button><p id="nav-lock" class="nav-lock" role="status" hidden>Pare o carro para digitar</p><p id="nav-search-status" class="nav-search-status" role="status"></p></form>
+<div id="nav-results" class="ck-card ck-list ck-plan"></div>
+<div id="ck-nearby" class="ck-card ck-list" role="group" aria-label="Lugares perto de você" hidden><p class="ck-nearby-title">Perto de você</p><div id="ck-nearby-list"></div></div>
+<button type="button" class="nav-replay-btn ck-chip ck-plan" hidden>Simular trajeto (teste)</button>
+<button type="button" id="ck-cities-toggle" class="ck-chip ck-plan" aria-expanded="false" aria-controls="route-form">Entre duas cidades</button>
+<form id="route-form" class="ck-card route-cities ck-plan" hidden><label for="route-from">Origem · cidade / UF</label><input id="route-from" list="route-from-options" value="" placeholder="Sua cidade" autocomplete="off" maxlength="160"><datalist id="route-from-options"></datalist><button type="button" id="swap-route" class="ck-swap" aria-label="Inverter origem e destino"><svg class="ck-ico" aria-hidden="true" focusable="false"><use href="#ck-swap"/></svg></button><label for="route-to">Destino · cidade / UF</label><input id="route-to" list="route-to-options" value="Londrina / PR" autocomplete="off" maxlength="160"><datalist id="route-to-options"></datalist><button type="submit" id="calculate-route">Traçar rota</button></form>
+<p id="route-status" class="ck-note ck-plan" role="status"></p>
+<div id="route-result" class="ck-card ck-preview ck-plan" hidden><div class="route-numbers"><div><strong id="route-distance"></strong><span>distância</span></div><div><strong id="route-duration"></strong><span>tempo</span></div><div><strong id="route-arrive"></strong><span>chegada</span></div></div><p id="route-endpoints"></p><p id="route-origin-note" class="ck-origin-note" role="status" hidden></p><div class="ck-preview-actions"><button type="button" id="route-start">Iniciar navegação</button><button type="button" id="route-external">Outro app</button><button type="button" id="fit-route" class="ck-sq" aria-label="Ver trajeto inteiro"><svg class="ck-ico" aria-hidden="true" focusable="false"><use href="#ck-fit"/></svg></button></div></div>
+<div id="nav-hud" hidden><div id="nav-top"><div id="nav-banner" class="ck-card"><div id="nav-arrow" aria-hidden="true">…</div><div class="nav-banner-text"><div id="nav-dist">—</div><div id="nav-street"></div></div></div><div id="nav-next" class="ck-pill" hidden></div><div id="nav-lanes" class="ck-card" hidden></div><div id="nav-gps" class="ck-pill-warn" role="status" hidden>Sinal de GPS fraco</div><div id="nav-msg" class="ck-pill-warn" role="status" hidden><span id="nav-msg-text"></span><button type="button" id="nav-retry" hidden>Tentar de novo</button></div></div></div>
+</aside>
+<aside class="ck-right" aria-label="Viagem e som">
+<div id="ck-trip" class="ck-card ck-nav"><div id="nav-bottom"><div id="nav-foot"><div class="ck-eta"><span>chegada</span><strong id="nav-eta">--:--</strong></div><div><span>restante</span><strong id="nav-rem">—</strong></div><div><span>tempo</span><strong id="nav-time">—</strong></div></div><div id="nav-progress"><i></i></div></div></div>
+<div id="ck-speed" class="ck-card ck-nav"><strong id="nav-speed">0</strong><span>km/h</span></div>
+<div id="ck-media" class="ck-card"><div class="ck-media-text"><strong>Som do carro</strong><span>Controles por Bluetooth/rádio</span></div><div class="ck-media-btns"><button type="button" data-action="media.previous" aria-label="Faixa anterior"><svg class="ck-ico" aria-hidden="true" focusable="false"><use href="#ck-prev"/></svg></button><button type="button" data-action="media.playpause" aria-label="Tocar ou pausar"><svg class="ck-ico" aria-hidden="true" focusable="false"><use href="#ck-play"/></svg></button><button type="button" data-action="media.next" aria-label="Próxima faixa"><svg class="ck-ico" aria-hidden="true" focusable="false"><use href="#ck-next"/></svg></button></div></div>
+<div id="ck-assist" class="ck-card ck-plan"><div class="ck-media-text"><strong>Harumi</strong><span>Peça o destino por voz</span></div><button type="button" class="ck-talk" data-action="assistant.listen"><svg class="ck-ico" aria-hidden="true" focusable="false"><use href="#ck-mic"/></svg>Falar</button></div>
+</aside>
+<div class="ck-fab"><button type="button" id="ck-view" class="ck-fab-btn ck-view" aria-label="Mudar para o mapa 2D" hidden><span>2D</span></button><button type="button" id="nav-recenter" class="ck-fab-btn" aria-label="Centralizar no carro" hidden><svg class="ck-ico" aria-hidden="true" focusable="false"><use href="#ck-compass"/></svg></button></div>
+<nav class="ck-tabs" aria-label="Seções"><button type="button" id="nav-stop" class="ck-stop">Encerrar</button><div class="ck-tabrow"><button type="button" id="ck-tab-home" class="ck-tab"><svg class="ck-ico" aria-hidden="true" focusable="false"><use href="#ck-home"/></svg><span>Início</span></button><button type="button" id="ck-tab-nav" class="ck-tab is-active" aria-current="page"><svg class="ck-ico" aria-hidden="true" focusable="false"><use href="#ck-nav"/></svg><span>Navegar</span></button><button type="button" class="ck-tab" data-action="apps.open.music"><svg class="ck-ico" aria-hidden="true" focusable="false"><use href="#ck-music"/></svg><span>Música</span></button><button type="button" class="ck-tab" data-action="assistant.listen"><svg class="ck-ico" aria-hidden="true" focusable="false"><use href="#ck-harumi"/></svg><span>Harumi</span></button><button type="button" id="ck-tab-apps" class="ck-tab"><svg class="ck-ico" aria-hidden="true" focusable="false"><use href="#ck-apps"/></svg><span>Apps</span></button></div><p id="nav-credit">© OpenStreetMap contributors (ODbL) · Rotas: OSRM</p><button type="button" class="nav-replay-btn" hidden>Simular trajeto (teste)</button></nav>
+</section>
+<!-- ===== APPS ===== -->
+<section id="apps-panel" class="hu-screen" hidden aria-label="Aplicativos">
+<div class="hu-head apps-head"><h2>Apps</h2><div class="hu-seg" role="tablist" aria-label="Grupos de apps"><button type="button" id="apps-tab-installed" role="tab" aria-selected="true">Instalados</button><button type="button" id="apps-tab-own" role="tab" aria-selected="false">Da Harumi</button><button type="button" id="apps-oem-tab" role="tab" aria-selected="false">Central</button><button type="button" id="apps-tab-more" role="tab" aria-selected="false">Mais apps</button></div><button type="button" id="apps-refresh" class="hu-icon-btn" aria-label="Atualizar lista"><svg class="ck-ico" aria-hidden="true" focusable="false"><use href="#ck-refresh"/></svg></button><button type="button" id="apps-all" class="hu-btn">Todos do Android</button><button type="button" id="apps-close" class="hu-icon-btn" aria-label="Fechar"><svg class="ck-ico" aria-hidden="true" focusable="false"><use href="#ck-close"/></svg></button></div>
+<div class="apps-scroll">
+<button type="button" id="apps-install" class="ck-chip" hidden></button>
+<div id="apps-installed-grid" class="hu-tiles" role="region" aria-label="Apps instalados"></div>
+<div id="apps-grid" class="hu-tiles" role="region" aria-label="Lista de aplicativos" hidden></div>
+</div>
+<p class="privacy apps-foot">Funções da central usam o firmware original e podem exigir licença. A Harumi não substitui rádio, câmera, DSP ou MCU.</p>
+</section>
+<div id="message" role="status" hidden></div>
+</main>
+<script src="avatar.js?v=0310"></script>
+<script src="app.js?v=0315"></script>
+<script src="atlas-data.js?v=0312"></script>
+<script src="atlas.js?v=0313"></script>
+<script src="vendor/leaflet/leaflet.js"></script>
+<script src="cities-data.js?v=0313"></script>
+<script src="road-map.js?v=0318"></script>
+<script type="module" src="map3d.js?v=0317"></script>
+<script src="apps-catalog.js?v=0319"></script>
+<script src="harumi-shell.js?v=0319"></script>
+<script src="launcher.js?v=0319"></script>
+</body>
+</html>

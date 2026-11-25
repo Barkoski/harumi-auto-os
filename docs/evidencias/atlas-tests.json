@@ -1,0 +1,22 @@
+[
+  {
+    "viewport": "1024x600",
+    "photos": 27,
+    "selection_route_close": "PASS"
+  },
+  {
+    "viewport": "1024x480",
+    "photos": 27,
+    "selection_route_close": "PASS"
+  },
+  {
+    "viewport": "800x480",
+    "photos": 27,
+    "selection_route_close": "PASS"
+  },
+  {
+    "viewport": "390x844",
+    "photos": 27,
+    "selection_route_close": "PASS"
+  }
+]

@@ -1,0 +1,1500 @@
+HARUMI AUTO OS
+
+Documento técnico mestre — Stock Android Edition
+
+Identificação: HAO-TECH-001
+Versão do documento: 0.2.0
+Data: 02/11/2026
+Plataforma-alvo: multimídia Android ZK adquirida para o Subaru Impreza SW 1993
+Base de código analisada: protótipo Harumi Auto OS 0.1.0 (Harumi_Auto_OS_v0.1_AndroidStudio.zip)
+Situação: especificação para implementação; homologação no hardware real pendente.
+
+Princípio inegociável: desenvolver a experiência Harumi sobre o Android original da central, preservando firmware, kernel, MCU, drivers e aplicativos proprietários. A Harumi é candidata a launcher (HOME), não uma ROM, um fork de AOSP ou um novo sistema operacional em sentido estrito nesta fase. A compatibilidade com a câmera de ré e o sistema 360° é requisito de aprovação física, não uma garantia derivada da arquitetura.
+
+1. Resumo executivo e decisão de arquitetura
+
+O Harumi Auto OS é uma camada de experiência e assistência veicular para central Android aftermarket, projetada para substituir visualmente o ambiente inicial da multimídia sem substituir seu sistema-base. A versão inicial deve executar como aplicativo normal; somente depois de testes de segurança e reversão será selecionada como tela HOME, se a ROM do fabricante permitir.
+
+O sistema terá identidade visual retrofuturista/cyberpunk inspirada nos anos 1990, uma personagem virtual, comandos de voz em português, abertura de navegação e mídia, conectividade opcional com a Harumi Core e, em evolução futura, leitura diagnóstica somente passiva do Subaru mediante interface validada.
+
+Decisão ADR-001 — Stock Android first: manter a distribuição OEM; utilizar APIs Android públicas, intents documentadas e aplicativos exportados pelo fabricante. Evitar root, flash, intervenção em partições, substituição de APKs de sistema ou engenharia de firmware na fase inicial. A alternativa de ROM modificada só será reavaliada mediante documentação, procedimento de recuperação testado e necessidade comprovada.
+
+Regra de independência operacional: as funções essenciais do veículo e as integrações OEM (especialmente câmera de ré e câmeras 360°) não podem depender da conectividade, da resposta da IA ou da execução correta da Harumi. Caso um teste indique dependência de um launcher OEM específico, a Harumi não deve ser estabelecida como HOME até existir solução compatível e comprovada.
+
+1.1 O que está comprovado, informado e pendente
+
+Situação
+
+Informação
+
+Consequência técnica
+
+Verificado no código
+
+Android Java, MainActivity, WebView local, HarumiBridge, escolha de apps e categoria HOME.
+
+Há base de launcher para evolução incremental.
+
+Verificado no código
+
+minSdk 26, targetSdk 34, compileSdk 35, AGP 8.6.1; permissões sensíveis ausentes no manifesto v0.1.
+
+Preservar configuração até o primeiro build; avaliar ajustes após identificar a ROM.
+
+Validado na prévia
+
+Interface HTML e fluxos simulados em navegador, inclusive 1024 × 600.
+
+Validação visual não equivale a teste Android nem a homologação no carro.
+
+Informado para o projeto
+
+Central ZK anunciada com processador octa-core, 8 GB RAM, 256 GB e recursos como câmeras 360°.
+
+Dados de produto ainda precisam ser confirmados no dispositivo entregue.
+
+Pendente
+
+SoC, Android real, WebView, versão MCU, firmware OEM, resolução nativa, apps OEM e forma de comutação de vídeo.
+
+Bloqueia afirmar compatibilidade automotiva.
+
+Não executado
+
+Compilação do APK, instalação em Android real e testes com marcha ré, 360°, Bluetooth e sleep/wake.
+
+Impede classificar a v0.1 como pronta para uso veicular.
+
+1.2 Objetivo de produto e limites
+
+Dentro do escopo: launcher reversível; painel inicial; configurações locais; atalhos para aplicativos Android; notificações/status; voz com acionamento deliberado; integração autenticada com Harumi Core em fase posterior; navegação via APIs e intents documentadas; observabilidade e diagnóstico de compatibilidade; eventual telemetria de leitura com interface externa.
+
+Fora do escopo inicial: reprogramar MCU/ECU; controlar câmbio, freio, aceleração, direção ou funções críticas; substituir captura/composição dos vídeos OEM; atualizar ROM/bootloader; inferir suporte a OBD-II no Subaru 1993; escuta permanente de microfone sem estudo de viabilidade e privacidade; prometer mapas offline ou voz offline sem um motor efetivamente instalado.
+
+2. Inventário técnico do protótipo v0.1
+
+Foi analisado o arquivo ZIP de projeto Android Studio fornecido na conversa, além de README.md, docs/arquitetura.md, docs/plano-de-testes.md e docs/validacao-v0.1.md. O inventário a seguir descreve o código existente, não funcionalidades presumidas.
+
+2.1 Estrutura existente
+
+harumi-auto-os/
+├── app/
+│   ├── build.gradle.kts
+│   └── src/main/
+│       ├── AndroidManifest.xml
+│       ├── java/com/harumi/autoos/MainActivity.java
+│       ├── assets/index.html
+│       └── res/...
+├── preview/index.html
+├── docs/arquitetura.md
+├── docs/plano-de-testes.md
+├── docs/validacao-v0.1.md
+├── test_preview.py
+├── test_source_guards.py
+├── build.gradle.kts
+└── settings.gradle.kts
+
+O projeto é Java + HTML/CSS/JavaScript em WebView, não Kotlin/Jetpack Compose. A migração de tecnologia não faz parte do primeiro sprint: primeiro validar o que já existe. A interface web utiliza eventos internos de demonstração; isso não constitui um barramento de comunicação entre serviços Android nem a Harumi Core real.
+
+2.2 Funções concretas em MainActivity.java
+
+Operação do HarumiBridge
+
+Comportamento atual
+
+Limite
+
+getAssignments()
+
+Retorna rótulos dos três módulos associáveis.
+
+Sem descoberta de capacidade OEM real.
+
+getDeviceInfo()
+
+Retorna fabricante/modelo/Android/API do sistema.
+
+MCU é exibida como não identificada.
+
+selectApp(module)
+
+Lista Activities MAIN/LAUNCHER; salva componente escolhido.
+
+Apps OEM ocultos podem não aparecer.
+
+launchModule(module)
+
+Abre componente associado a NAV, MUSIC ou CAMERA360.
+
+Não acessa API de vídeo, nem intercepta marcha ré.
+
+openAndroidSettings()
+
+Abre configurações comuns.
+
+Firmware pode restringir acesso.
+
+openHomeSettings()
+
+Solicita tela Android de seleção de HOME.
+
+OEM pode bloquear ou substituir o seletor.
+
+listen()
+
+Dispara RecognizerIntent por toque.
+
+Reconhecedor pode faltar ou transmitir áudio a serviço remoto.
+
+greet()
+
+Executa TextToSpeech com saudação em pt-BR.
+
+Dependente de voz/engine disponível no aparelho.
+
+O estado de associações está em SharedPreferences privadas. O HTML é carregado de file:///android_asset/index.html; carregamentos HTTP/HTTPS pelo WebView estão bloqueados; o manifesto não solicita INTERNET, RECORD_AUDIO ou CAMERA. Há filtro CATEGORY_HOME opcional, além do atalho de app comum. O Gradle Wrapper não foi incluído no ZIP; não há APK compilado validado.
+
+2.3 Débitos técnicos identificados
+
+Build reproduzível: incluir e versionar o Gradle Wrapper oficial e comprovar assembleDebug/assembleRelease no ambiente de desenvolvimento.
+
+Segurança do conteúdo local: migrar o HTML de file:// para WebViewAssetLoader e consolidar navegação estritamente permitida, como recomendado pela documentação Android. Revisar a ponte JS antes de liberar rede ao aplicativo.
+
+Separação de responsabilidades: extrair MainActivity monolítica em serviços/adaptadores testáveis, preservando comportamento.
+
+Contratos entre módulos: definir ações e mensagens tipadas. Não permitir que conteúdo da Web ou resposta de LLM forneça Intent, pacote, classe ou comando de sistema arbitrário.
+
+Compatibilidade OEM: criar perfil de dispositivo que registre apenas capacidades observadas e seus resultados de teste.
+
+Ciclo de vida: testar HOME, alternância de apps, retomada de suspensão, inicialização a frio, chamadas e falha forçada da Harumi.
+
+Voz: atualizar o fluxo legado onActivityResult em etapa controlada; prever ausência de motor de reconhecimento, idioma ou acesso à rede.
+
+3. Arquitetura funcional e fronteiras
+
+              MOTORISTA / PASSAGEIRO
+                       |
+             HARUMI UI (launcher)
+            HTML/CSS/JS empacotado
+                       |
+          API limitada de interface
+                       |
+          HARUMI NATIVE APPLICATION
+       +---------------+---------------+
+       |               |               |
+   ModuleRouter    VoiceGateway    CoreClient (futuro)
+       |               |               |
+   OEM AppGateway  STT / TTS     API autenticada HTTPS
+       |               |               |
+       +---------------+---------------+
+                       |
+             ANDROID ORIGINAL OEM
+         apps, audio, GPS, rede, WebView
+                       |
+           MCU / CAMERAS / HARDWARE
+       (fora da autoridade da Harumi)
+
+Fluxo separado e prioritario, a confirmar fisicamente:
+  Sinal de re -> MCU/OEM -> tela de camera OEM
+  A Harumi NAO substitui, intercepta ou renderiza esse video.
+
+3.1 Camadas
+
+L1 — UI: interface embarcada; não recebe segredo, token persistente ou comando direto de MCU; trata estados visuais e ações permitidas. L2 — Orquestração local: valida intenção, aplica regras, controla estado, distribui eventos internos entre módulos e decide fallbacks. L3 — Adaptadores Android/OEM: abrem aplicativos, gerenciam TTS/STT, consulta limitada de dispositivo e integrações futuras. L4 — Serviços remotos: Harumi Core opcional e isolada via API autenticada; nunca indispensável para HOME e câmeras.
+
+3.2 Princípios de engenharia
+
+Capability-first: interface mostra função como disponível apenas quando o adaptador detecta e comprova a capacidade em teste. Estados: AVAILABLE, UNAVAILABLE, UNKNOWN, DEGRADED.
+
+Fail-safe e fail-closed: ao falhar a IA, voltar a comandos locais limitados; nunca invocar ações sensíveis por adivinhação.
+
+Offline-first na interface: HOME, configurações e lançador de apps devem operar sem Internet. Mapas, STT do provedor e Core podem depender de rede.
+
+Uma autoridade por domínio: câmera de ré/360 e telefonia continuam sob OEM; a Harumi não disputa foco nem prioridade com funções críticas.
+
+Acesso mínimo: permissões e visibilidade de apps estritamente relacionadas ao caso de uso.
+
+Reversibilidade: manter acesso ao sistema de fábrica; não exigir root para desinstalação ou recuperação.
+
+3.3 Estados operacionais propostos
+
+BOOTING → READY_LOCAL → READY_CONNECTED quando Core disponível. Transições possíveis para DEGRADED (rede/STT/App OEM indisponível), SUSPENDED (Activity pausada) e RECOVERY (UI falhou ou usuário solicita retorno ao Android). Não considerar REVERSE_ACTIVE um estado observado pela Harumi sem integração OEM oficialmente confirmada: o vídeo de ré poderá ser exibido fora do conhecimento do aplicativo.
+
+4. Matriz de integração com a central e com o Subaru
+
+Domínio
+
+Autoridade primária
+
+Estratégia Harumi
+
+Dependência / aceite
+
+Câmera de ré
+
+MCU + serviço OEM
+
+Não interceptar; permitir sobreposição OEM.
+
+Testar em R com Harumi aberta/HOME; falha é bloqueio P0.
+
+Câmeras 360°
+
+App e processador OEM
+
+Abrir Activity exportada/documentada, se houver.
+
+Preservar costura, calibração, vistas e saída; atalho não garante acesso.
+
+Bluetooth/chamadas
+
+Stack e app OEM
+
+Não substituir serviço de telefonia; respeitar foco e chamadas.
+
+Ligações e retorno à HOME passam no teste físico.
+
+Música e rádio
+
+Apps de sistema/usuário
+
+Lançamento e, futuramente, controle por APIs permitidas.
+
+Volume, foco e retorno preservados.
+
+GPS e navegação
+
+Android e app de mapas
+
+Intent documentada ACTION_VIEW/geo:; depois adaptador por provedor.
+
+App instalado, rede/mapas disponíveis, usuário confirma destino.
+
+Modem 4G/Wi-Fi
+
+Android OEM
+
+Verificar conectividade; cliente HTTPS apenas em versão futura.
+
+Operação local independente de rede.
+
+MCU / botões
+
+Firmware da central
+
+Coletar identificação; usar somente interfaces expostas e verificadas.
+
+Sem alteração de firmware, sem reverse engineering invasiva na MVP.
+
+ACC, sleep e wake
+
+Energia/firmware OEM
+
+Respeitar ciclo de vida Android; sem serviço persistente prematuro.
+
+Sem consumo anômalo, perda de câmera ou boot loop.
+
+Telemetria Subaru 1993
+
+Interface diagnóstica a confirmar
+
+Módulo isolado de leitura passiva em fase futura.
+
+Verificar conectores/protocolo; não presumir OBD-II.
+
+4.1 Fluxo de câmera de ré (invariante de segurança)
+
+Antes de instalar a Harumi, registrar o comportamento de câmera no launcher de fábrica.
+
+Com o carro imobilizado em ambiente controlado, abrir Harumi como aplicativo comum.
+
+Quando R for engatada, observar se a lógica OEM exibe a câmera automaticamente, sobrepondo ou substituindo a tela atual.
+
+Sair de R: verificar retorno estável ao app anterior, sem tela preta, freeze ou loop.
+
+Repetir após tornar Harumi HOME, somente se já houver procedimento de reversão testado e as etapas anteriores tiverem passado.
+
+Se houver regressão, reverter imediatamente à HOME OEM e registrar bloqueio. Não criar uma simulação de câmera como substituto da imagem real.
+
+4.2 Fluxo das câmeras 360°
+
+O aplicativo 360° pode depender de serviços próprios, Activity não exportada, parâmetros internos da MCU ou processador externo de imagens. O protótipo só pode tentar abrir uma Activity visível no seletor Android. A v0.2 criará o adaptador Camera360OemAdapter com três estados: OPENABLE, OEM_ONLY, UNKNOWN. Não utilizar am start com Activity privada, permissões privilegiadas ou captura não documentada para contornar bloqueios. Se o 360° não puder ser aberto por fora, preservar acesso pelo fluxo de fábrica e registrar a limitação.
+
+4.3 Diagnóstico do Subaru
+
+O Subaru Impreza SW 1993 pode ter interfaces diagnósticas anteriores à adoção ampla do OBD-II. O protocolo físico e sua disponibilidade não estão confirmados. A primeira versão de diagnóstico será restrita a leitura de dados efetivamente expostos, usando adaptador externo elétrico/protocolarmente adequado; a interpretação de parâmetros precisará ser validada contra documentação técnica. Não enviar comandos de escrita, testes de atuadores ou reprogramação de ECU.
+
+5. Requisitos funcionais (RF)
+
+Os requisitos abaixo são alvos de desenvolvimento. Somente os marcados como v0.1 estão parcialmente presentes em código; a coluna de aceite explicita o que precisa ser demonstrado no dispositivo.
+
+ID / prioridade
+
+Requisito
+
+Critério objetivo de aceite
+
+RF-001 / P0
+
+Executar como app Android comum, sem root.
+
+Instala e abre sem alterar HOME ou firmware.
+
+RF-002 / P0
+
+Ser candidato a HOME reversível.
+
+Usuário alterna para OEM e volta sem ADB, quando o firmware permitir.
+
+RF-003 / P0
+
+Preservar câmera de ré OEM.
+
+Funcionamento idêntico ao original e retorno estável; testes T04/T15.
+
+RF-004 / P0
+
+Preservar visão 360° OEM.
+
+Visualização, calibração e modos sem regressão; T05.
+
+RF-005 / P0
+
+Preservar Bluetooth, telefonia e áudio.
+
+Chamada e reprodução não sofrem interrupções atribuíveis ao launcher.
+
+RF-006 / P0
+
+Ter recuperação segura.
+
+Roteiro de reversão registrado e repetível, sem flash.
+
+RF-007 / P0
+
+Registrar perfil técnico da central.
+
+Modelo, Android/API, WebView, MCU se obtível, resolução e apps OEM identificados.
+
+RF-008 / P1
+
+Exibir interface principal Harumi.
+
+Tela responsiva no tamanho físico validado, sem overflow.
+
+RF-009 / P1
+
+Abrir mapas, música e 360° quando disponíveis.
+
+Módulo usa app validado ou informa indisponibilidade.
+
+RF-010 / P1
+
+Armazenar vínculos de apps localmente.
+
+Persistência após reinício e opção de limpar associação.
+
+RF-011 / P1
+
+Saudação em pt-BR.
+
+TTS sob comando ou no evento configurado, sem interferir em chamadas.
+
+RF-012 / P1
+
+Comando de voz push-to-talk.
+
+Reconhecimento iniciado só por ação do usuário; ausência de provedor tratada.
+
+RF-013 / P1
+
+Operação básica sem Internet.
+
+HOME, configurações e atalhos locais funcionam offline.
+
+RF-014 / P1
+
+Não acessar permissões excessivas.
+
+Manifesto audível; nenhuma permissão sem justificativa de requisito.
+
+RF-015 / P1
+
+Tratar falha/ausência de app OEM.
+
+App não trava e sugere escolher alternativa ou usar OEM.
+
+RF-016 / P1
+
+Manter estado ao alternar apps.
+
+Volta à HOME sem perder configurações nem criar telas duplicadas.
+
+RF-017 / P2
+
+Integrar Harumi Core autenticada.
+
+Solicitações HTTPS com timeout, identificação de versão e respostas verificadas.
+
+RF-018 / P2
+
+Interpretar comandos por ações permitidas.
+
+Comando de IA só gera ações catalogadas e validadas pelo roteador local.
+
+RF-019 / P2
+
+Navegar por destino solicitado.
+
+Intent documentada abre mapa compatível após confirmação quando necessária.
+
+RF-020 / P2
+
+Fornecer mensagens de falha compreensíveis.
+
+Timeout/sem rede/sem serviço não ocasionam tela vazia nem operação incorreta.
+
+RF-021 / P2
+
+Suportar seleção de voz.
+
+Motor/voz instalado identificado; sem depender de voz proprietária não licenciada.
+
+RF-022 / P2
+
+Gerar logs técnicos locais mínimos.
+
+Diagnóstico de erro sem registrar transcrições, coordenadas e dados pessoais por padrão.
+
+RF-023 / P3
+
+Disponibilizar leitura diagnóstica externa.
+
+Leitura passiva validada, com fonte e qualidade de dados identificadas.
+
+RF-024 / P3
+
+Permitir configuração de perfis OEM.
+
+Perfis não concedem privilégios; capacidades desconhecidas permanecem desabilitadas.
+
+Regra de evolução: P2 (Core, IA e navegação inteligente) não será priorizada em dispositivo real enquanto RF-003, RF-004, RF-005 e RF-006 não estiverem aceitos. Pode, entretanto, ser desenvolvida e testada em emulador ou bancada paralelamente.
+
+6. Requisitos não funcionais (RNF)
+
+ID
+
+Propriedade exigida
+
+Medição ou evidência
+
+RNF-01
+
+Segurança automotiva
+
+Nenhuma regressão OEM nos testes T03–T05, T08, T10 e T15.
+
+RNF-02
+
+Recuperabilidade
+
+Caminho de retorno OEM documentado e demonstrado no hardware.
+
+RNF-03
+
+Segurança Android
+
+Permissões mínimas, ponte JS limitada, conteúdo local confiável, sem comandos remotos arbitrários.
+
+RNF-04
+
+Disponibilidade local
+
+Interface/atalhos funcionam com modo avião ou sem serviço de dados.
+
+RNF-05
+
+Resiliência de rede
+
+Resposta a timeout, API fora do ar, token inválido ou conexão intermitente.
+
+RNF-06
+
+Tempo de resposta
+
+Coletar métricas de abertura, retorno, fala e uso de memória no aparelho. Metas numéricas só após linha de base.
+
+RNF-07
+
+Consumo de bateria
+
+Não manter serviço, localização ou microfone em execução sem justificativa e medição.
+
+RNF-08
+
+Interação segura
+
+Botões legíveis, ações rápidas, modo condução simplificado; sem vídeo ou teclado livre para motorista.
+
+RNF-09
+
+Privacidade
+
+Sem envio de voz/localização à Core sem informação adequada e ativação da função.
+
+RNF-10
+
+Compatibilidade
+
+Testes por versão Android, WebView, MCU e firmware real, sem assumir padrões genéricos.
+
+RNF-11
+
+Auditabilidade
+
+Build reproduzível, versões de dependências e resultados de teste associados a cada release.
+
+RNF-12
+
+Manutenibilidade
+
+Módulos com contrato explícito, testes automatizados e regressão OEM obrigatória.
+
+7. Interface, telas e comportamento de uso
+
+
+
+Interface demonstrativa da versão 0.1, não conectada à câmera real.
+
+O design de referência é 1024 × 600 em paisagem, já exercitado no navegador, mas ainda não confirmado como resolução física da central. Evitar pressupor densidade de pixels ou proporções exatas; validar wm size, wm density, área útil e barras de sistema. O estilo será retrô/cyberpunk anos 1990, sem sacrificar legibilidade e velocidade de interação.
+
+7.1 Mapa de telas
+
+Inicialização/Splash: logomarca, diagnóstico de serviços e entrada para modo de recuperação. A mensagem falada de boas-vindas só deve ocorrer quando áudio estiver disponível e não houver chamada ou áudio crítico em andamento.
+
+HOME principal: avatar Harumi, relógio, estado de conectividade, módulos Maps, Mídia, 360°, Voz e Configurações. Não exibir telemetria não validada como se fosse real.
+
+Assistente: botão de microfone, texto reconhecido com indicação de provedor, resposta curta, status da Core e cancelamento.
+
+Navegação: destinos favoritos e botão para abrir aplicativo nativo compatível. A Harumi não precisa desenhar o mapa dentro da WebView na MVP.
+
+Mídia: atalhos para app OEM, controle de reprodução apenas quando API oficial e permissões permitirem.
+
+Câmeras: botão 360° abre app de fábrica quando suportado. A tela de ré é inteiramente OEM, não uma página Harumi.
+
+Configurações técnicas: versão do app, mapa de capacidades, apps associados, diagnósticos, opções de privacidade, seleção HOME OEM.
+
+Erro/recuperação: mensagem explícita, retry seguro e atalho para configurações do Android; sem ocultar os controles de fábrica.
+
+7.2 Fluxos de experiência
+
+F-START — Ignição / retomada: Android/MCU inicializam → HOME escolhida conforme firmware → Harumi carrega interface local → consulta preferências → mostra capacidades verificadas → habilita Core se a rede permitir. A Harumi não assume que recebe BOOT_COMPLETED nem que sua Activity nasce a cada acionamento de ACC.
+
+F-REV — Engatar ré: transição é controlada por OEM/MCU, sem intervenção da Harumi → imagem real da câmera deve obter a prioridade prevista pelo fabricante → ao encerrar, Android retorna ao estado normal. Se o vídeo OEM depender do launcher original, a incompatibilidade precisa ser tratada como bloqueio arquitetural.
+
+F-360 — Exibir 360°: toque em 360° → consultar capacidade → abrir aplicativo OEM exportado (se possível) → caso contrário, informar que a função deve ser acessada pelo sistema original. Não apresentar simulação como visão real.
+
+F-VOICE — “Harumi, abrir mapas”: toque no microfone → provedor de STT devolve texto → roteador local classifica ação permitida → solicita NAV.open() → adaptador abre app Android associado. Comandos desconhecidos retornam uma mensagem, sem execução de ação implícita.
+
+F-CORE — Pedido complexo: toque → transcrição → contrato da API Core (quando disponível) → resposta estruturada → verificação de ação contra lista de capacidades → confirmação contextual quando aplicável → execução do adaptador nativo ou resposta apenas textual. A Core não recebe autoridade para executar operações Android arbitrárias.
+
+F-OFFLINE — Sem Internet: tela HOME e apps locais continuam acessíveis; IA remota e alguns serviços de mapa/voz indicam indisponibilidade. Não exibir “IA offline pronta” sem motor local de fato testado.
+
+7.3 Segurança de uso e acessibilidade
+
+A tela deve manter alto contraste e botões grandes; o tamanho de alvo será definido em dp depois de medir densidade e distância de operação. Evitar animações em excesso, menus profundos, texto longo e digitação durante a condução. O módulo de voz pode reduzir toques, mas não deve mascarar falhas. Aplicar princípios de redução de distração do Android for Cars como referência de UX; a central ZK aftermarket não deve ser presumida Android Automotive OS.
+
+8. Módulos de software e interfaces propostas
+
+8.1 Estrutura de pacotes (meta v0.2–v0.4)
+
+app/src/main/java/com/harumi/autoos/
+├── MainActivity.java           # ciclo de vida e host da UI
+├── ui/
+│   ├── HarumiWebViewHost.java  # origem local, CSP e navegação
+│   └── UiStatePublisher.java   # atualizações seguras para UI
+├── bridge/
+│   ├── HarumiBridge.java       # superficie minima de comandos
+│   ├── BridgeCommand.java      # parser/validacao de tipos
+│   └── BridgeResponse.java
+├── domain/
+│   ├── ModuleRouter.java      # orquestrador e allowlist
+│   ├── CapabilityRegistry.java
+│   ├── HarumiState.java
+│   └── CommandPolicy.java
+├── oem/
+│   ├── OemAppGateway.java
+│   ├── Camera360OemAdapter.java
+│   ├── DeviceProfileCollector.java
+│   └── AppAssignmentStore.java
+├── voice/
+│   ├── SpeechGateway.java
+│   ├── TtsGateway.java
+│   └── VoicePrivacyPolicy.java
+├── core/                     # NAO IMPLEMENTADO NA v0.1
+│   ├── CoreApiClient.java
+│   ├── CoreRequest.java
+│   └── CoreResponseValidator.java
+├── navigation/
+│   └── NavigationGateway.java
+├── diagnostics/              # SOMENTE EM FASE POSTERIOR
+│   └── PassiveTelemetryGateway.java
+└── security/
+    ├── TrustedOrigins.java
+    ├── EndpointPolicy.java
+    └── RedactedLogger.java
+
+A estrutura é proposta, não está presente integralmente no ZIP. A separação busca permitir testes unitários sem exigir MCU, navegador de mapas ou Harumi Core real. O código original continuará funcional durante a extração de módulos; mudanças de tecnologia devem ser avaliadas em decisão de arquitetura separada.
+
+8.2 Responsabilidades e contratos principais
+
+ModuleRouter: recebe comandos da UI/voz/Core, valida identificador e parâmetros, consulta CapabilityRegistry e delega ao adaptador autorizado. Nunca executa comandos shell ou startActivity() com pacote arbitrário recebido de rede.
+
+OemAppGateway: lista e abre Activities exportadas/visíveis; confere se o app ainda está instalado; captura falhas sem derrubar HOME. Restringir categorias a NAV, MUSIC, CAMERA360 no início.
+
+CapabilityRegistry: mantém capacidade observada, data/versão do teste, fonte da observação e motivo da indisponibilidade. Não marcar câmera 360° como compatível porque existe um ícone ou porque o vendedor anuncia o recurso.
+
+SpeechGateway / TtsGateway: abstraem fornecedores e versões; em v0.1, STT por RecognizerIntent e fala por TextToSpeech. Uma voz própria poderá surgir depois, mediante motor local/serviço com licenças e recursos compatíveis.
+
+CoreApiClient: futuro cliente nativo HTTPS com autenticação, timeouts, controle de concorrência e resposta tipada; não colocar tokens no HTML/JavaScript da WebView.
+
+PassiveTelemetryGateway: futuro adaptador de leitura, desconectado por padrão; devolve unidade, timestamp, fonte e status de validade; não contém operações de escrita em ECU.
+
+8.3 Contratos Java ilustrativos (não implementados)
+
+public interface CapabilityRegistry {
+    CapabilityStatus status(String capabilityId);
+}
+
+public interface OemAppGateway {
+    LaunchResult openConfiguredModule(String moduleId);
+}
+
+public interface CommandRouter {
+    CommandResult dispatch(AllowedCommand command);
+}
+
+public interface PassiveTelemetryGateway {
+    TelemetrySnapshot readSnapshot(); // Somente leitura, se suportado
+}
+
+Esses contratos são pontos de projeto; CapabilityStatus, LaunchResult, AllowedCommand e TelemetrySnapshot devem ser criados como tipos explícitos e testáveis, sem expor APIs Android diretamente à WebView.
+
+8.4 Catálogo de comandos locais permitido (v0.2)
+
+Comando
+
+Emissor permitido
+
+Efeito permitido
+
+apps.open.nav
+
+UI / voz / Core validada
+
+Abre app NAV previamente associado.
+
+apps.open.music
+
+UI / voz / Core validada
+
+Abre app MUSIC previamente associado.
+
+apps.open.camera360
+
+UI / voz / Core validada
+
+Abre app OEM 360° se capacidade confirmada.
+
+voice.listen
+
+Toque consciente do usuário
+
+Solicita STT ao sistema.
+
+voice.speak
+
+UI / Core validada
+
+Fala texto limitado, sem dados sensíveis por padrão.
+
+settings.open.android
+
+UI com ação explícita
+
+Abre Configurações Android, quando disponível.
+
+settings.open.home
+
+UI com ação explícita
+
+Abre seletor HOME.
+
+device.read.basic
+
+UI de diagnóstico
+
+Devolve informações não sensíveis permitidas.
+
+Negados explicitamente: shell.exec, adb.exec, firmware.flash, mcu.write, ecu.write, camera.reconfigure, settings.secure.write, package.uninstall, input.inject e qualquer ação não registrada. Exemplos são nomes conceituais para uma política de negação, não endpoints existentes.
+
+9. Comunicação interna e Harumi Core
+
+A arquitetura futura deve usar roteamento centralizado de mensagens tipadas. A UI não chama diretamente módulos de navegação, áudio ou diagnóstico; todos os pedidos passam pelo domínio que valida a ação e a capacidade. A comunicação interna pode começar como chamadas de interfaces Java e eventos locais em memória; não é necessário introduzir microsserviços ou um broker de mensagens no Android para a primeira versão.
+
+9.1 Contrato de evento UI → Android (proposta)
+
+{
+  "schemaVersion": 1,
+  "requestId": "f24e0ef4-06b8-4ad8-bcc1-4fa87a2c60cd",
+  "type": "apps.open.nav",
+  "payload": {},
+  "origin": "LOCAL_UI"
+}
+
+O roteador deverá validar: versão do esquema, type na allowlist, formato/limite de parâmetros, capacidade disponível, origem e confirmação quando exigida. Respostas devem incluir requestId, status (OK, UNAVAILABLE, REJECTED, ERROR) e mensagem de erro sem detalhes sensíveis. A v0.1 ainda possui métodos JavaScript individuais; a migração para envelope é futura e deverá manter compatibilidade durante a transição.
+
+9.2 Contrato Harumi Core → app (proposta, não existente)
+
+Transporte: HTTPS com autenticação configurada no código nativo. Endpoint ilustrativo: POST /v1/assistant/interpret; caminho e hospedagem definitivos ainda não definidos. O cliente envia conteúdo mínimo necessário, após ciência/ação do usuário. Não transmitir por padrão lista de aplicativos, localização precisa, contatos, histórico de viagens nem áudio bruto.
+
+Requisição conceitual:
+
+{
+  "requestId": "b42b1e5c-1240-458e-a2ae-5861a57ade46",
+  "locale": "pt-BR",
+  "input": {"kind": "text", "value": "Abrir o mapa"},
+  "capabilities": ["apps.open.nav", "apps.open.music"]
+}
+
+Resposta conceitual:
+
+{
+  "requestId": "b42b1e5c-1240-458e-a2ae-5861a57ade46",
+  "speechText": "Vou abrir o mapa.",
+  "action": {
+    "type": "apps.open.nav",
+    "payload": {},
+    "requiresConfirmation": false
+  }
+}
+
+O campo requiresConfirmation não tem autoridade final: a política local decide se confirmação é obrigatória. Rejeitar resposta com ação fora da allowlist, erro de esquema, resposta duplicada, requestId diferente, prazo vencido ou contexto inválido. A Core nunca envia uma classe Java/Android, uma URI arbitrária de componente, um script nem parâmetros de ECU. Um texto de IA não é uma instrução executável.
+
+9.3 Estratégia offline e falhas
+
+Offline seguro: comandos simples já mapeados podem ser tratados por regras locais (p.ex., abrir mapas e abrir música). Isso não é um LLM offline.
+
+Sem rede: tratar como CORE_UNAVAILABLE, preservar interface e adaptar a fala de erro. Sem reconexão em loop agressivo que drene bateria.
+
+Timeout: primeiro definir política configurável (tempo de conexão e resposta) e aferir empiricamente. Respostas tardias devem ser descartadas se o usuário iniciou outra tarefa.
+
+Retentativas: apenas em operações idempotentes; não repetir comando com efeito externo sem controlar duplicidade.
+
+Segredos: tokens em armazenamento nativo adequado (p.ex., Android Keystore e mecanismo de proteção associado); nunca no HTML, URLs ou repositório.
+
+10. Política de privacidade, segurança e superfície de ataque
+
+10.1 Modelo de ameaças mínimo
+
+Ameaça
+
+Risco
+
+Mitigação obrigatória
+
+XSS ou navegação maliciosa na WebView
+
+Chamada indevida à ponte nativa.
+
+Conteúdo local confiável; origem estrita; CSP; API mínima; sem HTML remoto misturado.
+
+Resposta não confiável da IA
+
+Comando inesperado, abertura de app ou vazamento.
+
+Esquema e allowlist locais, validação de parâmetros, confirmação onde couber.
+
+Dependência de app OEM oculto
+
+Falha de câmera 360° ou funções originais.
+
+Inventário e testes reais; fallback para OEM; não forçar Activity privada.
+
+Conexão com serviço falso
+
+Exposição de dados ou instruções manipuladas.
+
+TLS, autenticação, validação de endpoint, segregação de debug/release.
+
+Excesso de telemetria/log
+
+Coleta desnecessária de trajetos, voz ou informações do aparelho.
+
+Não armazenar por padrão; redigir logs; retenção definida antes de habilitar.
+
+Falha de ciclo de vida
+
+Tela travada, boot loop, consumo de bateria.
+
+Recuperação OEM; testes de suspensão/retomada; sem serviços persistentes prematuros.
+
+Pacote malicioso fingindo ser app de mapas
+
+Abertura de destino indevido.
+
+Associação explícita por usuário e validação da Activity/exportação.
+
+10.2 Regras específicas do WebView
+
+A v0.1 usa addJavascriptInterface com HTML local, o que exige cautela. A documentação Android alerta que a ponte nativa é acessível ao JavaScript do WebView, inclusive em frames carregados. Antes de liberar qualquer rede no aplicativo, adotar WebViewAssetLoader para os recursos locais, bloquear navegação e redirecionamentos não autorizados e considerar canais de mensagem com validação explícita de origem para futuras funções sensíveis. A WebView de interface não deve carregar páginas web de terceiros. URLs externas deverão ser abertas por app/navegador separado, sem a ponte Harumi.
+
+A futura permissão INTERNET, se aprovada para a Core, deverá ser utilizada no cliente nativo isolado; não significa liberar requisições da WebView para endereços arbitrários. A configuração de rede deve negar tráfego em texto claro em produção e usar exceções de certificados apenas em builds de debug controlados.
+
+10.3 Voz e dados pessoais
+
+Na v0.1, RecognizerIntent pode delegar a transcrição a um provedor remoto; não se pode afirmar que o reconhecimento é offline. Antes do uso real, verificar fornecedor instalado, termos, funcionamento sem dados móveis e política de privacidade. A escuta deve ser iniciada de forma consciente, com sinal visual claro. Uma futura palavra de ativação permanente demanda projeto próprio e análise das restrições Android sobre microfone/serviços em segundo plano.
+
+10.4 Medidas mínimas para releases
+
+Revisar manifesto a cada alteração de permissão; não instalar certificados de teste em release; desabilitar logs detalhados; assinar o APK de produção; guardar chaves fora do repositório; não habilitar depuração remota da WebView em release; proteger backups; gerar SBOM ou inventário de dependências; testar dependências e erros de rede; jamais afirmar que o sistema é seguro só por não ter root.
+
+11. Configuração, perfil OEM e persistência
+
+11.1 Perfil de dispositivo (esquema de trabalho)
+
+{
+  "profileVersion": 1,
+  "manufacturer": "PENDENTE",
+  "model": "PENDENTE",
+  "androidVersion": "PENDENTE",
+  "apiLevel": null,
+  "soc": "PENDENTE",
+  "mcuFirmware": "PENDENTE",
+  "webviewVersion": "PENDENTE",
+  "displayPx": null,
+  "displayDensityDpi": null,
+  "capabilities": {
+    "reverseCameraOem": "UNKNOWN",
+    "surround360Oem": "UNKNOWN",
+    "homeSwitch": "UNKNOWN",
+    "oemSleepWake": "UNKNOWN"
+  },
+  "validationRecord": null
+}
+
+Os valores PENDENTE são placeholders. Não preencher sem observação. capabilities só será marcada AVAILABLE se houver evidência associada à versão de firmware testada; uma atualização OEM invalida a homologação anterior até repetição dos testes relevantes.
+
+11.2 Persistência
+
+v0.1: SharedPreferences privadas para associação de três módulos. v0.2: manter o formato até migração versionada; armazenar capacidades e estado de onboarding com esquema explicitamente versionado; permitir reset e exportação de um relatório técnico sem identificadores desnecessários. v0.3+: credenciais da Core em armazenamento protegido por mecanismos do Android; não mover segredos para preferências simples nem para JS.
+
+11.3 Observabilidade e diagnóstico
+
+Eventos locais propostos: launcher.started, launcher.resumed, app.opened, app.open.failed, voice.provider.unavailable, core.timeout, oem.camera.test.failed (este último registrado manualmente no teste, não inferido da marcha ré). Não persistir por padrão transcrições completas, números de telefone, coordenadas, conversas, tokens ou dados de outros aplicativos.
+
+12. Ambiente de desenvolvimento e build
+
+12.1 Configuração inicial do projeto EXISTENTE
+
+Plataforma: Android tradicional da central aftermarket. Não presumir Android Auto/Android Automotive OS.
+
+Código: Java 17, HTML/CSS/JS local. applicationId atual: com.harumi.autoos.
+
+Build atual: AGP 8.6.1, Gradle 8.7 (versão mínima compatível com AGP 8.6), JDK 17, compileSdk 35, targetSdk 34, minSdk 26.
+
+O ZIP original não contém os arquivos do Gradle Wrapper, portanto gradlew ainda não funcionará até sua inclusão.
+
+O ambiente de desenvolvimento preferido é Windows 11; os exemplos abaixo pressupõem PowerShell. Em Windows com Android Studio, instalar Android SDK Platform 35 e as ferramentas SDK necessárias.
+
+12.2 Procedimento reproduzível proposto
+
+Extrair Harumi_Auto_OS_v0.1_AndroidStudio.zip e abrir a pasta harumi-auto-os no Android Studio.
+
+Conferir o JDK configurado para Gradle (17) e a instalação do SDK 35. Instalar Gradle 8.7 confiável ou usar mecanismo apropriado no Android Studio para gerar/versionar o Wrapper oficial.
+
+Executar o Gradle Sync e corrigir apenas erros reais de compilação; não trocar AGP indiscriminadamente.
+
+Após o Wrapper existir e ter sido versionado, executar no terminal da raiz:
+
+.\gradlew.bat --version
+.\gradlew.bat :app:assembleDebug
+.\gradlew.bat :app:testDebugUnitTest
+
+Verificar se app\build\outputs\apk\debug\app-debug.apk foi produzido. Instalar primeiro em emulador/tablet, e não selecionar como HOME antes do teste de recuperação.
+
+Quando um dispositivo Android de teste estiver conectado via ADB e devidamente autorizado:
+
+adb devices
+adb install -r app\build\outputs\apk\debug\app-debug.apk
+
+Os comandos acima constituem roteiro, não evidência de build executado. Se o teste unitário não existir ou ainda não tiver casos, o ticket de infraestrutura deverá adicioná-los, em vez de considerar ausência de teste como aprovação.
+
+12.3 Coleta inicial segura de hardware (quando ADB autorizado)
+
+adb devices
+adb shell getprop ro.product.manufacturer
+adb shell getprop ro.product.model
+adb shell getprop ro.hardware
+adb shell getprop ro.build.version.release
+adb shell getprop ro.build.version.sdk
+adb shell wm size
+adb shell wm density
+adb shell pm list packages
+
+Coletar versão do app de câmeras e da MCU preferencialmente pelo menu de informações do fabricante. Não assumir que getprop forneça a MCU. Antes de compartilhar listagem de pacotes ou capturas, remover identificadores pessoais, aplicativos de terceiros e dados não necessários ao diagnóstico. Caso ADB esteja desativado ou bloqueado, não forçar desbloqueio de bootloader; utilizar a tela de configurações do fabricante.
+
+12.4 Fluxo de Git e proteção de releases
+
+Branch principal protegida; branches feature/HAO-xxx; pull request com descrição, impacto em permissões, testes e plano de rollback; assinatura e versão por release; tags v0.1.0, v0.2.0 etc. Arquivos sensíveis (local.properties, keystore, segredos de API, logs com transcrição) não entram no Git. Fixar e verificar dependências e, quando viável, produzir checksums dos artefatos distribuidos.
+
+13. Plano de testes e homologação
+
+13.1 Abordagem
+
+Os testes de interface no Chrome/Playwright, realizados no protótipo, são úteis para regressão visual, mas não validam permissões, integração com Android, MCU, áudio OEM, câmeras ou comportamento após ACC. Dividir a homologação em três níveis:
+
+N1 — Código/emulador: build limpo, testes unitários, análise estática, navegação UI e mocks de módulos.
+
+N2 — Bancada Android: tela real ou dispositivo de teste, escolha HOME, abertura/retorno de apps, áudio, STT e falta de rede.
+
+N3 — Multimídia instalada no Subaru: somente com veículo imobilizado e condições controladas; reproduzir cenários de câmera e energia OEM antes e depois da instalação.
+
+13.2 Matriz de testes de aceitação
+
+Teste
+
+Descrição
+
+Aprovação esperada
+
+Nível
+
+T01
+
+Instalação e abertura
+
+APK instala e inicia como app comum.
+
+N1/N2
+
+T02
+
+Seleção como HOME
+
+Seletor permite escolher Harumi ou registra bloqueio OEM.
+
+N2/N3
+
+T03
+
+Reversão ao HOME original
+
+Retorno demonstrado, sem root/flash.
+
+N3 / gate P0
+
+T04
+
+Engatar/sair da ré
+
+Câmera OEM aparece automaticamente e se encerra corretamente.
+
+N3 / gate P0
+
+T05
+
+Câmeras 360°
+
+Imagem, modos, calibração e app OEM permanecem funcionais.
+
+N3 / gate P0
+
+T06
+
+Abrir mapas
+
+App escolhido abre e retorna sem duplicação indevida.
+
+N2/N3
+
+T07
+
+Música e rádio
+
+Reprodução, volume e troca de app preservados.
+
+N2/N3
+
+T08
+
+Bluetooth e chamada
+
+Entrada/saída de chamada e foco de áudio normais.
+
+N3 / gate P0
+
+T09
+
+Boot frio
+
+Sistema inicia com tempo e interface aceitáveis, comparados à linha de base.
+
+N3
+
+T10
+
+ACC / suspensão / retomada
+
+Sem loop, tela preta persistente ou descarga anômala.
+
+N3 / gate P0
+
+T11
+
+Síntese de voz pt-BR
+
+TTS funciona ou informa engine ausente.
+
+N2/N3
+
+T12
+
+Reconhecimento de fala
+
+Captura por toque, retorno/cancelamento e provedor ausente tratados.
+
+N2/N3
+
+T13
+
+Controles físicos e brilho
+
+Comportamento OEM preservado.
+
+N3
+
+T14
+
+4G, Wi-Fi e GPS
+
+Apps originais funcionam; sem regressão imputável à Harumi.
+
+N2/N3
+
+T15
+
+Crash forçado da Harumi
+
+Recuperação possível; câmeras OEM continuam operáveis.
+
+N3 / gate P0
+
+T16
+
+Interface 1024 × 600
+
+Sem cortes/rolagem indesejada no ambiente de referência.
+
+N1/N2
+
+T17
+
+Tela real e densidade
+
+Layout preserva ações visíveis e áreas de toque.
+
+N2/N3
+
+T18
+
+App OEM ausente/oculto
+
+Erro controlado, sem exceção não tratada.
+
+N1/N2
+
+T19
+
+Falta de Internet
+
+HOME e atalhos locais funcionam.
+
+N1/N2
+
+T20
+
+Core fora do ar
+
+Timeout, cancelamento, fallback e sem comando inesperado.
+
+N1/N2
+
+T21
+
+Comando malformado da Core
+
+Roteador rejeita ação desconhecida ou campo inválido.
+
+N1
+
+T22
+
+URL/iframe externo na WebView
+
+Navegação/ponte nativa não expostas à origem não confiável.
+
+N1
+
+T23
+
+Reinstalação/atualização
+
+Preferências válidas, rollback previsto e sem perda de HOME OEM.
+
+N2/N3
+
+T24
+
+Áudio durante chamada e ré
+
+Saudação/IA não interrompem comunicação nem interface OEM.
+
+N3
+
+T25
+
+Sessões prolongadas
+
+Verificar memória, temperatura, estabilidade e bateria.
+
+N2/N3
+
+T26
+
+Interface externa de diagnóstico
+
+Somente leitura, unidades e dados validados; sem atuadores.
+
+N3 futuro
+
+13.3 Gates de release
+
+G0 — Pronto para desenvolver: inventário e especificação rastreáveis; código em Git; tarefas definidas. G1 — Pronto para instalar em bancada: build em Android Studio, teste unitário mínimo, manifesto revisado, recuperação demonstrada em emulador/tablet. G2 — Pronto para HOME experimental na central: T03, T04, T05, T08, T10 e T15 aprovados no mesmo hardware e firmware, com teste de ré/360 OEM antes e depois. G3 — Pronto para incorporar IA: G2 aprovado + política de permissões, CoreClient e testagem de ações inválidas. G4 — Pronto para uso cotidiano: sessões prolongadas, métricas de estabilidade e plano de contingência efetivamente demonstrados.
+
+13.4 Evidência de testes
+
+Cada caso deve registrar: ID, data, modelo/firmware da central, versão do aplicativo, versão Android/WebView/MCU quando disponível, executor, passos, resultado observado, esperado, vídeo/captura opcional sem dados sensíveis e status PASS, FAIL, BLOCKED ou NOT_RUN. Nunca registrar PASS em teste não executado.
+
+14. Matriz de riscos e decisões técnicas
+
+Risco
+
+Gravidade
+
+Sinal de ocorrência
+
+Resposta
+
+Câmera de ré depende do launcher OEM
+
+Crítica
+
+Ré não sobrepõe Harumi; imagem atrasada/inexistente.
+
+Não usar Harumi como HOME. Preservar acesso OEM.
+
+360° inacessível externamente
+
+Alta
+
+App OEM não exporta Activity ou requer serviço de fábrica.
+
+Manter função na interface OEM; não fazer integração invasiva.
+
+HOME OEM bloqueada pelo fabricante
+
+Alta
+
+Seletor não permite mudança ou reinicia launcher original.
+
+Operar Harumi como aplicativo comum; não modificar ROM.
+
+Ciclo ACC/sleep mata apps de terceiros
+
+Alta
+
+Harumi não retorna ou inicia várias instâncias.
+
+Instrumentar lifecycle; adaptar sem serviço persistente desnecessário.
+
+WebView desatualizada na central
+
+Média/alta
+
+Recursos CSS/JS quebram, crash e fonte ausente.
+
+Teste na versão real; polyfills e simplificação visual seletiva.
+
+STT indisponível ou envia áudio externamente
+
+Média/alta
+
+Sem engine offline ou demanda serviço de terceiros.
+
+Informar, pedir consentimento de uso e manter comando por toque.
+
+Core comprometida/indisponível
+
+Alta
+
+Respostas malformadas ou fora de prazo.
+
+Contratos restritos, autenticação, allowlist e fallback local.
+
+Falta de interface diagnóstica validada
+
+Média
+
+Scanner comum não consegue ler ECU do Subaru.
+
+Pesquisa física/técnica específica; deixar módulo desabilitado.
+
+Regressão de bateria/áudio
+
+Alta
+
+Corrente em repouso ou foco de áudio alterado.
+
+Benchmark antes/depois, bloquear release em caso de diferença relevante.
+
+14.1 Registro de decisões (ADRs)
+
+ADR-001 — Stock Android first (aceita): launcher sobre Android original; sem ROM/firmware.
+ADR-002 — Java/WebView preservados no MVP (aceita): refatorar a base existente antes de considerar Compose; evita reescrita prematura.
+ADR-003 — Vídeo OEM fora do processo Harumi (aceita): câmera de ré e 360° não são capturadas/compostas pela UI.
+ADR-004 — Core sem autoridade direta (aceita): todas as ações passam por roteador/allowlist local.
+ADR-005 — Integração 360° por Activity exportada (condicional): depende de confirmação na central.
+ADR-006 — Motor de voz próprio/hotword (adiada): exigir estudo de hardware, privacidade, bateria e restrições do Android.
+ADR-007 — Diagnóstico Subaru somente leitura (aceita como diretriz): habilitação condicionada à interface e documentação técnica.
+
+15. Roadmap de engenharia e backlog acionável
+
+15.1 Sprints por dependência (sem previsão artificial de prazo)
+
+Etapa A — Estabilização do protótipo (P0): repositório, build reproduzível, testes automatizados básicos, inventário real do dispositivo, recuperação do HOME OEM. Saída: aplicativo de bancada instalável e reversível.
+
+Etapa B — Integração OEM e homologação (P0): câmeras, áudio, chamadas, power lifecycle, atalhos e perfil MCU; aceitar ou bloquear candidatura HOME. Saída: relatório de compatibilidade com provas.
+
+Etapa C — Modularização/segurança (P1): extrair ponte/roteador/adaptadores, adotar WebViewAssetLoader, capacidades e logs mínimos. Saída: arquitetura estável com testes unitários e de ponte.
+
+Etapa D — Voz e experiência (P1): estados de microfone, TTS pt-BR, tratamentos de falha, UI de condução, gerenciamento de foco e áudio. Saída: voz acionada deliberadamente, sem escuta contínua por padrão.
+
+Etapa E — Harumi Core e navegação inteligente (P2): cliente HTTPS autenticado, parser seguro, política local, abertura de mapas e fallback. Saída: comandos estruturados e observáveis, não execução arbitrária.
+
+Etapa F — Diagnóstico passivo (P3): identificar interface do Subaru, desenvolver adaptador isolado e validar dados. Saída: leitura confiável ou bloqueio justificado, sem reprogramar o veículo.
+
+15.2 Tickets de implementação (prontos para GitHub Issues)
+
+Ticket
+
+Prioridade
+
+Entregável / Definition of Done
+
+HAO-001
+
+P0
+
+Registrar baseline v0.1, hash do ZIP, versões e status de testes.
+
+HAO-002
+
+P0
+
+Adicionar Gradle Wrapper confiável; assembleDebug reprodutível e APK versionado.
+
+HAO-003
+
+P0
+
+Criar coleta do perfil da central; preencher SoC/Android/MCU/apps com evidências.
+
+HAO-004
+
+P0
+
+Documentar e testar retorno ao launcher OEM sem root/flash.
+
+HAO-005
+
+P0
+
+Testar marcha ré com HOME OEM, Harumi app e Harumi HOME (se liberado).
+
+HAO-006
+
+P0
+
+Testar app 360°, Bluetooth, chamada, ACC/sleep e crash; relatório PASS/FAIL.
+
+HAO-007
+
+P1
+
+Extrair OemAppGateway e AppAssignmentStore da MainActivity, sem regressão.
+
+HAO-008
+
+P1
+
+Criar ModuleRouter, CapabilityRegistry e testes de allowlist.
+
+HAO-009
+
+P1
+
+Migrar ativos locais para WebViewAssetLoader; bloquear origem externa.
+
+HAO-010
+
+P1
+
+Criar tela de diagnóstico/recuperação e exportação sanitizada do perfil.
+
+HAO-011
+
+P1
+
+Refatorar STT/TTS por interfaces, erros e lifecycle; testar provedor ausente.
+
+HAO-012
+
+P1
+
+Adaptar a UI à densidade real, legibilidade e modos seguro/estacionado.
+
+HAO-013
+
+P2
+
+Implementar CoreApiClient nativo com HTTPS, token protegido e timeout.
+
+HAO-014
+
+P2
+
+Validar contrato Core; rejeitar ações arbitrárias e respostas repetidas/tardias.
+
+HAO-015
+
+P2
+
+Implementar NavigationGateway com intents documentadas e confirmações.
+
+HAO-016
+
+P2
+
+Adicionar testes de falta de rede, falha Core e retorno de apps.
+
+HAO-017
+
+P3
+
+Identificar protocolo diagnóstico e adaptar leitura passiva após homologação.
+
+HAO-018
+
+P3
+
+Homologação final, política de release, assinatura, backup/rollback e documentação de usuário.
+
+15.3 Ordem recomendada dos primeiros commits
+
+1. docs: registrar baseline 0.1 e evidencias de testes
+2. build: incluir Gradle Wrapper e validar assembleDebug
+3. test: adicionar smoke tests Java + manifesto + UI
+4. refactor: separar AppAssignmentStore e OemAppGateway
+5. security: introduzir WebViewAssetLoader e allowlist de origem
+6. feat: introduzir DeviceProfileCollector / CapabilityRegistry
+7. docs(test): registrar homologacao camera/360/ACC no hardware
+
+Não iniciar pelo Core/LLM. O ganho de engenharia mais relevante é estabilizar o launcher e provar que as funções originais sobrevivem à sua presença.
+
+15.4 Definition of Done global
+
+Um ticket só está concluído com: código revisado, teste automatizado pertinente, testes manuais explicitados, arquivos de documentação atualizados, nenhuma permissão adicionada silenciosamente, regressão visual verificada e resultado compatível com gate de segurança aplicável. Funções pendentes não devem aparecer no painel como disponíveis ou medidas reais.
+
+16. Pendências que exigem dados do hardware real
+
+Modelo impresso na placa, número do produto, SoC, GPU e revisão de PCB.
+
+Versão efetiva do Android (não apenas string da interface OEM), API e WebView.
+
+Versão da MCU/firmware da central e caminho oficial para recuperação de configurações.
+
+Resolução, densidade, brilho e orientação nativa da tela instalada.
+
+Nome/versão do aplicativo 360°, existência de Activity exportada e tipo de processamento das câmeras.
+
+Modo como o OEM exibe a câmera de ré: Activity, serviço, sobreposição, alternância de entrada de vídeo ou outra via.
+
+Comportamento de ACC, desligamento, standby e reinício após corte de alimentação.
+
+Controles físicos/volante (se existentes), Bluetooth, rádio, amplificador e foco de áudio.
+
+Motor STT/TTS instalado e disponibilidade pt-BR/local.
+
+Interface de diagnóstico efetiva do Subaru: conector, protocolo e adaptador apropriado.
+
+Sem esses itens, não posso confirmar a viabilidade de HOME substituta nem a integração 360° na unidade específica. A implementação do UI/roteador pode começar; a homologação do comportamento automotivo não.
+
+17. Primeiro pacote de desenvolvimento recomendado
+
+Entregar como primeiro marco: (i) APK debug compilável e reproduzível; (ii) Harumi executando como app comum; (iii) botão de retorno à HOME OEM; (iv) perfil de dispositivo com campos comprovados; (v) relatório T01/T03/T04/T05/T08/T10/T15; (vi) código do roteador e adaptadores com testes básicos; (vii) inventário das dependências e permissões. O marco só autoriza a alteração permanente da HOME se os gates físicos estiverem aprovados.
+
+18. Referências técnicas e evidências
+
+18.1 Fontes oficiais Android
+
+Android Developers — Intent, categorias HOME/LAUNCHER
+
+Android Developers — Settings.ACTION_HOME_SETTINGS
+
+Android Developers — Intents e filtros
+
+Android Developers — Visibilidade de pacotes
+
+Android Developers — Carregamento local e WebViewAssetLoader
+
+Android Developers — Riscos das pontes JavaScript
+
+Android Developers — RecognizerIntent
+
+Android Developers — Restrições de serviços em segundo plano/microfone
+
+Android Developers — AGP 8.6 e compatibilidade
+
+Android Developers — Intents comuns (mapas)
+
+Android Developers — Configuração de segurança da rede
+
+Android Developers — Princípios de UX veicular (referência, não certificação AAOS)
+
+Android Developers — Guia de arquitetura de aplicativo
+
+18.2 Evidências do repositório de partida
+
+Harumi_Auto_OS_v0.1_AndroidStudio.zip — app/src/main/java/com/harumi/autoos/MainActivity.java; AndroidManifest.xml; Gradle; recursos da UI.
+
+harumi-auto-os/README.md — estado do protótipo, requisitos locais de build, funcionalidades existentes e limitações.
+
+harumi-auto-os/docs/arquitetura.md — separação de domínios OEM/Harumi e política de câmera.
+
+harumi-auto-os/docs/plano-de-testes.md e docs/validacao-v0.1.md — testes de navegador e pendências de homologação física.
+
+
+Conclusão técnica: o Harumi Auto OS deve evoluir como launcher e conjunto de módulos nativos reversíveis, executados sobre o Android de fábrica. O fator decisivo para a versão utilizável não é a complexidade da IA; é a aprovação demonstrável de câmera de ré, 360°, telefonia, energia e recuperação na central específica. A Harumi Core entra como serviço adicional, nunca como requisito para as funções OEM.
+
+Especificação técnica  •  02/11/2026    |    Página 

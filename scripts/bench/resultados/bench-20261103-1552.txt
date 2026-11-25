@@ -1,0 +1,159 @@
+== Harumi bench 03/11/2026 15:52 · aparelho emulator-5554
+Aparelho: V2309A · Android 14 · ABI x86_64 · núcleos 8
+Versão: versionName=0.3.15-dev.1
+
+-- Abertura a frio (3x): tela nativa (Android) e interface pronta (WebView + status)
+  rodada 1: Android 1340 ms · interface pronta 2408 ms
+  rodada 2: Android 1323 ms · interface pronta 2163 ms
+  rodada 3: Android 1406 ms · interface pronta 2255 ms
+
+-- Abrir app pela Harumi (Chrome) e Configurações de Wi-Fi: tempo medido pelo Android (Displayed)
+  catalog.open chrome: em primeiro plano em ~768 ms (medido pelo PC, inclui adb) · Android: sem registro
+  connection.wifi -: em primeiro plano em ~1168 ms (medido pelo PC, inclui adb) · Android: sem registro
+
+-- Conversa, IA, voz, Oi Harumi e painéis (pela interface)
+{
+ "quando": "2026-11-03T18:53:05.246Z",
+ "comandos_locais": [
+  {
+   "pergunta": "Abra o Spotify",
+   "primeira_palavra_ms": 356,
+   "voz_comeca_ms": 456,
+   "fim_ms": 6400,
+   "caracteres": 91,
+   "status_final": "Pronta para conversar · IA local",
+   "resposta": "Não encontrei um aplicativo de música nesta central. Use o rádio ou o Bluetooth da central."
+  },
+  {
+   "pergunta": "Como está o carro?",
+   "primeira_palavra_ms": 433,
+   "voz_comeca_ms": 533,
+   "fim_ms": 9650,
+   "caracteres": 147,
+   "status_final": "Pronta · diga “Oi Harumi”",
+   "resposta": "Sem adaptador de diagnóstico conectado. Não tenho leituras reais de motor, temperatura, bateria ou falhas, então não consigo avaliar o carro agora."
+  },
+  {
+   "pergunta": "Por favor, tudo bem?",
+   "primeira_palavra_ms": 456,
+   "voz_comeca_ms": 456,
+   "fim_ms": 3830,
+   "caracteres": 37,
+   "status_final": "Pronta · diga “Oi Harumi”",
+   "resposta": "Oi, Lucas! Tudo bem por aqui. E você?"
+  }
+ ],
+ "ia": [
+  {
+   "pergunta": "Qual a capital do Paraná?",
+   "primeira_palavra_ms": 3230,
+   "voz_comeca_ms": 35606,
+   "fim_ms": 62793,
+   "caracteres": 254,
+   "status_final": "Pronta para conversar · IA local",
+   "resposta": "A capital do Paraná é Curitiba, mas o estado tem três capitais reais: São Paulo, Rio de Janeiro e Curitiba. A resposta correta para \"qual a capital\" depende da "
+  },
+  {
+   "pergunta": "Me dê uma dica para economizar combustível.",
+   "primeira_palavra_ms": 3860,
+   "voz_comeca_ms": 32196,
+   "fim_ms": 49950,
+   "caracteres": 179,
+   "status_final": "Pronta · diga “Oi Harumi”",
+   "resposta": "Use o \"brake\" (pneus) para frear suavemente e não acesse os pontos de alta velocidade. O ideal é usar apenas o motor quando estiver em movimento, pois o consumo"
+  },
+  {
+   "pergunta": "Explique em poucas palavras o que é um motor boxer.",
+   "primeira_palavra_ms": 5630,
+   "voz_comeca_ms": 33743,
+   "fim_ms": 42583,
+   "caracteres": 140,
+   "status_final": "Pronta para conversar · IA local",
+   "resposta": "O motor boxer é um tipo de motor que usa as quatro válvulas do cilindro para gerar movimento, diferindo dos motores a gasolina tradicionais."
+  },
+  {
+   "pergunta": "Quanto é 15 vezes 12?",
+   "primeira_palavra_ms": 5893,
+   "voz_comeca_ms": 18453,
+   "fim_ms": 21800,
+   "caracteres": 27,
+   "status_final": "Pronta · diga “Oi Harumi”",
+   "resposta": "15 vezes 12 resulta em 180."
+  },
+  {
+   "pergunta": "Obrigado, Harumi.",
+   "primeira_palavra_ms": 420,
+   "voz_comeca_ms": 523,
+   "fim_ms": 3303,
+   "caracteres": 32,
+   "status_final": "Pronta · diga “Oi Harumi”",
+   "resposta": "Por nada, Lucas! Estou por aqui."
+  }
+ ],
+ "outros": {
+  "oi_harumi": {
+   "voz_comeca_ms": 407,
+   "ouvindo_ms": 3084
+  },
+  "mapa_abre_com_tiles_ms": 97,
+  "atlas_abre_ms": 7,
+  "painel_apps_ms": 50
+ },
+ "navegacao": {
+  "busca_endereco": [
+   {
+    "q": "Avenida Higienópolis, Londrina",
+    "ms": 997,
+    "status": 200,
+    "resultados": 5
+   },
+   {
+    "q": "Catedral de Londrina",
+    "ms": 730,
+    "status": 200,
+    "resultados": 2
+   },
+   {
+    "q": "Aeroporto de Londrina",
+    "ms": 673,
+    "status": 200,
+    "resultados": 2
+   }
+  ],
+  "rota_com_manobras": [
+   {
+    "pontos": "-51.1630,-23.3105,-51.1561,-23.3040",
+    "ms": 833,
+    "status": 200,
+    "km": 1.4,
+    "min": 4,
+    "manobras": 5
+   },
+   {
+    "pontos": "-51.1630,-23.3105,-51.1300,-23.3290",
+    "ms": 270,
+    "status": 200,
+    "km": 4.7,
+    "min": 8,
+    "manobras": 14
+   },
+   {
+    "pontos": "-51.1630,-23.3105,-51.4600,-23.4200",
+    "ms": 337,
+    "status": 200,
+    "km": 41.9,
+    "min": 43,
+    "manobras": 19
+   }
+  ],
+  "rota_repetida_cache_ms": 0,
+  "painel_abre_ms": 0
+ }
+}
+
+-- Memória do app (com modelos carregados)
+  Native Heap        0        0        0        0        0   959768   952661     7106
+         Native Heap:        0                              0
+           TOTAL PSS:   627672            TOTAL RSS:   753456      TOTAL SWAP (KB):        0
+
+Resultado salvo em /c/Users/Aaaa/Documents/Codex/2026-11-02/bom-dia-tenho-u-5/Harumi Auto OS/scripts/bench/resultados/bench-20261103-1552.txt

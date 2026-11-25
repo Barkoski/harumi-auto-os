@@ -1,0 +1,26 @@
+[
+  {
+    "viewport": "2000x1200",
+    "home_streaming_dictation_panels": "PASS"
+  },
+  {
+    "viewport": "1280x720",
+    "home_streaming_dictation_panels": "PASS"
+  },
+  {
+    "viewport": "1024x600",
+    "home_streaming_dictation_panels": "PASS"
+  },
+  {
+    "viewport": "1024x520",
+    "home_streaming_dictation_panels": "PASS"
+  },
+  {
+    "viewport": "800x480",
+    "home_streaming_dictation_panels": "PASS"
+  },
+  {
+    "viewport": "390x844",
+    "home_streaming_dictation_panels": "PASS"
+  }
+]

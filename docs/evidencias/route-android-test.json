@@ -1,0 +1,7 @@
+{
+  "device": "API30 x86_64 WebView83; own bench 5556",
+  "real_route": "1.100 km / 14 h 57 min",
+  "street_tiles": 13,
+  "native_two_city_command": "PASS",
+  "offline_uncached_route_error_without_stale_geometry": "PASS"
+}

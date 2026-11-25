@@ -1,0 +1,25 @@
+{
+  "date": "2026-11-03",
+  "model": "Aikon Fóton F09-88256/360/G3",
+  "scope": "Manuais oficiais das linhas Fóton e Próton (2024), suporte Próton G3 e anúncio G3 de vendedor; não substitui inventário da unidade física",
+  "sources": [
+    {
+      "id": "foton-manual",
+      "label": "Manual oficial Aikon Fóton",
+      "url": "https://aikontechnology.com/wp-content/uploads/2024/05/Manual-Aikon-Foton.pdf"
+    },
+    {
+      "id": "g3-seller",
+      "label": "Anúncio F09-88256/G3 — composição do vendedor",
+      "url": "https://atecheletronica.com/shopping/multimidia-universal-aikon-foton-g3-8256gb-octacore-4g-9p-58211572449"
+    },
+    {
+      "id": "proton-manual",
+      "label": "Manual oficial Aikon Próton — comparação de linha",
+      "url": "https://aikontechnology.com/wp-content/uploads/2024/05/Manual-Aikon-Proton.pdf"
+    }
+  ],
+  "installation": "Nenhum app de terceiros foi instalado. Central física ausente; LDPlayer do usuário não operado. Integração de abertura, associação OEM e instalação pela loja preparada no APK.",
+  "gps": "Android LocationManager GPS_PROVIDER, sem chave de API de terceiros. GPS/GNSS não é serviço de mapa/rota. Não integrado nesta entrega.",
+  "official_android_gps": "https://developer.android.com/reference/android/location/LocationManager"
+}

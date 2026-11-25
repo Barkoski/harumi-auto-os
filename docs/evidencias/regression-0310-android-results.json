@@ -1,0 +1,24 @@
+[
+  {
+    "test": "Idle is a still frame from startup",
+    "status": "PASS"
+  },
+  {
+    "test": "First microphone grant starts capture after returning to foreground; character remains still",
+    "status": "PASS"
+  },
+  {
+    "test": "Actual LLM answers the exact typed phrase from user screenshot",
+    "status": "PASS",
+    "reply": "Harumi\nOlá, Lucas! Tudo bem, Harumi! Se o carro ainda estiver conectado, posso ajudar com o sistema de navegação ou ajustar a situação. Se não tiver acesso, então não posso avaliar o veículo.",
+    "seconds": 23.06
+  },
+  {
+    "test": "Character animates only during real TTS reply",
+    "status": "PASS"
+  },
+  {
+    "test": "End of answer returns character to a still frame",
+    "status": "PASS"
+  }
+]

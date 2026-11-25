@@ -1,0 +1,46 @@
+/* Privacidade: modo manobrista (classe hl-valet no body) e secao em Ajustes. Sem estilo inline (CSP). */
+
+/* ---- o que o modo manobrista esconde ---- */
+body.hl-valet #hl-dock [data-dock="harumi"],
+body.hl-valet #hl-dock [data-dock="trip"],
+body.hl-valet .hl-valet-hide,
+body.hl-valet #assistant,
+body.hl-valet #talk,
+body.hl-valet .hl-navcard-favs,
+body.hl-valet .hl-fav-edit,
+body.hl-valet .hl-fav-pair,
+body.hl-valet #hl-cards [data-page="trip"],
+body.hl-valet #hl-cards .hl-dots { display: none !important; }
+
+/* ---- botao fixo de saida ---- */
+.hl-priv-exit { position: fixed; right: 16px; bottom: calc(var(--ck-tab-h, 84px) + 12px); z-index: 90; min-height: 48px; padding: 0 20px; border-radius: 14px;
+  border: 1px solid var(--ck-stroke-hi, rgba(240,234,240,.18)); background: var(--ck-warn-bg, #5a4634); color: var(--ck-warn-text, #ffe9c9); font: inherit; font-size: 15px; cursor: pointer; }
+.hl-priv-exit[hidden], .hl-priv-dialog[hidden], .hl-priv *[hidden] { display: none; }
+
+/* ---- dialogo de PIN ---- */
+.hl-priv-dialog { position: fixed; inset: 0; z-index: 100; display: flex; align-items: center; justify-content: center; background: rgba(20, 16, 22, .62); }
+.hl-priv-box { display: flex; flex-direction: column; gap: 12px; width: min(420px, 90vw); padding: 22px; border-radius: 18px; background: var(--ck-panel, #2d2530);
+  border: 1px solid var(--ck-stroke-hi, rgba(240,234,240,.18)); color: var(--ck-text, #f0eaf0); }
+.hl-priv-box h3 { margin: 0; font-size: 18px; font-weight: 600; }
+.hl-priv-box input, .hl-priv-field input { min-height: 48px; padding: 0 14px; border-radius: 12px; font: inherit; font-size: 18px; letter-spacing: .2em;
+  border: 1px solid var(--ck-stroke-hi, rgba(240,234,240,.18)); background: rgba(240, 234, 240, .06); color: var(--ck-text, #f0eaf0); }
+
+/* ---- secao em Ajustes ---- */
+.hl-priv { display: flex; flex-direction: column; gap: 12px; }
+.hl-priv h4 { margin: 8px 0 0; font-size: 16px; font-weight: 600; }
+.hl-priv-note, .hl-priv-status { margin: 0; font-size: 14px; line-height: 1.45; color: var(--ck-muted, #b9a9bb); }
+.hl-priv-status { color: var(--ck-text, #f0eaf0); }
+.hl-priv-form, .hl-priv-confirm { display: flex; flex-direction: column; gap: 10px; max-width: 420px; }
+.hl-priv-field { display: flex; flex-direction: column; gap: 4px; font-size: 14px; color: var(--ck-muted, #b9a9bb); }
+.hl-priv-row { display: flex; flex-wrap: wrap; gap: 10px; }
+.hl-priv-btn { min-height: 48px; min-width: 48px; padding: 0 20px; border-radius: 12px; font: inherit; font-size: 15px; cursor: pointer;
+  border: 1px solid var(--ck-stroke-hi, rgba(240,234,240,.18)); background: rgba(240, 234, 240, .06); color: var(--ck-text, #f0eaf0); }
+.hl-priv-btn.primary { background: rgba(210, 160, 189, .22); border-color: var(--ck-accent, #d2a0bd); }
+.hl-priv-btn.danger { background: var(--ck-warn-bg, #5a4634); color: var(--ck-warn-text, #ffe9c9); }
+.hl-priv-btn:disabled { opacity: .5; cursor: default; }
+.hl-priv-warn { margin: 0; font-size: 15px; color: var(--ck-warn-text, #ffe9c9); }
+.hl-priv-err { margin: 0; min-height: 1.2em; font-size: 14px; color: var(--ck-warn-text, #ffe9c9); }
+.hl-priv-btn:focus-visible, .hl-priv-exit:focus-visible, .hl-priv-box input:focus-visible, .hl-priv-field input:focus-visible {
+  outline: 2px solid var(--ck-accent, #d2a0bd); outline-offset: 2px; }
+
+@media (prefers-reduced-motion: reduce) { .hl-priv-btn, .hl-priv-exit { transition: none; } }

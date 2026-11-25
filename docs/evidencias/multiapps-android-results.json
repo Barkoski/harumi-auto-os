@@ -1,0 +1,30 @@
+[
+  {
+    "test": "Actual AOSP bench has no Maps, Waze or Spotify bundled",
+    "status": "PASS"
+  },
+  {
+    "test": "Choose and launch Mapa teste A",
+    "status": "PASS"
+  },
+  {
+    "test": "Choose and launch Mapa teste B",
+    "status": "PASS"
+  },
+  {
+    "test": "Choose and launch Música teste A",
+    "status": "PASS"
+  },
+  {
+    "test": "Choose and launch Música teste B",
+    "status": "PASS"
+  },
+  {
+    "test": "Favorite preserved without hiding alternative navigator",
+    "status": "PASS"
+  },
+  {
+    "test": "Other installed OEM apps remain reachable",
+    "status": "PASS"
+  }
+]

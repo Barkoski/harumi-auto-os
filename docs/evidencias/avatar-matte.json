@@ -1,0 +1,32 @@
+[
+  {
+    "state": "greeting",
+    "frames": 56,
+    "background": "#1b1b21",
+    "audio": false
+  },
+  {
+    "state": "idle",
+    "frames": 33,
+    "background": "#1b1b21",
+    "audio": false
+  },
+  {
+    "state": "listening",
+    "frames": 31,
+    "background": "#1b1b21",
+    "audio": false
+  },
+  {
+    "state": "thinking",
+    "frames": 35,
+    "background": "#1b1b21",
+    "audio": false
+  },
+  {
+    "state": "speaking",
+    "frames": 68,
+    "background": "#1b1b21",
+    "audio": false
+  }
+]

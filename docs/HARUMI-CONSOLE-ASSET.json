@@ -1,0 +1,12 @@
+{
+  "original_path": "C:\\Users\\Aaaa\\Desktop\\gemini_generated_video_32078480.mp4",
+  "original_sha256": "6910fb62bc489fcdf0169a6cce982c3a9a9b2492c27c2f7e6b944c45c666c15f",
+  "duration_seconds": 10.03,
+  "source_video": "1280x720 / H264 / 24fps / opaque checkerboard",
+  "preview_video": "256x352 / H264 baseline / silent / local",
+  "audio_policy": "Original audio removed from preview; approved F3 voice remains unchanged",
+  "lip_sync": "Gestures follow native assistant states; no phoneme synchronization",
+  "apk_updated": true,
+  "apk_version": "0.3.8-dev.1",
+  "processed_background": "Checkerboard removed; composited onto #1b1b21"
+}

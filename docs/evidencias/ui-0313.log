@@ -1,0 +1,92 @@
+127.0.0.1 - - [03/Nov/2026 02:24:12] "GET /index.html HTTP/1.1" 200 -
+127.0.0.1 - - [03/Nov/2026 02:24:12] "GET /style.css?v=0310 HTTP/1.1" 200 -
+127.0.0.1 - - [03/Nov/2026 02:24:12] "GET /large-buttons.css?v=0310 HTTP/1.1" 200 -
+127.0.0.1 - - [03/Nov/2026 02:24:12] "GET /harumi-pink.css?v=0310 HTTP/1.1" 200 -
+127.0.0.1 - - [03/Nov/2026 02:24:12] "GET /atlas.css?v=0312 HTTP/1.1" 200 -
+127.0.0.1 - - [03/Nov/2026 02:24:12] "GET /vendor/leaflet/leaflet.css HTTP/1.1" 200 -
+127.0.0.1 - - [03/Nov/2026 02:24:12] "GET /road-map.css?v=0313 HTTP/1.1" 200 -
+127.0.0.1 - - [03/Nov/2026 02:24:12] "GET /avatar.js?v=0310 HTTP/1.1" 200 -
+127.0.0.1 - - [03/Nov/2026 02:24:12] "GET /media/harumi-poster.jpg?v=0310 HTTP/1.1" 200 -
+127.0.0.1 - - [03/Nov/2026 02:24:12] "GET /media/harumi-idle.mp4?v=038pink HTTP/1.1" 200 -
+127.0.0.1 - - [03/Nov/2026 02:24:12] "GET /app.js?v=0313 HTTP/1.1" 200 -
+127.0.0.1 - - [03/Nov/2026 02:24:12] "GET /atlas-data.js?v=0312 HTTP/1.1" 200 -
+127.0.0.1 - - [03/Nov/2026 02:24:12] "GET /atlas.js?v=0313 HTTP/1.1" 200 -
+127.0.0.1 - - [03/Nov/2026 02:24:12] "GET /atlas/PR.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [03/Nov/2026 02:24:12] "GET /vendor/leaflet/leaflet.js HTTP/1.1" 200 -
+127.0.0.1 - - [03/Nov/2026 02:24:12] "GET /cities-data.js?v=0313 HTTP/1.1" 200 -
+127.0.0.1 - - [03/Nov/2026 02:24:12] "GET /road-map.js?v=0313 HTTP/1.1" 200 -
+127.0.0.1 - - [03/Nov/2026 02:24:12] code 404, message File not found
+127.0.0.1 - - [03/Nov/2026 02:24:12] "GET /favicon.ico HTTP/1.1" 404 -
+127.0.0.1 - - [03/Nov/2026 02:24:12] "GET /index.html HTTP/1.1" 200 -
+127.0.0.1 - - [03/Nov/2026 02:24:12] "GET /style.css?v=0310 HTTP/1.1" 200 -
+127.0.0.1 - - [03/Nov/2026 02:24:12] "GET /large-buttons.css?v=0310 HTTP/1.1" 200 -
+127.0.0.1 - - [03/Nov/2026 02:24:12] "GET /harumi-pink.css?v=0310 HTTP/1.1" 200 -
+127.0.0.1 - - [03/Nov/2026 02:24:12] "GET /atlas.css?v=0312 HTTP/1.1" 200 -
+127.0.0.1 - - [03/Nov/2026 02:24:12] "GET /vendor/leaflet/leaflet.css HTTP/1.1" 200 -
+127.0.0.1 - - [03/Nov/2026 02:24:12] "GET /media/harumi-poster.jpg?v=0310 HTTP/1.1" 200 -
+127.0.0.1 - - [03/Nov/2026 02:24:12] "GET /avatar.js?v=0310 HTTP/1.1" 200 -
+127.0.0.1 - - [03/Nov/2026 02:24:12] "GET /road-map.css?v=0313 HTTP/1.1" 200 -
+127.0.0.1 - - [03/Nov/2026 02:24:12] "GET /app.js?v=0313 HTTP/1.1" 200 -
+127.0.0.1 - - [03/Nov/2026 02:24:12] "GET /media/harumi-idle.mp4?v=038pink HTTP/1.1" 200 -
+127.0.0.1 - - [03/Nov/2026 02:24:13] "GET /atlas-data.js?v=0312 HTTP/1.1" 200 -
+127.0.0.1 - - [03/Nov/2026 02:24:13] "GET /atlas.js?v=0313 HTTP/1.1" 200 -
+127.0.0.1 - - [03/Nov/2026 02:24:13] "GET /atlas/PR.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [03/Nov/2026 02:24:13] "GET /vendor/leaflet/leaflet.js HTTP/1.1" 200 -
+127.0.0.1 - - [03/Nov/2026 02:24:13] "GET /cities-data.js?v=0313 HTTP/1.1" 200 -
+127.0.0.1 - - [03/Nov/2026 02:24:13] "GET /road-map.js?v=0313 HTTP/1.1" 200 -
+127.0.0.1 - - [03/Nov/2026 02:24:13] "GET /index.html HTTP/1.1" 200 -
+127.0.0.1 - - [03/Nov/2026 02:24:13] "GET /style.css?v=0310 HTTP/1.1" 200 -
+127.0.0.1 - - [03/Nov/2026 02:24:13] "GET /large-buttons.css?v=0310 HTTP/1.1" 200 -
+127.0.0.1 - - [03/Nov/2026 02:24:13] "GET /atlas.css?v=0312 HTTP/1.1" 200 -
+127.0.0.1 - - [03/Nov/2026 02:24:13] "GET /harumi-pink.css?v=0310 HTTP/1.1" 200 -
+127.0.0.1 - - [03/Nov/2026 02:24:13] "GET /vendor/leaflet/leaflet.css HTTP/1.1" 200 -
+127.0.0.1 - - [03/Nov/2026 02:24:13] "GET /road-map.css?v=0313 HTTP/1.1" 200 -
+127.0.0.1 - - [03/Nov/2026 02:24:13] "GET /media/harumi-poster.jpg?v=0310 HTTP/1.1" 200 -
+127.0.0.1 - - [03/Nov/2026 02:24:13] "GET /avatar.js?v=0310 HTTP/1.1" 200 -
+127.0.0.1 - - [03/Nov/2026 02:24:13] "GET /media/harumi-idle.mp4?v=038pink HTTP/1.1" 200 -
+127.0.0.1 - - [03/Nov/2026 02:24:13] "GET /app.js?v=0313 HTTP/1.1" 200 -
+127.0.0.1 - - [03/Nov/2026 02:24:13] "GET /atlas-data.js?v=0312 HTTP/1.1" 200 -
+127.0.0.1 - - [03/Nov/2026 02:24:13] "GET /atlas.js?v=0313 HTTP/1.1" 200 -
+127.0.0.1 - - [03/Nov/2026 02:24:13] "GET /atlas/PR.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [03/Nov/2026 02:24:13] "GET /vendor/leaflet/leaflet.js HTTP/1.1" 200 -
+127.0.0.1 - - [03/Nov/2026 02:24:13] "GET /cities-data.js?v=0313 HTTP/1.1" 200 -
+127.0.0.1 - - [03/Nov/2026 02:24:13] "GET /road-map.js?v=0313 HTTP/1.1" 200 -
+127.0.0.1 - - [03/Nov/2026 02:24:14] "GET /index.html HTTP/1.1" 200 -
+127.0.0.1 - - [03/Nov/2026 02:24:14] "GET /style.css?v=0310 HTTP/1.1" 200 -
+127.0.0.1 - - [03/Nov/2026 02:24:14] "GET /large-buttons.css?v=0310 HTTP/1.1" 200 -
+127.0.0.1 - - [03/Nov/2026 02:24:14] "GET /harumi-pink.css?v=0310 HTTP/1.1" 200 -
+127.0.0.1 - - [03/Nov/2026 02:24:14] "GET /atlas.css?v=0312 HTTP/1.1" 200 -
+127.0.0.1 - - [03/Nov/2026 02:24:14] "GET /vendor/leaflet/leaflet.css HTTP/1.1" 200 -
+127.0.0.1 - - [03/Nov/2026 02:24:14] "GET /road-map.css?v=0313 HTTP/1.1" 200 -
+127.0.0.1 - - [03/Nov/2026 02:24:14] "GET /media/harumi-poster.jpg?v=0310 HTTP/1.1" 200 -
+127.0.0.1 - - [03/Nov/2026 02:24:14] "GET /avatar.js?v=0310 HTTP/1.1" 200 -
+127.0.0.1 - - [03/Nov/2026 02:24:14] "GET /media/harumi-idle.mp4?v=038pink HTTP/1.1" 200 -
+127.0.0.1 - - [03/Nov/2026 02:24:14] "GET /app.js?v=0313 HTTP/1.1" 200 -
+127.0.0.1 - - [03/Nov/2026 02:24:14] "GET /atlas-data.js?v=0312 HTTP/1.1" 200 -
+127.0.0.1 - - [03/Nov/2026 02:24:14] "GET /atlas.js?v=0313 HTTP/1.1" 200 -
+127.0.0.1 - - [03/Nov/2026 02:24:14] "GET /atlas/PR.jpg HTTP/1.1" 200 -
+127.0.0.1 - - [03/Nov/2026 02:24:14] "GET /vendor/leaflet/leaflet.js HTTP/1.1" 200 -
+127.0.0.1 - - [03/Nov/2026 02:24:14] "GET /cities-data.js?v=0313 HTTP/1.1" 200 -
+127.0.0.1 - - [03/Nov/2026 02:24:14] "GET /road-map.js?v=0313 HTTP/1.1" 200 -
+[
+  {
+    "viewport": "1024x600",
+    "status": "PASS",
+    "vertical_scroll": false
+  },
+  {
+    "viewport": "1024x480",
+    "status": "PASS",
+    "vertical_scroll": false
+  },
+  {
+    "viewport": "800x480",
+    "status": "PASS",
+    "vertical_scroll": false
+  },
+  {
+    "viewport": "390x844",
+    "status": "PASS",
+    "vertical_scroll": true
+  }
+]
