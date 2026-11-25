@@ -165,7 +165,7 @@ function label(text,size){const c=document.createElement('canvas');const ctx=c.g
   const t=new THREE.CanvasTexture(c);const s=new THREE.Sprite(new THREE.SpriteMaterial({map:t,depthTest:false,transparent:true}));s.scale.set(size*w/c.height,size,1);s.renderOrder=10;return s;}
 
 function makePart(p,scale){const g=p[5]();g.traverse(o=>{if(o.isMesh)o.userData.part=p;});const w=new THREE.Group();w.add(g);w.scale.setScalar(scale);w.userData.part=p;return w;}
-function info(p){const [,n,gr,d,est,,q,liga]=p;if(!d.length)return `${n}: ${liga}`;return `${n}${q>1?` (×${q})`:""} — ${d.map(v=>String(v).replace('.',',')).join(" × ")} mm${est?" (estimada)":""} — ${liga}`;}
+function info(p){const [,n,gr,d,est,,q,liga]=p;if(!d.length)return `${n}: ${liga}`;return `${n}${q>1?` (×${q})`:""}: ${d.map(v=>String(v).replace('.',',')).join(" × ")} mm${est?" (estimada)":""} — ${liga}`;}
 
 function buildBancada(){
   const groups=[...new Set(P.map(p=>p[2]))];let z=0,maxX=0;
