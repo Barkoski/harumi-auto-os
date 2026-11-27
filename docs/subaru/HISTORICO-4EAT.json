@@ -1,0 +1,97 @@
+{
+  "aviso": "Arquivo histórico: 4EAT removido; não utilizar como orientação para o veículo atual. Dados antigos não revalidados.",
+  "entries": [
+    {
+      "id": "ficha",
+      "regex": "\\b(?:ficha|dados|especificac\\w*|versao|qual (?:e )?o modelo) d[oe] (?:meu |seu |nosso )?(?:carro|subaru|impreza)|quantos cavalos|potencia d[oe] (?:meu |seu )?(?:carro|motor|subaru|impreza)",
+      "answer": "Seu carro é um Subaru Impreza perua 1993, provavelmente a versão GF6, com tração integral e câmbio automático de 4 marchas. O motor é o EJ18 boxer, 1,8 litro e 16 válvulas, com cerca de 105 cavalos. Confirme a versão pelo número do chassi."
+    },
+    {
+      "id": "luz_cambio",
+      "regex": "\\bat oil temp\\b|\\b(?:luz|lampada)\\b.*\\b(?:cambio|power)\\b",
+      "answer": "A luz AT OIL TEMP acesa com o motor ligado indica câmbio quente: pare e deixe esfriar. Se ela piscar logo ao dar a partida, provavelmente há um código de falha gravado no câmbio."
+    },
+    {
+      "id": "oleo_cambio",
+      "regex": "\\b(?:oleo|fluido|atf)\\b.*\\b(?:cambio|transmissao|automatico)\\b|\\b(?:cambio|transmissao)\\b.*\\b(?:oleo|fluido)\\b|\\batf\\b",
+      "answer": "O câmbio automático usa fluido ATF Dexron II, ou o ATF da Subaru compatível. A capacidade total é de cerca de 7,9 litros, mas uma troca pelo dreno tira uns 2,5 litros. Confira o nível com o motor quente, na posição P."
+    },
+    {
+      "id": "trepida",
+      "regex": "\\b(?:trepida|trepidando|treme|tremendo|freia sozinho|segura|travando)\\b.*\\bcurvas?\\b|\\bcurvas?\\b.*\\b(?:trepida|trepidando|treme|travando)\\b|\\btorque bind\\b",
+      "answer": "Trepidar ou travar em curvas fechadas e lentas costuma ser a embreagem da tração integral ou o solenoide Duty C. Um teste é colocar o fusível no soquete FWD do cofre: se o sintoma sumir, o problema está no sistema 4x4."
+    },
+    {
+      "id": "cambio_tranco",
+      "regex": "\\b(?:cambio|marcha|marchas)\\b.*\\b(?:tranco|trancos|escorrega|patina|dura|duras|demora)\\b|\\btranco\\b",
+      "answer": "Trancos ou trocas que escorregam no câmbio automático costumam vir de fluido velho ou de solenoides com defeito. Confira o nível e a cor do fluido, e leia os códigos do câmbio quando o scanner estiver conectado."
+    }
+  ],
+  "gearbox": [
+    {
+      "code": "11",
+      "text": "o solenoide Duty A, da pressão de linha",
+      "singleSource": false
+    },
+    {
+      "code": "12",
+      "text": "o solenoide Duty B, do travamento do conversor",
+      "singleSource": false
+    },
+    {
+      "code": "13",
+      "text": "o solenoide de troca 3",
+      "singleSource": false
+    },
+    {
+      "code": "14",
+      "text": "o solenoide de troca 2",
+      "singleSource": false
+    },
+    {
+      "code": "15",
+      "text": "o solenoide de troca 1",
+      "singleSource": false
+    },
+    {
+      "code": "21",
+      "text": "o sensor de temperatura do fluido",
+      "singleSource": false
+    },
+    {
+      "code": "22",
+      "text": "o sensor de pressão atmosférica",
+      "singleSource": false
+    },
+    {
+      "code": "23",
+      "text": "o sinal de rotação do motor",
+      "singleSource": false
+    },
+    {
+      "code": "24",
+      "text": "o solenoide Duty C, da tração integral",
+      "singleSource": false
+    },
+    {
+      "code": "25",
+      "text": "o sinal de controle de torque",
+      "singleSource": false
+    },
+    {
+      "code": "31",
+      "text": "o sensor da borboleta",
+      "singleSource": false
+    },
+    {
+      "code": "32",
+      "text": "o sensor de velocidade 1",
+      "singleSource": false
+    },
+    {
+      "code": "33",
+      "text": "o sensor de velocidade 2",
+      "singleSource": false
+    }
+  ]
+}

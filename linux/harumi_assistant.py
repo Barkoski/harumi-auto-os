@@ -75,7 +75,9 @@ def car_answer(raw: str):
     m = CODE.match(n)
     if m:
         code, gear = m.group(1), bool(GEARBOX.match(n))
-        for c in (GEAR_CODES if gear else ENGINE_CODES):
+        if gear:
+            return f"A caixa atual é manual AWD; não aplique códigos da TCU 4EAT. Confirme a origem do código {code} e a instalação elétrica com um profissional."
+        for c in ENGINE_CODES:
             if c["code"] == code:
                 place = "No câmbio automático" if gear else "No motor do seu Impreza"
                 extra = " Essa informação tem uma fonte só; confirme com o mecânico." if c.get("singleSource") else ""
@@ -413,3 +415,4 @@ class Assistant:
             self.history += [{"role": "user", "content": question}, {"role": "assistant", "content": text}]
             self.history = self.history[-12:]
         return text
+

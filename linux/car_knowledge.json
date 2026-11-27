@@ -2,9 +2,9 @@
  "source": "app/src/main/java/com/harumi/autoos/ai/CarKnowledge.java",
  "entries": [
   {
-   "id": "ficha",
+   "id": "ficha_mt2026",
    "regex": "\\b(?:ficha|dados|especificac\\w*|versao|qual (?:e )?o modelo) d[oe] (?:meu |seu |nosso )?(?:carro|subaru|impreza)|quantos cavalos|potencia d[oe] (?:meu |seu )?(?:carro|motor|subaru|impreza)",
-   "answer": "Seu carro é um Subaru Impreza perua 1993, provavelmente a versão GF6, com tração integral e câmbio automático de 4 marchas. O motor é o EJ18 boxer, 1,8 litro e 16 válvulas, com cerca de 105 cavalos. Confirme a versão pelo número do chassi."
+   "answer": "Seu Subaru Impreza perua 1993 tem motor EJ18 e agora usa câmbio manual AWD de cinco marchas de um Impreza 1.8 de 1994. Confirme o código gravado na caixa e a relação dos diferenciais antes de comprar peças."
   },
   {
    "id": "boxer",
@@ -22,9 +22,9 @@
    "answer": "Luz do óleo acesa com o motor ligado é sinal de parar. Encoste assim que for seguro, desligue o motor e confira o nível na vareta antes de seguir."
   },
   {
-   "id": "luz_cambio",
+   "id": "luz_cambio_mt2026",
    "regex": "\\bat oil temp\\b|\\b(?:luz|lampada)\\b.*\\b(?:cambio|power)\\b",
-   "answer": "A luz AT OIL TEMP acesa com o motor ligado indica câmbio quente: pare e deixe esfriar. Se ela piscar logo ao dar a partida, provavelmente há um código de falha gravado no câmbio."
+   "answer": "Após o swap manual, a luz AT OIL TEMP pode ter fiação ou painel remanescente do automático. Não interpreta temperatura da caixa manual sem verificar a instalação; peça diagnóstico elétrico."
   },
   {
    "id": "luz_injecao",
@@ -32,29 +32,49 @@
    "answer": "Luz da injeção acesa e fixa: dá para seguir com calma, mas verifique logo. Se ela piscar com o motor andando, é falha grave, provavelmente de ignição: reduza e pare em local seguro."
   },
   {
-   "id": "oleo_cambio",
+   "id": "diferencial_mt2026",
+   "regex": "\\bdiferencia\\w*\\b",
+   "answer": "O diferencial traseiro tem óleo próprio; confirme tipo, capacidade e eventual autoblocante pela identificação da peça. Confira que as relações dianteira e traseira são compatíveis antes de rodar."
+  },
+  {
+   "id": "embreagem_mt2026",
+   "regex": "\\b(?:embreagem|plat[o\\u00f4]|disco|garfo|rolamento)\\b",
+   "answer": "Confirme se o acionamento instalado é por cabo ou hidráulico e identifique caixa, volante e conjunto antes de comprar. Patinação, cheiro de queimado ou dificuldade de engate exigem inspeção; não force o carro."
+  },
+  {
+   "id": "reboque_mt2026",
+   "regex": "\\b(?:reboc\\w*|guinch\\w*|pane|avari\\w*)\\b",
+   "answer": "Em pane, pare em local seguro e peça guincho plataforma com as quatro rodas apoiadas. Não rebocá-lo com um eixo no chão sem procedimento comprovado para esta transmissão AWD."
+  },
+  {
+   "id": "historico_4eat_mt2026",
+   "regex": "\\b(?:duty c|fusivel fwd|4eat|atf|dexron|automatico|tcu)\\b",
+   "answer": "O 4EAT automático é histórico: o carro agora usa câmbio manual AWD. Duty C, fusível FWD, códigos da TCU e ATF não são diagnóstico nem especificação da caixa manual; confirme qualquer fiação remanescente."
+  },
+  {
+   "id": "oleo_cambio_mt2026",
    "regex": "\\b(?:oleo|fluido|atf)\\b.*\\b(?:cambio|transmissao|automatico)\\b|\\b(?:cambio|transmissao)\\b.*\\b(?:oleo|fluido)\\b|\\batf\\b",
-   "answer": "O câmbio automático usa fluido ATF Dexron II, ou o ATF da Subaru compatível. A capacidade total é de cerca de 7,9 litros, mas uma troca pelo dreno tira uns 2,5 litros. Confira o nível com o motor quente, na posição P."
+   "answer": "O câmbio manual AWD usa óleo de engrenagens, não ATF. Para a especificação e quantidade exatas, confirme o código da caixa e o manual aplicável; o diferencial dianteiro integra a transmissão em aplicações manuais Subaru, mas confirme nesta caixa."
   },
   {
-   "id": "oleo_motor",
+   "id": "oleo_motor_mt2026",
    "regex": "\\boleo\\b.*\\b(?:motor|troca|trocar|qual|quantos? litros?|viscosidade|usar|uso|colocar|cabe)\\b|\\b(?:troca|trocar|qual|quantos? litros?)\\b.*\\boleo\\b",
-   "answer": "O motor EJ18 leva cerca de 4 litros de óleo. Na época se usava 5W-30 em clima frio, ou 10W-30 e 10W-40. Confira a vareta com o carro no plano e o motor desligado há alguns minutos."
+   "answer": "Para o EJ18, confirme viscosidade, classificação e capacidade no manual da variante e conforme o filtro instalado. Confira o nível na vareta, com o carro plano e motor desligado há alguns minutos."
   },
   {
-   "id": "velas",
+   "id": "velas_mt2026",
    "regex": "\\bvelas?\\b(?! de aniversario)",
-   "answer": "A vela indicada é a NGK BKR6E-11, com folga de 1,0 a 1,1 milímetro e aperto de 41 a 47 newton-metro. O modelo da vela veio de uma fonte só, então confira a aplicação na loja."
+   "answer": "Confirme as velas, a folga e o torque pelo código do motor, aplicação e manual antes de instalar; não tenho esses valores verificados para este carro."
   },
   {
-   "id": "correia",
+   "id": "correia_mt2026",
    "regex": "\\bcorreia (?:dentada|do comando|de comando|da distribuicao)|\\bcorreia\\b.*\\b(?:trocar|troca|quando|romper|rompeu|arrebentar)\\b",
-   "answer": "A correia dentada deve ser inspecionada a cada 48 mil quilômetros e trocada a cada 96 mil. Sem registro da última troca, o melhor é trocar já, junto com tensor, polias, retentores e bomba d'água. O EJ18 não é interferente: se romper, o carro para, mas em tese não empena válvula."
+   "answer": "Sem histórico confiável da correia dentada, inspecione e planeje a troca conforme o manual da variante, incluindo avaliação dos tensores e polias. Não presuma que a quebra não cause danos."
   },
   {
-   "id": "marcha_lenta",
+   "id": "marcha_lenta_mt2026",
    "regex": "\\bmarcha lenta\\b|\\blenta (?:oscilando|baixa|alta|irregular)|\\b(?:rotacao|giro) (?:oscila|oscilando|sobe e desce)",
-   "answer": "Com o motor quente, a marcha lenta normal é de 700 rotações, com variação de 100 para mais ou para menos. Com o ar-condicionado ligado, fica perto de 850. Se ela oscilar, a causa comum é a válvula de marcha lenta suja, que pode ser limpa antes de trocar."
+   "answer": "Se a marcha lenta oscila, verifique entradas de ar, sensores e sistema de marcha lenta. Confirme a rotação de ajuste no manual da versão e nas condições especificadas."
   },
   {
    "id": "temperatura",
@@ -62,24 +82,24 @@
    "answer": "Com o motor quente, o normal fica entre 80 e 100 graus. Acima de 105, fique atento; acima de 110, pare em local seguro e desligue o motor. Esses limites são de referência e não do manual do seu carro."
   },
   {
-   "id": "scanner",
+   "id": "scanner_mt2026",
    "regex": "\\b(?:elm ?327|obd ?2?|obdii|scanner|leitor de (?:falhas|codigos)|select monitor|ssm)\\b",
-   "answer": "O seu Impreza 1993 é anterior ao OBD-II e usa o protocolo Subaru Select Monitor. Leitor ELM327 comum não funciona. Serve um cabo próprio para Select Monitor, no conector amarelo de 9 pinos."
+   "answer": "O Impreza 1993 pode usar diagnóstico Subaru anterior ao OBD-II. Confirme conector, ECU e protocolo instalados antes de comprar um scanner; um leitor OBD-II comum pode não ser compatível."
   },
   {
-   "id": "piscadas",
+   "id": "piscadas_mt2026",
    "regex": "\\b(?:ler|leitura|ver)\\b.*\\b(?:codigos?|falhas?)\\b.*\\bsem (?:scanner|aparelho)|\\bpiscadas\\b",
-   "answer": "Sem scanner, com a ignição ligada e o motor desligado, liga-se o par de plugues pretos de leitura de memória e contam-se as piscadas da luz da injeção. Piscada longa é a dezena e curta é a unidade. A posição desses plugues no seu carro ainda precisa ser confirmada."
+   "answer": "A leitura de piscadas depende da ECU e dos conectores instalados. Confirme o procedimento no manual da versão antes de conectar qualquer terminal."
   },
   {
-   "id": "bateria",
+   "id": "bateria_mt2026",
    "regex": "\\bbateria\\b|\\balternador\\b",
-   "answer": "Com o motor ligado, a bateria deve marcar entre 13,5 e 14,5 volts. Abaixo de 12,5 com o motor ligado indica problema no alternador; acima de 15, no regulador."
+   "answer": "Verifique bateria, terminais e sistema de carga com multímetro e compare com o manual da configuração instalada. Uma medição isolada não identifica a peça defeituosa."
   },
   {
-   "id": "trepida",
+   "id": "trepida_mt2026",
    "regex": "\\b(?:trepida|trepidando|treme|tremendo|freia sozinho|segura|travando)\\b.*\\bcurvas?\\b|\\bcurvas?\\b.*\\b(?:trepida|trepidando|treme|travando)\\b|\\btorque bind\\b",
-   "answer": "Trepidar ou travar em curvas fechadas e lentas costuma ser a embreagem da tração integral ou o solenoide Duty C. Um teste é colocar o fusível no soquete FWD do cofre: se o sintoma sumir, o problema está no sistema 4x4."
+   "answer": "Em curvas fechadas, trepidação ou travamento no AWD manual exige inspeção de pneus, relações dos diferenciais e transmissão central. Pare de usar se houver esforço forte; não faça o teste de fusível FWD do antigo automático."
   },
   {
    "id": "vazamento",
@@ -87,9 +107,9 @@
    "answer": "No EJ18, os vazamentos mais comuns são nas juntas das tampas de válvulas, nos retentores dianteiros e na placa separadora entre motor e câmbio. Retentores velhos devem ser trocados junto com a correia dentada."
   },
   {
-   "id": "cambio_tranco",
+   "id": "cambio_tranco_mt2026",
    "regex": "\\b(?:cambio|marcha|marchas)\\b.*\\b(?:tranco|trancos|escorrega|patina|dura|duras|demora)\\b|\\btranco\\b",
-   "answer": "Trancos ou trocas que escorregam no câmbio automático costumam vir de fluido velho ou de solenoides com defeito. Confira o nível e a cor do fluido, e leia os códigos do câmbio quando o scanner estiver conectado."
+   "answer": "No câmbio manual, marchas difíceis ou trancos podem envolver embreagem, acionamento, cabos ou trambulador e a própria caixa. Não force os engates; verifique vazamentos e procure diagnóstico mecânico."
   },
   {
    "id": "pneus",
@@ -234,71 +254,5 @@
    "singleSource": true
   }
  ],
- "gearbox": [
-  {
-   "code": "11",
-   "text": "o solenoide Duty A, da pressão de linha",
-   "singleSource": false
-  },
-  {
-   "code": "12",
-   "text": "o solenoide Duty B, do travamento do conversor",
-   "singleSource": false
-  },
-  {
-   "code": "13",
-   "text": "o solenoide de troca 3",
-   "singleSource": false
-  },
-  {
-   "code": "14",
-   "text": "o solenoide de troca 2",
-   "singleSource": false
-  },
-  {
-   "code": "15",
-   "text": "o solenoide de troca 1",
-   "singleSource": false
-  },
-  {
-   "code": "21",
-   "text": "o sensor de temperatura do fluido",
-   "singleSource": false
-  },
-  {
-   "code": "22",
-   "text": "o sensor de pressão atmosférica",
-   "singleSource": false
-  },
-  {
-   "code": "23",
-   "text": "o sinal de rotação do motor",
-   "singleSource": false
-  },
-  {
-   "code": "24",
-   "text": "o solenoide Duty C, da tração integral",
-   "singleSource": false
-  },
-  {
-   "code": "25",
-   "text": "o sinal de controle de torque",
-   "singleSource": false
-  },
-  {
-   "code": "31",
-   "text": "o sensor da borboleta",
-   "singleSource": false
-  },
-  {
-   "code": "32",
-   "text": "o sensor de velocidade 1",
-   "singleSource": false
-  },
-  {
-   "code": "33",
-   "text": "o sensor de velocidade 2",
-   "singleSource": false
-  }
- ]
+ "gearbox": []
 }
