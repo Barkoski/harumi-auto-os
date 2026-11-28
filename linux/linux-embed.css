@@ -1,19 +1,19 @@
 /* Card de app embutido (YouTube) dentro da Harumi. Arquivo separado: a politica de seguranca da pagina bloqueia CSS inline. */
 #hl-embed{position:fixed;z-index:60;display:flex;flex-direction:column;background:var(--ck-glass-strong,#2b2432);
-  border:1px solid var(--ck-stroke-hi,rgba(240,234,240,.18));border-radius:var(--ck-r,16px);box-shadow:var(--ck-shadow,0 8px 24px rgba(0,0,0,.45));overflow:hidden}
+  border:1px solid var(--ck-stroke-hi,rgb(from var(--ck-text,#f0eaf0) r g b / .18));border-radius:var(--ck-r,16px);box-shadow:var(--ck-shadow,0 8px 24px rgba(0,0,0,.45));overflow:hidden}
 #hl-embed[hidden]{display:none}
 #hl-embed.card{right:16px;bottom:calc(var(--ck-tab-h,84px) + 16px);width:min(46vw,880px);height:min(46vh,560px)}
 #hl-embed.full{left:12px;right:12px;top:12px;bottom:calc(var(--ck-tab-h,84px) + 8px)}
 #hl-embed .hl-embed-bar{display:flex;align-items:center;gap:8px;padding:8px 10px;color:var(--ck-text,#f0eaf0);font:500 16px system-ui,sans-serif}
 #hl-embed .hl-embed-title{flex:1;padding-left:4px}
-#hl-embed .hl-embed-btn{min-width:56px;min-height:44px;padding:0 14px;border-radius:12px;border:1px solid var(--ck-stroke,rgba(240,234,240,.1));
+#hl-embed .hl-embed-btn{min-width:56px;min-height:44px;padding:0 14px;border-radius:12px;border:1px solid var(--ck-stroke,rgb(from var(--ck-text,#f0eaf0) r g b / .1));
   background:transparent;color:var(--ck-text,#f0eaf0);font:500 15px system-ui,sans-serif;cursor:pointer}
 #hl-embed .hl-embed-btn:focus-visible{outline:2px solid var(--ck-accent,#d2a0bd);outline-offset:2px}
 #hl-embed .hl-embed-btn.close{background:var(--ck-accent,#d2a0bd);color:var(--ck-accent-ink,#2a1e2b);border-color:transparent}
 #hl-embed .hl-embed-body{flex:1;background:#111;display:flex;align-items:center;justify-content:center;color:var(--ck-muted,#b9a9bb);font:14px system-ui}
 #hl-embed .hl-embed-url{flex:1;display:flex}
 #hl-embed .hl-embed-url[hidden]{display:none}
-#hl-embed .hl-embed-url input{flex:1;min-height:44px;padding:0 14px;border-radius:12px;border:1px solid var(--ck-stroke-hi,rgba(240,234,240,.18));
+#hl-embed .hl-embed-url input{flex:1;min-height:44px;padding:0 14px;border-radius:12px;border:1px solid var(--ck-stroke-hi,rgb(from var(--ck-text,#f0eaf0) r g b / .18));
   background:rgba(0,0,0,.25);color:var(--ck-text,#f0eaf0);font:16px system-ui,sans-serif}
 #hl-embed .hl-embed-url input:focus-visible{outline:2px solid var(--ck-accent,#d2a0bd);outline-offset:1px}
 /* Outra tela da Harumi por cima: o app nativo some (area zero); o card fica discreto atras */

@@ -2,6 +2,7 @@
 # Instala a Harumi como servicos do usuario (systemd --user) no Orange Pi.
 # Uso (como o usuario da sessao grafica, ex. orangepi):  sh ~/harumi/install.sh
 set -eu
+umask 022  # os arquivos de servico sairam graváveis por qualquer usuario (20/11/2026)
 H="$HOME/harumi"
 U="$HOME/.config/systemd/user"
 A="$HOME/.config/autostart"
@@ -75,6 +76,9 @@ cat > "$U/harumi-llm.service" <<EOF
 Description=Harumi Auto OS - IA local (llama-server, Qwen3.5 2B)
 
 [Service]
+# Partida em dia quente: espera a placa ficar abaixo de 70 C (no maximo 10 min); mapa e musica ja funcionam enquanto isso.
+ExecStartPre=/bin/sh -c 'for i in \$(seq 1 120); do t=\$(cat /sys/class/thermal/thermal_zone0/temp); [ "\$t" -lt 70000 ] && exit 0; sleep 5; done; exit 0'
+TimeoutStartSec=11min
 ExecStart=/usr/bin/taskset -c 4-7 $LLM_BIN -m $LLM_MODEL -t 4 -c 4096 --host 127.0.0.1 --port 8090 --no-webui
 Restart=on-failure
 RestartSec=5
@@ -85,10 +89,32 @@ WantedBy=default.target
 EOF
 fi
 
+# Rota offline (GraphHopper 11.1 + grafo do Brasil) nos 4 nucleos pequenos (A55), longe da IA. Copiar antes para
+# ~/.local/share/harumi/rotas: graphhopper-web-11.1.jar e grafo-brasil/ (gerados no PC, ver docs/ADR-011).
+GH_DIR="$HOME/.local/share/harumi/rotas"
+if command -v java >/dev/null && [ -s "$GH_DIR/graphhopper-web-11.1.jar" ] && [ -d "$GH_DIR/grafo-brasil" ]; then
+cat > "$U/harumi-routes.service" <<EOF
+[Unit]
+Description=Harumi Auto OS - rota offline (GraphHopper local)
+
+[Service]
+WorkingDirectory=$GH_DIR
+ExecStart=/usr/bin/taskset -c 0-3 /usr/bin/java -Xms128m -Xmx768m -jar $GH_DIR/graphhopper-web-11.1.jar server $H/rotas/gh-config.yml
+Restart=on-failure
+RestartSec=10
+Nice=10
+
+[Install]
+WantedBy=default.target
+EOF
+fi
+
 systemctl --user daemon-reload
 [ -f "$U/harumi-llm.service" ] && systemctl --user enable --now harumi-llm.service
+[ -f "$U/harumi-routes.service" ] && systemctl --user enable --now harumi-routes.service
 systemctl --user enable harumi-server.service harumi-kiosk.service
 [ -f "$U/harumi-spotify.service" ] && systemctl --user enable --now harumi-spotify.service
 systemctl --user restart harumi-server.service
 systemctl --user restart harumi-kiosk.service || true
+[ -f "$H/root/install-root.sh" ] && echo "Falta a parte de root (governador termico): sudo sh $H/root/install-root.sh"
 echo "Harumi instalada. Servidor: http://127.0.0.1:8765/assets/index.html"

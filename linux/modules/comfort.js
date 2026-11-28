@@ -179,6 +179,11 @@
   window.harumiAssistCmd = function (cmd) {
     if (!cmd || typeof cmd.type !== 'string') return;
     if (cmd.type === 'cleanScreen') { setClean(!!cmd.on); return; }
+    if (cmd.type === 'stopNav') {  /* "encerrar navegacao" por voz: o mesmo botao do mapa */
+      var ns = document.getElementById('nav-stop');
+      if (ns) ns.click();
+      return;
+    }
     if (cmd.type === 'closeApp') {
       if (window.harumiEmbed && window.harumiEmbed.close) window.harumiEmbed.close();
       if (window.HarumiNative && window.HarumiNative.dispatch) window.HarumiNative.dispatch('linux.close', '');

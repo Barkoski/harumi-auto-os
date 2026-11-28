@@ -1,0 +1,83 @@
+/* Temas da Harumi. Base: Android for Cars (contraste >= 4,5:1, tema claro de dia e escuro a noite, acento usado com
+   moderacao) e o modo "Calm" do Polestar (so o essencial). Cada tema so redefine variaveis; o layout nao muda.
+   - Harumi: o visual atual (rosa suave sobre ameixa escura), sem nada aqui.
+   - Calma: grafite, um acento areia, menos bordas e sombras, texto e alvos maiores para olhar rapido.
+   - Dia: claro, texto escuro, acento azul-petroleo; para sol forte. */
+
+/* ---------- Calma ---------- */
+body.hl-theme-calma, body.hl-theme-calma #road-map{
+  --hl-accent:#d9b779; --hl-accent-ink:#1d1a12; --hl-accent-soft:#e6cfa1; --hl-focus:#f1dcb0;
+  --ck-text:#ececee; --ck-muted:#a7abb3; --ck-accent:#d9b779; --ck-accent-ink:#1d1a12;
+  --hl-surface:#1b1d21; --hl-surface-2:#23262b; --hl-surface-3:#2f3238; --hl-pane:#16181b; --hl-dock:#111214;
+  --ck-glass:rgba(27,29,33,.94); --ck-glass-strong:rgba(27,29,33,.97); --ck-stroke:rgba(236,236,238,.07); --ck-stroke-hi:rgba(236,236,238,.12);
+  --ck-glow:none; --ck-shadow:none; --t-line:rgba(236,236,238,.06); --t-shadow:none; --hu-bg:#111214}
+body.hl-theme-calma{background:#111214}
+/* menos ruido: sem contorno nos cartoes, so a superficie */
+body.hl-theme-calma .hl-slot, body.hl-theme-calma .hl-qtile, body.hl-theme-calma .hl-vcard, body.hl-theme-calma #road-map .ck-card,
+body.hl-theme-calma #hl-mini, body.hl-theme-calma .hl-navswitch{border-color:transparent;box-shadow:none}
+/* olhar rapido: numeros e titulos maiores, botoes com area maior */
+body.hl-theme-calma .hl-w-speed b{font-size:clamp(52px,6vw,160px)}
+body.hl-theme-calma .hl-w-title{font-size:clamp(22px,2vw,40px)}
+body.hl-theme-calma .hl-w-cell b{font-size:clamp(20px,1.5vw,30px)}
+body.hl-theme-calma .hl-slot-head h3{font-size:15px;letter-spacing:.8px}
+body.hl-theme-calma .hl-w-mbtn{width:72px;height:64px}
+body.hl-theme-calma .hl-w-mbtn .ck-ico{width:34px;height:34px}
+body.hl-theme-calma .hl-slot-pick, body.hl-theme-calma .hl-slot-full{min-height:52px}
+body.hl-theme-calma .hl-slot-full{width:52px}
+body.hl-theme-calma .hl-navswitch-btn{min-height:52px;font-size:17px}
+body.hl-theme-calma .hl-w-sub, body.hl-theme-calma .hl-w-kick, body.hl-theme-calma .hl-w-cell span{font-size:16px}
+body.hl-theme-calma #road-map .ck-top{background:linear-gradient(to bottom,rgba(17,18,20,.9),rgba(17,18,20,0))}
+
+/* ---------- Dia (claro) ---------- */
+body.hl-theme-dia, body.hl-theme-dia #road-map{
+  --hl-accent:#2f6f73; --hl-accent-ink:#ffffff; --hl-accent-soft:#3e8a8f; --hl-focus:#1f4f52;
+  --ck-text:#1f2226; --ck-muted:#545a62; --ck-accent:#2f6f73; --ck-accent-ink:#ffffff;
+  --hl-surface:#fbfaf8; --hl-surface-2:#efece7; --hl-surface-3:#e2ded8; --hl-pane:#f4f2ee; --hl-dock:#e8e5e0;
+  --ck-glass:rgba(251,250,248,.95); --ck-glass-strong:rgba(251,250,248,.98); --ck-stroke:rgba(31,34,38,.12); --ck-stroke-hi:rgba(31,34,38,.2);
+  --ck-glow:none; --ck-shadow:0 6px 18px rgba(30,30,40,.14); --t-line:rgba(31,34,38,.1); --t-shadow:0 6px 18px rgba(30,30,40,.14);
+  --ck-warn-bg:#f6e3c8; --ck-warn-text:#5a3d12; --hu-bg:#eceae6}
+body.hl-theme-dia{background:#eceae6;color:#1f2226}
+body.hl-theme-dia #road-map .ck-top{background:linear-gradient(to bottom,rgba(236,234,230,.95),rgba(236,234,230,0))}
+body.hl-theme-dia #road-map .ck-top, body.hl-theme-dia #road-map .ck-top *{color:#1f2226}
+/* paineis que vem do app original com cor fixa escura */
+body.hl-theme-dia #assistant, body.hl-theme-dia #settings, body.hl-theme-dia #connectivity, body.hl-theme-dia #apps-panel,
+body.hl-theme-dia .hl-carview, body.hl-theme-dia #hl-drawer, body.hl-theme-dia .hl-greet, body.hl-theme-dia .hl-split-menu,
+body.hl-theme-dia .hl-free-bar, body.hl-theme-dia #hl-focus{background:#fbfaf8;color:#1f2226;border-color:rgba(31,34,38,.14)}
+body.hl-theme-dia #conversation p{background:#efece7;color:#1f2226}
+body.hl-theme-dia #conversation p.user-message{background:#dbe9e9}
+body.hl-theme-dia #conversation strong{color:#2f6f73}
+body.hl-theme-dia #assistant textarea, body.hl-theme-dia #settings input{background:#ffffff;color:#1f2226;border-color:rgba(31,34,38,.2)}
+body.hl-theme-dia .hl-prox-svg .body{fill:#e2ded8;stroke:rgba(31,34,38,.3)}
+body.hl-theme-dia .hl-prox-svg .glass{fill:#cfcac2}
+body.hl-theme-dia .hl-prox-svg .zone{stroke:rgba(31,34,38,.15)}
+body.hl-theme-dia .hl-pane-speed b.none, body.hl-theme-dia .hl-w-speed b.none{color:rgba(31,34,38,.25)}
+body.hl-theme-dia .hl-ftile-label{color:#1f2226}
+body.hl-theme-dia.hl-free-edit #hl-free{background:rgba(236,234,230,.6)}
+body.hl-theme-dia #hl-dock .ck-ico{color:#1f2226}
+
+/* ---------- Seletor nos Ajustes ---------- */
+.hl-theme-row{display:flex;flex-wrap:wrap;gap:10px}
+.hl-theme-opt{flex:1 1 150px;display:flex;flex-direction:column;align-items:flex-start;gap:8px;min-height:96px;padding:12px 14px;border-radius:16px;
+  border:2px solid transparent;background:var(--hl-surface-2,#24202a);color:var(--ck-text,#f0eaf0);font:600 16px system-ui,sans-serif;text-align:left;cursor:pointer}
+.hl-theme-opt[aria-pressed="true"]{border-color:var(--hl-accent,#d2a0bd)}
+.hl-theme-opt:focus-visible{outline:2px solid var(--hl-focus,#f0d2e3);outline-offset:2px}
+.hl-theme-sw{display:flex;gap:6px}
+.hl-theme-sw i{display:block;width:26px;height:26px;border-radius:50%;border:1px solid rgba(128,128,128,.35)}
+.hl-theme-opt small{font:400 14px system-ui,sans-serif;color:var(--ck-muted,#b9a9bb)}
+.hl-theme-note{flex-basis:100%;margin:2px 0 0;font-size:14px;color:var(--ck-muted,#b9a9bb)}
+body.hl-theme-dia #road-map, body.hl-theme-dia #road-map #route-canvas{background:#eceae6}
+/* Dia: contraste da auditoria (minimo 4,5:1) no teclado, nos botoes do app original e no card Navegar */
+body.hl-theme-dia, body.hl-theme-dia #road-map{--ck-muted:#4b5057}
+body.hl-theme-dia #hl-kb{background:#e8e5e0;border-color:rgba(31,34,38,.14);color:#1f2226}
+body.hl-theme-dia #hl-kb .hl-kb-bar{color:#3f444b}
+body.hl-theme-dia #hl-kb .hl-kb-key{background:#fbfaf8;color:#1f2226;border-color:rgba(31,34,38,.14)}
+body.hl-theme-dia #hl-kb .hl-kb-key.fn{background:#dedad3}
+body.hl-theme-dia #hl-kb .hl-kb-hide{background:#fbfaf8;color:#1f2226;border-color:rgba(31,34,38,.2)}
+body.hl-theme-dia .hu-btn{background:#fbfaf8;color:#1f2226;border-color:rgba(31,34,38,.2)}
+body.hl-theme-dia .hl-navcard-search{background:#fbfaf8;color:#1f2226}
+
+/* Dia: mapa claro. O estilo do mapa e escuro; inverter as cores e girar o matiz em 180 graus devolve um mapa claro com os
+   mesmos tons (rota, agua, parques), sem baixar outro estilo. Vale para o 3D (canvas) e o 2D (blocos). */
+body.hl-theme-dia #route-canvas canvas, body.hl-theme-dia #route-canvas .leaflet-tile-pane{filter:invert(.9) hue-rotate(180deg) brightness(1.04) contrast(.95)}
+body.hl-theme-dia #road-map .maplibregl-ctrl-attrib, body.hl-theme-dia #road-map .leaflet-control-attribution{background:rgba(251,250,248,.88);color:#4b5057}
+body.hl-theme-dia #road-map .maplibregl-ctrl-attrib a, body.hl-theme-dia #road-map .leaflet-control-attribution a{color:#2f6f73}

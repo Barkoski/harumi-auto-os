@@ -1,0 +1,52 @@
+/* Ajustes da avaliacao de UX (20/11/2026), em todos os temas. Referencia: Android for Cars (alvos de 76dp, texto
+   principal 32dp / secundario 24dp, olhada de ate 2 s) e NHTSA (2 s por olhada, 12 s por tarefa). Na tela de 7" o
+   padrao inteiro nao cabe; o minimo adotado aqui e 64 px nos controles principais e 56 px nos secundarios. */
+
+/* Informacao tecnica que nao ajuda o motorista */
+#road-map #ck-engine{display:none}
+
+/* Controles do mapa: maiores e com folga entre si */
+#road-map .m3-zoom button, #road-map .leaflet-control-zoom a{width:64px;height:64px;line-height:64px}
+#road-map .ck-fab{width:64px;height:64px}
+#road-map .ck-fab button{width:64px;height:64px}
+
+/* Seletor Harumi | Waze e cabecalho das telas */
+.hl-navswitch-btn{min-height:56px;min-width:88px;font-size:16px}
+.hl-slot-pick{min-height:52px;min-width:52px;font-size:15px}
+.hl-slot-full{width:52px;height:52px}
+
+/* Casa / Trabalho: o lapis tinha 48 px colado no botao; agora 56 px e um respiro maior */
+.hl-fav-pen{width:56px;min-height:56px}
+.hl-fav-pair{gap:10px}
+.hl-fav{min-height:56px}
+
+/* Volume na barra de baixo */
+#hl-dock .hl-vol-btn{min-width:64px;min-height:64px}
+
+/* Leitura em uma olhada: textos de decisao maiores nas telas */
+.hl-w-title{font-size:clamp(20px,1.7vw,34px)}
+.hl-w-sub,.hl-w-kick{font-size:16px}
+.hl-w-cell span{font-size:15px}
+.hl-w-cell b{font-size:clamp(20px,1.4vw,28px)}
+.hl-w-last{font-size:18px}
+.hl-w-sc{min-height:64px;font-size:17px}
+.hl-w-mbtn{width:64px;height:60px}
+
+/* Painel do carro sem sensores: uma frase clara no lugar de quatro tracos */
+.hl-w-nodata{margin:0;font-size:16px;line-height:1.4;color:var(--ck-muted,#b9a9bb)}
+.hl-w-nodata[hidden],.hl-w-kv[hidden]{display:none}
+#road-map .ck-go{width:64px;height:64px;min-width:64px}
+#road-map #ck-cities-toggle{min-height:56px}
+#hl-dock .hl-vol-btn{width:64px;height:64px}
+#road-map .ck-fab{border-radius:50%;overflow:hidden}
+
+/* Topo: o nome tecnico da rede ("Rede do Orange Pi") sai; fica "Online" / "Sem internet" (linux-layout.js) */
+#road-map .ck-top #ck-net{display:none}
+#road-map .ck-top .hl-status-net{font-size:15px;color:var(--ck-muted,#b9a9bb)}
+#road-map .ck-top .hl-status-temp:empty,#road-map .ck-top .hl-status-net:empty{display:none}
+
+/* Rotulos curtos sob os icones da barra, so em telas grandes (na de 7" falta altura) */
+@media (min-width:1280px) and (min-height:761px){
+  #hl-dock .hl-dock-apps button{flex-direction:column;gap:4px;min-width:84px}
+  #hl-dock .hl-dock-apps button::after{content:attr(aria-label);font:500 14px system-ui,sans-serif;color:var(--ck-muted,#b9a9bb);white-space:nowrap;max-width:96px;overflow:hidden;text-overflow:ellipsis}
+}

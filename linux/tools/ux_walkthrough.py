@@ -147,13 +147,13 @@ def main():
     shot("4-ajustes")
 
     home()
-    task("Fixar o Waze no dock (e desfazer)", [
+    task("Fixar o Claude no dock (e desfazer)", [
         ("abrir Apps", TAP + "('#hl-dock-drawer')", 1),
         ("tocar Editar dock", TAP + "('.hl-drawer-edit')", 0.5),
         ("dock cheio? quantos apps", "document.querySelectorAll('#hl-dock .hl-dock-apps button').length", 0),
-        ("tocar Waze", "(()=>{const t=[...document.querySelectorAll('.hl-tile')].find(t=>t.textContent.includes('Waze'));if(!t)return 'falhou';t.click();return 'ok'})()", 0.5),
-        ("resultado", "document.querySelector('#hl-dock [data-dock=waze]') ? 'Waze fixado' : (document.getElementById('message').hidden ? 'falhou: sem aviso' : 'aviso: '+document.getElementById('message').textContent)", 0),
-        ("desfazer se fixou", "(()=>{if(document.querySelector('#hl-dock [data-dock=waze]')){[...document.querySelectorAll('.hl-tile')].find(t=>t.textContent.includes('Waze')).click()}return 'ok'})()", 0.3),
+        ("tocar Claude", "(()=>{const t=[...document.querySelectorAll('.hl-tile')].find(t=>t.textContent.includes('Claude'));if(!t)return 'falhou';t.click();return 'ok'})()", 0.5),
+        ("resultado", "document.querySelector('#hl-dock [data-dock=claude]') ? 'Claude fixado' : (document.getElementById('message').hidden ? 'falhou: sem aviso' : 'aviso: '+document.getElementById('message').textContent)", 0),
+        ("desfazer se fixou", "(()=>{if(document.querySelector('#hl-dock [data-dock=claude]')){[...document.querySelectorAll('.hl-tile')].find(t=>t.textContent.includes('Claude')).click()}return 'ok'})()", 0.3),
         ("tocar Concluir", TAP + "('.hl-drawer-edit')", 0.3),
     ])
 

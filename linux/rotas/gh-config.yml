@@ -1,0 +1,29 @@
+# GraphHopper 11.1 na placa: so carrega o grafo pronto (gerado no PC em 04/11/2026 a partir do brazil-latest.osm.pbf).
+# Os perfis precisam ser iguais aos da geracao (D:/HarumiMapa/gh-config.yml), senao o grafo e recusado.
+graphhopper:
+  graph.location: /home/orangepi/.local/share/harumi/rotas/grafo-brasil
+  profiles:
+    - name: car
+      custom_model_files: [car.json]
+  profiles_ch:
+    - profile: car
+  profiles_lm: []
+  graph.encoded_values: car_access, car_average_speed, road_access
+  prepare.min_network_size: 200
+  prepare.subnetworks.threads: 1
+  routing.snap_preventions_default: tunnel, bridge, ferry
+  import.osm.ignored_highways: footway,construction,cycleway,path,steps
+  graph.dataaccess.default_type: MMAP_STORE
+server:
+  application_connectors:
+    - type: http
+      port: 8989
+      bind_host: localhost
+  admin_connectors:
+    - type: http
+      port: 8990
+      bind_host: localhost
+logging:
+  appenders:
+    - type: console
+      log_format: "%d{HH:mm:ss.SSS} %-5level %logger{20} - %msg%n"

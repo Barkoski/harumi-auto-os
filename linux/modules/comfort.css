@@ -22,7 +22,7 @@ body.ck-clean .hl-status-temp{display:none!important}
   font-size:clamp(96px,22vw,260px);font-weight:600;line-height:1.1;font-variant-numeric:tabular-nums;letter-spacing:.02em}
 .ck-clean-hint{margin:0;padding:6px 16px;border-radius:12px;background:rgba(27,22,32,.78);color:var(--ck-muted,#b9a9bb);font-size:16px}
 .ck-clean-exit{position:absolute;top:16px;right:16px;min-width:64px;min-height:64px;padding:0 24px;border-radius:16px;
-  border:1px solid var(--ck-stroke-hi,rgba(240,234,240,.18));background:var(--ck-glass,rgba(43,36,50,.92));color:var(--ck-text,#f0eaf0);
+  border:1px solid var(--ck-stroke-hi,rgb(from var(--ck-text,#f0eaf0) r g b / .18));background:var(--ck-glass,rgba(43,36,50,.92));color:var(--ck-text,#f0eaf0);
   font:600 18px system-ui,sans-serif;cursor:pointer}
 .ck-clean-exit:focus-visible,.ck-rest-ok:focus-visible,.ck-comfort-btn:focus-visible{outline:2px solid var(--ck-accent,#d2a0bd);outline-offset:2px}
 @media (prefers-reduced-motion:no-preference){
@@ -33,10 +33,10 @@ body.ck-clean .hl-status-temp{display:none!important}
 /* Lembrete de descanso: discreto, canto inferior esquerdo acima do dock */
 .ck-rest{position:fixed;left:16px;bottom:calc(var(--ck-tab-h,84px) + 16px);z-index:60;max-width:min(420px,calc(100vw - 32px));
   display:flex;align-items:center;gap:12px;padding:10px 12px 10px 16px;border-radius:16px;
-  background:var(--ck-warn-bg,#5a4634);color:var(--ck-warn-text,#ffe9c9);border:1px solid var(--ck-stroke-hi,rgba(240,234,240,.18));
+  background:var(--ck-warn-bg,#5a4634);color:var(--ck-warn-text,#ffe9c9);border:1px solid var(--ck-stroke-hi,rgb(from var(--ck-text,#f0eaf0) r g b / .18));
   font:500 16px/1.35 system-ui,sans-serif}
 .ck-rest-text{flex:1}
-.ck-rest-ok{min-width:48px;min-height:48px;padding:0 16px;border-radius:12px;border:1px solid var(--ck-stroke-hi,rgba(240,234,240,.18));
+.ck-rest-ok{min-width:48px;min-height:48px;padding:0 16px;border-radius:12px;border:1px solid var(--ck-stroke-hi,rgb(from var(--ck-text,#f0eaf0) r g b / .18));
   background:transparent;color:inherit;font:600 15px system-ui,sans-serif;cursor:pointer}
 @media (prefers-reduced-motion:no-preference){
   .ck-rest:not([hidden]){animation:ck-rise .3s ease-out}
@@ -46,7 +46,7 @@ body.ck-clean .hl-status-temp{display:none!important}
 /* Secao em Ajustes */
 .ck-comfort{display:flex;flex-direction:column;gap:12px;padding:4px 0 12px;color:var(--ck-text,#f0eaf0);font-family:system-ui,sans-serif}
 .ck-comfort-row{display:flex;flex-wrap:wrap;gap:8px}
-.ck-comfort-btn{min-height:48px;min-width:64px;padding:0 18px;border-radius:12px;border:1px solid var(--ck-stroke-hi,rgba(240,234,240,.18));
+.ck-comfort-btn{min-height:48px;min-width:64px;padding:0 18px;border-radius:12px;border:1px solid var(--ck-stroke-hi,rgb(from var(--ck-text,#f0eaf0) r g b / .18));
   background:transparent;color:var(--ck-text,#f0eaf0);font:500 16px system-ui,sans-serif;cursor:pointer}
 .ck-comfort-btn[aria-pressed="true"]{background:var(--ck-accent,#d2a0bd);color:var(--ck-accent-ink,#2a1e2b);border-color:transparent}
 .ck-comfort-label{margin:0;font-size:15px;font-weight:600}

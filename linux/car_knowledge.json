@@ -2,6 +2,36 @@
  "source": "app/src/main/java/com/harumi/autoos/ai/CarKnowledge.java",
  "entries": [
   {
+   "id": "tanque",
+   "regex": "\\b(?:capacidade do tanque|tanque (?:tem|leva|cabe|e de) (?:quantos )?litros|quantos litros (?:tem|leva|cabe) (?:no |o )?tanque|tamanho do tanque)\\b",
+   "answer": "O tanque do Impreza 1.8 leva 50 litros, pelo manual de serviço Subaru de 1994."
+  },
+  {
+   "id": "potencia_torque",
+   "regex": "\\b(?:torque|potencia)\\b(?!.*\\b(?:aperto|apertar|parafuso|parafusos|roda|rodas|vela|velas|porca|porcas|cabecote)\\b)|\\bquantos cavalos\\b|\\bcavalos\\b",
+   "answer": "O EJ18 tem 103 cavalos a 5.600 rpm e 147 newton-metro, ou 15 quilos, de torque a 4.400 rpm, pelo manual de serviço Subaru de 1994. A ficha brasileira cita 105 cavalos."
+  },
+  {
+   "id": "arrefecimento",
+   "regex": "\\b(?:quantos litros|capacidade|quanto)\\b.*\\b(?:agua|arrefecimento|radiador|aditivo)\\b|\\b(?:agua|arrefecimento|radiador)\\b.*\\b(?:quantos litros|capacidade)\\b",
+   "answer": "O sistema de arrefecimento do motor 1.8 leva 6,2 litros, pelo manual de serviço Subaru de 1994. O tipo de aditivo não está confirmado na minha base; use um de boa marca, misturado como diz a embalagem."
+  },
+  {
+   "id": "ponto",
+   "regex": "\\bponto (?:de ignicao|do motor)\\b|\\bponto\\b.*\\b(?:graus|ignicao)\\b",
+   "answer": "O ponto de ignição do EJ18 é 15 graus antes do ponto morto superior, a 700 rpm em marcha lenta, pelo manual de serviço Subaru de 1994."
+  },
+  {
+   "id": "dif_traseiro",
+   "regex": "\\bdiferencial traseiro\\b|\\bdiferencial de tras\\b",
+   "answer": "O diferencial traseiro leva 0,8 litro de óleo GL-5. Como seu câmbio foi trocado, a relação do diferencial traseiro precisa ser igual à da frente, que no 1.8 AWD é 3,900; relações diferentes forçam o diferencial central. Isso é pelo manual de serviço Subaru de 1994."
+  },
+  {
+   "id": "aperto_roda",
+   "regex": "\\b(?:aperto|apertar|torque)\\b.*\\b(?:roda|rodas|porca|porcas|parafuso da roda|parafusos da roda)\\b",
+   "answer": "As porcas das rodas vão com 88 newton-metro, cerca de 9 quilos, com variação de 10 para mais ou para menos, pelo manual de serviço Subaru de 1994. Aperte em cruz e use torquímetro."
+  },
+  {
    "id": "ficha_mt2026",
    "regex": "\\b(?:ficha|dados|especificac\\w*|versao|qual (?:e )?o modelo) d[oe] (?:meu |seu |nosso )?(?:carro|subaru|impreza)|quantos cavalos|potencia d[oe] (?:meu |seu )?(?:carro|motor|subaru|impreza)",
    "answer": "Seu Subaru Impreza perua 1993 tem motor EJ18 e agora usa câmbio manual AWD de cinco marchas de um Impreza 1.8 de 1994. Confirme o código gravado na caixa e a relação dos diferenciais antes de comprar peças."
@@ -54,12 +84,12 @@
   {
    "id": "oleo_cambio_mt2026",
    "regex": "\\b(?:oleo|fluido|atf)\\b.*\\b(?:cambio|transmissao|automatico)\\b|\\b(?:cambio|transmissao)\\b.*\\b(?:oleo|fluido)\\b|\\batf\\b",
-   "answer": "O câmbio manual AWD usa óleo de engrenagens, não ATF. Para a especificação e quantidade exatas, confirme o código da caixa e o manual aplicável; o diferencial dianteiro integra a transmissão em aplicações manuais Subaru, mas confirme nesta caixa."
+   "answer": "O câmbio manual AWD usa óleo de engrenagens GL-5, não ATF; o 75W-90 serve em qualquer temperatura. Pela tabela do manual de serviço Subaru de 1994, a quantidade é de 4,0 litros no 5 marchas AWD; confirme o código gravado na sua caixa. O diferencial dianteiro fica dentro da transmissão."
   },
   {
    "id": "oleo_motor_mt2026",
    "regex": "\\boleo\\b.*\\b(?:motor|troca|trocar|qual|quantos? litros?|viscosidade|usar|uso|colocar|cabe)\\b|\\b(?:troca|trocar|qual|quantos? litros?)\\b.*\\boleo\\b",
-   "answer": "Para o EJ18, confirme viscosidade, classificação e capacidade no manual da variante e conforme o filtro instalado. Confira o nível na vareta, com o carro plano e motor desligado há alguns minutos."
+   "answer": "O motor EJ18 trabalha entre 3,0 litros, no mínimo da vareta, e 4,0 litros, no máximo. O manual de 1994 pede óleo API SH ou SG, 10W-30 ou 10W-40, ou 5W-30 em clima frio. Confira a vareta com o carro no plano e o motor desligado há alguns minutos."
   },
   {
    "id": "velas_mt2026",
@@ -114,7 +144,7 @@
   {
    "id": "pneus",
    "regex": "\\b(?:calibr\\w*|pressao (?:dos|do) pneus?|libras? (?:do|no|nos) pneus?)\\b",
-   "answer": "A pressão certa está na etiqueta do carro ou no manual; não tenho esse valor confirmado para o seu Impreza. Calibre com os pneus frios, a cada 15 dias, e um pouco mais quando o carro estiver carregado."
+   "answer": "Com os pneus de fábrica, 165/80 aro 13 ou 175/70 aro 14, a calibragem é 31 libras na frente e 29 atrás, com os pneus frios; o estepe fino, tipo T, vai com 58 libras. Isso é pelo manual de serviço Subaru de 1994. Se os seus pneus forem de outra medida, siga a recomendação do fabricante do pneu."
   },
   {
    "id": "chuva",
@@ -254,5 +284,6 @@
    "singleSource": true
   }
  ],
- "gearbox": []
+ "gearbox": [],
+ "cambio": "manual 5 marchas AWD (swap informado pelo dono em 20/11/2026). Manual de servico Subaru 1994 (suplemento, PDF rusEFI): oleo GL-5, 4,0 L no 5MT AWD (pag. 13 do PDF), 75W-90 em toda faixa de temperatura (pag. 24), relacao final 1800 AWD 3,900 (pag. 259)."
 }

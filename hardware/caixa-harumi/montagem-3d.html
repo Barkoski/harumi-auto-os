@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tela e central da Harumi</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{--bg:#eef0f2;--panel:#f8f9fa;--fg:#1f2a33;--muted:#5b6872;--line:#cfd6dc;--accent:#2f6f8f;--warn:#a8632a;--bad:#a83a3a;--ok:#3f7d4f;--scene:#e3e7ea;
+  --sans:"IBM Plex Sans",system-ui,"Segoe UI",sans-serif;--mono:"IBM Plex Mono",Consolas,monospace}
+@media (prefers-color-scheme: dark){:root{--bg:#171c20;--panel:#1f262b;--fg:#dde4e9;--muted:#97a4ad;--line:#34404a;--accent:#6fb0cf;--warn:#d99a5f;--bad:#e07a7a;--ok:#79b98a;--scene:#2a3238;color-scheme:dark}}
+html,body{margin:0}
+body{background:var(--bg);color:var(--fg);font:14px/1.5 var(--sans);padding:16px}
+h1{font-size:20px;font-weight:600;margin:0}
+h2{font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:0 0 8px}
+.top{display:flex;flex-wrap:wrap;gap:4px 24px;align-items:baseline;margin-bottom:12px}.top p{margin:0;color:var(--muted)}
+.wrap{display:grid;grid-template-columns:minmax(0,1fr) 380px;gap:16px}
+@media (max-width:900px){.wrap{grid-template-columns:minmax(0,1fr)}}
+.view{position:relative;border:1px solid var(--line);border-radius:6px;overflow:hidden;background:var(--scene);height:min(72vh,660px);min-height:360px}
+#cv{display:block;width:100%;height:100%;touch-action:none}
+.pick{position:absolute;left:12px;right:12px;bottom:12px;font:12px var(--mono);background:var(--panel);border:1px solid var(--line);border-radius:4px;padding:6px 10px;pointer-events:none}
+.side{display:flex;flex-direction:column;gap:16px;min-width:0}
+.box{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:12px 14px}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:8px}
+.row output{font:12px var(--mono);min-width:48px;text-align:right}
+input[type=range]{flex:1;min-width:110px;accent-color:var(--accent)} input{accent-color:var(--accent)}
+button{font:inherit;color:var(--fg);background:var(--bg);border:1px solid var(--line);border-radius:4px;padding:4px 10px;cursor:pointer}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+ul.warn{margin:0;padding-left:18px;display:grid;gap:6px}
+ul.warn li::marker{color:var(--warn)} ul.warn li.bad::marker{color:var(--bad)} ul.warn li.ok::marker{color:var(--ok)}
+table{border-collapse:collapse;width:100%;font-size:12px} td,th{border-bottom:1px solid var(--line);padding:4px 6px;text-align:left;vertical-align:top}
+th{color:var(--muted);font-weight:500} td.n{font-family:var(--mono);white-space:nowrap} .est{color:var(--warn)} .src{color:var(--muted)}
+.tw{overflow-x:auto} .note{font-size:12px;color:var(--muted);margin:8px 0 0}
+</style>
+</head>
+<body>
+<div class="top">
+  <h1>Tela no painel e caixa da central</h1>
+  <p>Impreza 1993 · tela de 13,3" Full HD em cima do painel · central embaixo do painel do passageiro · mm</p>
+</div>
+<div class="wrap">
+  <div class="view"><canvas id="cv" aria-label="Modelo 3D da tela no painel e da caixa da central"></canvas><div class="pick" id="pick">Toque numa peça para ver o nome e a medida</div></div>
+  <div class="side">
+    <div class="box">
+      <h2>Vista</h2>
+      <div class="row"><label for="tilt">Inclinação da tela</label><input id="tilt" type="range" min="0" max="35" step="1" value="20"><output id="tilto">20°</output></div>
+      <div class="row"><label for="alt">Altura do eixo</label><input id="alt" type="range" min="25" max="60" step="1" value="40"><output id="alto">40 mm</output></div>
+      <div class="row"><label for="exp">Explodir a central</label><input id="exp" type="range" min="0" max="1" step="0.01" value="0.25"></div>
+      <div class="row"><input type="checkbox" id="c90" checked><label for="c90">Cabos com plugue em 90°</label> <input type="checkbox" id="hand" checked><label for="hand">Mão (escala)</label></div>
+      <div class="row"><button id="rv" type="button">Vista inicial</button><button id="vt" type="button">Só a tela</button><button id="vc" type="button">Só a central</button></div>
+    </div>
+    <div class="box"><h2>Conferência</h2><ul class="warn" id="warn"></ul></div>
+  </div>
+</div>
+<div class="box" style="margin-top:16px">
+  <h2>Peças impressas (pasta caixa-harumi)</h2>
+  <div class="tw"><table><thead><tr><th>Arquivo</th><th>O que é</th><th>Tamanho</th></tr></thead><tbody>
+    <tr><td>1b_moldura_tela_13pol_esq / _dir.stl</td><td>Frente da moldura em 2 partes (corte em x = −50): janela e bolso da tela</td><td class="n">111 e 212 × 201 × 11</td></tr>
+    <tr><td>1c_traseira_tela_13pol_esq / _dir.stl</td><td>Traseira em 2 partes (corte em x = +50, desencontrado da frente): grade de ar e lingueta da articulação (M6)</td><td class="n">211 e 112 × 201 × 23</td></tr>
+    <tr><td>1d_suporte_tela_painel.stl</td><td>Suporte no tampo do painel: base 180 × 100, orelhas do eixo M6, rasgo dos cabos</td><td class="n">180 × 100 × 50</td></tr>
+    <tr><td>6_caixa_central.stl</td><td>Caixa da central: Orange Pi, conversor, hub, modem, PC817, relé</td><td class="n">205 × 195 × 73 (233 com orelhas)</td></tr>
+    <tr><td>7_tampa_central.stl</td><td>Tampa com 2 ventoinhas de 80 mm por fora: entrada sobre o Orange Pi, saída no canto oposto</td><td class="n">205 × 195 × 3</td></tr>
+    <tr><td>9_capuz_saida_ar.stl</td><td>Capuz sobre a saída: vira o ar quente 90° para a cabine, rumo ao assoalho</td><td class="n">80 × 92 × 43</td></tr>
+    <tr><td>8_bocal_ar_condicionado.stl</td><td>Bocal opcional sobre a entrada: liga uma mangueira de 50 mm à saída de ar do passageiro</td><td class="n">80 × 80 × 66</td></tr>
+  </tbody></table></div>
+  <p class="note">Medidas da tela estimadas (o anúncio não informa); altura e curvatura do tampo do painel ainda não medidas. Peças do plano 2-DIN antigo ficaram em antigo-2din/.</p>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+<script>
+const MAT={},METAL={metalness:.75,roughness:.3};
+function mat(c,o={}){const k=c+JSON.stringify(o);return MAT[k]||(MAT[k]=new THREE.MeshStandardMaterial(Object.assign({color:c,roughness:.6,metalness:.1},o)));}
+function B(g,w,h,d,x,y,z,c,o){const m=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),mat(c,o));m.position.set(x+w/2,y+h/2,z+d/2);g.add(m);return m;}
+function CY(g,r,len,axis,x,y,z,c,o,seg=24){const m=new THREE.Mesh(new THREE.CylinderGeometry(r,r,len,seg),mat(c,o));if(axis==='x')m.rotation.z=Math.PI/2;if(axis==='z')m.rotation.x=Math.PI/2;m.position.set(x,y,z);g.add(m);return m;}
+function tag(g,name,info,est){g.traverse(o=>{if(o.isMesh)o.userData.owner=g;});g.userData={name,info,est};return g;}
+
+// ===== medidas (iguais aos geradores) =====
+const T={L:306,A:184,E:8,J:[294,166],BOR:8,TRAS:3,LAB:2.5}; const ML=T.L+.6+2*T.BOR, MA=T.A+.6+2*T.BOR;
+const LING={L:40,Y0:15,Y1:45,P:20};
+const CX={PAR:2.5,L:200,A:70,P:190}; CX.EL=CX.L+5; CX.EA=CX.A+2.5; CX.EP=CX.P+5;
+const P_=(x0,w,z0,d)=>[2.5+x0,2.5+x0+w,2.5+z0,2.5+z0+d];
+const POS={opi:P_(20,104,20,66),conv:P_(130,66,23,60),hub:P_(26,145,92,58),modem:P_(6,88,152,28),pc817:P_(96,40,152,28),rele:P_(140,50,154,26)};
+
+// ===== construtores =====
+const BUILD={
+ tela(){ // moldura (frente + traseira) com a tela; origem no eixo da articulacao. Tela olha para +z.
+  const g=new THREE.Group(); const yc=MA/2-(LING.Y0+LING.Y1)/2; // centro da tela acima do eixo
+  const zf=LING.P-8; // a traseira fica 12 mm a frente do eixo (a lingueta vai para tras, rumo ao para-brisa)
+  const f=new THREE.Group(); g.add(f); f.position.set(0,yc,zf);
+  B(f,ML,MA,3,-ML/2,-MA/2,0,"#3e474e"); // traseira
+  B(f,ML,MA,9,-ML/2,-MA/2,3,"#4a545c");  // frente
+  B(f,T.J[0],T.J[1],.4,-T.J[0]/2,-T.J[1]/2,12,"#16314a",{roughness:.1});
+  B(f,140,90,15,-70,-45,-12,"#1d5c2f");   // placa da tela atras
+  B(f,LING.L,LING.Y1-LING.Y0,LING.P,-LING.L/2,-MA/2+LING.Y0,-LING.P,"#3e474e"); // lingueta
+  CY(g,3,52,'x',0,0,0,"#b8bcc0",METAL); // parafuso M6
+  return tag(g,'Tela 13,3" Full HD na moldura','moldura 323×201 (em 2 partes); tela ~306×184×8 (estimada)',true);},
+ suporte(alt){const g=new THREE.Group();B(g,180,5,100,-90,0,-50,"#5b656d");
+  [-1,1].forEach(s=>{B(g,6,alt+10,30,s>0?20.6:-26.6,0,-15,"#5b656d");for(let i=0;i<8;i++){const h=Math.max(alt-i*5,2);B(g,3,h,10,s>0?26.6+i*3:-29.6-i*3,5,-5,"#66717a");}});
+  return tag(g,"Suporte no tampo do painel","base 180×100; eixo M6 a "+alt+" mm do tampo",false);},
+ orangepi(){const g=new THREE.Group();[[3.5,3.5],[96.5,3.5],[3.5,58.5],[96.5,58.5]].forEach(([x,z])=>CY(g,2.5,5,'y',x,2.5,z,"#d9d4c7"));
+  B(g,100,1.6,62,0,5,0,"#1d2b25");B(g,104,17,66,-2,7,-2,"#8f979e",{metalness:.8,roughness:.35,transparent:true,opacity:.4});CY(g,14,4,'y',50,24,31,"#2a2a2a");
+  B(g,9,3.3,7,10,6.6,-1,"#b8bcc0",METAL);B(g,9,3.3,7,24,6.6,-1,"#b8bcc0",METAL);B(g,15,5.6,11,40,6.6,-1,"#b8bcc0",METAL);
+  B(g,17,7.5,14,-3,6.6,24,"#2d63c8");B(g,17,15,14,-3,6.6,42,"#c8ccd0",METAL);return g;},
+ conversor(){const g=new THREE.Group();B(g,66,8,60,0,0,0,"#bfc5ca",METAL);for(let i=0;i<7;i++)B(g,66,14,3,0,8,4+i*8.5,"#c9cfd4",METAL);return g;},
+ hub(){const g=new THREE.Group();B(g,145,26,58,0,0,0,"#26292c");for(let i=0;i<7;i++){B(g,13,1,5,8+i*19,26,30,"#2d63c8");B(g,6,1.5,4,11+i*19,26,14,"#c94a3a");}return g;},
+ modem(){const g=new THREE.Group();B(g,76,11.5,28,12,0,0,"#f2f2f0",{roughness:.35});B(g,12,4.5,12,0,3.5,8,"#c8ccd0",METAL);return g;},
+ pc817(){const g=new THREE.Group();B(g,40,1.6,28,0,0,0,"#1f5fa8");for(let i=0;i<4;i++){B(g,7,4,4,4+i*9,1.6,4,"#f0f0f0");B(g,7,8,9,4+i*9,1.6,17,"#2f8f4a");}return g;},
+ rele(){const g=new THREE.Group();B(g,50,1.6,26,0,0,0,"#1f5fa8");B(g,19,15,15.5,4,1.6,5,"#2d63c8");B(g,10,10,8,34,1.6,3,"#2f8f4a");return g;},
+ fan(){const g=new THREE.Group();B(g,80,25,80,0,0,0,"#6b4a36");CY(g,38,25.4,'y',40,12.5,40,"#1d1d1d");CY(g,13,25.8,'y',40,12.5,40,"#d8c3a5");return g;},
+ capuz(){const g=new THREE.Group();B(g,80,3,80,0,0,12,"#5b656d");B(g,80,40,2.5,0,3,89.5,"#5b656d");B(g,2.5,40,80,0,3,12,"#5b656d");B(g,2.5,40,80,77.5,3,12,"#5b656d");B(g,80,2.5,80,0,40.5,12,"#5b656d");for(let i=0;i<4;i++)B(g,75,2.5,3,2.5,37.5-i*2,9-i*3,"#66717a");return g;},
+ bocal(){const g=new THREE.Group();B(g,80,3,80,0,0,0,"#5b656d");const f=new THREE.Mesh(new THREE.CylinderGeometry(25,39.5,30,32,1,true),mat("#5b656d",{side:THREE.DoubleSide}));f.position.set(40,18,40);g.add(f);CY(g,25,33,'y',40,49.5,40,"#5b656d");return g;},
+ mao(){const g=new THREE.Group();const c="#d8a98a";B(g,85,22,100,0,0,0,c);[0,22,44,64].forEach((x,i)=>B(g,18,18,[70,80,76,60][i],x+2,2,100,c));B(g,22,20,55,85,0,25,c);return g;},
+};
+
+// ===== cena =====
+const cv=document.getElementById('cv');const R=new THREE.WebGLRenderer({canvas:cv,antialias:true});R.setPixelRatio(Math.min(devicePixelRatio,2));
+const scene=new THREE.Scene();const cam=new THREE.PerspectiveCamera(35,1,1,8000);const ctl=new THREE.OrbitControls(cam,cv);ctl.enableDamping=!matchMedia('(prefers-reduced-motion: reduce)').matches;
+scene.add(new THREE.HemisphereLight(0xffffff,0x445566,.85));const dl=new THREE.DirectionalLight(0xffffff,.6);dl.position.set(300,600,500);scene.add(dl);
+const css=v=>getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+const ui={tilt:document.getElementById('tilt'),alt:document.getElementById('alt'),exp:document.getElementById('exp'),c90:document.getElementById('c90'),hand:document.getElementById('hand')};
+let world=null,parts=[];const fmt=v=>v.toFixed(0);
+
+function ghost(g,name,x0,x1,y0,y1,z0,z1,bad){const w=x1-x0,h=y1-y0,d=z1-z0;const m=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),new THREE.MeshBasicMaterial({color:bad?0xd0503c:0xd9a040,transparent:true,opacity:.3,depthWrite:false}));
+  m.position.set(x0+w/2,y0+h/2,z0+d/2);m.userData={owner:m,name,info:"espaço que o cabo pede"+(bad?": não cabe":"")};g.add(m);}
+
+function build(){
+  if(world)scene.remove(world);world=new THREE.Group();scene.add(world);parts=[];
+  const tilt=+ui.tilt.value,alt=+ui.alt.value,plug=ui.c90.checked?16:38;
+  // --- tampo do painel (aproximado) e tela ---
+  const tampo=new THREE.Mesh(new THREE.BoxGeometry(600,12,260),new THREE.MeshStandardMaterial({color:0x56606a,transparent:true,opacity:.55}));
+  tampo.position.set(0,-6,-30);tampo.userData={owner:tampo,name:"Tampo do painel (aproximado)",info:"altura e curvatura reais ainda não medidas"};world.add(tampo);
+  const vid=new THREE.Mesh(new THREE.BoxGeometry(520,2,260),new THREE.MeshStandardMaterial({color:0x9fb6c8,transparent:true,opacity:.18,depthWrite:false}));
+  vid.position.set(0,90,-210);vid.rotation.x=-0.55;world.add(vid);
+  const sup=BUILD.suporte(alt);world.add(sup);
+  const tela=BUILD.tela();tela.position.set(0,alt,0);tela.rotation.x=-tilt*Math.PI/180;world.add(tela);
+  // --- caixa da central (ao lado, so para ver; no carro fica embaixo do painel do passageiro) ---
+  const cx=new THREE.Group();cx.position.set(330,-60,-100);world.add(cx);
+  const sb=new THREE.Mesh(new THREE.BoxGeometry(CX.EL,CX.EA,CX.EP),new THREE.MeshStandardMaterial({color:0xb9c2c9,transparent:true,opacity:.15,depthWrite:false}));
+  sb.position.set(CX.EL/2,CX.EA/2,CX.EP/2);sb.userData={owner:sb,name:"Caixa da central (6_caixa_central.stl)",info:"205×195×73 mm por fora; embaixo do painel do passageiro"};cx.add(sb);
+  const se=new THREE.LineSegments(new THREE.EdgesGeometry(sb.geometry),new THREE.LineBasicMaterial({color:0x55606a}));se.position.copy(sb.position);cx.add(se);
+  const k=+ui.exp.value*50;
+  const put=(key,name,info,est,p,dy=0)=>{const g=tag(BUILD[key](),name,info,est);g.position.set(p[0],2.5+dy+k*(parts.length%3),p[2]);cx.add(g);parts.push(g);return g;};
+  put('orangepi','Orange Pi 5 + case com fan','placa 100×62; HDMI/USB-C virados para a parede da frente',true,POS.opi);
+  put('conversor','Conversor 12→5 V 10 A IP67','66×60×22',false,POS.conv);
+  put('hub','Hub USB 7 portas','145×58×26; Bluetooth, FT232RL e captura plugados nele',false,POS.hub);
+  put('modem','Modem 4G E3372h','88×28×11,5, deitado',false,POS.modem);
+  put('pc817','Optoacoplador PC817','~40×28×15',true,POS.pc817);
+  put('rele','Relé temporizador ACC','~50×26×18',true,POS.rele);
+  const fx=(POS.opi[0]+POS.opi[1])/2, fz=(POS.opi[2]+POS.opi[3])/2;
+  const fe=tag(BUILD.fan(),'Ventoinha de ENTRADA 80 mm (por fora da tampa)','sopra ar frio sobre o Orange Pi; recebe o bocal do ar-condicionado',false);
+  fe.position.set(fx-40,CX.EA+3+k*1.5,fz-40);cx.add(fe);
+  const fs=tag(BUILD.fan(),'Ventoinha de SAÍDA 80 mm (por fora da tampa)','tira o ar quente no canto oposto',false);
+  fs.position.set(CX.EL-2.5-55-40,CX.EA+3+k*1.5,CX.EP-2.5-55-40);cx.add(fs);
+  const cz=tag(BUILD.capuz(),'Capuz da saída de ar quente (9_capuz_saida_ar.stl)','vira o ar quente 90° para a cabine (frente da caixa), rumo ao assoalho',false);
+  cz.position.set(CX.EL-2.5-55-40,CX.EA+28+k*2.5,CX.EP-2.5-55-40-12);cx.add(cz);
+  const bo=tag(BUILD.bocal(),'Bocal do ar-condicionado (8_bocal_ar_condicionado.stl)','80 × 80 → mangueira de 50 mm até a saída de ar do passageiro',false);
+  bo.position.set(fx-40,CX.EA+28+k*2.5,fz-40);cx.add(bo);
+  cx.add(new THREE.ArrowHelper(new THREE.Vector3(0,-1,0),new THREE.Vector3(fx,CX.EA+150,fz),70,0x3f8fd0,18,10));
+  cx.add(new THREE.ArrowHelper(new THREE.Vector3(0,-.35,-1).normalize(),new THREE.Vector3(CX.EL-57.5,CX.EA+50,CX.EP-57.5-50),80,0xd0503c,18,10));
+  const o=POS.opi;
+  ghost(cx,"Plugues HDMI e USB-C do Orange Pi (frente)",o[0]+5,o[0]+60,7,25,o[2]-plug,o[2],o[2]-plug<2.5);
+  ghost(cx,"Plugues USB do Orange Pi (esquerda)",o[0]-plug,o[0]-3,7,25,o[2]+20,o[2]+60,o[0]-plug<2.5);
+  ghost(cx,"Plugues nas portas do hub",POS.hub[0]+5,POS.hub[1]-5,28.5,28.5+plug,POS.hub[2]+28,POS.hub[2]+36,26+plug>CX.A);
+  if(ui.hand.checked){const m=tag(BUILD.mao(),"Mão adulta (escala)","palma ~85×100 mm",false);m.position.set(-330,0,-60);world.add(m);}
+
+  // --- conferencia ---
+  const a=tilt*Math.PI/180, yc=MA/2-(LING.Y0+LING.Y1)/2;
+  const topo=alt+Math.cos(a)*(yc+MA/2)+Math.sin(a)*3, baixo=alt+Math.cos(a)*(yc-MA/2);
+  const W=[];
+  W.push(["warn",`Borda de cima da tela a ~${fmt(topo)} mm acima do tampo do painel. Antes de imprimir, faça o gabarito de papelão de 323 × 201 mm (páginas 1 e 2 do PDF) nessa altura e veja do banco se ele não entra na linha de visão pelo para-brisa.`]);
+  W.push([baixo>=5?"ok":"bad",baixo>=5?`Borda de baixo a ${fmt(baixo)} mm do tampo: não encosta.`:`Borda de baixo encosta no tampo (${fmt(baixo)} mm): suba o eixo ou incline menos.`]);
+  W.push(["warn","O tampo esquenta muito ao sol: use quebra-sol no para-brisa. Nada de eletrônica além da tela fica em cima do painel."]);
+  W.push(["warn","Não cubra a saída do desembaçador perto do para-brisa: o suporte vai no meio do tampo, entre ela e as saídas de ar."]);
+  W.push([o[2]-plug<2.5?"bad":"ok",`Central: plugues da frente do Orange Pi ${o[2]-plug<2.5?"não cabem":"cabem"} (${plug} mm pedidos, 20 mm de folga).`]);
+  W.push([o[0]-plug<2.5?"bad":"ok",`Central: plugues da lateral do Orange Pi ${o[0]-plug<2.5?"não cabem":"cabem"} (20 mm de folga).`]);
+  W.push([26+plug>CX.A?"bad":"ok",`Central: hub 26 mm + plugues ${plug} mm = ${26+plug} mm de ${CX.A} mm de altura interna.`]);
+  W.push(["ok","Central: Orange Pi, conversor, hub, modem, PC817 e relé lado a lado, sem sobrepor."]);
+  W.push(["ok","Ventilação empurra e puxa: entrada de 80 mm sobre o Orange Pi (seta azul) e saída de 80 mm no canto oposto (seta vermelha). O ar atravessa a caixa inteira."]);
+  W.push(["ok","Ar quente: sai pela ventoinha de saída e o capuz vira o fluxo para a cabine (rumo ao assoalho do passageiro). Assim ele não fica preso atrás do porta-luvas nem volta para a entrada."]);
+  W.push(["warn","Bocal do ar-condicionado: ótimo com o ar ligado no frio. Com o ar no quente (inverno), tire a mangueira ou feche a saída do passageiro: senão a caixa recebe ar quente."]);
+  W.push(["warn","A central fica embaixo do painel do passageiro, não dentro do porta-luvas fechado (sem ar, o Orange Pi passa de 80 °C). Meça o espaço: 205 × 195 × 73 mm, 233 mm com as orelhas."]);
+  document.getElementById('warn').innerHTML=W.map(([c,t])=>`<li class="${c}">${t}</li>`).join("");
+}
+let home=[-560,360,760,80,30,-40];
+function view(x,y,z,tx,ty,tz){cam.position.set(x,y,z);ctl.target.set(tx,ty,tz);ctl.update();}
+document.getElementById('rv').onclick=()=>view(...home);
+document.getElementById('vt').onclick=()=>view(-260,180,380,0,90,0);
+document.getElementById('vc').onclick=()=>view(430,360,260,430,-20,0);
+ui.tilt.oninput=()=>{document.getElementById('tilto').textContent=ui.tilt.value+"°";build();};
+ui.alt.oninput=()=>{document.getElementById('alto').textContent=ui.alt.value+" mm";build();};
+ui.exp.oninput=build;ui.c90.onchange=build;ui.hand.onchange=build;
+
+const ray=new THREE.Raycaster(),mp=new THREE.Vector2(),pick=document.getElementById('pick');let down=null;
+cv.addEventListener('pointerdown',e=>down=[e.clientX,e.clientY]);
+cv.addEventListener('pointerup',e=>{if(!down||Math.hypot(e.clientX-down[0],e.clientY-down[1])>5)return;const b=cv.getBoundingClientRect();
+  mp.set((e.clientX-b.left)/b.width*2-1,-(e.clientY-b.top)/b.height*2+1);ray.setFromCamera(mp,cam);
+  const hs=ray.intersectObjects(world.children,true).filter(h=>h.object.userData.owner);const h=hs.find(h=>!(h.object.material.transparent&&h.object.material.opacity<.5))||hs[0];
+  if(h){const u=h.object.userData.owner.userData;pick.textContent=`${u.name} — ${u.info}${u.est?" (medida estimada)":""}`;}else pick.textContent="Toque numa peça para ver o nome e a medida";});
+function theme(){scene.background=new THREE.Color(css('--scene'));}
+matchMedia('(prefers-color-scheme: dark)').addEventListener('change',theme);theme();
+function size(){const w=cv.clientWidth,h=cv.clientHeight;R.setSize(w,h,false);cam.aspect=w/h;cam.updateProjectionMatrix();}
+addEventListener('resize',size);size();build();view(...home);
+(function loop(){requestAnimationFrame(loop);ctl.update();R.render(scene,cam);})();
+</script>
+</body>
+</html>

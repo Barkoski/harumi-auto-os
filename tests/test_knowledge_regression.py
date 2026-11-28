@@ -5,6 +5,7 @@ import unittest
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / 'linux'))  # harumi_assistant importa harumi_diag (diagnostico por conversa)
 sys.modules.setdefault('harumi_guard', types.ModuleType('harumi_guard'))
 spec = importlib.util.spec_from_file_location('harumi_assistant', ROOT / 'linux/harumi_assistant.py')
 assistant = importlib.util.module_from_spec(spec)

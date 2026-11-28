@@ -13,6 +13,7 @@ import urllib.request
 from datetime import datetime
 from pathlib import Path
 
+import harumi_diag
 import harumi_guard
 
 LLM_URL = "http://127.0.0.1:8090/v1/chat/completions"
@@ -39,7 +40,7 @@ OFF_TOPIC_REPLY = ("Esse assunto fica fora da minha área. Sou sua copiloto: pos
 OFF_TOPIC = re.compile(r"(?s).*\b(?:medicina|doencas?|remedios?|medicamentos?|cancer|diabetes|depressao|ansiedade|gravidez|"
                        r"gravida|vacinas?|cirurgia|exame de sangue|consulta medica|advogad[oa]s?|juridic[oa]|jurisprudencia|"
                        r"processo judicial|peticao|sentenca|tribunal|inss|aposentadoria|politica|eleicao|eleicoes|deputad[oa]|"
-                       r"senador[a]?|partido politico|investimentos?|bitcoin|criptomoedas?|bolsa de valores|imposto de renda|"
+                       r"senador[a]?|partido politico|lula|bolsonaro|petista|bolsonarista|esquerdista|direitista|investimentos?|bitcoin|criptomoedas?|bolsa de valores|imposto de renda|"
                        r"programacao|python|javascript|receita de|como cozinhar|culinaria|religiao|horoscopo|signo)\b.*")
 BAD_PLACE = re.compile(r"(?is).*(?:[\x00-\x1f<>]|https?:|intent:|javascript:|file:|geo:).*")
 
@@ -91,8 +92,8 @@ def car_answer(raw: str):
 
 def quick_reply(raw: str):
     n = re.sub(r"\s+", " ", re.sub(r"[,.!?;:]", " ", re.sub(r"\b(?:harumi|rarumi)\b", " ", norm(raw)))).strip()
-    greeting = r"(?:oi|ola|bom dia|boa tarde|boa noite)"
-    wellbeing = r"(?:tudo bem|(?:esta|ta) tudo bem|como (?:vai(?: voce)?|voce (?:esta|ta|vai))|voce (?:esta|ta) bem)"
+    greeting = r"(?:oi|ola|bom dia|boa tarde|boa noite|e ai|eai|fala|salve|opa)"
+    wellbeing = r"(?:tudo bem|(?:esta|ta) tudo bem|como (?:vai(?: voce)?|voce (?:esta|ta|vai))|voce (?:esta|ta) bem|(?:tudo )?(?:suave|beleza|blz|de boa|firmeza|tranquilo|joia))"
     unit = f"(?:{greeting}(?: {wellbeing})?|{wellbeing})"
     if re.fullmatch(f"{unit}(?: {unit}){{0,2}}", n):
         return "Oi, Lucas! Tudo bem por aqui. E você?"
@@ -201,6 +202,14 @@ def parse(raw: str):
     """Devolve (acao, dado). Acoes: GREETING, STOP, MAP, MUSIC, YOUTUBE, VOLUME, OPEN_APP, CLOSE_APP, CLOCK, ETA, CLEAN, ROUTE, ROUTE_BETWEEN, DIAGNOSTICS, OFF_TOPIC, CHAT."""
     if raw is None or len(raw) > 1600:
         raise ValueError("Pedido muito longo.")
+    if not raw.strip():
+        return "QUICK_REPLY", "Não ouvi nada. Pode repetir?"
+    if harumi_guard.gibberish(raw):
+        return "QUICK_REPLY", "Não entendi. Pode repetir de outro jeito?"
+    raw = harumi_guard.clean_voice(raw) or raw
+    safe = harumi_guard.priority(raw)  # seguranca antes de qualquer comando ou da base do carro
+    if safe:
+        return "QUICK_REPLY", safe
     text = re.sub(r"(?iu)^(?:harumi|rarumi)[, ]+", "", raw.strip())
     text = re.sub(r"(?iu)[,.!?]+$", "", text)
     text = re.sub(r"(?iu)^(?:por favor[, ]+|(?:você |voce )?pode )", "", text)
@@ -208,7 +217,9 @@ def parse(raw: str):
     n = norm(text)
     if re.fullmatch(r"(?:oi|ola)(?:,? (?:harumi|rarumi))?", n):
         return "GREETING", ""
-    if re.fullmatch(r"(pare|parar|cancele|cancelar|silencio)", n):
+    if re.fullmatch(r"(?:encerr\w*|cancel\w*|par\w*|termin\w*|finaliz\w*|sai\w*|desliga\w*)(?: (?:a|o|da|do))? (?:navegacao|rota|percurso|gps)", n):
+        return "STOP_NAV", ""
+    if re.fullmatch(r"(?:pare|para|parar|cancela|cancele|cancelar|esquece|esqueca|deixa pra la|chega|silencio|stop)(?: isso| tudo)?", n):
         return "STOP", ""
     if re.fullmatch(r"(?:abra|abrir|abre|abril)(?: o| os| um| uma)? (?:mapa|mapas|navegador|navegacao)(?: para (?:encontrar|ver|buscar|procurar).*)?", n):
         return "MAP", ""
@@ -219,7 +230,7 @@ def parse(raw: str):
     cmd = command(n)
     if cmd:
         return cmd
-    if re.match(r".*(?:temperatura do motor|rotacao do motor|estado do carro|como esta o carro|problema no carro|status do motor|diagnostico).*", n):
+    if re.match(r".*(?:temperatura do motor|rotacao do motor|estado do carro|como (?:esta|ta) o carro|problema no carro|status do motor|diagnostico).*", n):
         return "DIAGNOSTICS", ""
     m = re.match(r"(?iu)^(?:me )?(?:(?:trace|traça|traca|tracar|traçar|faça|faca) (?:uma |a )?rota(?: pra mim| para mim)?(?: no mapa)?|rota|navegue) de\s+(.+?)\s+(?:para|até|ate)\s+(.+)$", text)
     if m:
@@ -249,7 +260,25 @@ def parse(raw: str):
         return g
     if g:
         return "QUICK_REPLY", g
+    long_reply = _long_message(n)
+    if long_reply:
+        return "QUICK_REPLY", long_reply
     return "CHAT", ""
+
+
+def _long_message(n: str):
+    """Frase longa com varios pedidos: o 2B se perde e inventa ("a placa de Londrina diz que a cidade esta vazia").
+    Responde o que da com seguranca e pede o resto em partes."""
+    if len(n) < 160:
+        return None
+    parts = []
+    if re.search(r"\b(?:olhar|verificar|checar|conferir|revisar)\b", n):
+        parts.append("Antes de sair, confira óleo, água do radiador, pneus e estepe, faróis e palhetas.")
+    if re.search(r"\b(?:quanto tempo|demora|distancia|quantos km|leva)\b", n):
+        parts.append("Para o tempo, me pergunte um trecho por vez, por exemplo: “quanto tempo de Londrina até Apucarana”.")
+    if not parts:
+        return "Essa ficou longa para eu entender de uma vez. Me pergunte uma coisa por vez, que eu respondo melhor."
+    return " ".join(parts)
 
 
 _EMOJI = re.compile("[\U0001F000-\U0001FAFF☀-➿️‍]")
@@ -259,8 +288,15 @@ def tidy(text: str, max_sentences: int = 3) -> str:
     """Limpa a resposta do modelo: sem emoji, sem listas longas, no maximo 3 frases (a persona pede isso; o 2B nem sempre obedece)."""
     t = _EMOJI.sub("", text or "")
     t = re.sub(r"\s*\n+\s*", " ", t).strip()
-    parts = re.split(r"(?<=[.!?])\s+", t)
-    return " ".join(parts[:max_sentences]).strip()
+    parts = [p for p in re.split(r"(?<=[.!?])\s+", t) if p]
+    # O 2B abre com "Olá! Tudo bem? Como posso ajudar?" mesmo quando perguntado de outra coisa
+    while len(parts) > 1 and re.fullmatch(r"(?iu)(?:olá|ola|oi)(?:,? \w+)?[!.]|tudo bem\?|como posso (?:te )?ajudar(?: você)?(?: hoje)?\?",
+                                          parts[0].strip()):
+        parts = parts[1:]
+    parts = parts[:max_sentences]
+    if len(parts) > 1 and not re.search(r"[.!?…]$", parts[-1]):
+        parts = parts[:-1]  # ultima frase cortada pelo limite de tokens ("Lembre-se de que a")
+    return " ".join(parts).strip()
 
 
 class Assistant:
@@ -273,6 +309,28 @@ class Assistant:
         self.session = 0
         self.busy = False
         self.history: list[dict] = []
+        self.diag = None  # diagnostico em andamento (harumi_diag): {"arvore", "no", "erros"}
+
+    def route(self, question: str):
+        """Diagnostico por conversa primeiro (resposta a pergunta da Harumi, ou sintoma novo), depois o parser.
+        Seguranca (harumi_guard.priority) sempre passa na frente, inclusive no meio do diagnostico."""
+        q = question or ""
+        safe = harumi_guard.priority(q) if q.strip() else None
+        if self.diag is not None:
+            if safe:
+                self.diag = None
+                return "QUICK_REPLY", safe
+            r = harumi_diag.answer(self.diag, harumi_guard.clean_voice(q) or q)
+            if r is not None:
+                reply, self.diag = r
+                return "QUICK_REPLY", reply
+            self.diag = None  # nao entendeu duas vezes: trata como pedido novo
+        if not safe and q.strip() and not harumi_guard.gibberish(q):
+            s = harumi_diag.start(harumi_guard.clean_voice(q) or q)
+            if s:
+                reply, self.diag = s
+                return "QUICK_REPLY", reply
+        return parse(q)
 
     def status(self, text, busy):
         self.busy = busy
@@ -285,11 +343,13 @@ class Assistant:
             was = self.busy
         if feedback and was:
             self.emit("harumiMessage", "Harumi", "Operação interrompida. Pode enviar uma nova mensagem.")
+        elif feedback:
+            self.emit("harumiMessage", "Harumi", "Não havia nada em andamento. Para parar a rota, diga “encerrar navegação”.")
         self.status("Pronta · Orange Pi", False)
 
     def ask(self, question: str):
         try:
-            action, data = parse(question)
+            action, data = self.route(question)
         except ValueError as e:
             self.emit("harumiMessage", "Harumi", str(e))
             return
@@ -329,6 +389,8 @@ class Assistant:
                 reply, then = f"Vou abrir o {_APPS[data][1]}.", [("harumiLinuxOpen", _APPS[data][0])]
             elif action == "CLOSE_APP":
                 reply, then = "Vou fechar o app.", [("harumiAssistCmd", {"type": "closeApp"})]
+            elif action == "STOP_NAV":
+                reply, then = "Vou encerrar a navegação.", [("harumiAssistCmd", {"type": "stopNav"})]
             elif action == "CLEAN":
                 reply = "Vou ativar a tela limpa. Toque na tela para voltar." if data else "Vou sair da tela limpa."
                 then = [("harumiAssistCmd", {"type": "cleanScreen", "on": bool(data)})]
@@ -360,6 +422,10 @@ class Assistant:
         if not self._valid(sid):
             return
         self.emit("harumiMessage", "Harumi", reply or "Não consegui montar uma resposta agora. Pode repetir?")
+        if reply and action != "CHAT":  # respostas prontas tambem entram no historico: o modelo perdia o assunto
+            # ("qual o oleo?" -> "e quantos litros leva?" virou combustivel no teste de 20/11/2026)
+            self.history = (self.history + [{"role": "user", "content": question},
+                                            {"role": "assistant", "content": reply}])[-12:]
         for call in then:
             self.emit(call[0], *call[1:])
         with self.lock:
@@ -388,7 +454,7 @@ class Assistant:
 
     def _chat(self, sid, question):
         msgs = [{"role": "system", "content": PERSONA}] + self.history[-6:] + [{"role": "user", "content": question}]
-        body = json.dumps({"messages": msgs, "max_tokens": 200, "temperature": 0.25, "stream": True,
+        body = json.dumps({"messages": msgs, "max_tokens": 120, "temperature": 0.25, "stream": True,
                            "chat_template_kwargs": {"enable_thinking": False}}).encode()
         req = urllib.request.Request(LLM_URL, data=body, headers={"Content-Type": "application/json"})
         text = ""

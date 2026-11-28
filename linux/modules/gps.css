@@ -7,7 +7,7 @@
 .hl-gps-status{margin:0;color:var(--ck-text,#f0eaf0);font:500 16px system-ui,sans-serif}
 .hl-gps-hint{margin:0;color:var(--ck-muted,#b9a9bb);font:14px system-ui,sans-serif}
 .hl-gps-switch{align-self:flex-start;min-width:200px;min-height:48px;padding:0 20px;border-radius:24px;cursor:pointer;
-  border:1px solid var(--ck-stroke-hi,rgba(240,234,240,.18));background:transparent;color:var(--ck-text,#f0eaf0);font:600 16px system-ui,sans-serif}
+  border:1px solid var(--ck-stroke-hi,rgb(from var(--ck-text,#f0eaf0) r g b / .18));background:transparent;color:var(--ck-text,#f0eaf0);font:600 16px system-ui,sans-serif}
 .hl-gps-switch.on{background:var(--ck-accent,#d2a0bd);color:var(--ck-accent-ink,#2a1e2b);border-color:transparent}
 .hl-gps-switch:focus-visible{outline:2px solid var(--ck-accent,#d2a0bd);outline-offset:3px}
 @media (prefers-reduced-motion:reduce){.hl-gps-badge,.hl-gps-switch{transition:none;animation:none}}

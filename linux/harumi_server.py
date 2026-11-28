@@ -35,6 +35,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from harumi_assistant import Assistant  # noqa: E402
 import harumi_system  # noqa: E402
+import harumi_routes  # noqa: E402
 import harumi_store  # noqa: E402,F401  (os plugins o importam; aqui garante o mesmo modulo)
 
 VERSION = "linux-0.3"
@@ -606,6 +607,12 @@ class MapGateway:
             url += f"&bearings={bearing},45;"
         data, mtime = cache_read(url, ROUTE_TTL)
         cached = data is not None
+        if data is None:
+            # 1o: rota offline no proprio Orange Pi (GraphHopper local com o grafo do Brasil); funciona sem Internet
+            local = harumi_routes.local_route(path)
+            if local:
+                data, mtime = json.dumps(local).encode(), time.time()
+                cache_write(url, data)
         if data is None:
             try:
                 if self.force_offline:

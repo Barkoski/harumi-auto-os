@@ -5,7 +5,7 @@
   'use strict';
   var NS = 'http://www.w3.org/2000/svg';
   var DOCK_KEY = 'hl.dock.v1', DOCK_MAX = window.innerWidth >= 1600 ? 9 : 7; // tela de 10" (1280) cabe 7; monitor grande, 9
-  var DEFAULT_DOCK = ['nav', 'music', 'video', 'harumi', 'camera', 'car'];
+  var DEFAULT_DOCK = ['nav', 'music', 'video', 'harumi', 'camera', 'waze']; // o carro ja tem botao proprio a esquerda da barra
   function $(id) { return document.getElementById(id); }
   function el(tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
   function icon(id) {
@@ -32,7 +32,7 @@
     { id: 'claude', label: 'Claude', icon: 'ck-chat', img: 'claude', run: function () { closePanels(); window.harumiLinuxOpen('claude'); } },
     { id: 'chatgpt', label: 'ChatGPT', icon: 'ck-chat', img: 'chatgpt', run: function () { closePanels(); window.harumiLinuxOpen('chatgpt'); } },
     { id: 'camera', label: 'Câmeras', icon: 'ck-camera', run: function () { notify('Câmera de ré: aguardando a câmera USB e o sinal da ré.'); } },
-    { id: 'car', label: 'Carro', icon: 'ck-car', run: function () { closePanels(); flash($('hl-car')); } },
+    { id: 'car', label: 'Carro', icon: 'ck-car', run: function () { closeDrawer(); var b = document.querySelector('.hl-dock-car'); if (b) b.click(); } },
     { id: 'trip', label: 'Viagem', icon: 'ck-compass', run: function () { closePanels(); showCard('trip'); } },
     { id: 'atlas', label: 'Atlas', icon: 'ck-globe', run: function () { closeDrawer(); click('open-atlas'); } },
     { id: 'internet', label: 'Internet', icon: 'ck-wifi', run: function () { closeDrawer(); click('connections'); } },
@@ -50,7 +50,18 @@
   function flash(node) { if (!node) return; node.scrollIntoView({ block: 'nearest' }); node.classList.add('hl-flash'); setTimeout(function () { node.classList.remove('hl-flash'); }, 1200); }
 
   function loadDock() {
-    try { var v = JSON.parse(localStorage.getItem(DOCK_KEY)); if (Array.isArray(v)) return v.filter(app).slice(0, DOCK_MAX); } catch (e) { /* sem storage */ }
+    try {
+      var v = JSON.parse(localStorage.getItem(DOCK_KEY));
+      if (Array.isArray(v)) {
+        // avaliacao de UX (20/11/2026): "Carro" no dock repetia o botao do carro da esquerda; troca uma vez pelo Waze
+        if (!localStorage.getItem('hl.dock.mig1')) {
+          var i = v.indexOf('car');
+          if (i >= 0) { if (v.indexOf('waze') < 0) v[i] = 'waze'; else v.splice(i, 1); localStorage.setItem(DOCK_KEY, JSON.stringify(v)); }
+          localStorage.setItem('hl.dock.mig1', '1');
+        }
+        return v.filter(app).slice(0, DOCK_MAX);
+      }
+    } catch (e) { /* sem storage */ }
     return DEFAULT_DOCK.slice();
   }
   function saveDock(list) { try { localStorage.setItem(DOCK_KEY, JSON.stringify(list)); } catch (e) { /* sem storage */ } }
@@ -132,16 +143,20 @@
   function toggleDrawer() { if (drawer.hidden) openDrawer(); else closeDrawer(); }
 
   /* ---------------- Barra de status (topo do mapa) ---------------- */
-  var tempEl;
+  var tempEl, netEl;
   function buildStatus() {
     var right = document.querySelector('#road-map .ck-top .ck-right'); if (!right) return;
     tempEl = el('span', 'hl-status-temp', ''); tempEl.title = 'Temperatura da placa';
+    netEl = el('span', 'hl-status-net', '');
     right.insertBefore(tempEl, right.firstChild);
+    right.insertBefore(netEl, tempEl.nextSibling);
   }
   function pollStatus() {
     fetch('/linux/status').then(function (r) { return r.ok ? r.json() : null; }).then(function (s) {
       if (!s) return;
-      if (tempEl) { tempEl.textContent = s.tempC != null ? 'Placa ' + s.tempC + ' °C' : ''; tempEl.classList.toggle('hot', s.tempC >= 80); }
+      // Topo sem jargao: a temperatura da placa so aparece quando esta alta; a rede vira "Online" / "Sem internet"
+      if (tempEl) { var hot = s.tempC != null && s.tempC >= 75; tempEl.textContent = hot ? 'Central quente · ' + s.tempC + ' °C' : ''; tempEl.classList.toggle('hot', s.tempC >= 80); }
+      if (netEl) netEl.textContent = s.online === false ? 'Sem internet · mapa offline' : s.online ? 'Online' : '';
       window.harumiVolume(s.volume);
       if (s.spotify) window.harumiSpotifyNow(s.spotify);
       window.dispatchEvent(new CustomEvent('hl-status', { detail: s }));

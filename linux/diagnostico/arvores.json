@@ -1,0 +1,1395 @@
+{
+ "sobre": "Arvores de diagnostico da Harumi (harumi_diag.py). Mecanica geral de carros + o que docs/subaru/BASE-IMPREZA-1993-EJ18.md confirma para o EJ18. Carro: Impreza SW 1993, EJ18, cambio MANUAL 5 marchas AWD (swap). Textos curtos para voz; sempre dizem o que conferir e se da para rodar. Gatilhos e chaves usam texto sem acento e minusculo.",
+ "arvores": [
+  {
+   "id": "motor_barulho",
+   "titulo": "Barulho no motor",
+   "gatilho": ".*\\b(?:barulho|batida|batendo|tac|tic|toc|tec|estalo|estalando|ruido|chocalho|chiado|chiando|assobio|ronco|roncando|zumbido)\\b.*\\b(?:motor|capo)\\b.*|.*\\bmotor\\b.*\\b(?:barulho|batendo|batida|tac|tic|toc|tec|estalando|ruido|chiando|chiado|assobiando|roncando)\\b.*",
+   "intro": "Vamos descobrir juntos.",
+   "inicio": "tipo",
+   "nos": {
+    "tipo": {
+     "pergunta": "Como é o barulho: uma batida metálica rápida, tipo tac-tac, um chiado ou assobio, ou um ronco?",
+     "dica": "Diga: batida, chiado ou ronco.",
+     "opcoes": [
+      {
+       "chaves": [
+        "tac",
+        "tic",
+        "toc",
+        "tec",
+        "batida",
+        "batendo",
+        "metalico",
+        "martelando",
+        "estalo",
+        "estalando",
+        "taca"
+       ],
+       "vai": "ritmo"
+      },
+      {
+       "chaves": [
+        "chiado",
+        "chia",
+        "chiando",
+        "assobio",
+        "assobia",
+        "assobiando",
+        "guincho",
+        "apito",
+        "fino"
+       ],
+       "vai": "chiado"
+      },
+      {
+       "chaves": [
+        "ronco",
+        "ronca",
+        "roncando",
+        "zumbido",
+        "uivo",
+        "grave"
+       ],
+       "vai": "r_ronco"
+      }
+     ],
+     "nao_sei": "ritmo"
+    },
+    "ritmo": {
+     "pergunta": "O barulho fica mais rápido quando você acelera, acompanhando o giro do motor?",
+     "opcoes": [
+      {
+       "chaves": [
+        "sim",
+        "fica",
+        "acompanha",
+        "acelera junto",
+        "mais rapido",
+        "isso",
+        "exato",
+        "aham",
+        "uhum",
+        "aumenta",
+        "acelera"
+       ],
+       "vai": "oleo"
+      },
+      {
+       "chaves": [
+        "nao",
+        "nunca",
+        "igual",
+        "mesmo ritmo"
+       ],
+       "vai": "r_externo"
+      }
+     ],
+     "nao_sei": "oleo"
+    },
+    "oleo": {
+     "pergunta": "A luz do óleo acende, ou o nível na vareta está baixo?",
+     "opcoes": [
+      {
+       "chaves": [
+        "sim",
+        "acende",
+        "acendeu",
+        "baixo",
+        "pouco",
+        "faltando",
+        "isso"
+       ],
+       "vai": "r_sem_oleo"
+      },
+      {
+       "chaves": [
+        "nao",
+        "normal",
+        "certo",
+        "cheio",
+        "ok",
+        "no nivel"
+       ],
+       "vai": "frio"
+      }
+     ],
+     "nao_sei": "frio"
+    },
+    "frio": {
+     "pergunta": "O barulho é mais forte com o motor frio e diminui ou some depois que ele esquenta?",
+     "opcoes": [
+      {
+       "chaves": [
+        "sim",
+        "some",
+        "sumiu",
+        "diminui",
+        "melhora",
+        "so frio",
+        "de manha",
+        "frio",
+        "isso"
+       ],
+       "vai": "r_frio"
+      },
+      {
+       "chaves": [
+        "nao",
+        "continua",
+        "sempre",
+        "quente tambem",
+        "igual"
+       ],
+       "vai": "carga"
+      }
+     ],
+     "nao_sei": "carga"
+    },
+    "carga": {
+     "pergunta": "Ele aparece mais ao acelerar forte ou em subida, parecendo pedrinhas chacoalhando?",
+     "opcoes": [
+      {
+       "chaves": [
+        "sim",
+        "subida",
+        "acelerar forte",
+        "pedrinha",
+        "pedrinhas",
+        "chacoalhando",
+        "carga",
+        "isso"
+       ],
+       "vai": "r_detonacao"
+      },
+      {
+       "chaves": [
+        "nao",
+        "sempre",
+        "parado tambem",
+        "marcha lenta"
+       ],
+       "vai": "lugar"
+      }
+     ],
+     "nao_sei": "lugar"
+    },
+    "lugar": {
+     "pergunta": "Parece vir de cima, dos lados do motor, onde ficam as tampas de válvulas, ou de baixo, mais grave e pesado?",
+     "dica": "Diga: em cima ou embaixo.",
+     "opcoes": [
+      {
+       "chaves": [
+        "cima",
+        "lado",
+        "lados",
+        "tampa",
+        "tampas",
+        "cabecote",
+        "alto",
+        "lateral"
+       ],
+       "vai": "r_valvulas"
+      },
+      {
+       "chaves": [
+        "baixo",
+        "embaixo",
+        "grave",
+        "pesado",
+        "fundo",
+        "carter"
+       ],
+       "vai": "r_biela"
+      }
+     ],
+     "nao_sei": "r_batida_geral"
+    },
+    "chiado": {
+     "pergunta": "O chiado aparece ao ligar o motor frio, ao virar o volante ou ao ligar o ar-condicionado?",
+     "opcoes": [
+      {
+       "chaves": [
+        "sim",
+        "frio",
+        "ligar",
+        "partida",
+        "volante",
+        "virar",
+        "ar",
+        "ar condicionado",
+        "isso"
+       ],
+       "vai": "r_correia"
+      },
+      {
+       "chaves": [
+        "nao",
+        "sempre",
+        "constante",
+        "o tempo todo"
+       ],
+       "vai": "r_chiado_geral"
+      }
+     ],
+     "nao_sei": "r_chiado_geral"
+    },
+    "r_sem_oleo": {
+     "causas": "Batida com pouco óleo ou com a luz do óleo acesa é emergência: o motor está sem lubrificação.",
+     "rodar": "Pare em local seguro e desligue agora. Complete o óleo; se a luz continuar acesa com o motor ligado, não rode e chame um guincho."
+    },
+    "r_frio": {
+     "causas": "Batida que some quando o motor esquenta costuma ser folga nos tuchos e válvulas, ou o pistão batendo de leve no frio, o que é comum em motor boxer rodado.",
+     "conferir": "Confira o nível e a idade do óleo: óleo velho piora. Se trocar óleo e filtro e continuar, um mecânico avalia as válvulas.",
+     "rodar": "Pode rodar normalmente, sem acelerar forte com o motor frio."
+    },
+    "r_detonacao": {
+     "causas": "Isso parece detonação, a batida de pino: combustível ruim, ponto de ignição adiantado, carbonização ou sensor de detonação com defeito, que no seu carro é o código 22 da injeção.",
+     "conferir": "Abasteça num posto de confiança, evite acelerar fundo em marcha alta e leia os códigos pelas piscadas da luz da injeção.",
+     "rodar": "Dá para rodar com calma, mas detonação contínua estraga pistão: não force até resolver.",
+     "fonte": "codigo 22 = sensor de detonacao: BASE secao 5 [1]"
+    },
+    "r_valvulas": {
+     "causas": "Batida leve e rápida em cima costuma ser tucho ou folga de válvula, ou uma vela frouxa.",
+     "conferir": "Óleo no nível e trocado; confira se as velas estão apertadas. Um mecânico acha o ponto exato com um estetoscópio.",
+     "rodar": "Geralmente dá para rodar com cuidado até a oficina."
+    },
+    "r_biela": {
+     "causas": "Batida grave, de baixo, que acompanha o giro e piora com carga é sinal de bronzina ou biela gasta.",
+     "conferir": "Confira o óleo agora.",
+     "rodar": "Isso é grave: rode o mínimo, devagar, direto para a oficina, ou chame um guincho. Se a batida aumentar, desligue o motor."
+    },
+    "r_batida_geral": {
+     "causas": "Sem saber de onde vem, os suspeitos principais são folga de válvula, em cima e leve, e bronzina, embaixo e grave.",
+     "conferir": "Confira o óleo. Com o motor ligado, alguém escuta perto de cada lado e embaixo.",
+     "rodar": "Se for grave e embaixo, não rode; senão, só o necessário até um mecânico."
+    },
+    "r_externo": {
+     "causas": "Se o barulho não acompanha o giro do motor, provavelmente vem de fora dele: protetor de calor do escapamento solto, escapamento batendo ou suspensão.",
+     "conferir": "Com o carro parado e frio, mexa no escapamento e procure chapinhas soltas.",
+     "rodar": "Normalmente dá para rodar."
+    },
+    "r_correia": {
+     "causas": "Chiado nessas horas costuma ser correia de acessórios frouxa ou ressecada: alternador, direção ou ar-condicionado.",
+     "conferir": "Com o motor desligado, veja se a correia tem rachaduras ou brilho e se está frouxa. Trocar e esticar resolve na maioria das vezes.",
+     "rodar": "Dá para rodar, mas se a correia romper você perde a carga da bateria e a direção fica pesada."
+    },
+    "r_chiado_geral": {
+     "causas": "Chiado constante pode ser rolamento de polia, do tensor, do alternador ou da bomba d'água, ou um assobio de vazamento de vácuo.",
+     "conferir": "O mecânico testa girando as polias com a correia solta e procura mangueiras de vácuo rachadas.",
+     "rodar": "Dá para rodar com atenção; se virar um ronco forte, vá logo para a oficina."
+    },
+    "r_ronco": {
+     "causas": "Ronco que aumenta com a velocidade do carro costuma ser rolamento de roda ou pneu; se aumenta com o giro do motor parado, pode ser rolamento de polia ou do alternador.",
+     "conferir": "Repare se o ronco muda nas curvas: se muda, é rolamento de roda, problema conhecido na frente desse Impreza.",
+     "rodar": "Dá para rodar com atenção até checar.",
+     "fonte": "rolamento dianteiro: BASE secao 5 [1]"
+    }
+   }
+  },
+  {
+   "id": "motor_falhando",
+   "titulo": "Motor falhando",
+   "gatilho": ".*\\b(?:falhando|engasga\\w*|engasgo|picotando|picota|sem forca|perdendo forca|perdeu forca|fraco de forca|morrendo|morre sozinho|apagando sozinho|apaga sozinho|soluc\\w*|tropeca\\w*|trancando|rateando|ratea|batendo pino)\\b.*",
+   "intro": "Vamos descobrir juntos.",
+   "inicio": "luz",
+   "nos": {
+    "luz": {
+     "pergunta": "A luz da injeção, a Check Engine, está acesa fixa, piscando, ou apagada?",
+     "dica": "Diga: acesa, piscando ou apagada.",
+     "opcoes": [
+      {
+       "chaves": [
+        "piscando",
+        "pisca",
+        "piscou"
+       ],
+       "vai": "r_pisca"
+      },
+      {
+       "chaves": [
+        "acesa",
+        "fixa",
+        "sim",
+        "ligada",
+        "acendeu"
+       ],
+       "vai": "quando"
+      },
+      {
+       "chaves": [
+        "apagada",
+        "nao",
+        "nenhuma",
+        "normal"
+       ],
+       "vai": "quando"
+      }
+     ],
+     "nao_sei": "quando"
+    },
+    "quando": {
+     "pergunta": "A falha acontece mais em marcha lenta, ao acelerar forte e em subida, ou depois de chuva ou de lavar o motor?",
+     "dica": "Diga: marcha lenta, acelerando ou chuva.",
+     "opcoes": [
+      {
+       "chaves": [
+        "chuva",
+        "lavagem",
+        "lavei",
+        "lavar",
+        "umido",
+        "umidade",
+        "molhado",
+        "orvalho",
+        "choveu",
+        "chovendo",
+        "chuvoso",
+        "garoa",
+        "neblina",
+        "sereno"
+       ],
+       "vai": "r_umidade"
+      },
+      {
+       "chaves": [
+        "lenta",
+        "marcha lenta",
+        "parado",
+        "semaforo",
+        "sinal"
+       ],
+       "vai": "r_lenta"
+      },
+      {
+       "chaves": [
+        "acelerar",
+        "acelerando",
+        "acelero",
+        "subida",
+        "forca",
+        "ultrapassagem",
+        "estrada",
+        "carga"
+       ],
+       "vai": "r_acelera"
+      },
+      {
+       "chaves": [
+        "sempre",
+        "todas",
+        "tudo",
+        "o tempo todo"
+       ],
+       "vai": "r_falha_geral"
+      }
+     ],
+     "nao_sei": "r_falha_geral"
+    },
+    "r_pisca": {
+     "causas": "Luz da injeção piscando com o motor andando indica falha de ignição forte: combustível sem queimar pode esquentar demais o catalisador.",
+     "rodar": "Reduza, não acelere forte e leve à oficina o quanto antes; se o carro tremer muito, pare.",
+     "fonte": "BASE secao 4 [1]"
+    },
+    "r_lenta": {
+     "causas": "Falha ou rotação irregular em marcha lenta, no EJ18, costuma ser a válvula de marcha lenta carbonizada, mangueira de vácuo rachada ou o sensor de borboleta.",
+     "conferir": "Limpe a válvula de marcha lenta e o corpo de borboleta antes de trocar peças, e procure mangueiras rachadas, que costumam assobiar.",
+     "rodar": "Dá para rodar.",
+     "fonte": "BASE secao 5 (ISC/vacuo/TPS) [2+]"
+    },
+    "r_acelera": {
+     "causas": "Falha ao acelerar forte costuma ser ignição fraca, nas velas, cabos, tampa e rotor do distribuidor ou bobina, ou combustível chegando pouco, por filtro entupido ou bomba fraca.",
+     "conferir": "Comece pelo barato: velas NGK BKR6E-11 com folga de 1,0 a 1,1 milímetro, cabos, e a tampa do distribuidor, vendo se tem óleo ou trinca dentro. Troque o filtro de combustível se for velho.",
+     "rodar": "Dá para rodar com calma; evite ultrapassagens que dependam de força.",
+     "fonte": "velas e distribuidor: BASE secoes 5 e 6"
+    },
+    "r_umidade": {
+     "causas": "Falha depois de chuva ou lavagem é quase sempre umidade na ignição: cabos de vela ressecados ou tampa do distribuidor trincada deixam a faísca escapar.",
+     "conferir": "Seque a tampa do distribuidor e os cabos; se melhorar, troque os cabos e a tampa.",
+     "rodar": "Dá para rodar; costuma melhorar quando seca."
+    },
+    "r_falha_geral": {
+     "causas": "Os suspeitos mais comuns são ignição, nas velas, cabos e distribuidor, combustível, no filtro e na bomba, e entrada de ar falsa.",
+     "conferir": "Leia os códigos pelas piscadas da luz da injeção: eles apontam o sensor com problema.",
+     "rodar": "Rode com calma até a oficina."
+    }
+   }
+  },
+  {
+   "id": "nao_pega",
+   "titulo": "Carro não pega",
+   "gatilho": ".*\\b(?:carro|motor|ele|subaru|impreza)\\b.*\\bnao (?:pega|liga|da partida|quer pegar|quer ligar|pegou|ligou|deu partida)\\b.*|(?:o carro )?nao (?:pega|pegou|da partida|deu partida|quer pegar)(?: o carro)?|.*\\bnao (?:pega|pegou|da partida|quer pegar)\\b.*\\b(?:carro|motor)\\b.*",
+   "intro": "Vamos por partes.",
+   "inicio": "partida",
+   "nos": {
+    "partida": {
+     "pergunta": "Quando você vira a chave, o motor de partida gira o motor, só faz um clique, ou não acontece nada?",
+     "dica": "Diga: gira, clique ou nada.",
+     "opcoes": [
+      {
+       "chaves": [
+        "clique",
+        "clic",
+        "click",
+        "estalo",
+        "tec",
+        "tac",
+        "tlec"
+       ],
+       "vai": "r_clique"
+      },
+      {
+       "chaves": [
+        "nada",
+        "nenhum",
+        "silencio",
+        "morto",
+        "apagado",
+        "nao faz nada"
+       ],
+       "vai": "r_nada"
+      },
+      {
+       "chaves": [
+        "gira",
+        "roda",
+        "vira",
+        "tenta",
+        "rrr",
+        "barulho de partida",
+        "funciona a partida",
+        "sim"
+       ],
+       "vai": "bomba"
+      }
+     ],
+     "nao_sei": "bomba"
+    },
+    "bomba": {
+     "pergunta": "Ao ligar a chave, antes da partida, você ouve a bomba de combustível zumbir por uns dois segundos, vindo de trás?",
+     "opcoes": [
+      {
+       "chaves": [
+        "sim",
+        "ouco",
+        "ouvi",
+        "zumbe",
+        "zumbiu",
+        "faz",
+        "isso"
+       ],
+       "vai": "giro"
+      },
+      {
+       "chaves": [
+        "nao",
+        "nada",
+        "nao ouco",
+        "silencio"
+       ],
+       "vai": "r_bomba"
+      }
+     ],
+     "nao_sei": "giro"
+    },
+    "giro": {
+     "pergunta": "O motor gira solto e mais rápido que o normal, ou tem cheiro forte de gasolina?",
+     "dica": "Diga: gira solto, cheiro de gasolina, ou normal.",
+     "opcoes": [
+      {
+       "chaves": [
+        "solto",
+        "rapido",
+        "leve",
+        "diferente",
+        "estranho"
+       ],
+       "vai": "r_correia_dentada"
+      },
+      {
+       "chaves": [
+        "cheiro",
+        "gasolina",
+        "combustivel",
+        "afogado"
+       ],
+       "vai": "r_afogado"
+      },
+      {
+       "chaves": [
+        "nao",
+        "normal",
+        "igual",
+        "nenhum"
+       ],
+       "vai": "r_ignicao"
+      }
+     ],
+     "nao_sei": "r_ignicao"
+    },
+    "r_clique": {
+     "causas": "Só um clique costuma ser bateria fraca, terminal frouxo ou oxidado, ou o automático do motor de partida com defeito.",
+     "conferir": "Limpe e aperte os terminais da bateria. Se as luzes do painel enfraquecem na partida, é bateria: dá para fazer chupeta. Se elas ficam fortes e só clica, é o motor de partida.",
+     "rodar": "Se pegar na chupeta, rode pelo menos meia hora para recarregar."
+    },
+    "r_nada": {
+     "causas": "Sem nada ao virar a chave: bateria totalmente descarregada, cabo da bateria solto, ou, se o seu carro tiver, o interruptor do pedal da embreagem, que só libera a partida com o pedal pisado até o fim.",
+     "conferir": "Pise a embreagem até o fundo e tente de novo; veja se o painel acende e confira os terminais da bateria. Depois do swap do câmbio, vale conferir se esse interruptor foi ligado certo.",
+     "rodar": "Até resolver, o carro não sai."
+    },
+    "r_bomba": {
+     "causas": "Sem o zumbido da bomba, o combustível pode não estar chegando: fusível ou relé da bomba, ou a própria bomba.",
+     "conferir": "Confira o fusível e o relé da bomba. Um mecânico mede se chega energia na bomba.",
+     "rodar": "Até resolver, o carro não roda."
+    },
+    "r_correia_dentada": {
+     "causas": "Motor girando solto e rápido demais pode ser a correia dentada rompida. No EJ18 o motor não é interferente: em tese não empena válvula, mas o carro não pega até trocar a correia e acertar o ponto.",
+     "conferir": "Tire a tampa plástica da frente do motor e veja se a correia está inteira.",
+     "rodar": "Não insista na partida; chame um guincho.",
+     "fonte": "nao interferente: BASE secao 1.2 [2+]"
+    },
+    "r_afogado": {
+     "causas": "Cheiro de gasolina com o motor girando sem pegar pode ser motor afogado.",
+     "conferir": "Espere uns minutos e dê a partida com o acelerador todo pressionado, sem bombear. Se o cheiro for forte embaixo do carro, procure vazamento antes.",
+     "rodar": "Se estiver pingando gasolina, não dê partida: risco de incêndio."
+    },
+    "r_ignicao": {
+     "causas": "Motor gira normal e o combustível parece chegar, mas não pega: costuma faltar faísca, na bobina, no módulo de ignição, na tampa e rotor do distribuidor ou nos cabos.",
+     "conferir": "Um mecânico testa a faísca com um testador de centelha. Leia também os códigos pelas piscadas da luz da injeção.",
+     "rodar": "Não insista muito na partida, para não esgotar a bateria."
+    }
+   }
+  },
+  {
+   "id": "fumaca",
+   "titulo": "Fumaça",
+   "gatilho": ".*\\b(?:fumaca|fumacando|fumacinha|fumacento)\\b.*",
+   "intro": "Vamos ver.",
+   "inicio": "cor",
+   "nos": {
+    "cor": {
+     "pergunta": "De onde sai a fumaça e de que cor ela é: branca, azulada, ou preta?",
+     "dica": "Diga a cor, e se sai do escapamento ou do capô.",
+     "opcoes": [
+      {
+       "chaves": [
+        "capo",
+        "motor",
+        "frente",
+        "debaixo do capo"
+       ],
+       "vai": "r_capo"
+      },
+      {
+       "chaves": [
+        "branca",
+        "branco",
+        "vapor"
+       ],
+       "vai": "branca"
+      },
+      {
+       "chaves": [
+        "azul",
+        "azulada",
+        "cinza",
+        "acinzentada"
+       ],
+       "vai": "r_azul"
+      },
+      {
+       "chaves": [
+        "preta",
+        "preto",
+        "escura"
+       ],
+       "vai": "r_preta"
+      }
+     ],
+     "nao_sei": "r_fumaca_geral"
+    },
+    "branca": {
+     "pergunta": "Essa fumaça branca some depois que o motor esquenta, ou continua com o motor quente e tem cheiro adocicado?",
+     "opcoes": [
+      {
+       "chaves": [
+        "some",
+        "sumiu",
+        "so de manha",
+        "so frio",
+        "frio",
+        "passa",
+        "para"
+       ],
+       "vai": "r_condensacao"
+      },
+      {
+       "chaves": [
+        "continua",
+        "doce",
+        "adocicado",
+        "quente tambem",
+        "sempre",
+        "sim"
+       ],
+       "vai": "r_junta"
+      }
+     ],
+     "nao_sei": "r_junta"
+    },
+    "r_capo": {
+     "causas": "Fumaça saindo do capô costuma ser vapor do arrefecimento, branco e com cheiro doce, ou óleo pingando no escapamento, cinza e com cheiro de queimado.",
+     "rodar": "Pare em local seguro e desligue. Não abra a tampa do radiador quente. Se houver chamas, saiam do carro e liguem para os Bombeiros no 193."
+    },
+    "r_condensacao": {
+     "causas": "Fumaça branca que some quando o motor esquenta é só condensação da água no escapamento, normal em dia frio ou úmido.",
+     "rodar": "Pode rodar normalmente."
+    },
+    "r_junta": {
+     "causas": "Fumaça branca contínua, com cheiro doce e o nível de água baixando, indica água entrando na combustão: junta do cabeçote ou cabeçote empenado. No EJ18 isso é bem menos comum que nos EJ22 e EJ25, mas acontece depois de um superaquecimento.",
+     "conferir": "Com o motor frio, veja o nível do reservatório e se há bolhas no radiador. O mecânico faz o teste de CO2 na água e a compressão.",
+     "rodar": "Rode o mínimo, vigiando o ponteiro da temperatura; se subir, pare.",
+     "fonte": "BASE secao 5 [2+]"
+    },
+    "r_azul": {
+     "causas": "Fumaça azulada é óleo queimando: retentores de válvula ou anéis gastos, ou óleo pingando no escapamento pela junta da tampa de válvulas, que costuma vazar no EJ18.",
+     "conferir": "Compare o nível do óleo a cada abastecimento. Se a fumaça aparece só ao acelerar depois de muito tempo parado em marcha lenta, são os retentores de válvula; se é constante, os anéis.",
+     "rodar": "Dá para rodar completando o óleo; não deixe faltar.",
+     "fonte": "tampa de valvulas: BASE secao 5 [2+]"
+    },
+    "r_preta": {
+     "causas": "Fumaça preta é mistura rica: filtro de ar sujo, bico injetor pingando, sensor de fluxo de ar, sensor de temperatura ou sonda lambda com defeito.",
+     "conferir": "Comece pelo filtro de ar e leia os códigos pelas piscadas da luz da injeção.",
+     "rodar": "Dá para rodar, mas o consumo sobe."
+    },
+    "r_fumaca_geral": {
+     "causas": "Pela cor dá para saber a causa: branca e doce é água, azulada é óleo, preta é excesso de combustível.",
+     "rodar": "Se a fumaça vier do capô, pare e desligue o carro."
+    }
+   }
+  },
+  {
+   "id": "vazamento",
+   "titulo": "Vazamento",
+   "gatilho": ".*\\b(?:vazamento|vazando|vaza|pingando|pinga|pingo|poca|mancha no chao|molhado embaixo)\\b.*",
+   "intro": "Vamos ver o que está pingando.",
+   "inicio": "cor",
+   "nos": {
+    "cor": {
+     "pergunta": "Qual a cor e o cheiro do líquido, e de onde pinga: na frente, no meio do carro, ou perto de uma roda?",
+     "dica": "Diga a cor: verde, preto, transparente, vermelho, ou se é perto de uma roda.",
+     "opcoes": [
+      {
+       "chaves": [
+        "gasolina",
+        "combustivel"
+       ],
+       "vai": "r_gasolina"
+      },
+      {
+       "chaves": [
+        "roda",
+        "perto da roda",
+        "pneu"
+       ],
+       "vai": "r_freio"
+      },
+      {
+       "chaves": [
+        "verde",
+        "rosa",
+        "laranja",
+        "doce",
+        "adocicado",
+        "radiador",
+        "agua do motor"
+       ],
+       "vai": "r_arrefecimento"
+      },
+      {
+       "chaves": [
+        "transparente",
+        "agua limpa",
+        "agua",
+        "ar condicionado"
+       ],
+       "vai": "r_ar"
+      },
+      {
+       "chaves": [
+        "vermelho",
+        "enxofre",
+        "cheiro forte",
+        "meio",
+        "cambio",
+        "diferencial"
+       ],
+       "vai": "r_cambio"
+      },
+      {
+       "chaves": [
+        "preto",
+        "preta",
+        "marrom",
+        "escuro",
+        "oleo"
+       ],
+       "vai": "r_oleo"
+      }
+     ],
+     "nao_sei": "r_vaz_geral"
+    },
+    "r_gasolina": {
+     "causas": "Pingo com cheiro de gasolina é vazamento de combustível: risco de incêndio.",
+     "rodar": "Não ligue o carro e não fume perto. Chame um mecânico ou guincho."
+    },
+    "r_freio": {
+     "causas": "Líquido oleoso perto de uma roda, ou na parte de dentro do pneu, pode ser fluido de freio: é grave.",
+     "conferir": "Confira o reservatório de fluido de freio.",
+     "rodar": "Se o nível baixou ou o pedal está mole, não rode: chame um guincho."
+    },
+    "r_arrefecimento": {
+     "causas": "Líquido verde, rosa ou laranja com cheiro doce é do arrefecimento: mangueira, radiador, tampa do radiador ou bomba d'água, que no EJ18 fica atrás da correia dentada.",
+     "conferir": "Com o motor frio, veja o nível do reservatório e procure gotas nas mangueiras. Se for a bomba d'água, troque junto com a correia dentada.",
+     "rodar": "Rode vigiando o ponteiro da temperatura e com água extra no carro; se o ponteiro subir, pare.",
+     "fonte": "bomba no kit da correia: BASE secao 6 [2+]"
+    },
+    "r_ar": {
+     "causas": "Água limpa pingando embaixo, do lado do passageiro, com o ar-condicionado ligado, é normal: é a condensação do ar.",
+     "rodar": "Pode rodar."
+    },
+    "r_cambio": {
+     "causas": "Óleo grosso com cheiro forte de enxofre, no meio do carro, é óleo do câmbio ou do diferencial. Nessa região também fica a placa separadora entre motor e câmbio do EJ18, que racha e pinga óleo do motor.",
+     "conferir": "Veja se o pingo vem da junção entre motor e câmbio, que é a placa, ou do próprio câmbio. Complete o óleo do câmbio pelo bujão de nível.",
+     "rodar": "Se pingar pouco, dá para rodar; câmbio sem óleo quebra.",
+     "fonte": "placa separadora: BASE secao 5 [2+]"
+    },
+    "r_oleo": {
+     "causas": "No EJ18, os vazamentos de óleo mais comuns são nas juntas das tampas de válvulas, nas laterais do motor, nos retentores dianteiros, atrás da capa da correia, e na placa separadora entre motor e câmbio.",
+     "conferir": "Limpe o motor e veja onde o óleo aparece primeiro; confira o nível na vareta. Retentores dianteiros se trocam junto com a correia dentada.",
+     "rodar": "Dá para rodar completando o óleo; não deixe faltar.",
+     "fonte": "BASE secao 5 [2+]"
+    },
+    "r_vaz_geral": {
+     "causas": "Para descobrir, deixe um papelão branco embaixo do carro durante a noite e veja a cor e o lugar da mancha.",
+     "conferir": "Preto ou marrom é óleo do motor; verde, rosa ou laranja é água do radiador; transparente é ar-condicionado; perto de uma roda pode ser freio.",
+     "rodar": "Se for perto de uma roda ou cheirar a gasolina, não rode."
+    }
+   }
+  },
+  {
+   "id": "embreagem",
+   "titulo": "Embreagem",
+   "gatilho": ".*\\b(?:embreagem|embreage|patinando|patina|platô|plato|rolamento de encosto)\\b.*",
+   "intro": "Vamos ver a embreagem.",
+   "inicio": "sintoma",
+   "nos": {
+    "sintoma": {
+     "pergunta": "O que acontece: o giro sobe e o carro não acompanha, as marchas arranham, o carro trepida ao sair, faz barulho quando você pisa, ou o pedal está estranho?",
+     "dica": "Diga: patina, arranha, trepida, barulho ou pedal.",
+     "opcoes": [
+      {
+       "chaves": [
+        "patina",
+        "patinando",
+        "giro sobe",
+        "sobe o giro",
+        "nao acompanha",
+        "acelera e nao anda",
+        "nao anda"
+       ],
+       "vai": "r_patina"
+      },
+      {
+       "chaves": [
+        "arranha",
+        "arranhando",
+        "nao entra",
+        "custa",
+        "dura",
+        "duro de engatar",
+        "engatar"
+       ],
+       "vai": "r_nao_desacopla"
+      },
+      {
+       "chaves": [
+        "trepida",
+        "trepidando",
+        "treme",
+        "tremendo",
+        "tranco",
+        "sair",
+        "saida",
+        "arrancada"
+       ],
+       "vai": "r_trepida"
+      },
+      {
+       "chaves": [
+        "barulho",
+        "chiado",
+        "ronco",
+        "zumbido",
+        "pisar",
+        "piso"
+       ],
+       "vai": "r_rolamento"
+      },
+      {
+       "chaves": [
+        "pedal",
+        "duro",
+        "pesado",
+        "mole",
+        "baixo",
+        "nao volta",
+        "fundo"
+       ],
+       "vai": "r_pedal"
+      }
+     ],
+     "nao_sei": "r_embreagem_geral"
+    },
+    "r_patina": {
+     "causas": "Giro subindo sem o carro acompanhar, principalmente em marcha alta e subida, é disco de embreagem gasto ou com óleo, que pode vir do retentor traseiro do motor ou da placa separadora.",
+     "conferir": "Teste: em terceira, a uns 30 por hora, acelere fundo; se o giro dispara sem ganhar velocidade, está patinando. Veja se há óleo pingando entre o motor e o câmbio.",
+     "rodar": "Dá para rodar com calma por um tempo, mas piora rápido: troque disco, platô e rolamento juntos."
+    },
+    "r_nao_desacopla": {
+     "causas": "Marcha arranhando ou custando a entrar costuma ser embreagem que não desacopla toda, por folga no cabo ou no sistema hidráulico, ou disco e platô com defeito. Se só uma marcha arranha, é o sincronizado dela.",
+     "conferir": "Confira a regulagem e o curso do pedal. Óleo do câmbio velho ou baixo também deixa as trocas duras.",
+     "rodar": "Dá para rodar, trocando as marchas com calma."
+    },
+    "r_trepida": {
+     "causas": "Trepidação ao sair com o carro é disco ou platô irregular, volante do motor marcado, ou coxins do motor e do câmbio gastos, o que é comum depois de um swap.",
+     "conferir": "Veja se o motor balança muito quando alguém acelera com o carro parado: isso indica coxins.",
+     "rodar": "Dá para rodar."
+    },
+    "r_rolamento": {
+     "causas": "Se o barulho aparece quando você pisa no pedal, é o rolamento de encosto da embreagem. Se aparece com o pedal solto e some ao pisar, é rolamento do eixo de entrada do câmbio.",
+     "conferir": "Repare se o barulho muda com o pedal.",
+     "rodar": "Dá para rodar, mas troque o rolamento antes que ele trave, de preferência junto com a embreagem."
+    },
+    "r_pedal": {
+     "causas": "Pedal duro costuma ser cabo ressecado ou platô; pedal mole ou baixo, se a embreagem for hidráulica, é ar ou vazamento no sistema.",
+     "conferir": "Veja se a sua embreagem é de cabo ou hidráulica. Na hidráulica, confira o reservatório e procure vazamento no cilindro.",
+     "rodar": "Se o pedal não volta ou a embreagem não desacopla, não rode."
+    },
+    "r_embreagem_geral": {
+     "causas": "Os problemas mais comuns da embreagem são disco gasto, que patina, regulagem ou sistema hidráulico, que fazem arranhar, e rolamento de encosto, que faz barulho ao pisar.",
+     "rodar": "Se ela não desacopla, não rode."
+    }
+   }
+  },
+  {
+   "id": "cambio_manual",
+   "titulo": "Câmbio manual",
+   "gatilho": ".*\\b(?:cambio|marcha|marchas|engate)\\b.*\\b(?:barulho|uivo|ronco|ruido|zumbido|escapa|escapando|pula|saindo sozinha|sai sozinha)\\b.*",
+   "intro": "Vamos ver o câmbio.",
+   "inicio": "onde",
+   "nos": {
+    "onde": {
+     "pergunta": "Isso acontece em todas as marchas, só em uma marcha, ou a marcha escapa sozinha?",
+     "dica": "Diga: todas, só uma, ou escapa.",
+     "opcoes": [
+      {
+       "chaves": [
+        "escapa",
+        "escapando",
+        "pula",
+        "sai sozinha",
+        "solta"
+       ],
+       "vai": "r_escapa"
+      },
+      {
+       "chaves": [
+        "todas",
+        "todas as marchas",
+        "sempre",
+        "qualquer"
+       ],
+       "vai": "r_todas"
+      },
+      {
+       "chaves": [
+        "uma",
+        "so na",
+        "so em",
+        "primeira",
+        "segunda",
+        "terceira",
+        "quarta",
+        "quinta",
+        "re"
+       ],
+       "vai": "r_uma"
+      }
+     ],
+     "nao_sei": "r_todas"
+    },
+    "r_todas": {
+     "causas": "Uivo em todas as marchas, mudando com a velocidade, costuma ser rolamento interno do câmbio, óleo baixo ou velho, ou um diferencial; no seu AWD, também o diferencial traseiro.",
+     "conferir": "Confira e troque o óleo do câmbio e do diferencial traseiro, que usam óleo de engrenagem GL-5.",
+     "rodar": "Dá para rodar enquanto não piorar."
+    },
+    "r_uma": {
+     "causas": "Barulho só em uma marcha aponta para a engrenagem ou o rolamento daquela marcha.",
+     "conferir": "Um mecânico de câmbio confirma abrindo.",
+     "rodar": "Dá para rodar evitando essa marcha."
+    },
+    "r_escapa": {
+     "causas": "Marcha que escapa sozinha costuma ser coxim do câmbio ou do motor gasto, trambulador com folga, ou desgaste dos engates internos.",
+     "conferir": "Veja os coxins e a alavanca. Depois do swap, confira se o trambulador e os coxins são do mesmo câmbio.",
+     "rodar": "Segure a alavanca até resolver e evite subidas fortes."
+    }
+   }
+  },
+  {
+   "id": "freio",
+   "titulo": "Freio",
+   "gatilho": ".*\\bfre(?:io|ios|ar|ando|agem|ei)\\b.*\\b(?:barulho|chiado|chiando|chia|rangendo|range|treme|tremendo|vibra|vibrando|trepida|puxa|puxando|raspando|guincho)\\b.*|.*\\b(?:barulho|chiado|chia|treme|vibra|puxa|puxando|raspando)\\b.*\\bfre(?:io|ar|ando|ei)\\b.*",
+   "intro": "Vamos ver o freio.",
+   "inicio": "sintoma",
+   "nos": {
+    "sintoma": {
+     "pergunta": "O que você sente ao frear: chiado ou barulho de metal, o volante ou o pedal tremendo, ou o carro puxando para um lado?",
+     "dica": "Diga: barulho, treme ou puxa.",
+     "opcoes": [
+      {
+       "chaves": [
+        "treme",
+        "tremendo",
+        "vibra",
+        "vibrando",
+        "trepida",
+        "pulsa"
+       ],
+       "vai": "r_disco"
+      },
+      {
+       "chaves": [
+        "puxa",
+        "puxando",
+        "desvia",
+        "lado"
+       ],
+       "vai": "r_puxa"
+      },
+      {
+       "chaves": [
+        "chiado",
+        "chia",
+        "barulho",
+        "metal",
+        "raspando",
+        "rangendo",
+        "guincho",
+        "assobio"
+       ],
+       "vai": "r_pastilha"
+      }
+     ],
+     "nao_sei": "r_pastilha"
+    },
+    "r_pastilha": {
+     "causas": "Chiado ao frear costuma ser pastilha no fim, porque muitas têm um aviso metálico que chia, disco riscado ou sujeira.",
+     "conferir": "Olhe a espessura das pastilhas pela roda.",
+     "rodar": "Se for barulho de metal raspando, ou o pedal ficar baixo, pare de usar e leve ao mecânico logo."
+    },
+    "r_disco": {
+     "causas": "Volante ou pedal tremendo ao frear é disco empenado ou gasto de forma irregular.",
+     "conferir": "Meça a espessura dos discos: às vezes dá para retificar; senão, troque o par.",
+     "rodar": "Dá para rodar com cuidado."
+    },
+    "r_puxa": {
+     "causas": "Carro puxando ao frear é pinça travada ou pastilha contaminada de um lado, ou mangueira de freio velha.",
+     "conferir": "Depois de rodar, aproxime a mão, sem encostar, de cada roda: a mais quente é a que está prendendo.",
+     "rodar": "Vá à oficina logo: freio desigual é perigoso em pista molhada."
+    }
+   }
+  },
+  {
+   "id": "suspensao",
+   "titulo": "Barulho na suspensão",
+   "gatilho": ".*\\b(?:suspensao|amortecedor|buraco|buracos|lombada|quebra molas?|quebra-molas?|valeta|paralelepipedo|curva|curvas)\\b.*\\b(?:barulho|batida|estalo|estalando|estala|rangido|range|batendo|toc|tec|tlec)\\b.*|.*\\b(?:barulho|batida|estalo|estalando|estala|rangido|batendo)\\b.*\\b(?:buraco|buracos|lombada|quebra molas?|curva|curvas|suspensao|valeta|roda|rodas)\\b.*",
+   "intro": "Vamos ver a suspensão.",
+   "inicio": "quando",
+   "nos": {
+    "quando": {
+     "pergunta": "Quando o barulho aparece: em buracos e lombadas, ao fazer curva acelerando, ou ao virar o volante com o carro parado?",
+     "dica": "Diga: buraco, curva ou manobra.",
+     "opcoes": [
+      {
+       "chaves": [
+        "buraco",
+        "buracos",
+        "lombada",
+        "quebra molas",
+        "valeta",
+        "irregular",
+        "paralelepipedo",
+        "asfalto ruim"
+       ],
+       "vai": "r_buraco"
+      },
+      {
+       "chaves": [
+        "curva",
+        "curvas",
+        "acelerando",
+        "virando"
+       ],
+       "vai": "r_homocinetica"
+      },
+      {
+       "chaves": [
+        "parado",
+        "manobra",
+        "manobrando",
+        "estacionando",
+        "volante"
+       ],
+       "vai": "r_manobra"
+      }
+     ],
+     "nao_sei": "r_buraco"
+    },
+    "r_buraco": {
+     "causas": "Batida seca em buraco costuma ser bieleta, bucha da bandeja, coxim do amortecedor ou amortecedor vencido.",
+     "conferir": "Com o carro parado, balance cada canto: se continuar balançando, o amortecedor está fraco. O mecânico vê as folgas no elevador.",
+     "rodar": "Dá para rodar com cuidado."
+    },
+    "r_homocinetica": {
+     "causas": "Estalos ao fazer curva acelerando são típicos de junta homocinética gasta, quase sempre por coifa rasgada.",
+     "conferir": "Veja se as coifas de borracha perto das rodas estão rasgadas, com graxa espalhada. Trocar a coifa cedo salva a junta.",
+     "rodar": "Dá para rodar por um tempo, mas se a junta quebrar o carro para."
+    },
+    "r_manobra": {
+     "causas": "Barulho ao virar o volante parado pode ser o coxim do topo do amortecedor, terminal de direção, ou a bomba da direção hidráulica com fluido baixo.",
+     "conferir": "Confira o nível do fluido da direção hidráulica.",
+     "rodar": "Dá para rodar."
+    }
+   }
+  },
+  {
+   "id": "vibracao",
+   "titulo": "Vibração",
+   "gatilho": "(?!.*\\bcurvas?\\b)(?!.*\\bfre(?:io|ar|ando)\\b).*\\b(?:vibra|vibrando|vibracao|tremendo|treme|tremedeira|trepida|trepidando|trepidacao|balanca|balancando)\\b.*",
+   "intro": "Vamos ver essa vibração.",
+   "inicio": "quando",
+   "nos": {
+    "quando": {
+     "pergunta": "A vibração aparece em certa velocidade na estrada, com o carro parado em marcha lenta, ou ao acelerar?",
+     "dica": "Diga: na estrada, parado, ou acelerando.",
+     "opcoes": [
+      {
+       "chaves": [
+        "estrada",
+        "velocidade",
+        "rapido",
+        "80",
+        "90",
+        "100",
+        "110",
+        "120",
+        "rodovia"
+       ],
+       "vai": "r_balanceamento"
+      },
+      {
+       "chaves": [
+        "parado",
+        "lenta",
+        "marcha lenta",
+        "semaforo",
+        "sinal",
+        "ponto morto"
+       ],
+       "vai": "r_lenta"
+      },
+      {
+       "chaves": [
+        "acelerar",
+        "acelerando",
+        "arrancada",
+        "saida",
+        "subida"
+       ],
+       "vai": "r_acelera"
+      }
+     ],
+     "nao_sei": "r_balanceamento"
+    },
+    "r_balanceamento": {
+     "causas": "Vibração no volante numa faixa de velocidade, geralmente entre 80 e 110, costuma ser roda desbalanceada ou pneu deformado.",
+     "conferir": "Faça o balanceamento e veja se algum pneu tem bolha. No seu AWD, os quatro pneus devem ser iguais.",
+     "rodar": "Dá para rodar."
+    },
+    "r_lenta": {
+     "causas": "Motor tremendo em marcha lenta é falha em um cilindro, por vela ou cabo, ou coxim do motor gasto.",
+     "conferir": "Se o motor também falha, comece pelas velas e cabos; se só treme e o giro está estável, olhe os coxins.",
+     "rodar": "Dá para rodar."
+    },
+    "r_acelera": {
+     "causas": "Vibração ao acelerar que some quando você tira o pé costuma ser homocinética, o cardã que leva a força para trás no AWD, ou coxins.",
+     "conferir": "O mecânico verifica folga na cruzeta e no rolamento central do cardã.",
+     "rodar": "Dá para rodar com cuidado."
+    }
+   }
+  },
+  {
+   "id": "bateria",
+   "titulo": "Bateria descarregando",
+   "gatilho": ".*\\bbateria\\b.*\\b(?:descarrega\\w*|arriando|arria|arriou|morre|morreu|acaba|acabou|nao segura|perde carga|zerou)\\b.*|.*\\b(?:descarrega\\w*|arria|arriou)\\b.*\\bbateria\\b.*",
+   "intro": "Vamos ver a bateria.",
+   "inicio": "quando",
+   "nos": {
+    "quando": {
+     "pergunta": "A bateria descarrega com o carro parado, de um dia para o outro, ou mesmo rodando, com a luz da bateria acendendo?",
+     "dica": "Diga: parado ou rodando.",
+     "opcoes": [
+      {
+       "chaves": [
+        "rodando",
+        "andando",
+        "luz",
+        "dirigindo",
+        "ligado"
+       ],
+       "vai": "r_alternador"
+      },
+      {
+       "chaves": [
+        "parado",
+        "noite",
+        "dia para o outro",
+        "de manha",
+        "fim de semana",
+        "dias"
+       ],
+       "vai": "idade"
+      }
+     ],
+     "nao_sei": "idade"
+    },
+    "idade": {
+     "pergunta": "A bateria tem mais de três anos?",
+     "opcoes": [
+      {
+       "chaves": [
+        "sim",
+        "mais",
+        "velha",
+        "antiga",
+        "quatro",
+        "cinco"
+       ],
+       "vai": "r_velha"
+      },
+      {
+       "chaves": [
+        "nao",
+        "nova",
+        "menos",
+        "troquei"
+       ],
+       "vai": "r_fuga"
+      }
+     ],
+     "nao_sei": "r_fuga"
+    },
+    "r_velha": {
+     "causas": "Bateria com mais de três ou quatro anos que não segura carga com o carro parado costuma estar no fim.",
+     "conferir": "Muitas lojas de bateria testam de graça. Antes de trocar, limpe os terminais.",
+     "rodar": "Dá para rodar; evite deixar o carro parado muitos dias."
+    },
+    "r_fuga": {
+     "causas": "Bateria nova descarregando com o carro parado indica algo consumindo escondido: luz do porta-malas ou do porta-luvas, rádio, alarme, ou algo instalado depois, inclusive a central da Harumi.",
+     "conferir": "Com tudo desligado, um eletricista mede a corrente na bateria. Confira se a Harumi desliga junto com a chave.",
+     "rodar": "Dá para rodar."
+    },
+    "r_alternador": {
+     "causas": "Descarregando mesmo rodando é o alternador não carregando: correia frouxa, regulador ou o próprio alternador.",
+     "conferir": "Com o motor ligado, a tensão na bateria deve ficar entre 13,5 e 14,5 volts.",
+     "rodar": "O carro anda só pela bateria por pouco tempo: desligue o ar e os acessórios e vá direto à oficina.",
+     "fonte": "faixa de tensao: BASE secao 4 [1]"
+    }
+   }
+  },
+  {
+   "id": "cheiro",
+   "titulo": "Cheiro estranho",
+   "gatilho": ".*\\b(?:cheiro|cheirando|fedendo|fedor)\\b.*",
+   "intro": "Vamos ver esse cheiro.",
+   "inicio": "tipo",
+   "nos": {
+    "tipo": {
+     "pergunta": "Que cheiro é: queimado, gasolina, doce, ou ovo podre?",
+     "dica": "Diga: queimado, gasolina, doce ou ovo.",
+     "opcoes": [
+      {
+       "chaves": [
+        "gasolina",
+        "combustivel"
+       ],
+       "vai": "r_gasolina"
+      },
+      {
+       "chaves": [
+        "doce",
+        "adocicado",
+        "xarope"
+       ],
+       "vai": "r_doce"
+      },
+      {
+       "chaves": [
+        "ovo",
+        "podre",
+        "enxofre"
+       ],
+       "vai": "r_ovo"
+      },
+      {
+       "chaves": [
+        "queimado",
+        "queimando",
+        "borracha",
+        "fumaca",
+        "oleo queimado"
+       ],
+       "vai": "queimado"
+      }
+     ],
+     "nao_sei": "queimado"
+    },
+    "queimado": {
+     "pergunta": "O cheiro de queimado aparece depois de usar muito a embreagem ou o freio, em subida ou trânsito, ou vem do capô com o motor quente?",
+     "dica": "Diga: embreagem, freio ou capô.",
+     "opcoes": [
+      {
+       "chaves": [
+        "embreagem",
+        "subida",
+        "transito",
+        "arrancada",
+        "rampa"
+       ],
+       "vai": "r_embreagem"
+      },
+      {
+       "chaves": [
+        "freio",
+        "descida",
+        "serra"
+       ],
+       "vai": "r_freio"
+      },
+      {
+       "chaves": [
+        "capo",
+        "motor",
+        "frente",
+        "oleo"
+       ],
+       "vai": "r_oleo"
+      }
+     ],
+     "nao_sei": "r_oleo"
+    },
+    "r_gasolina": {
+     "causas": "Cheiro de gasolina pode ser vazamento na linha, no filtro ou nos bicos, ou a tampa do tanque mal fechada.",
+     "conferir": "Feche bem a tampa do tanque e procure pingos embaixo do carro e manchas no motor.",
+     "rodar": "Se o cheiro for forte ou estiver pingando, não ligue o carro: risco de incêndio."
+    },
+    "r_doce": {
+     "causas": "Cheiro doce é líquido de arrefecimento vazando, em mangueira, radiador ou no radiador do aquecedor, dentro do carro, quando o vidro embaça por dentro.",
+     "conferir": "Confira o nível do reservatório com o motor frio e procure manchas úmidas.",
+     "rodar": "Rode vigiando o ponteiro da temperatura."
+    },
+    "r_ovo": {
+     "causas": "Cheiro de ovo podre vem do catalisador, geralmente por mistura rica ou catalisador no fim; também pode ser óleo do câmbio vazando no escapamento.",
+     "conferir": "Leia os códigos pelas piscadas da luz da injeção e veja se há óleo pingando no escapamento.",
+     "rodar": "Dá para rodar."
+    },
+    "r_embreagem": {
+     "causas": "Cheiro de queimado depois de subida ou trânsito, no câmbio manual, costuma ser a embreagem esquentando por ficar meio pisada.",
+     "conferir": "Evite segurar o carro na embreagem em rampa: use o freio de mão. Se o cheiro aparece sempre, a embreagem pode estar patinando.",
+     "rodar": "Deixe esfriar uns minutos e siga com calma."
+    },
+    "r_freio": {
+     "causas": "Cheiro de queimado depois de descida longa é freio superaquecido.",
+     "conferir": "Em descida, use marcha mais baixa para segurar o carro com o motor.",
+     "rodar": "Pare uns minutos para esfriar; se o pedal ficou mole, não siga."
+    },
+    "r_oleo": {
+     "causas": "Cheiro de óleo queimado vindo do capô costuma ser óleo pingando no escapamento, quase sempre pela junta das tampas de válvulas no EJ18.",
+     "conferir": "Procure óleo nas laterais do motor e no escapamento.",
+     "rodar": "Dá para rodar, mas confira o nível do óleo; se aparecer fumaça forte do capô, pare.",
+     "fonte": "BASE secao 5 [2+]"
+    }
+   }
+  },
+  {
+   "id": "direcao",
+   "titulo": "Direção",
+   "gatilho": ".*\\b(?:direcao|volante)\\b.*\\b(?:pesada|pesado|dura|duro|torto|torta|folga|jogo|solta|solto|vibra|treme|barulho)\\b.*",
+   "intro": "Vamos ver a direção.",
+   "inicio": "sintoma",
+   "nos": {
+    "sintoma": {
+     "pergunta": "A direção ficou pesada, está com folga, ou o volante fica torto com o carro andando reto?",
+     "dica": "Diga: pesada, folga ou torto.",
+     "opcoes": [
+      {
+       "chaves": [
+        "pesada",
+        "pesado",
+        "dura",
+        "duro"
+       ],
+       "vai": "r_pesada"
+      },
+      {
+       "chaves": [
+        "folga",
+        "jogo",
+        "solta",
+        "solto",
+        "boba"
+       ],
+       "vai": "r_folga"
+      },
+      {
+       "chaves": [
+        "torto",
+        "torta",
+        "desalinhado",
+        "puxa"
+       ],
+       "vai": "r_torto"
+      }
+     ],
+     "nao_sei": "r_pesada"
+    },
+    "r_pesada": {
+     "causas": "Direção hidráulica pesada costuma ser fluido baixo, correia da bomba frouxa ou a bomba gasta; pneus murchos também pesam.",
+     "conferir": "Confira o nível do fluido da direção, a correia e a calibragem.",
+     "rodar": "Dá para rodar, com mais força no volante."
+    },
+    "r_folga": {
+     "causas": "Folga no volante é terminal de direção, barra axial ou a caixa de direção gasta.",
+     "conferir": "Com o carro parado e o motor ligado, alguém mexe o volante enquanto outro olha os terminais.",
+     "rodar": "Folga grande na direção é perigosa: vá logo à oficina."
+    },
+    "r_torto": {
+     "causas": "Volante torto com o carro reto é alinhamento fora, geralmente depois de uma batida em buraco ou guia.",
+     "conferir": "Faça alinhamento e veja se os pneus da frente estão gastando por dentro ou por fora.",
+     "rodar": "Dá para rodar."
+    }
+   }
+  }
+ ]
+}

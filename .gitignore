@@ -17,3 +17,6 @@ hs_err_pid*.log
 replay_pid*.log
 __pycache__/
 app-icons/
+
+# Manuais de fabrica (direitos da Subaru): so na maquina, fora do git
+docs/subaru/manuais-rusefi/

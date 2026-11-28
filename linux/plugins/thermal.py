@@ -1,6 +1,6 @@
 """Politica termica: pausa a IA local (harumi-llm) quando a placa esquenta e religa quando esfria.
 
-Le a temperatura a cada 10 s (harumi_system.temperature_c, a maior zona termica). Acima de HI (padrao 80 C) por
+Le a temperatura a cada 10 s (harumi_system.temperature_c, a maior zona termica). Acima de HI (padrao 88 C; antes 80) por
 2 leituras seguidas: `systemctl --user stop harumi-llm`. Abaixo de LO (padrao 70 C) por 3 leituras seguidas:
 `systemctl --user start harumi-llm`, mas SO se foi esta politica que a parou (IA parada pelo usuario nao e religada).
 Limites em harumi_store: "thermal.hi" e "thermal.lo" (invalidos ou hi <= lo -> padroes).
@@ -21,7 +21,7 @@ except Exception:  # pragma: no cover - fora da placa
 
 SERVICE = "harumi-llm.service"
 INTERVAL = 10
-HI_DEFAULT, LO_DEFAULT = 80, 70
+HI_DEFAULT, LO_DEFAULT = 88, 70  # 88: ultima defesa; o harumi-cpufreq (root) segura antes baixando a frequencia
 HI_READS, LO_READS = 2, 3
 
 _state = {"tempC": None, "paused": False, "hot": 0, "cool": 0, "error": None}
@@ -66,18 +66,20 @@ def step(temp) -> None:
         _state["cool"] = _state["cool"] + 1 if temp < lo else 0
         if not _state["paused"] and _state["hot"] >= HI_READS:
             if _active():  # so assume a pausa se a IA estava ligada; parada pelo usuario fica como esta
-                r = _systemctl("stop", SERVICE)
-                if r.returncode == 0:
-                    _state["paused"] = True
-                    _state["error"] = None
-                else:
-                    _state["error"] = "stop falhou"
+                # Marca a pausa ANTES de parar e sem esperar o fim (--no-block): em 20/11/2026 o stop demorou mais que o
+                # timeout no meio de uma resposta longa, a pausa nao foi registrada e a IA nunca mais foi religada.
+                _state["paused"] = True
+                try:
+                    r = _systemctl("--no-block", "stop", SERVICE)
+                    _state["error"] = None if r.returncode == 0 else "stop falhou"
+                except (OSError, subprocess.SubprocessError) as e:
+                    _state["error"] = "stop: " + type(e).__name__
             _state["hot"] = 0
         elif _state["paused"] and _state["cool"] >= LO_READS:
             if _active():  # alguem ja religou
                 _state["paused"] = False
             else:
-                r = _systemctl("start", SERVICE)
+                r = _systemctl("--no-block", "start", SERVICE)
                 if r.returncode == 0:
                     _state["paused"] = False
                     _state["error"] = None

@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Harumi completa 3D</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{--bg:#eef0f2;--panel:#f8f9fa;--fg:#1f2a33;--muted:#5b6872;--line:#cfd6dc;--accent:#2f6f8f;--warn:#a8632a;--scene:#e3e7ea;
+  --sans:"IBM Plex Sans",system-ui,"Segoe UI",sans-serif;--mono:"IBM Plex Mono",Consolas,monospace}
+@media (prefers-color-scheme: dark){:root{--bg:#171c20;--panel:#1f262b;--fg:#dde4e9;--muted:#97a4ad;--line:#34404a;--accent:#6fb0cf;--warn:#d99a5f;--scene:#2a3238;color-scheme:dark}}
+html,body{margin:0}
+body{background:var(--bg);color:var(--fg);font:14px/1.5 var(--sans);padding:16px}
+h1{font-size:20px;font-weight:600;margin:0}
+h2{font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:0 0 8px}
+.top{display:flex;flex-wrap:wrap;gap:4px 24px;align-items:baseline;margin-bottom:12px}.top p{margin:0;color:var(--muted)}
+.wrap{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:16px}
+@media (max-width:900px){.wrap{grid-template-columns:minmax(0,1fr)}}
+.view{position:relative;border:1px solid var(--line);border-radius:6px;overflow:hidden;background:var(--scene);height:min(74vh,700px);min-height:380px}
+#cv{display:block;width:100%;height:100%;touch-action:none}
+.pick{position:absolute;left:12px;right:12px;bottom:12px;font:12px var(--mono);background:var(--panel);border:1px solid var(--line);border-radius:4px;padding:6px 10px;pointer-events:none}
+.side{display:flex;flex-direction:column;gap:16px;min-width:0}
+.box{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:12px 14px}
+.row{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:8px}
+button{font:inherit;color:var(--fg);background:var(--bg);border:1px solid var(--line);border-radius:4px;padding:4px 10px;cursor:pointer}
+button[aria-pressed=true]{background:var(--accent);color:#fff;border-color:var(--accent)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+input{accent-color:var(--accent)}
+.leg{display:grid;gap:4px;font-size:13px}
+.leg span{display:inline-block;width:18px;height:4px;border-radius:2px;margin-right:8px;vertical-align:middle}
+ul.g{margin:0;padding-left:18px;font-size:13px;display:grid;gap:2px}
+.note{font-size:12px;color:var(--muted);margin:8px 0 0}
+</style>
+</head>
+<body>
+<div class="top">
+  <h1>Harumi completa: todas as peças</h1>
+  <p>Subaru Impreza 1993 · medidas em mm · arraste para girar, role para aproximar, toque numa peça</p>
+</div>
+<div class="wrap">
+  <div class="view"><canvas id="cv" aria-label="Modelo 3D de todas as peças da Harumi"></canvas><div class="pick" id="pick">Toque numa peça para ver nome, medida e onde liga</div></div>
+  <div class="side">
+    <div class="box">
+      <h2>Vista</h2>
+      <div class="row"><button id="mBan" aria-pressed="true" type="button">Bancada (tamanho real)</button><button id="mCar" aria-pressed="false" type="button">No carro</button></div>
+      <div class="row"><input type="checkbox" id="lab" checked><label for="lab">Nomes</label>
+        <input type="checkbox" id="cab" checked><label for="cab">Cabos</label>
+        <input type="checkbox" id="big"><label for="big">Peças 4× maiores (no carro)</label></div>
+      <div class="row"><button id="rv" type="button">Vista inicial</button><button id="tv" type="button">De cima</button><button id="pv" type="button">Painel e central</button></div>
+    </div>
+    <div class="box">
+      <h2>Cabos (vista no carro)</h2>
+      <div class="leg">
+        <div><span style="background:#c0392b"></span>Energia 12 V / 5 V</div>
+        <div><span style="background:#2d63c8"></span>USB</div>
+        <div><span style="background:#d9a400"></span>Vídeo (câmeras 360)</div>
+        <div><span style="background:#2f8f4a"></span>Áudio</div>
+        <div><span style="background:#8e44ad"></span>Sinais (ACC, ré, sensores, SSM1)</div>
+        <div><span style="background:#8a949c"></span>Sem fio (ESP-NOW, Bluetooth)</div>
+      </div>
+    </div>
+    <div class="box">
+      <h2>Grupos</h2>
+      <ul class="g" id="grp"></ul>
+      <p class="note">Peças marcadas "estimada" têm medida a conferir. Posições no carro e o tamanho do carro (~4350 × 1690 × 1415) são aproximados, de memória.</p>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+<script>
+// ===== primitivas =====
+const MAT={}; const METAL={metalness:.75,roughness:.3};
+function mat(c,o={}){const k=c+JSON.stringify(o);return MAT[k]||(MAT[k]=new THREE.MeshStandardMaterial(Object.assign({color:c,roughness:.6,metalness:.1},o)));}
+function B(g,w,h,d,x,y,z,c,o){const m=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),mat(c,o));m.position.set(x+w/2,y+h/2,z+d/2);g.add(m);return m;}
+function CY(g,r,len,axis,x,y,z,c,o,seg=24){const m=new THREE.Mesh(new THREE.CylinderGeometry(r,r,len,seg),mat(c,o));if(axis==='x')m.rotation.z=Math.PI/2;if(axis==='z')m.rotation.x=Math.PI/2;m.position.set(x,y,z);g.add(m);return m;}
+
+// Construtores detalhados (origem no canto minimo; w = L, h = A, d = P)
+const BUILD={
+ orangepi(){const g=new THREE.Group();[[3.5,3.5],[96.5,3.5],[3.5,58.5],[96.5,58.5]].forEach(([x,z])=>CY(g,2.5,5,'y',x,2.5,z,"#d9d4c7"));
+  B(g,100,1.6,62,0,5,0,"#1d2b25");B(g,15,1.2,15,38,6.6,22,"#2b2b2b");[[56,20],[56,34]].forEach(([x,z])=>B(g,12,1,10,x,6.6,z,"#222"));
+  B(g,42,3,22,2,1.6,20,"#3a3d42");B(g,51,2.5,5,45,6.6,2,"#111");B(g,21,13.5,16,-3,6.6,3,"#c8ccd0",METAL);B(g,17,7.5,14,-3,6.6,24,"#2d63c8");B(g,17,15,14,-3,6.6,42,"#c8ccd0",METAL);
+  B(g,9,3.3,7,10,6.6,57,"#b8bcc0",METAL);B(g,9,3.3,7,24,6.6,57,"#b8bcc0",METAL);B(g,15,5.6,11,40,6.6,53,"#b8bcc0",METAL);CY(g,3,12,'z',70,9.6,56,"#111");return g;},
+ caseopi(){const g=new THREE.Group();B(g,104,24,66,0,0,0,"#8f979e",METAL);for(let i=0;i<9;i++)B(g,104,3,2,0,24,4+i*7,"#a3abb2",METAL);CY(g,14,3,'y',52,25.5,33,"#2a2a2a");return g;},
+ conversor(){const g=new THREE.Group();B(g,66,8,60,0,0,0,"#bfc5ca",METAL);for(let i=0;i<7;i++)B(g,66,14,3,0,8,4+i*8.5,"#c9cfd4",METAL);
+  [[10,"#c0392b"],[18,"#222"],[48,"#c0392b"],[56,"#222"]].forEach(([x,c])=>CY(g,1.6,30,'z',x,4,75,c));return g;},
+ capuz(){const g=new THREE.Group();B(g,80,3,80,0,0,12,"#5b656d");B(g,80,40,2.5,0,3,89.5,"#5b656d");B(g,2.5,40,80,0,3,12,"#5b656d");B(g,2.5,40,80,77.5,3,12,"#5b656d");B(g,80,2.5,80,0,40.5,12,"#5b656d");for(let i=0;i<4;i++)B(g,75,2.5,3,2.5,37.5-i*2,9-i*3,"#66717a");return g;},
+ fan80(){const g=new THREE.Group();B(g,80,25,80,0,0,0,"#6b4a36");CY(g,38,25.4,'y',40,12.5,40,"#1d1d1d");CY(g,13,25.8,'y',40,12.5,40,"#d8c3a5");return g;},
+ bocal(){const g=new THREE.Group();B(g,80,3,80,0,0,0,"#5b656d");const f=new THREE.Mesh(new THREE.CylinderGeometry(25,39.5,30,32,1,true),mat("#5b656d",{side:THREE.DoubleSide}));f.position.set(40,18,40);g.add(f);CY(g,25,33,'y',40,49.5,40,"#5b656d");return g;},
+ fan(){const g=new THREE.Group();B(g,40,10,40,0,0,0,"#6b4a36");CY(g,19,10.2,'y',20,5,20,"#1d1d1d");
+  for(let i=0;i<9;i++){const b=B(g,15,1.2,6,0,0,0,"#d8c3a5");b.position.set(20+9*Math.cos(i*.7),5,20+9*Math.sin(i*.7));b.rotation.y=-i*.7;b.rotation.x=.4;}CY(g,6,10.4,'y',20,5,20,"#d8c3a5");return g;},
+ hub(){const g=new THREE.Group();B(g,145,26,58,0,0,0,"#26292c");for(let i=0;i<7;i++){B(g,13,1,5,8+i*19,26,30,"#2d63c8");B(g,6,1.5,4,11+i*19,26,14,"#c94a3a");}CY(g,3.5,6,'x',-2,13,29,"#888",METAL);return g;},
+ modem(){const g=new THREE.Group();B(g,76,11.5,28,12,0,0,"#f2f2f0",{roughness:.35});B(g,12,4.5,12,0,3.5,8,"#c8ccd0",METAL);B(g,14,.4,10,60,11.6,9,"#c8312c");return g;},
+ pcb(w,d,c,extra){return ()=>{const g=new THREE.Group();B(g,w,1.6,d,0,0,0,c);if(extra)extra(g);return g;};},
+ tela(){const g=new THREE.Group();B(g,322.6,200.6,11,0,0,0,"#3e474e");B(g,294,166,.3,14.3,17.3,-.25,"#16314a",{roughness:.1});B(g,140,90,15,91.3,55.3,11,"#1d5c2f");return g;},
+ gps(){const g=new THREE.Group();const m=B(g,49,16,38,0,0,0,"#202326",{roughness:.4});CY(g,1.5,60,'z',24.5,4,-30,"#111");return g;},
+ bateria(){const g=new THREE.Group();B(g,151,94,65,0,0,0,"#2b2f33");B(g,151,6,65,0,94,0,"#3b4147");CY(g,4,8,'y',15,102,15,"#c0392b",METAL);CY(g,4,8,'y',136,102,15,"#333",METAL);B(g,90,0.5,30,30,60,-0.3,"#d9a400");return g;},
+ amp(){const g=new THREE.Group();B(g,160,45,130,0,0,0,"#1f2225",METAL);for(let i=0;i<10;i++)B(g,3,10,130,8+i*15.5,45,0,"#2a2e32",METAL);B(g,40,12,4,10,15,130,"#c8ccd0",METAL);return g;},
+ dvr(){const g=new THREE.Group();B(g,120,25,90,0,0,0,"#26292c");for(let i=0;i<5;i++)B(g,9,9,4,10+i*14,8,90,"#d9a400");return g;},
+ camera(){const g=new THREE.Group();B(g,30,25,30,0,0,0,"#1a1c1e");CY(g,8,6,'z',15,12.5,33,"#0d0d0d",{metalness:.5,roughness:.1});return g;},
+ ultrassom(){const g=new THREE.Group();CY(g,11,20,'z',11,11,10,"#1a1a1a");B(g,41,12,28.5,-60,0,0,"#1f5fa8");CY(g,1,40,'x',-20,6,10,"#111");return g;},
+ radar(){const g=new THREE.Group();B(g,70,1.6,35,0,0,0,"#1d5c2f");for(let i=0;i<4;i++)B(g,8,.6,8,8+i*14,1.6,6,"#d4af37",METAL);for(let i=0;i<4;i++)B(g,8,.6,8,8+i*14,1.6,21,"#d4af37",METAL);return g;},
+ lidar(){const g=new THREE.Group();B(g,35,21,18.5,0,0,0,"#111");CY(g,5,2,'z',10,10.5,19.5,"#2a4a6a",{metalness:.5,roughness:.1});CY(g,5,2,'z',25,10.5,19.5,"#2a4a6a",{metalness:.5,roughness:.1});return g;},
+ mao(){const g=new THREE.Group();const c="#d8a98a";B(g,85,22,100,0,0,0,c);[0,22,44,64].forEach((x,i)=>B(g,18,18,[70,80,76,60][i],x+2,2,100,c));B(g,22,20,55,85,0,25,c);return g;},
+ caixa(w,d,h,c){return ()=>{const g=new THREE.Group();const m=B(g,w,h,d,0,0,0,c,{transparent:true,opacity:.35,depthWrite:false});const e=new THREE.LineSegments(new THREE.EdgesGeometry(m.geometry),new THREE.LineBasicMaterial({color:0x55606a}));e.position.copy(m.position);g.add(e);return g;};},
+};
+const chips=(n,c,w=7,h=4,d=5,dx=9)=>g=>{for(let i=0;i<n;i++)B(g,w,h,d,4+i*dx,1.6,4,c);};
+const term=(n,dx=9)=>g=>{for(let i=0;i<n;i++)B(g,7,8,8,4+i*dx,1.6,18,"#2f8f4a");};
+function simple(c){return (w,d,h)=>()=>{const g=new THREE.Group();B(g,w,h,d,0,0,0,c);B(g,w,Math.min(2,h*.1),d,0,h,0,new THREE.Color(c).offsetHSL(0,0,.08).getStyle());return g;};}
+
+// ===== pecas: [id, nome, grupo, [L,P,A], estimada, construtor, qtd, liga, posicoes no carro [x,y,z] (x+ = passageiro, z+ = frente)] =====
+const G={central:"1. Central e tela",serv:"2. Caixa da central",gps:"3. GPS, voz e câmera",som:"4. Som",dados:"5. Dados do carro",vig:"7. Modo vigia",s360:"8. 360 e sensores",cx:"Caixas impressas",ref:"Escala"};
+const P=[
+ ["tela",'Tela 13,3" Full HD touch (em cima do painel)',G.central,[322.6,26,200.6],true,BUILD.tela,1,"HDMI + USB do Orange Pi",[[-161,962,1165]]],
+ ["opi","Orange Pi 5 + NVMe",G.central,[100,62,20],false,BUILD.orangepi,1,"tudo passa por ele",[[270,425,880]]],
+ ["case","Case de alumínio com fan",G.central,[104,66,27],true,BUILD.caseopi,1,"sobre o Orange Pi",[[268,440,878]]],
+ ["fan80","Ventoinha 80 mm Noctua NF-A8 5V (tampa da central)",G.serv,[80,80,25],false,BUILD.fan80,2,"ENTRADA sobre o Orange Pi e SAÍDA no canto oposto",[[284.5,496,865.5],[357.5,496,947.5]]],
+ ["capuz","Capuz da saída de ar quente (impresso)",G.cx,[80,92,43],false,BUILD.capuz,1,"sobre a ventoinha de saída; vira o ar quente para a cabine, rumo ao assoalho",[[357.5,521,935.5]]],
+ ["bocal","Bocal do ar-condicionado (impresso)",G.cx,[80,80,66],false,BUILD.bocal,1,"sobre a ventoinha de entrada; recebe a mangueira de 50 mm",[[284.5,521,865.5]]],
+ ["conv","Conversor 12→5 V 10 A IP67",G.central,[66,60,22],false,BUILD.conversor,1,"dentro da caixa da central; USB-C 90° até o Orange Pi",[[380,425,880]]],
+ ["ina","Medidor INA226",G.central,[25,17,3],true,BUILD.pcb(25,17,"#7a2f8f",chips(1,"#222",6,1.5,6)),1,"I2C do Orange Pi + fio de 12 V",[[300,470,990]]],
+ ["mpu","MPU6050 (opcional)",G.central,[21,16,3],true,BUILD.pcb(21,16,"#1f5fa8",chips(1,"#222",5,1,5)),1,"I2C do Orange Pi",[[330,470,990]]],
+ ["hub","Hub USB 7 portas",G.serv,[145,58,26],false,BUILD.hub,1,"cabo USB 3.0 curto até o Orange Pi",[[280,425,945]]],
+ ["hubpwr","Alimentação 12 V estável do hub",G.serv,[60,40,20],true,simple("#3b4a57")(60,40,20),1,"fusível → ACC",[[420,425,1000]]],
+ ["modem","Modem 4G Huawei E3372h",G.serv,[88,28,11.5],false,BUILD.modem,1,"hub (extensor curto) + chip",[[260,425,1005]]],
+ ["bt","Bluetooth USB UB500",G.serv,[15,19,7],true,simple("#111")(15,19,7),1,"hub; recebe o TPMS",[[300,452,950]]],
+ ["ftdi","Adaptador FT232RL (SSM1)",G.serv,[36,18,10],true,BUILD.pcb(36,18,"#c0392b",chips(1,"#222",8,1.5,8)),1,"hub ↔ conector do SSM1",[[330,452,950]]],
+ ["cap","Placa de captura USB (vídeo 360)",G.serv,[60,25,12],true,simple("#2b2f33")(60,25,12),1,"hub ← RCA do DVR",[[360,452,950]]],
+ ["pc817","Optoacoplador PC817 4 canais",G.serv,[40,30,15],true,BUILD.pcb(40,30,"#1f5fa8",g=>{chips(4,"#f0f0f0")(g);term(4)(g);}),1,"ACC, ré, painel → GPIO",[[350,425,1005]]],
+ ["rele","Relé temporizador ACC",G.serv,[50,26,18],true,BUILD.pcb(50,26,"#1f5fa8",g=>{B(g,19,15,15.5,4,1.6,5,"#2d63c8");B(g,10,10,8,34,1.6,3,"#2f8f4a");}),1,"ACC + 12 V permanente",[[395,425,1005]]],
+ ["gps","GPS USB VK-162",G.gps,[49,38,16],false,BUILD.gps,1,"hub (cabo ~2 m)",[[-25,950,1290]]],
+ ["mic","Microfone USB de lapela",G.gps,[20,10,10],true,simple("#111")(20,10,10),1,"hub (cabo 2 m)",[[-640,1150,1020]]],
+ ["dash","Câmera USB da frente (opcional)",G.gps,[40,30,40],true,BUILD.camera,1,"hub",[[0,1220,980]]],
+ ["iso","Isolador de ruído P2",G.som,[45,20,15],true,simple("#2b2f33")(45,20,15),1,"P2 do Orange Pi → RCA",[[340,470,880]]],
+ ["amp","Amplificador 12 V 4 canais",G.som,[160,130,45],true,BUILD.amp,1,"RCA; 4 mm² da bateria; remoto no ACC",[[300,260,150]]],
+ ["falante","Alto-falantes originais",G.som,[130,60,130],true,simple("#333")(130,60,130),4,"amplificador",[[-800,450,750],[800,450,750],[-800,450,-550],[800,450,-550]]],
+ ["ssm","Conector SSM1 do carro",G.dados,[30,20,15],true,simple("#e0e0e0")(30,20,15),1,"FT232RL",[[-300,460,1100]]],
+ ["tpms","Sensor TPMS (na válvula)",G.dados,[20,20,22],true,simple("#7f8a93")(20,20,22),4,"sem fio → Bluetooth",[[-700,300,1270],[700,300,1270],[-700,300,-1250],[700,300,-1250]]],
+ ["bat","Bateria extra 12 V 7 Ah",G.vig,[151,65,94],false,BUILD.bateria,1,"carregador; XH-M609 → central",[[-560,330,-1700]]],
+ ["sk35","Carregador buck-boost SK35L",G.vig,[70,40,25],true,BUILD.pcb(70,40,"#1d5c2f",g=>B(g,30,14,18,30,1.6,10,"#111")),1,"relé 40 A → bateria extra",[[-380,330,-1720]]],
+ ["xh","Protetor de tensão XH-M609",G.vig,[70,40,25],true,BUILD.pcb(70,40,"#1f5fa8",g=>{B(g,25,10,12,8,1.6,8,"#111");B(g,15,15,19,45,1.6,10,"#2d63c8");}),1,"bateria extra → central",[[-380,330,-1660]]],
+ ["r40","Relé automotivo 40 A",G.vig,[28,28,25],false,simple("#111")(28,28,25),1,"liga a carga só com o motor ligado",[[-300,330,-1700]]],
+ ["dvr","DVR do kit 360",G.s360,[120,90,25],true,BUILD.dvr,1,"4 câmeras → RCA → captura",[[-300,260,150]]],
+ ["cam","Câmera do kit 360",G.s360,[30,30,25],true,BUILD.camera,4,"DVR",[[0,600,2160],[-900,950,1000],[900,950,1000],[0,950,-2140]]],
+ ["us","Ultrassom JSN-SR04T (sonda + placa)",G.s360,[101,28.5,22],false,BUILD.ultrassom,12,"nó do para-choque",
+  [[-560,500,2170],[-200,500,2170],[200,500,2170],[560,500,2170],[-560,500,-2170],[-200,500,-2170],[200,500,-2170],[560,500,-2170],[-845,500,1550],[845,500,1550],[-845,500,-1550],[845,500,-1550]]],
+ ["radar","Radar HLK-LD2451",G.s360,[70,35,4],false,BUILD.radar,4,"nó do para-choque",[[-760,450,2100],[760,450,2100],[-760,450,-2100],[760,450,-2100]]],
+ ["lidar","Lidar TFmini Plus",G.s360,[35,18.5,21],true,BUILD.lidar,1,"nó dianteiro",[[0,560,2150]]],
+ ["no","Nó de sensores (caixa + ESP32-S3)",G.s360,[110,75,40],false,BUILD.caixa(110,75,40,"#b9c2c9"),2,"USB (dianteiro) / ESP-NOW (traseiro)",[[-300,560,1950],[0,700,-2050]]],
+ ["esp","ESP32-S3 DevKitC-1",G.s360,[63,25,10],true,BUILD.pcb(63,25,"#111",chips(1,"#c8ccd0",18,3,18)),2,"dentro do nó",[]],
+ ["cxcentral","Caixa da central (impressa)",G.cx,[205,195,73],false,BUILD.caixa(205,195,73,"#b9c2c9"),1,"embaixo do painel do passageiro",[[250,420,850]]],
+ ["suporte","Suporte da tela no tampo (impresso)",G.cx,[180,100,50],false,simple("#5b656d")(180,100,50),1,"tampo do painel; eixo M6",[[-90,950,1150]]],
+ ["mao","Mão adulta",G.ref,[107,180,22],false,BUILD.mao,1,"escala",[]],
+];
+
+// ===== cena =====
+const cv=document.getElementById('cv');const R=new THREE.WebGLRenderer({canvas:cv,antialias:true});R.setPixelRatio(Math.min(devicePixelRatio,2));
+const scene=new THREE.Scene();const cam=new THREE.PerspectiveCamera(35,1,1,40000);const ctl=new THREE.OrbitControls(cam,cv);ctl.enableDamping=true;
+scene.add(new THREE.HemisphereLight(0xffffff,0x445566,.85));const dl=new THREE.DirectionalLight(0xffffff,.6);dl.position.set(3000,5000,4000);scene.add(dl);
+const css=v=>getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+let world=null,mode='ban',labels=[],cables=null;
+
+function label(text,size){const c=document.createElement('canvas');const ctx=c.getContext('2d');const f=48;ctx.font=`500 ${f}px IBM Plex Sans, sans-serif`;
+  const w=Math.ceil(ctx.measureText(text).width)+24;c.width=w;c.height=f+20;ctx.font=`500 ${f}px IBM Plex Sans, sans-serif`;
+  ctx.fillStyle='rgba(255,255,255,.88)';ctx.fillRect(0,0,w,c.height);ctx.fillStyle='#1f2a33';ctx.textBaseline='middle';ctx.fillText(text,12,c.height/2+2);
+  const t=new THREE.CanvasTexture(c);const s=new THREE.Sprite(new THREE.SpriteMaterial({map:t,depthTest:false,transparent:true}));s.scale.set(size*w/c.height,size,1);s.renderOrder=10;return s;}
+
+function makePart(p,scale){const g=p[5]();g.traverse(o=>{if(o.isMesh)o.userData.part=p;});const w=new THREE.Group();w.add(g);w.scale.setScalar(scale);w.userData.part=p;return w;}
+function info(p){const [,n,gr,d,est,,q,liga]=p;if(!d.length)return `${n} — ${liga}`;return `${n}${q>1?` (×${q})`:""} — ${d.map(v=>String(v).replace('.',',')).join(" × ")} mm${est?" (estimada)":""} — ${liga}`;}
+
+function buildBancada(){
+  const groups=[...new Set(P.map(p=>p[2]))];let z=0,maxX=0;
+  groups.forEach(gr=>{let x=0,maxD=0;const ps=P.filter(p=>p[2]===gr);
+    const t=label(gr,24);t.position.set(-60,60,z+20);t.center.set(1,.5);world.add(t);labels.push(t);
+    ps.forEach(p=>{const [L,Pp,A]=p[3];const m=makePart(p,1);m.position.set(x,0,z);world.add(m);
+      const l=label(p[1]+(p[6]>1?` ×${p[6]}`:""),13);l.position.set(x+L/2,A+18,z+Pp/2);world.add(l);labels.push(l);
+      x+=L+60;maxD=Math.max(maxD,Pp);});
+    maxX=Math.max(maxX,x);z+=maxD+110;});
+  const mesa=new THREE.Mesh(new THREE.BoxGeometry(maxX+400,6,z+60),new THREE.MeshStandardMaterial({color:0x9aa3aa,roughness:.9}));mesa.position.set(maxX/2-150,-3.5,z/2-30);world.add(mesa);
+  view(maxX/2,z*0.9,z*1.15,maxX/2-100,0,z/2);
+}
+
+function carShell(){const g=new THREE.Group();const lm=new THREE.LineBasicMaterial({color:0x6a7680});
+  const box=(w,h,d,x,y,z)=>{const e=new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.BoxGeometry(w,h,d)),lm);e.position.set(x,y,z);g.add(e);};
+  box(1690,700,4350,0,520,0);box(1500,560,2700,0,1140,-250);
+  const fl=new THREE.Mesh(new THREE.BoxGeometry(1690,4,4350),new THREE.MeshStandardMaterial({color:0x8a949c,transparent:true,opacity:.25,depthWrite:false}));fl.position.y=170;g.add(fl);
+  [[-1,1],[1,1],[-1,-1],[1,-1]].forEach(([sx,sz])=>{const w=new THREE.Mesh(new THREE.CylinderGeometry(300,300,190,32),mat("#2b2f33"));w.rotation.z=Math.PI/2;w.position.set(sx*745,300,sz*1260);g.add(w);});
+  [[-560,'saída de ar do motorista'],[-120,'saídas centrais'],[120,''],[640,'saída de ar do passageiro']].forEach(([x,t])=>{const v=new THREE.Mesh(new THREE.BoxGeometry(110,55,10),new THREE.MeshStandardMaterial({color:0x1d2226}));v.position.set(x,820,1022);g.add(v);if(t){const l=label(t,32);l.position.set(x,880,1010);g.add(l);}});
+  const glove=new THREE.Mesh(new THREE.BoxGeometry(420,180,40),new THREE.MeshStandardMaterial({color:0x56606a,transparent:true,opacity:.35,depthWrite:false}));glove.position.set(380,640,1040);g.add(glove);
+  {const l=label('porta-luvas',32);l.position.set(380,740,1010);g.add(l);}
+  const dash=new THREE.Mesh(new THREE.BoxGeometry(1500,300,250),new THREE.MeshStandardMaterial({color:0x56606a,transparent:true,opacity:.3,depthWrite:false}));dash.position.set(0,800,1150);g.add(dash);
+  [[-380,1],[380,1]].forEach(([x])=>{const s=new THREE.Mesh(new THREE.BoxGeometry(500,120,500),new THREE.MeshStandardMaterial({color:0x56606a,transparent:true,opacity:.18,depthWrite:false}));s.position.set(x,400,150);g.add(s);});
+  [["frente",0,700,2400],["trás",0,700,-2400],["motorista",-1000,900,300]].forEach(([t,x,y,z])=>{const l=label(t,60);l.position.set(x,y,z);g.add(l);});
+  return g;}
+
+const POS={};
+function buildCarro(){
+  world.add(carShell());const big=document.getElementById('big').checked?4:1;
+  P.forEach(p=>{(p[8]||[]).forEach((pos,i)=>{const m=makePart(p,big);m.position.set(...pos);world.add(m);(POS[p[0]]=POS[p[0]]||[]).push(new THREE.Vector3(pos[0]+p[3][0]*big/2,pos[1]+p[3][2]*big/2,pos[2]+p[3][1]*big/2));
+    if(i===0||p[6]<=4){const l=label(p[1]+(p[6]>1&&i===0?` ×${p[6]}`:""),40);l.position.set(pos[0],pos[1]+p[3][2]*big+60,pos[2]);world.add(l);labels.push(l);}});});
+  cables=new THREE.Group();world.add(cables);
+  const C={pw:0xc0392b,usb:0x2d63c8,vid:0xd9a400,aud:0x2f8f4a,sig:0x8e44ad,rf:0x8a949c};
+  // cada sensor liga so no no mais proximo; o resto liga em todos os destinos
+  const near=(pa,list)=>[list.reduce((m,p)=>pa.distanceTo(p)<pa.distanceTo(m)?p:m)];
+  const line=(a,b,c,dash)=>{(POS[a]||[]).forEach(pa=>{(b==="no"?near(pa,POS[b]||[]):(POS[b]||[])).forEach(pb=>{const mid=new THREE.Vector3((pa.x+pb.x)/2,Math.min(pa.y,pb.y)-40,(pa.z+pb.z)/2);
+    const cur=new THREE.QuadraticBezierCurve3(pa,mid,pb);const geo=new THREE.BufferGeometry().setFromPoints(cur.getPoints(24));
+    const m=dash?new THREE.LineDashedMaterial({color:c,dashSize:40,gapSize:30}):new THREE.LineBasicMaterial({color:c});const l=new THREE.Line(geo,m);if(dash)l.computeLineDistances();cables.add(l);});});};
+  [["hub","opi","usb"],["modem","hub","usb"],["bt","hub","usb"],["ftdi","hub","usb"],["cap","hub","usb"],["gps","hub","usb"],["mic","hub","usb"],["dash","hub","usb"],
+   ["conv","opi","pw"],["rele","conv","pw"],["rele","hubpwr","pw"],["hubpwr","hub","pw"],["amp","rele","sig"],["bat","xh","pw"],["xh","conv","pw"],["r40","sk35","pw"],["sk35","bat","pw"],
+   ["iso","amp","aud"],["opi","iso","aud"],["amp","falante","aud"],["cam","dvr","vid"],["dvr","cap","vid"],["ftdi","ssm","sig"],["pc817","opi","sig"],["pc817","rele","sig"],
+   ["ina","opi","sig"],["us","no","sig"],["radar","no","sig"],["lidar","no","sig"]].forEach(([a,b,t])=>line(a,b,C[t]));
+  line("tpms","bt",C.rf,true);
+  // no dianteiro por USB ao hub; traseiro sem fio ao dianteiro
+  const nd=POS.no[0],nt=POS.no[1],hb=POS.hub[0];
+  [[nd,hb,C.usb,false],[nt,nd,C.rf,true]].forEach(([a,b,c,d])=>{const geo=new THREE.BufferGeometry().setFromPoints([a,b]);const m=d?new THREE.LineDashedMaterial({color:c,dashSize:60,gapSize:40}):new THREE.LineBasicMaterial({color:c});const l=new THREE.Line(geo,m);if(d)l.computeLineDistances();cables.add(l);});
+  // rotas fisicas desenhadas como tubos: por onde passa cada coisa
+  const rotas=[
+   ["Mangueira de 50 mm: saída de ar do passageiro → bocal da central",0x8fb8d8,25,[[640,800,1040],[640,720,1000],[560,640,960],[420,600,920],[324,600,905],[324,580,905]]],
+   ["Cabo HDMI 2 m (90°) + extensão USB do touch: central → por trás do porta-luvas → fresta do tampo → tela",0x2d63c8,5,[[300,470,845],[250,560,900],[150,720,1060],[40,900,1200],[0,950,1240],[0,975,1235]]],
+   ["12 V e ACC: caixa de fusíveis (derivador) → por baixo do painel → central",0xc0392b,4,[[-600,500,1000],[-300,430,1040],[100,430,1060],[300,450,1045]]],
+   ["Ar quente: ventoinha de saída → capuz → para a cabine, rumo ao assoalho do passageiro (não fica preso atrás do porta-luvas)",0xd0503c,8,[[397,545,935],[397,540,860],[397,470,760],[397,330,700]]],
+  ];
+  rotas.forEach(([nome,cor,r,pts])=>{const curva=new THREE.CatmullRomCurve3(pts.map(p=>new THREE.Vector3(...p)));
+    const t=new THREE.Mesh(new THREE.TubeGeometry(curva,48,r,12,false),new THREE.MeshStandardMaterial({color:cor,roughness:.5,transparent:true,opacity:.85}));
+    t.userData.part=[0,nome,"",[],false,null,1,"rota aproximada; medir no carro"];cables.add(t);});
+  cables.visible=document.getElementById('cab').checked;
+  view(-3600,2600,3600,0,600,0);
+}
+
+function rebuild(){if(world)scene.remove(world);world=new THREE.Group();scene.add(world);labels=[];cables=null;for(const k in POS)delete POS[k];
+  mode==='ban'?buildBancada():buildCarro();labels.forEach(l=>l.visible=document.getElementById('lab').checked);}
+let home=null;
+function view(x,y,z,tx,ty,tz){home=[x,y,z,tx,ty,tz];cam.position.set(x,y,z);ctl.target.set(tx,ty,tz);ctl.update();}
+
+// UI
+const mB=document.getElementById('mBan'),mC=document.getElementById('mCar');
+mB.onclick=()=>{mode='ban';mB.setAttribute('aria-pressed','true');mC.setAttribute('aria-pressed','false');rebuild();};
+mC.onclick=()=>{mode='car';mC.setAttribute('aria-pressed','true');mB.setAttribute('aria-pressed','false');rebuild();};
+document.getElementById('lab').onchange=e=>labels.forEach(l=>l.visible=e.target.checked);
+document.getElementById('cab').onchange=e=>{if(cables)cables.visible=e.target.checked;};
+document.getElementById('big').onchange=()=>{if(mode==='car')rebuild();};
+document.getElementById('rv').onclick=()=>view(...home);
+document.getElementById('pv').onclick=()=>{if(mode!=='car')mC.click();cam.position.set(-1100,1500,-700);ctl.target.set(150,700,1000);ctl.update();};
+document.getElementById('tv').onclick=()=>{const [,,,tx,ty,tz]=home;cam.position.set(tx,mode==='ban'?2600:7000,tz+1);ctl.target.set(tx,ty,tz);ctl.update();};
+
+const gl=document.getElementById('grp');[...new Set(P.map(p=>p[2]))].forEach(g=>{const n=P.filter(p=>p[2]===g).reduce((s,p)=>s+p[6],0);gl.insertAdjacentHTML('beforeend',`<li>${g}: ${n} peça${n>1?'s':''}</li>`);});
+
+// selecao
+const ray=new THREE.Raycaster(),mp=new THREE.Vector2(),pick=document.getElementById('pick');let down=null;
+cv.addEventListener('pointerdown',e=>down=[e.clientX,e.clientY]);
+cv.addEventListener('pointerup',e=>{if(!down||Math.hypot(e.clientX-down[0],e.clientY-down[1])>5)return;const b=cv.getBoundingClientRect();
+  mp.set((e.clientX-b.left)/b.width*2-1,-(e.clientY-b.top)/b.height*2+1);ray.setFromCamera(mp,cam);
+  const h=ray.intersectObjects(world.children,true).find(h=>h.object.isMesh&&h.object.userData.part);
+  pick.textContent=h?info(h.object.userData.part):"Toque numa peça para ver nome, medida e onde liga";});
+
+function theme(){scene.background=new THREE.Color(css('--scene'));}
+matchMedia('(prefers-color-scheme: dark)').addEventListener('change',theme);theme();
+function size(){const w=cv.clientWidth,h=cv.clientHeight;R.setSize(w,h,false);cam.aspect=w/h;cam.updateProjectionMatrix();}
+addEventListener('resize',size);size();rebuild();
+(function loop(){requestAnimationFrame(loop);ctl.update();R.render(scene,cam);})();
+</script>
+</body>
+</html>

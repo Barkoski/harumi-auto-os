@@ -72,6 +72,8 @@
   }
   function moving(kmh) {
     if (!Number.isFinite(kmh)) return;
+    // Waze e navegacao: precisa funcionar andando (so video e outros apps travam)
+    if (current === 'waze') { slowSince = 0; if (locked) setLocked(false); return; }
     if (kmh > LOCK_KMH) { slowSince = 0; setLocked(true); return; }
     if (kmh < UNLOCK_KMH) { if (!slowSince) slowSince = Date.now(); if (Date.now() - slowSince >= UNLOCK_MS) setLocked(false); }
     else slowSince = 0;
